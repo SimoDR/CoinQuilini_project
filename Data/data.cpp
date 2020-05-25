@@ -1,5 +1,5 @@
 #include "data.h"
-#include "outofboundexception.h"
+
 
 unsigned short int Data::_maxMesi=12;
 
@@ -19,6 +19,22 @@ Data::Data(unsigned short int giorno,unsigned short int mese,unsigned short int 
     } catch(std::domain_error * exc) {
         cout<<exc->what()<<endl;
     }
+}
+
+Data::Data(std::string inputString)
+{
+    try {
+        parsingDaStringa(inputString);
+    } catch (std::invalid_argument * exc) {
+        cout<<exc->what()<<endl;
+    }
+
+    try {
+        checkLimiti();
+    } catch(std::domain_error * exc) {
+        cout<<exc->what()<<endl;
+    }
+
 }
 
 
@@ -86,6 +102,40 @@ void Data::aggiustaLimiti()
         throw new OutOfBoundException("anno");
     }
 
+}
+
+void Data::parsingDaStringa(string inputString)
+{
+    short int barFound=0;
+    string stringGiorno;
+    string stringMese;
+    string stringAnno;
+    for(string::iterator it=inputString.begin(); it!=inputString.end(); ++it)
+    {
+        if(*it=='/')
+            barFound++;
+        else
+        {
+            if(barFound==0)
+                stringGiorno=stringGiorno+(*it);
+            if(barFound==1)
+                stringMese=stringMese+(*it);
+            if(barFound==2)
+                stringAnno=stringAnno+(*it);
+        }
+    }
+    if(stringGiorno.empty() || stringMese.empty() || stringAnno.empty())
+        throw new std::invalid_argument("Parametri inseriti non correttamente");
+    else
+    {
+        std::stringstream streamGiorno(stringGiorno);
+        std::stringstream streamMese(stringMese);
+        std::stringstream streamAnno(stringAnno);
+
+        streamGiorno >> _giornoCorrente;
+        streamMese >> _meseCorrente;
+        streamAnno >> _annoCorrente;
+    }
 }
 
 const Data& Data::operator+(unsigned short addendo)

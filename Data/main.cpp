@@ -17,4 +17,8 @@ int main()
     cout<<"Prova eccezione: creazione giorno 29/2/2021: "<<endl;
     Data prova_eccezione(29,2,2021);
     cout<<endl;
+
+    cout<<"Prova creazione giorno 28/2/2021 da stringa: "<<endl;
+    Data prova_da_stringa("28/2/2021");
+    cout<<prova_da_stringa<<endl;
 }
