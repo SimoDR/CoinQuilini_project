@@ -11,6 +11,7 @@ using std::vector;
 using std::cout;
 using std::endl;
 using std::string;
+using std::stoi; //conversione string->int
 
 class Data;
 
