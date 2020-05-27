@@ -1,6 +1,7 @@
 #ifndef CALENDARIO_H
 #define CALENDARIO_H
 #include "data.h"
+#include "dList.h"
 
 class Calendario
 {
@@ -8,13 +9,13 @@ private:
     class Giorno
     {
         Data _dataDelGiorno;
-        vector<Incarico*> _incarichiDelGiorno;
+        //vector<Incarico*> _incarichiDelGiorno;
 
 
-    }
+    };
 
     dList<Giorno> _giorni;
-    dList<Giorno>::iterator _giornoCorrente;
+    //dList<Giorno>::iterator _giornoCorrente;
 
 public:
     Calendario();

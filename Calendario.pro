@@ -5,7 +5,13 @@ CONFIG -= qt
 
 SOURCES += \
         calendario.cpp \
+	dList.cpp \
+	data.cpp \
+	outofboundexception.cpp \
         main.cpp
 
 HEADERS += \
-    calendario.h
+    calendario.h \
+    dList.h \
+    data.h \
+    outofboundexception.h
