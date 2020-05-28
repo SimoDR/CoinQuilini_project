@@ -54,8 +54,8 @@ public:
     };
     iterator begin() const;
     iterator end() const;
-    iterator insert(iterator &i, const T &t);
-    iterator remove(iterator &i); 
+    iterator insert(iterator i, const T &t);
+    iterator remove(iterator i);
 
     class const_iterator
     {
@@ -174,12 +174,52 @@ void dList<T>::insertBack(const T &t)
 }
 
 template <class T>
-typename dList<T>::iterator dList<T>::insert(iterator &i, const T &t) //inseruisce t prima del nodo puntato da i e ritorna l'iteratore che punta al nuovo nodo
+void dList<T>::popFront()
+{
+    if (first) //se la lista ha almeno un elemento
+    {
+        nodo *temp = first;
+
+        if (first->next) //se la lista ha almeno 2 elementi
+        {
+            first = first->next;
+            temp->next = nullptr;
+            first->prev = nullptr;
+        }
+        else //la lista ha esattamente un elemento
+        {
+            first = last = nullptr;
+        }
+        delete temp;
+    }
+}
+
+template <class T>
+void dList<T>::popBack()
+{
+    if (first)
+    {
+        nodo *temp = last;
+        if (first->next)
+        {
+            last = last->prev;
+            last->next = nullptr;
+        }
+        else
+        {
+            first = last = nullptr;
+        }
+        delete temp;
+    }
+}
+
+template <class T>
+typename dList<T>::iterator dList<T>::insert(iterator i, const T &t) //inseruisce t prima del nodo puntato da i e ritorna l'iteratore che punta al nuovo nodo
 {
     if (i.ptr == nullptr) //la lista è vuota
     {
         insertFront(t);
-        return first; //conversione implicita in iterator
+        return begin(); 
     }
 
     else
@@ -196,6 +236,34 @@ typename dList<T>::iterator dList<T>::insert(iterator &i, const T &t) //inseruis
         }
         return --i;
     }
+}
+
+template <class T>
+typename dList<T>::iterator dList<T>::remove(iterator i) //rimuove il nodo puntato da i iteratore valido, restituisce l'iteratore al nodo successivo
+{
+    if (i != end())
+    {
+        if (i == begin())
+        {
+            ++i;
+            popFront();
+        }
+        else if (i == --end())
+        {
+            ++i;
+            popBack();
+        }
+        else
+        {
+            nodo *temp = i.ptr; //nodo da eliminare
+            ++i;                //iteratore da restituire
+            (temp->prev)->next = temp->next;
+            (temp->next)->prev = temp->prev;
+            temp->next = nullptr;
+            delete temp;
+        }
+    }
+    return i;
 }
 
 template <class T>
