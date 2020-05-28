@@ -5,15 +5,19 @@
 #define INCARICO_H
 
 #include<string>
+//#include "Inquilino.h"
+//#include "Data.h"
 using std::string;
 
 
-class Incarico{
+class Incarico
+{
 private:
 	string _nome;
 	//Inquilino* _incaricato; // serve #include "Inquilino.h"
 	bool _svolto;
 	static unsigned int _sogliaMax;
+
 protected:
 	void controlloSoglia(unsigned short int &) const; // bisogna gestire eccezioni che possono causare l'overflow del punteggio (es. mille commensali)
 
@@ -29,10 +33,14 @@ public:
 	virtual unsigned short int calcolaPunteggio() const=0;
 };
 
-class Pagamento: virtual public Incarico{
+
+
+class Pagamento: virtual public Incarico
+{
 private:
 	double _importo;
 	static double _pesoPagamento;
+
 public:
 	void setImporto(const double&);
 	virtual ~Pagamento()=0;
@@ -43,6 +51,8 @@ public:
 	virtual unsigned short int calcolaPunteggio() const;
 };
 
+
+
 class Bolletta: public Pagamento{
 private:
 	//Data _dataLimite; //serve #include "Data.h"
@@ -50,10 +60,12 @@ private:
 public:
 	virtual ~Bolletta() {} 
 	virtual Bolletta* clone() const;
-	//virtual data posponi (data) const; // serve #include "Data.h"
+    //virtual Data posponi (data) const; // serve #include "Data.h"
 	// virtual import //da definire opportunamente
 	//virtual double setCredito() const; //??? da definire
 };
+
+
 
 class Faccenda: virtual public Incarico {
 private:
@@ -67,9 +79,13 @@ public:
 	virtual unsigned short int calcolaPunteggio() const;
 };
 
-class Spesa: public Pagamento, public Faccenda{
+
+
+class Spesa: public Pagamento, public Faccenda
+{
 private:
-	static unsigned short int _pesoSpesa;
+    static unsigned short int _pesoSpesa;
+
 public:
 	virtual ~Spesa() {}; //???
 	virtual Spesa* clone() const;
@@ -81,7 +97,10 @@ public:
 
 };
 
-class Pulizia: public Faccenda{
+
+
+class Pulizia: public Faccenda
+{
 private:
 	unsigned short int _stanzeDaPulire; //eccezioni: limitare numero delle camere
 	static unsigned short int _pesoPulizia; 
@@ -92,10 +111,12 @@ public:
 	virtual string generaNota() const;
 	// virtual import
 	virtual unsigned short int calcolaPunteggio() const;
-
-
 };
-class Cucina: public Faccenda{
+
+
+
+class Cucina: public Faccenda
+{
 private:
 	unsigned short int _numeroCommensali; //eccezioni: limitare numero commensali
 	static double _pesoCucina;
@@ -109,7 +130,10 @@ public:
 
 };
 
-class Spazzatura: public Faccenda{
+
+
+class Spazzatura: public Faccenda
+{
 private:
 	static unsigned short int _pesoSpazzatura;
 public:
