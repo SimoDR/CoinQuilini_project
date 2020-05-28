@@ -47,6 +47,9 @@ public:
     const Data& aggiungiSettimane(unsigned short int);
     const Data& aggiungiMesi(unsigned short int);
     const Data& aggiungiAnni(unsigned short int);
+    bool operator<(const Data&) const;
+    bool operator>(const Data&) const;
+    bool operator==(const Data&) const;
 
 
 

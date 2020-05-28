@@ -182,6 +182,61 @@ const Data &Data::aggiungiAnni(unsigned short numero)
     return *this;
 }
 
+bool Data::operator<(const Data & d) const
+{
+    if (_annoCorrente<d._annoCorrente)
+        return true;
+    else if(_annoCorrente>d._annoCorrente)
+        return false;
+    else // _annoCorrente==d._annoCorrente
+    {
+        if (_meseCorrente<d._meseCorrente)
+            return true;
+        else if(_meseCorrente>d._meseCorrente)
+            return false;
+        else // _meseCorrente==d._meseCorrente
+        {
+            if (_giornoCorrente<d._giornoCorrente)
+                return true;
+            else if(_giornoCorrente>d._giornoCorrente)
+                return false;
+            else // _giornoCorrente==d._giornoCorrente
+                return false;
+        }
+    }
+}
+
+bool Data::operator>(const Data & d) const
+{
+    if (_annoCorrente>d._annoCorrente)
+        return true;
+    else if(_annoCorrente<d._annoCorrente)
+        return false;
+    else // _annoCorrente==d._annoCorrente
+    {
+        if (_meseCorrente>d._meseCorrente)
+            return true;
+        else if(_meseCorrente<d._meseCorrente)
+            return false;
+        else // _meseCorrente==d._meseCorrente
+        {
+            if (_giornoCorrente>d._giornoCorrente)
+                return true;
+            else if(_giornoCorrente<d._giornoCorrente)
+                return false;
+            else // _giornoCorrente==d._giornoCorrente
+                return false;
+        }
+    }
+}
+
+bool Data::operator==(const Data & d) const
+{
+    return _annoCorrente==d._annoCorrente && _meseCorrente==d._meseCorrente && _giornoCorrente==d._giornoCorrente;
+}
+
+
+
 std::ostream &operator<<(std::ostream &os, const Data &d)
 {
     os << d._giornoCorrente << "/" << d._meseCorrente << "/" << d._annoCorrente;

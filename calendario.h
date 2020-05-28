@@ -1,7 +1,7 @@
 #ifndef CALENDARIO_H
 #define CALENDARIO_H
 #include "data.h"
-#include "dList.h"
+//#include "dList.h"
 
 class Calendario
 {
@@ -14,7 +14,7 @@ private:
 
     };
 
-    dList<Giorno> _giorni;
+    //dList<Giorno> _giorni;
     //dList<Giorno>::iterator _giornoCorrente;
 
 public:
