@@ -14,7 +14,8 @@ private:
 	//Inquilino* _incaricato; // serve #include "Inquilino.h"
 	bool _svolto;
 	static unsigned int _sogliaMax;
-	unsigned short int& controlloSoglia(unsigned short int &) const; // bisogna gestire eccezioni che possono causare l'overflow del punteggio (es. mille commensali)
+protected:
+	void controlloSoglia(unsigned short int &) const; // bisogna gestire eccezioni che possono causare l'overflow del punteggio (es. mille commensali)
 
 public:
 	void setNome(const string&);
@@ -52,7 +53,6 @@ public:
 	//virtual data posponi (data) const; // serve #include "Data.h"
 	// virtual import //da definire opportunamente
 	//virtual double setCredito() const; //??? da definire
-	//virtual calcolaPunteggio();
 };
 
 class Faccenda: virtual public Incarico {
@@ -91,7 +91,7 @@ public:
 	//virtual data posponi (data) const; 
 	virtual string generaNota() const;
 	// virtual import
-	//virtual calcolaPunteggio();
+	virtual unsigned short int calcolaPunteggio() const;
 
 
 };
@@ -105,7 +105,7 @@ public:
 	//virtual data posponi (data) const; 
 	virtual string generaNota() const;
 	// virtual import
-	//virtual calcolaPunteggio();
+	virtual unsigned short int calcolaPunteggio() const;
 
 };
 
@@ -118,7 +118,7 @@ public:
 	//virtual data posponi (data) const; 
 	virtual string generaNota() const;
 	// virtual import
-	//virtual calcolaPunteggio();
+	virtual unsigned short int calcolaPunteggio() const;
 };
 
 

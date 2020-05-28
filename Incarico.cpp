@@ -1,4 +1,5 @@
 #include "Incarico.h"
+#include<math.h>
 
 // COSTANTI PER CALCOLO PUNTEGGIO
 unsigned int Incarico::_sogliaMax=10; // max punteggio attribuibile a un incarico
@@ -12,9 +13,8 @@ unsigned short int Spazzatura::_pesoSpazzatura=3;
 
 // Implementazione Incarico
 
-unsigned short int& Incarico::controlloSoglia(unsigned short int & x) const{
+void Incarico::controlloSoglia(unsigned short int & x) const{
 	if (x >_sogliaMax) x = _sogliaMax;
-	return x;
 }
 void Incarico::setNome(const string& s){
 	_nome=s;
@@ -53,7 +53,9 @@ string Pagamento::generaNota() const {
 }
 
 unsigned short int Pagamento::calcolaPunteggio() const{
-	return _importo/_pesoPagamento;
+	unsigned short int p=_importo/_pesoPagamento;
+	controlloSoglia(p);
+	return p;
 }
 
 // ...
@@ -63,13 +65,18 @@ Bolletta* Bolletta::clone() const {return new Bolletta(*this);}
 
 // Implementazione Spesa
 Spesa* Spesa::clone() const {return new Spesa(*this);}
-unsigned short int Spesa::calcolaPunteggio() const{
-	return 60/_pesoSpesa; //al posto del numero bisogna mettere gli elementi rimossi dalla lista_spesa perché acquistati
-}
 
 string Spesa::generaNota() const {
 	return "La lista della spesa è... "; // da definire
 }
+
+unsigned short int Spesa::calcolaPunteggio() const{
+	unsigned short int p=60/_pesoSpesa; //al posto del numero bisogna mettere gli elementi rimossi dalla lista_spesa perché acquistati
+	controlloSoglia(p);
+	return p;
+}
+
+
 
 // Implementazione Pulizia
 Pulizia* Pulizia::clone() const {return new Pulizia(*this);}
@@ -77,6 +84,11 @@ string Pulizia::generaNota() const {
 	string s1="Ei, Cenerentola! Devi pulire ";
 	string s2=" stanze!";
 	return s1+std::to_string(_stanzeDaPulire)+s2;
+}
+unsigned short int Pulizia::calcolaPunteggio() const{
+	unsigned short int p=_stanzeDaPulire*_pesoPulizia;
+	controlloSoglia(p);
+	return p;
 }
 
 // Implementazione Cucina
@@ -86,7 +98,17 @@ string Cucina::generaNota() const {
 	string s2=" persone!";
 	return s1+std::to_string(_numeroCommensali)+s2;
 }
+unsigned short int Cucina::calcolaPunteggio() const{
+	unsigned short int p=std::pow(_pesoCucina,_numeroCommensali);
+	controlloSoglia(p);
+	return p;
+}
 
 // Implementazione Spazzatura
 Spazzatura* Spazzatura::clone() const {return new Spazzatura(*this);}
 string Spazzatura::generaNota() const {return "Oggi bisogna buttare via ...";}
+unsigned short int Spazzatura::calcolaPunteggio() const{
+	unsigned short int p=_pesoSpazzatura;
+	controlloSoglia(p);
+	return p;
+}
