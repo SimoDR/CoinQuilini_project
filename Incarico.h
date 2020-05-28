@@ -25,7 +25,7 @@ public:
 	//virtual data posponi (data) const; // serve #include "Data.h"
 	virtual string generaNota() const=0;
 	// virtual import //da definire opportunamente
-	//virtual calcolaPunteggio();
+	virtual unsigned short int calcolaPunteggio() const=0;
 };
 
 class Pagamento: virtual public Incarico{
@@ -39,7 +39,7 @@ public:
 	virtual string generaNota() const;
 	// virtual import //da definire opportunamente
 	//virtual double setCredito() const; //??? da definire
-	//virtual calcolaPunteggio();
+	virtual unsigned short int calcolaPunteggio() const;
 };
 
 class Bolletta: public Pagamento{
@@ -64,20 +64,20 @@ public:
 	//virtual data posponi (data) const; 
 	virtual string generaNota() const;
 	// virtual import
-	//virtual calcolaPunteggio();
+	virtual unsigned short int calcolaPunteggio() const;
 };
 
 class Spesa: public Pagamento, public Faccenda{
 private:
 	static unsigned short int _pesoSpesa;
 public:
-	virtual ~Spesa(); //???
+	virtual ~Spesa() {}; //???
 	virtual Spesa* clone() const;
 	//virtual data posponi (data) const; 
 	virtual string generaNota() const;
 	// virtual import
-	virtual double setCredito() const; //??? da definire
-	//virtual calcolaPunteggio();
+	//virtual double setCredito() const; //??? da definire
+	virtual unsigned short int calcolaPunteggio() const;
 
 };
 

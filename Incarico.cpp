@@ -36,6 +36,9 @@ string Faccenda::generaNota() const {
 	string s1="Il tempo per svolgere questo incarico è stimato in ";
 	return s1+std::to_string(_tempoStimato); // usare metodi dataora
 }
+unsigned short int Faccenda::calcolaPunteggio() const{
+	return _tempoStimato/_pesoFaccenda;
+}
 
 // Implementazione Pagamento
 
@@ -49,14 +52,24 @@ string Pagamento::generaNota() const {
 	return s1+std::to_string(_importo)+s2;
 }
 
+unsigned short int Pagamento::calcolaPunteggio() const{
+	return _importo/_pesoPagamento;
+}
+
 // ...
 
 // Implementazione Bolletta
 Bolletta* Bolletta::clone() const {return new Bolletta(*this);}
 
-/*// Implementazione Spesa
-Spesa* Spesa::clone() const {return new Spesa(*this);}*/
+// Implementazione Spesa
+Spesa* Spesa::clone() const {return new Spesa(*this);}
+unsigned short int Spesa::calcolaPunteggio() const{
+	return 60/_pesoSpesa; //al posto del numero bisogna mettere gli elementi rimossi dalla lista_spesa perché acquistati
+}
 
+string Spesa::generaNota() const {
+	return "La lista della spesa è... "; // da definire
+}
 
 // Implementazione Pulizia
 Pulizia* Pulizia::clone() const {return new Pulizia(*this);}

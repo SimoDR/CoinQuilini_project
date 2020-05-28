@@ -3,16 +3,19 @@
 using namespace std;
 
 int main(){
-	Faccenda * s=new Spazzatura();
-	cout<< s->generaNota() <<endl;
-	cout<<s->Faccenda::generaNota()<<endl;
+	Faccenda * spazz=new Spazzatura();
+	cout<< spazz->generaNota() <<endl;
+	cout<<spazz->Faccenda::generaNota()<<endl;
 
-	Incarico * c=new Cucina();
-	cout<< c->generaNota() <<endl;
+	Incarico * cuc=new Cucina();
+	cout<< cuc->generaNota() <<endl;
 	
-	Pagamento * b=new Bolletta();
-	b->setImporto(23.5);
-	cout<< b->generaNota() <<endl;
+	Pagamento * boll=new Bolletta();
+	boll->setImporto(23.5);
+	cout<< boll->generaNota() <<endl;
+
+	Pagamento * spesa=new Spesa();
+	cout<<spesa->generaNota()<<endl;
 
 	//prova prova prova
 
