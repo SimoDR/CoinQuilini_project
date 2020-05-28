@@ -14,6 +14,8 @@ int main(){
 	b->setImporto(23.5);
 	cout<< b->generaNota() <<endl;
 
+	//prova prova prova
+
 
 
 }
