@@ -4,9 +4,18 @@
 using std::cout;
 using std::endl;
 
+//operatore di output
+template <class T>
+class dList;
+
+template <class T> //dichiarazione perché è necessario che compaia quando viene dichiarata l'amicizia su trialbero
+std::ostream &operator<<(std::ostream &, const dList<T> &);
+
 template <class T>
 class dList
 {
+    friend std::ostream &operator<<<T>(std::ostream &, const dList &);
+
 private:
     class nodo
     {
@@ -219,9 +228,8 @@ typename dList<T>::iterator dList<T>::insert(iterator i, const T &t) //inseruisc
     if (i.ptr == nullptr) //la lista è vuota
     {
         insertFront(t);
-        return begin(); 
+        return begin();
     }
-
     else
     {
         if (i == end()) //iteratore past the end
@@ -456,16 +464,27 @@ bool dList<T>::iterator::operator!=(const dList<T>::iterator &x) const
     return ptr != x.ptr;
 }
 
+template <class T> //dichiarazione perché è necessario che compaia quando viene dichiarata l'amicizia su trialbero
+std::ostream &operator<<(std::ostream &os, const dList<T> &l)
+{
+    for (dList<int>::const_iterator c = l.cbegin(); c != l.cend(); ++c)
+        std::cout << *c << ' ';
+    std::cout << std::endl;
+    return os;
+}
+
 #endif // DLIST_H
 
 /* 
 DONE:
--iteratori
--inserimento dato l'iteratore
-TODO:
+- iteratori 
+- inserimento dato l'iteratore (bug)
 - pop front e pop back
--eliminazione ad iteratore
--eccezioni all'inserimento e modifica?
--input e output?
+- eliminazione ad iteratore
+
+TODO (forse):
+- eliminazione ad iteratore
+- eccezioni all'inserimento e modifica?
+- input e output?
 questi due non presenti in stl::list
  */
