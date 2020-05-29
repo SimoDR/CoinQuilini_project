@@ -12,9 +12,6 @@ using std::vector;
 using std::ostream;
 using std::endl;
 
-class ListaSpesa;
-ostream& operator<<(ostream&, const ListaSpesa&);
-
 class ListaSpesa{
 	//friend class Spesa;
 	friend ostream& operator<<(ostream&, const ListaSpesa&);
