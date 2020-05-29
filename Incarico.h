@@ -24,6 +24,7 @@ protected:
 public:
 	void setNome(const string&);
 	//void setIncaricato(Inquilino *);
+	bool getSvolto() const;
 	void setSvolto();
 	virtual ~Incarico()=0;
 	virtual Incarico* clone() const =0;
@@ -85,7 +86,7 @@ class Spesa: public Pagamento, public Faccenda
 {
 private:
     static unsigned short int _pesoSpesa;
-
+    unsigned short int _articoli;
 public:
 	virtual ~Spesa() {}; //???
 	virtual Spesa* clone() const;

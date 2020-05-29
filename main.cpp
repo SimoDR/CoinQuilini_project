@@ -22,6 +22,8 @@ int main(){
 
 	Pagamento * spesa=new Spesa();
 	cout<<spesa->generaNota()<<endl;
+	spesa->setSvolto();
+	cout<<spesa->generaNota()<<endl;
 	cout<<"Questo incarico vale: "<<spesa->calcolaPunteggio()<<" punti!"<<endl;
 	cout<<"***"<<endl;
 

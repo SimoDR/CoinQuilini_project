@@ -26,6 +26,9 @@ void Incarico::setNome(const string& s){
 void Incarico::setSvolto(){
 	_svolto=true;
 }
+bool Incarico::getSvolto() const{
+	return _svolto;
+}
 
 Incarico::~Incarico() {}
 
@@ -47,7 +50,7 @@ void Pagamento::setImporto(const double& x){
 	_importo=x;
 }
 string Pagamento::generaNota() const {
-	string s1="Lillone! Devi sborsare ";
+	string s1="Lillone! L'importo da pagare è: ";
 	string s2=" sacchi!";
 	return s1+std::to_string(_importo)+s2;
 }
@@ -67,13 +70,20 @@ Bolletta* Bolletta::clone() const {return new Bolletta(*this);}
 Spesa* Spesa::clone() const {return new Spesa(*this);}
 
 string Spesa::generaNota() const {
-	return "La lista della spesa è... "; // da definire
+	if ( !getSvolto() ){
+		return "La lista della spesa è... "; // chiama stampaLista Spesa 
+	}
+	else{
+		return Pagamento::generaNota();
+	}
 }
 
+//ricordarsi di aggiornare _articoli quando viene conclusa una spesa
+
 unsigned short int Spesa::calcolaPunteggio() const{
-	unsigned short int p=60/_pesoSpesa; //al posto del numero bisogna mettere gli elementi rimossi dalla lista_spesa perché acquistati
-	controlloSoglia(p);
-	return p;
+		unsigned short int p=_articoli/_pesoSpesa; 
+		controlloSoglia(p);
+		return p;
 }
 
 
