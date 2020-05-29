@@ -62,7 +62,7 @@ public:
 	virtual Bolletta* clone() const;
     //virtual bool posponi (const Data&) const; // serve #include "Data.h"
 	// virtual import //da definire opportunamente
-	//virtual double setCredito() const; //??? da definire
+	//virtual double setCredito(Pagamento,vector<Inquilino> Inquilini) const; //???
 };
 
 

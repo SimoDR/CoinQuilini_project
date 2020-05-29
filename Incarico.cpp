@@ -4,12 +4,12 @@
 // COSTANTI PER CALCOLO PUNTEGGIO
 unsigned int Incarico::_sogliaMax=10; // max punteggio attribuibile a un incarico
 
-double Pagamento::_pesoPagamento=30; //30 euro
-unsigned short int Faccenda::_pesoFaccenda=3600; // ogni 1 h (3600 sec) ci si aggiudica un punto
-unsigned short int Spesa::_pesoSpesa=10; //1 punto ogni 10 articoli comprati
-unsigned short int Pulizia::_pesoPulizia=3;
-double Cucina::_pesoCucina=1.5;
-unsigned short int Spazzatura::_pesoSpazzatura=3;
+double Pagamento::_pesoPagamento=30; // => 1 punto ogni 30 euro di importo
+unsigned short int Faccenda::_pesoFaccenda=3600; // => 1 punto ogni ora (3600 sec)
+unsigned short int Spesa::_pesoSpesa=10; // => 1 punto ogni 10 articoli comprati
+unsigned short int Pulizia::_pesoPulizia=3; // => 3 punti ogni stanza pulita
+double Cucina::_pesoCucina=1.5; // => 1.5^(numeroCommensali) punti ogni pasto
+unsigned short int Spazzatura::_pesoSpazzatura=3; // => 3 punti ogni incarico spazzatura
 
 // Implementazione Incarico
 
