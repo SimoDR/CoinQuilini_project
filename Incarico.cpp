@@ -30,6 +30,10 @@ bool Incarico::getSvolto() const{
 	return _svolto;
 }
 
+/*virtual bool posponi (const Data&) const{
+	return false;
+}*/
+
 Incarico::~Incarico() {}
 
 // Implementazione Faccenda
@@ -66,6 +70,10 @@ unsigned short int Pagamento::calcolaPunteggio() const{
 // Implementazione Bolletta
 Bolletta* Bolletta::clone() const {return new Bolletta(*this);}
 
+/*virtual bool Bolletta::posponi(const Data& d) const{
+	d < _dataLimite ? true : false;
+}*/
+
 // Implementazione Spesa
 Spesa* Spesa::clone() const {return new Spesa(*this);}
 
@@ -77,6 +85,10 @@ string Spesa::generaNota() const {
 		return Pagamento::generaNota();
 	}
 }
+
+/*virtual bool Spesa::posponi(const Data& d) const{
+	return true;
+}*/
 
 //ricordarsi di aggiornare _articoli quando viene conclusa una spesa
 
@@ -100,6 +112,10 @@ unsigned short int Pulizia::calcolaPunteggio() const{
 	controlloSoglia(p);
 	return p;
 }
+
+/*virtual bool Pulizia::posponi(const Data& d) const{
+	return true;
+}*/
 
 // Implementazione Cucina
 Cucina* Cucina::clone() const {return new Cucina(*this);}

@@ -28,7 +28,7 @@ public:
 	void setSvolto();
 	virtual ~Incarico()=0;
 	virtual Incarico* clone() const =0;
-	//virtual data posponi (data) const; // serve #include "Data.h"
+	//virtual bool posponi (const Data&) const; // serve #include "Data.h"  // ritorna false di default
 	virtual string generaNota() const=0;
 	// virtual import //da definire opportunamente
 	virtual unsigned short int calcolaPunteggio() const=0;
@@ -45,7 +45,6 @@ private:
 public:
 	void setImporto(const double&);
 	virtual ~Pagamento()=0;
-	//virtual data posponi (data) const; // serve #include "Data.h"
 	virtual string generaNota() const;
 	// virtual import //da definire opportunamente
 	//virtual double setCredito() const; //??? da definire
@@ -61,7 +60,7 @@ private:
 public:
 	virtual ~Bolletta() {} 
 	virtual Bolletta* clone() const;
-    //virtual Data posponi (data) const; // serve #include "Data.h"
+    //virtual bool posponi (const Data&) const; // serve #include "Data.h"
 	// virtual import //da definire opportunamente
 	//virtual double setCredito() const; //??? da definire
 };
@@ -74,7 +73,6 @@ private:
 	static unsigned short int _pesoFaccenda;
 public:
 	virtual ~Faccenda()=0;
-	//virtual data posponi (data) const; 
 	virtual string generaNota() const;
 	// virtual import
 	virtual unsigned short int calcolaPunteggio() const;
@@ -90,7 +88,7 @@ private:
 public:
 	virtual ~Spesa() {}; //???
 	virtual Spesa* clone() const;
-	//virtual data posponi (data) const; 
+	//virtual bool posponi (const Data&) const; 
 	virtual string generaNota() const;
 	// virtual import
 	//virtual double setCredito() const; //??? da definire
@@ -108,7 +106,7 @@ private:
 public:
 	virtual ~Pulizia() {}
 	virtual Pulizia* clone() const;
-	//virtual data posponi (data) const; 
+	//virtual bool posponi (const Data&) const; 
 	virtual string generaNota() const;
 	// virtual import
 	virtual unsigned short int calcolaPunteggio() const;
@@ -124,7 +122,6 @@ private:
 public:
 	virtual ~Cucina() {}
 	virtual Cucina* clone() const;
-	//virtual data posponi (data) const; 
 	virtual string generaNota() const;
 	// virtual import
 	virtual unsigned short int calcolaPunteggio() const;
@@ -140,7 +137,6 @@ private:
 public:
 	virtual ~Spazzatura() {}
 	virtual Spazzatura* clone() const;
-	//virtual data posponi (data) const; 
 	virtual string generaNota() const;
 	// virtual import
 	virtual unsigned short int calcolaPunteggio() const;
