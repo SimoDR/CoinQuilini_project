@@ -246,6 +246,7 @@ typename dList<T>::iterator dList<T>::insert(iterator i, const T &t) //inseruisc
         {
             nodo *temp = new nodo(t, i.ptr->prev, i.ptr);
             (i.ptr->prev)->next = temp;
+            i.ptr->prev = temp;
             return temp;
         }
     }
