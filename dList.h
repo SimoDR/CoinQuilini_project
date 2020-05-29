@@ -45,7 +45,7 @@ public:
     class iterator
     {
         friend class dList<T>;
-        friend class const_iterator; //per accederere a p e pte
+        friend class const_iterator; //per accedere a p e pte
 
     private:
         nodo *ptr;
@@ -230,19 +230,24 @@ typename dList<T>::iterator dList<T>::insert(iterator i, const T &t) //inseruisc
         insertFront(t);
         return begin();
     }
-    else
+    else //lista non vuota
     {
         if (i == end()) //iteratore past the end
+        {
             insertBack(t);
+            return --end(); //cerca il past the end della lista aggiornata e ne ritorna il precedente (ultimo)
+        }
         else if (i == begin()) //iteratore primo elemento
+        {
             insertFront(t);
+            return begin(); //ritorna il primo, avendo inserito t prima del primo (che diventa quindi il primo)
+        }
         else //caso generale
         {
             nodo *temp = new nodo(t, i.ptr->prev, i.ptr);
             (i.ptr->prev)->next = temp;
-            i.ptr->prev = temp;
+            return temp;
         }
-        return --i;
     }
 }
 
@@ -263,7 +268,7 @@ typename dList<T>::iterator dList<T>::remove(iterator i) //rimuove il nodo punta
         }
         else
         {
-            nodo *temp = i.ptr; //nodo da eliminare
+            nodo * temp = i.ptr; //nodo da eliminare
             ++i;                //iteratore da restituire
             (temp->prev)->next = temp->next;
             (temp->next)->prev = temp->prev;
@@ -467,7 +472,7 @@ bool dList<T>::iterator::operator!=(const dList<T>::iterator &x) const
 template <class T> //dichiarazione perché è necessario che compaia quando viene dichiarata l'amicizia su trialbero
 std::ostream &operator<<(std::ostream &os, const dList<T> &l)
 {
-    for (dList<int>::const_iterator c = l.cbegin(); c != l.cend(); ++c)
+    for (typename dList<T>::const_iterator c = l.cbegin(); c != l.cend(); ++c)
         std::cout << *c << ' ';
     std::cout << std::endl;
     return os;
