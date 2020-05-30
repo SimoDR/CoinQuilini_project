@@ -1,10 +1,7 @@
 #include "inquilino.h"
 
-Inquilino::Inquilino(string user, string pw) : _user(user), _password(pw)
-{
-    _creditoDebito = 0;
-    _punteggio = 0;
-}
+Inquilino::Inquilino(const string& user, const string& pw) : _user(user), _password(pw), _creditoDebito(0), _punteggio(0) {}
+
 void Inquilino::modifica(string user, string pw)
 {
     _user = user;

@@ -17,7 +17,7 @@ private:
     static short int _sogliaPosponi;
 
 public:
-    Inquilino(string, string);        //utente da nome e pw
+    Inquilino(const string&, const string&);        //utente da nome e pw
     void modifica(string, string); //modifica username e/o password
     void setCD(double);            //modifica il credito/debito aggiungendo (o togliendo se negativo)
     void setPunteggio(short int);  //modifica il punteggio aggiungendo (o togliendo se negativo)
