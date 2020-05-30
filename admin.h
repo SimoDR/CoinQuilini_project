@@ -5,9 +5,8 @@
 class Admin : public Inquilino 
 {
     public:
-        Admin(string, string);
-        virtual unsigned short isAdmin();
-        virtual bool puoposporre();
+        Admin(const string&, const string&);
+        virtual unsigned short int isAdmin() const;
 };
 
 #endif
