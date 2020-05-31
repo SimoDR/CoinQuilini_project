@@ -50,6 +50,7 @@ unsigned short int Inquilino::getPunteggio() const{
 
 unsigned short int Inquilino::_puntiMin = 0;
 unsigned short int Inquilino::_puntiMax = 100;
-unsigned short int Inquilino::_sogliaPosponi = 40;short int Inquilino::_puntiMin = 0;
+unsigned short int Inquilino::_sogliaPosponi = 40;
+short int Inquilino::_puntiMin = 0;
 short int Inquilino::_puntiMax = 0;
 short int Inquilino::_sogliaPosponi = 0;
