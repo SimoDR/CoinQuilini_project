@@ -1,10 +1,14 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 
+#include<vector>
+#include<string>
 #include <QObject>
 #include "mainwindow.h"
 #include <QString>
 #include <QMessageBox>
+using std::vector;
+using std::string;
 
 class Controller : public QObject
 {
@@ -18,6 +22,7 @@ public:
 signals:
 
 public slots:
+    void creaNuovoIncarico(vector<string> parametri); //slot per la creazione di un nuovo incarico
 
 };
 

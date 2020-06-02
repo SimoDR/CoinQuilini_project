@@ -25,3 +25,8 @@ bool Controller::login(QString user, QString pw) //implementato per debug, poi b
 
 
 }
+
+void Controller::creaNuovoIncarico(vector<std::string> parametri)
+{
+
+}
