@@ -63,3 +63,7 @@ unsigned short Controller::isAdmin(const std::string & user) const
 }
 
 
+void Controller::creaNuovoIncarico(vector<std::string> parametri)
+{
+
+}

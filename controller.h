@@ -1,6 +1,8 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 
+#include<vector>
+#include<string>
 #include <QObject>
 #include "mainwindow.h"
 #include <QString>
@@ -26,7 +28,8 @@ public:
     unsigned short int isAdmin(const string &) const;
 signals:
 
-
+public slots:
+    void creaNuovoIncarico(vector<string> parametri); //slot per la creazione di un nuovo incarico
 
 };
 
