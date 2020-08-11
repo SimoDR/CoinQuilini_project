@@ -7,6 +7,5 @@ int main(int argc, char *argv[])
     Controller *controller=new Controller;
     Login l(nullptr, controller);
     l.show();
-
     return a.exec();
 }

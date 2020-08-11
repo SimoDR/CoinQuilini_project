@@ -1,10 +1,11 @@
 #include "mainwindow.h"
 #include "controller.h"
+#include "adminpanel.h"
 
-Mainwindow::Mainwindow(QWidget *parent, Controller* c, QString inquilino) : QMainWindow(parent),  controller(c), inquilino(inquilino)
+Mainwindow::Mainwindow(QWidget *parent, Controller* c, QString inquilino) : QMainWindow(parent),  _controller(c), _inquilino(inquilino)
 {
-    mainlayout=new QHBoxLayout;
-    setWindowTitle("Qoinquilini-Benvenuto " + inquilino);
+    _mainLayout=new QHBoxLayout;
+    setWindowTitle("Qoinquilini-Benvenuto " + _inquilino);
     //create menu bar
     addmenubar();
     //create calendar and buttons
@@ -12,45 +13,57 @@ Mainwindow::Mainwindow(QWidget *parent, Controller* c, QString inquilino) : QMai
     //create the 3 lists and labels
     addlists();
     //setting the central widget of the window
-    mainwidget=new QWidget;
-    mainwidget->setLayout(mainlayout);
-    setCentralWidget(mainwidget);
+    _mainWidget=new QWidget;
+    _mainWidget->setLayout(_mainLayout);
+    setCentralWidget(_mainWidget);
+}
+
+void Mainwindow::buildAdminPanel()
+{
+    adminPanel* adminpanel= new adminPanel(_controller,this);
+    adminpanel->show();
 }
 
 void Mainwindow::addbuttons()
 {
-    incarico= new QPushButton;
-    incarico->setText("Aggiungi un incarico");
-    listaspesa= new QPushButton;
-    listaspesa->setText("lista della spesa");
-    credeb= new QPushButton;
-    credeb->setText("il tuo credito / debito");
-    admin= new QPushButton;
-    admin->setText("Apri pannello admin");
+    _incarico= new QPushButton;
+    _incarico->setText("Aggiungi un incarico");
+    _listaSpesa= new QPushButton;
+    _listaSpesa->setText("lista della spesa");
+    _creDeb= new QPushButton;
+    _creDeb->setText("il tuo credito / debito");
+    _calendarLayout->addWidget(_incarico);
+    _calendarLayout->addWidget(_listaSpesa);
+    _calendarLayout->addWidget(_creDeb);
+
+    if (_controller->isAdmin(_inquilino.toStdString())) {
+        _admin= new QPushButton;
+        _admin->setText("Apri pannello admin");
+        connect(_admin, SIGNAL(clicked()), this, SLOT(buildAdminPanel()));
+        _calendarLayout->addWidget(_admin);
+    }
 
     //add buttons to the layout
-    calendarlayout->addWidget(incarico);
-    calendarlayout->addWidget(listaspesa);
-    calendarlayout->addWidget(credeb);
-    calendarlayout->addWidget(admin);
+
+
 }
 
 void Mainwindow::addcalendar()
 {
-    calendar=new QCalendarWidget;
-    calendarlayout= new QVBoxLayout;
+    _calendar=new QCalendarWidget;
+    _calendarLayout= new QVBoxLayout;
 
     //add calendar to the layout
-    calendarlayout->addWidget(calendar);
+    _calendarLayout->addWidget(_calendar);
 
     //buttons
     addbuttons();
 
-    calendargroup=new QGroupBox("Calendario");
-    calendargroup->setLayout(calendarlayout);
+    _calendarGroup=new QGroupBox("Calendario");
+    _calendarGroup->setLayout(_calendarLayout);
 
     //add to the main layout
-    mainlayout->addWidget(calendargroup);
+    _mainLayout->addWidget(_calendarGroup);
 }
 
 void Mainwindow::addlists()
@@ -59,17 +72,17 @@ void Mainwindow::addlists()
 
     //prev list and label
     QLabel* prec= new QLabel;
-    prec->setText(((calendar->selectedDate()).addDays(-1)).toString(Qt::SystemLocaleLongDate));
+    prec->setText(((_calendar->selectedDate()).addDays(-1)).toString(Qt::SystemLocaleLongDate));
     QListWidget* preclist= new QListWidget;
 
     //selected day list and label
     QLabel* selected = new QLabel;
-    selected->setText((calendar->selectedDate()).toString(Qt::SystemLocaleLongDate));
+    selected->setText((_calendar->selectedDate()).toString(Qt::SystemLocaleLongDate));
     QListWidget* selectedlist= new QListWidget;
 
     //next list and label
     QLabel* succ= new QLabel;
-    succ->setText(((calendar->selectedDate()).addDays(1)).toString(Qt::SystemLocaleLongDate));
+    succ->setText(((_calendar->selectedDate()).addDays(1)).toString(Qt::SystemLocaleLongDate));
     QListWidget* succlist= new QListWidget;
 
     //layout add
@@ -81,24 +94,24 @@ void Mainwindow::addlists()
     listlayout->addWidget(succ);
     listlayout->addWidget(succlist);
 
-    listgroup=new QGroupBox("I tuoi incarichi");
-    listgroup->setLayout(listlayout);
+    _listGroup=new QGroupBox("I tuoi incarichi");
+    _listGroup->setLayout(listlayout);
 
     //add to the main layout
-    mainlayout->addWidget(listgroup);
+    _mainLayout->addWidget(_listGroup);
 }
 
 void Mainwindow::addmenubar()
 {
-    menubar=menuBar();
-    file=new QMenu("File");
-    esci=new QAction("Esci");
-    file->addAction(esci);
-    menubar->addMenu(file);
-    opzioni= new QMenu("Opzioni");
-    logout=new QAction("Log out");
-    info=new QAction("info");         //this action could open a messagebox with the instructions and informations about the program
-    opzioni->addAction(logout);
-    opzioni->addAction(info);
-    menubar->addMenu(opzioni);
+    _menuBar=menuBar();
+    _file=new QMenu("File");
+    _esci=new QAction("Esci");
+    _file->addAction(_esci);
+    _menuBar->addMenu(_file);
+    _opzioni= new QMenu("Opzioni");
+    _logOut=new QAction("Log out");
+    _info=new QAction("info");         //this action could open a messagebox with the instructions and informations about the program
+    _opzioni->addAction(_logOut);
+    _opzioni->addAction(_info);
+    _menuBar->addMenu(_opzioni);
 }

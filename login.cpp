@@ -1,48 +1,49 @@
 #include "login.h"
 
-Login::Login(QWidget *parent, Controller* c) : QWidget(parent), controller(c)
+Login::Login(QWidget *parent, Controller* c) : QWidget(parent), _controller(c)
 {
     setWindowTitle("Login");
     //user label
-    labeluser = new QLabel();
-    labeluser->setText("User:");
+    _labelUser = new QLabel();
+    _labelUser->setText("User:");
     //password label
-    labelpw = new QLabel();
-    labelpw->setText("Password:");
+    _labelPw = new QLabel();
+    _labelPw->setText("Password:");
     //line edit user
-    edituser = new QLineEdit();
+    _editUser = new QLineEdit();
     //line edit password
-    editpw = new QLineEdit();
-    editpw->setEchoMode(QLineEdit::Password);
+    _editPw = new QLineEdit();
+    _editPw->setEchoMode(QLineEdit::Password);
     //login button
-    loginbut = new QPushButton();
-    loginbut->setText("Login");
+    _loginBut = new QPushButton();
+    _loginBut->setText("Login");
     //layout
-    layoutLogin= new QGridLayout;
-    layoutLogin->addWidget(labeluser, 1, 0);
-    layoutLogin->addWidget(edituser, 1, 1);
-    layoutLogin->addWidget(labelpw, 2, 0);
-    layoutLogin->addWidget(editpw, 2, 1);
-    layoutLogin->addWidget(loginbut, 3, 0, 1, 2);
+    _layoutLogin= new QGridLayout;
+    _layoutLogin->addWidget(_labelUser, 1, 0);
+    _layoutLogin->addWidget(_editUser, 1, 1);
+    _layoutLogin->addWidget(_labelPw, 2, 0);
+    _layoutLogin->addWidget(_editPw, 2, 1);
+    _layoutLogin->addWidget(_loginBut, 3, 0, 1, 2);
     //size
-    layoutLogin->setSizeConstraint(QLayout::SetFixedSize);
+    _layoutLogin->setSizeConstraint(QLayout::SetFixedSize);
 
-    setLayout(layoutLogin);
-
-    connect(loginbut, SIGNAL(clicked()), this, SLOT(trylogin()));
+    setLayout(_layoutLogin);
+    connect(_editUser,SIGNAL(returnPressed()), this, SLOT(trylogin()));
+    connect(_editPw,SIGNAL(returnPressed()), this, SLOT(trylogin()));
+    connect(_loginBut, SIGNAL(clicked()), this, SLOT(trylogin()));
 }
 
 //chiama il controller per check credenziali e in caso corrette chiude il login, altrimenti resetta i campi
 void Login::trylogin()
 {
 
-    bool logged=controller->login(edituser->text(), editpw->text());
+    bool logged=_controller->login(_editUser->text(), _editPw->text());
     if (logged)
         close();
     else{
 
-        edituser->clear();
-        editpw->clear();
+        _editUser->clear();
+        _editPw->clear();
     }
 }
 

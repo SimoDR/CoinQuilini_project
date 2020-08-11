@@ -11,13 +11,13 @@ class Login : public QWidget
 {
     Q_OBJECT
 private:
-    Controller* controller;
-    QGridLayout* layoutLogin;
-    QLabel* labeluser;
-    QLabel* labelpw;
-    QLineEdit* edituser;
-    QLineEdit* editpw;
-    QPushButton* loginbut;
+    Controller* _controller;
+    QGridLayout* _layoutLogin;
+    QLabel* _labelUser;
+    QLabel* _labelPw;
+    QLineEdit* _editUser;
+    QLineEdit* _editPw;
+    QPushButton* _loginBut;
 
 public:
     Login(QWidget *parent, Controller*);
