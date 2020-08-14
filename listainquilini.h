@@ -6,6 +6,8 @@
 #include "dList.h"
 #include "vector"
 #include <stdexcept>
+#include <QXmlStreamWriter>
+#include <QFile>
 using std::vector;
 
 class ListaInquilini
@@ -16,6 +18,7 @@ private:
     bool checkPresenza(const string &) const; //controlla se esiste già un inquilino con l'user selezionato per l'inserimento
 public:
     ListaInquilini();
+    ~ListaInquilini();
     void rimuovi(unsigned int);
     Inquilino *getInquilino(unsigned int) const;
     Inquilino *getInquilino(const string &) const;
@@ -26,6 +29,7 @@ public:
     void modifica(const string &, const string &, unsigned int);
     void checkAdmin(unsigned int);
     unsigned short int isAdmin(const string &) const;
+    void exportXml();
 };
 
 #endif // LISTAINQUILINI_H

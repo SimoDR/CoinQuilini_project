@@ -15,7 +15,7 @@ class Controller : public QObject
 {
     Q_OBJECT
 private:
-    ListaInquilini* _listainquilini;
+    ListaInquilini _listaInquilini;
 public:
     explicit Controller( QObject *parent = nullptr);
     bool login(const QString &, const QString &);   //debug, da togliere

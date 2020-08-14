@@ -10,6 +10,11 @@ ListaInquilini::ListaInquilini()
 
 }
 
+ListaInquilini::~ListaInquilini()
+{
+    exportXml();
+}
+
 void ListaInquilini::aggiungi(Inquilino * nuovo)
 {
     _listaInquilini.insertBack(nuovo);
@@ -120,4 +125,20 @@ unsigned short int ListaInquilini::isAdmin(const std::string & user) const
     Inquilino* i= getInquilino(user);
     return i->isAdmin();
 
+}
+
+void ListaInquilini::exportXml()
+{
+    QFile file("listainquilini.xml");
+    file.open(QIODevice::WriteOnly);
+    QXmlStreamWriter xmlOutput(&file);
+    xmlOutput.setAutoFormatting(true);
+    xmlOutput.writeStartDocument();
+
+    xmlOutput.writeStartElement("INQUILINI");
+    for(auto ci = _listaInquilini.cbegin(); ci != _listaInquilini.cend(); ++ci)
+        (*ci)->exportXml(xmlOutput);
+    xmlOutput.writeEndElement();
+    xmlOutput.writeEndDocument();
+    file.close();
 }

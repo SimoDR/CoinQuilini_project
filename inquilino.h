@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <QXmlStreamWriter>
 
 using std::string;
 
@@ -29,6 +30,9 @@ public:
     unsigned short int getPunteggio() const;
     string getNome() const;
     bool isLogged(const string &,const string &) const;
+    virtual std::string getLabel() const;
+    void exportXml(QXmlStreamWriter&) const;
+    virtual ~Inquilino(){}
 };
 
 #endif

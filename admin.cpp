@@ -9,3 +9,8 @@ bool Admin::puoposporre()
 {
     return true;
 }
+
+std::string Admin::getLabel() const
+{
+    return "ADMIN";
+}

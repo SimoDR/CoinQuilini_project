@@ -18,6 +18,7 @@ Mainwindow::Mainwindow(QWidget *parent, Controller* c, QString inquilino) : QMai
     setCentralWidget(_mainWidget);
 }
 
+
 void Mainwindow::buildAdminPanel()
 {
     adminPanel* adminpanel= new adminPanel(_controller,this);

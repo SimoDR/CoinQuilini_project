@@ -9,6 +9,7 @@ class Admin : public Inquilino
         Admin(string, string);
         virtual unsigned short int isAdmin() const;
         virtual bool puoposporre();
+        virtual std::string getLabel() const;
 };
 
 #endif

@@ -47,6 +47,20 @@ bool Inquilino::isLogged(const std::string &user, const std::string &pw) const
     return false;
 }
 
+std::string Inquilino::getLabel() const
+{
+    return "INQUILINO";
+}
+
+void Inquilino::exportXml(QXmlStreamWriter & xmlOutput) const
+{
+    xmlOutput.writeStartElement(QString::fromStdString(getLabel()));
+
+    xmlOutput.writeTextElement("nome", QString::fromStdString(_user));
+    xmlOutput.writeTextElement("password", QString::fromStdString(_password));
+    xmlOutput.writeEndElement();
+}
+
 unsigned short int Inquilino::getPunteggio() const{
     return _punteggio;
 }
