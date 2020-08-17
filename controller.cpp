@@ -38,7 +38,7 @@ vector<std::string> Controller::getInquilinoPos(unsigned int pos)
 
 void Controller::aggiungiInquilino(const QString & user, const QString & pw)
 {
-    _listaInquilini.creaInserisci(user.toStdString(), pw.toStdString());
+    _listaInquilini.creaInserisci("INQUILINO", user.toStdString(), pw.toStdString());
 }
 
 void Controller::modificaInquilino(const QString &user, const QString & pw, unsigned int pos)

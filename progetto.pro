@@ -7,7 +7,8 @@ HEADERS += \
     inquilino.h \
     listainquilini.h \
     login.h \
-    mainwindow.h
+    mainwindow.h \
+    utilities.h
 
 SOURCES += \
     admin.cpp \
@@ -18,7 +19,8 @@ SOURCES += \
     listainquilini.cpp \
     login.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    utilities.cpp
 
 
 

@@ -8,6 +8,8 @@
 #include <stdexcept>
 #include <QXmlStreamWriter>
 #include <QFile>
+#include "utilities.h"
+#include <iostream>
 using std::vector;
 
 class ListaInquilini
@@ -23,13 +25,14 @@ public:
     Inquilino *getInquilino(unsigned int) const;
     Inquilino *getInquilino(const string &) const;
     bool checkCredenziali(const string&,const string &) const;
-    void creaInserisci(const string &, const string &);   //crea l'inquilino e lo inserisce nel calendario
+    void creaInserisci(const string &, const string &, const string &);   //crea l'inquilino e lo inserisce nel calendario
     vector<string>inquilini() const;
     vector<std::string> getCredenziali(unsigned int) const;
     void modifica(const string &, const string &, unsigned int);
-    void checkAdmin(unsigned int);
+    void checkAdmin(unsigned int) const;
     unsigned short int isAdmin(const string &) const;
-    void exportXml();
+    void exportXml() const;
+    void importXml();
 };
 
 #endif // LISTAINQUILINI_H

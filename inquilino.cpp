@@ -55,7 +55,6 @@ std::string Inquilino::getLabel() const
 void Inquilino::exportXml(QXmlStreamWriter & xmlOutput) const
 {
     xmlOutput.writeStartElement(QString::fromStdString(getLabel()));
-
     xmlOutput.writeTextElement("nome", QString::fromStdString(_user));
     xmlOutput.writeTextElement("password", QString::fromStdString(_password));
     xmlOutput.writeEndElement();
