@@ -3,6 +3,7 @@
 ListaInquilini::ListaInquilini()
 {
     importXml();
+    creaInserisci("ADMIN", "admin", "admin");
 }
 
 ListaInquilini::~ListaInquilini()
