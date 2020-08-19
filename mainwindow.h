@@ -22,37 +22,37 @@ class Mainwindow : public QMainWindow
 {
     Q_OBJECT
 private:
-    Controller* controller; //controller figlio di mainwindow: alla distruzione della vista si distrugge in automatico anche il controller
-    QHBoxLayout* mainlayout;
-    QWidget*mainwidget;
+    Controller *_controller; //controller figlio di mainwindow: alla distruzione della vista si distrugge in automatico anche il controller
+    QHBoxLayout* _mainLayout;
+    QWidget*_mainWidget;
     //layout calendario e buttons
-    QGroupBox * calendargroup;
-    QVBoxLayout* calendarlayout;
-    QCalendarWidget* calendar;
-    QPushButton* incarico;
-    QPushButton* listaspesa;
-    QPushButton* credeb;
-    QPushButton* admin;
+    QGroupBox * _calendarGroup;
+    QVBoxLayout* _calendarLayout;
+    QCalendarWidget* _calendar;
+    QPushButton* _incarico;
+    QPushButton* _listaSpesa;
+    QPushButton* _creDeb;
+    QPushButton* _admin;
     //layout 3 liste
-    QGroupBox* listgroup;
-    QVBoxLayout* listlayout;
-    QLabel* prec;
-    QListWidget* preclist;
-    QLabel* selected;
-    QListWidget* selectedlist;
-    QLabel* succ;
-    QListWidget* succlist;
+    QGroupBox *_listGroup;
+    QVBoxLayout *_listLayout;
+    QLabel* _prec;
+    QListWidget* _precList;
+    QLabel* _selected;
+    QListWidget* _selectedList;
+    QLabel* _succ;
+    QListWidget* _succList;
 
     //menu bar
-    QMenuBar* menubar;
-    QMenu *file;
-    QAction *esci;
-    QMenu *opzioni;
-    QAction* logout;
-    QAction* info;
+    QMenuBar* _menuBar;
+    QMenu *_file;
+    QAction *_esci;
+    QMenu *_opzioni;
+    QAction* _logOut;
+    QAction* _info;
 
     //inquilino loggato
-    QString inquilino;
+    QString _inquilino;
 
     void addbuttons();
     void addcalendar();
@@ -65,6 +65,8 @@ public:
 
 signals:
 
+private slots:
+   void buildAdminPanel();
 };
 
 #endif // MAINWINDOW_H
