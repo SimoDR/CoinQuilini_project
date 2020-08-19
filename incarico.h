@@ -5,8 +5,8 @@
 #define INCARICO_H
 
 #include<string>
-//#include "Inquilino.h"
-//#include "Data.h"
+#include "inquilino.h"
+#include "data.h"
 using std::string;
 
 
@@ -14,8 +14,8 @@ class Incarico
 {
 private:
 	string _nome;
-	//Inquilino* _incaricato; // serve #include "Inquilino.h"
-	bool _svolto;
+    Inquilino* _incaricato;
+    bool _svolto=false;
 	static unsigned int _sogliaMax;
 
 protected:
@@ -23,13 +23,13 @@ protected:
 
 public:
 	void setNome(const string&);
-	//void setIncaricato(Inquilino *);
+    void setIncaricato(const Inquilino *);
 	bool getSvolto() const;
-	void setSvolto();
-	virtual ~Incarico()=0;
+    void setSvolto();
+    virtual ~Incarico() {}
 	virtual Incarico* clone() const =0;
-	//virtual bool posponi (const Data&) const; // serve #include "Data.h"  // ritorna false di default
-	virtual string generaNota() const=0;
+    virtual bool posponi (const Data&) const; // ritorna false di default
+    virtual string generaNota() const;
 	// virtual import //da definire opportunamente
 	virtual unsigned short int calcolaPunteggio() const=0;
 };
@@ -55,12 +55,12 @@ public:
 
 class Bolletta: public Pagamento{
 private:
-	//Data _dataLimite; //serve #include "Data.h"
-	//vector<Inquilino> _partecipanti; //serve Inquilino.h 
+    Data _dataLimite;
+    vector<const Inquilino *> _partecipanti;
 public:
 	virtual ~Bolletta() {} 
 	virtual Bolletta* clone() const;
-    //virtual bool posponi (const Data&) const; // serve #include "Data.h"
+    virtual bool posponi (const Data&) const;
 	// virtual import //da definire opportunamente
 	//virtual double setCredito(Pagamento,vector<Inquilino> Inquilini) const; //???
 };
@@ -88,7 +88,7 @@ private:
 public:
 	virtual ~Spesa() {}; //???
 	virtual Spesa* clone() const;
-	//virtual bool posponi (const Data&) const; 
+    virtual bool posponi (const Data&) const;
 	virtual string generaNota() const;
 	// virtual import
 	//virtual double setCredito() const; //??? da definire
