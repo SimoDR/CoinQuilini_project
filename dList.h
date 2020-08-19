@@ -238,7 +238,7 @@ unsigned int dList<T>::countElements()
 }
 
 template <class T>
-typename dList<T>::iterator dList<T>::insert(iterator i, const T &t) //inseruisce t prima del nodo puntato da i e ritorna l'iteratore che punta al nuovo nodo
+typename dList<T>::iterator dList<T>::insert(iterator i, const T &t) //inserisce t prima del nodo puntato da i e ritorna l'iteratore che punta al nuovo nodo
 {
     if (i.ptr == nullptr) //la lista è vuota
     {
