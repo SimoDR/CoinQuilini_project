@@ -5,6 +5,7 @@ SOURCES += \
     mainwindow.cpp \
 	calendario.cpp \
 	data.cpp \
+	dlList.cpp \
 	outofboundexception.cpp
 
 HEADERS += \
@@ -13,6 +14,7 @@ HEADERS += \
     mainwindow.h \
 calendario.h \
 	data.h \
+	dList.h \
 	outofboundexception.h
 
 QT += widgets

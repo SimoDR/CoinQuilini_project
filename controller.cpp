@@ -36,52 +36,56 @@ bool Controller::login(const QString & user, const QString & pw)
  * 4- TempoStimato
  * 5- StanzeDaPulire
  * 6- NumeroCommensali
- * //7- CosaButtare
- * 7- PesoSpazzatura
+ * 7- numeroArticoli
  * 8- Importo
  * 9- DataLimite
  * 10- DataInizio
- * 11-Partecipanti
+ * 11- numeroOccorrenze
+ * [11..parametri.size] -Partecipanti
  * ..
  *
  *
  * */
 
-/*
+
 void Controller::creaNuovoIncarico(vector<std::string> parametri)
 {
-    string NomeIncarico=parametri[0];
-    string TipoIncarico=parametri[1];
-    string NomeIncaricato=parametri[2];
-    int CadenzaIncarico=std::stoi(parametri[3]);
-    int TempoStimato=std::stoi(parametri[4]);
-    unsigned short int StanzeDaPulire=std::stoi(parametri[5]);
-    unsigned short int NumeroCommensali=std::stoi(parametri[6]);
-    unsigned short int PesoSpazzatura=std::stoi(parametri[7]);
-    int Importo=std::stoi(parametri[8]);
-    Data * DataLimite=new Data(parametri[9]);
-    Data * DataInizio=new Data(parametri[10]);
+    string nomeIncarico=parametri[0];
+    string tipoIncarico=parametri[1];
+    string nomeIncaricato=parametri[2]; //DA SISTEMARE
+    int cadenzaIncarico=std::stoi(parametri[3]);
+    int tempoStimato=std::stoi(parametri[4]);
+    unsigned short int stanzeDaPulire=std::stoi(parametri[5]);
+    unsigned short int numeroCommensali=std::stoi(parametri[6]);
+    unsigned short int numeroArticoli=std::stoi(parametri[7]);
+    int importo=std::stoi(parametri[8]);
+    Data * dataLimite=new Data(parametri[9]);
+    Data * dataInizio=new Data(parametri[10]);
+    int numeroOccorrenze=std::stoi(parametri[11]);
 
-    for(std::vector<string>::size_type i=10;i<parametri.size();i++)
-    {
-
-   }
-    if(TipoIncarico=="Spesa")
-        Incarico * i=new Spesa(NomeIncarico,NomeIncarico)
-
-    if (CadenzaIncarico==0) //incarico regolare, assegnazione automatica degli inquilini tra i disponibili nel buffer
-    {
-        for(int index=0;index<CadenzaIncarico;index++)
-        {
-
-        }
-    }
-    else //incarico singolo, assegnazione automatica o manuale
+    for(std::vector<string>::size_type i=12;i<parametri.size();i++)
     {
 
     }
+
+    Incarico * i=nullptr;
+
+    if (tipoIncarico=="Pulizia")
+        i=new Pulizia(nomeIncarico,stanzeDaPulire);
+    else if(tipoIncarico=="Spesa")
+        i=new Spesa(nomeIncarico,importo,tempoStimato,numeroArticoli);
+    else if(tipoIncarico=="Spazzatura")
+        i=new Spazzatura(nomeIncarico,tempoStimato);
+    else if(tipoIncarico=="Cucina")
+        i=new Cucina(nomeIncarico,tempoStimato,numeroCommensali);
+    else if(tipoIncarico=="Bolletta")
+        i=new Bolletta(nomeIncarico,importo,dataLimite); //partecipanti
+
+
+    bool successo=insert(i,dataInizio,numeroOccorrenze,cadenzaIncarico);
+
 }
-*/
+
 
 vector<string> Controller::getInquilini()
 {
