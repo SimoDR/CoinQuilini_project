@@ -34,7 +34,7 @@ public:
 signals:
 
 public slots:
-    void creaNuovoIncarico(vector<string> parametri); //slot per la creazione di un nuovo incarico
+   // void creaNuovoIncarico(vector<string> parametri); //slot per la creazione di un nuovo incarico
 
 
 };

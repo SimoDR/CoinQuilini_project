@@ -1,12 +1,9 @@
-<<<<<<< HEAD
 
 #include <iostream>
 #include<vector>
 #include <QApplication>
 #include "calendario.h"
 #include "login.h"
-using std::cout;
-using std::endl;
 
 
 int main(int argc, char *argv[])
@@ -55,8 +52,5 @@ int main(){
 }
 
 */
-=======
-
->>>>>>> gerarchia
 
 

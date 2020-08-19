@@ -11,6 +11,7 @@ HEADERS += \
     listainquilini.h \
     login.h \
     mainwindow.h \
+    outofboundexception.h \
     utilities.h
 
 SOURCES += \
@@ -26,6 +27,7 @@ SOURCES += \
     login.cpp \
     main.cpp \
     mainwindow.cpp \
+    outofboundexception.cpp \
     utilities.cpp
 
 
