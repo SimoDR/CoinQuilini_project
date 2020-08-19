@@ -34,8 +34,6 @@ bool Incarico::getSvolto() const{
 	return false;
 }*/
 
-Incarico::~Incarico() {}
-
 // Implementazione Faccenda
 
 Faccenda::~Faccenda() {}
