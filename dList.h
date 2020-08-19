@@ -1,6 +1,7 @@
 #ifndef DLIST_H
 #define DLIST_H
 #include <iostream>
+#include <type_traits>
 using std::cout;
 using std::endl;
 
@@ -100,6 +101,7 @@ dList<T>::nodo::nodo(const T &t, dList<T>::nodo *p, dList::nodo *n) : info(t), p
 template <class T>
 dList<T>::nodo::~nodo() {
     delete next;
+    if(std::is_pointer<T>::value)
     delete info;
 }
 
