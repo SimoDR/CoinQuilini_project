@@ -97,7 +97,8 @@ template <class T>
 dList<T>::nodo::nodo(const T &t, dList<T>::nodo *p, dList::nodo *n) : info(t), prev(p), next(n) {}
 
 template <class T>
-dList<T>::nodo::~nodo() { delete next; }
+dList<T>::nodo::~nodo() { delete next;
+                          delete info;}
 
 /**********************************DLIST**********************************/
 
@@ -130,7 +131,7 @@ bool dList<T>::isLess(nodo *d1, nodo *d2)
         return true;
     // d1 e d2 NON vuote
     return d1->info < d2->info ||
-           (d1->info == d2->info && isLess(d1->next, d2->next));
+            (d1->info == d2->info && isLess(d1->next, d2->next));
 }
 
 template <class T>
