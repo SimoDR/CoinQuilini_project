@@ -3,6 +3,7 @@
 #include "data.h"
 #include "dList.h"
 #include "incarico.h"
+#include "listainquilini.h"
 
 class Calendario
 {
@@ -11,7 +12,7 @@ private:
     {
         Data _dataDelGiorno;
         vector<Incarico*> _incarichiDelGiorno;
-
+        Giorno(Data delGiorno);
 
     };
 
@@ -26,11 +27,45 @@ private:
     // chiamata precedente nel caso di un incarico ricorrente
     dList<Giorno>::iterator iteratoreFromData(dList<Giorno>::iterator, const Data&);
 
+    class BufferInquilini
+    {
+        //campi dati
+        vector<Inquilino*> inquilini;
+        vector<Inquilino*>::iterator index;
+
+        //metodi
+        BufferInquilini(); //aggiungere i coinquilini DA FARE
+        void avanza()
+        {
+             index++;
+             if(index==inquilini.end()) index=inquilini.begin();
+        }
+        vector<Inquilino*> trovaMinimi() const
+        {
+            //DA FARE
+        }
+        Inquilino * restituisciIlMinimo(vector<Inquilino*> minimi)
+        {
+            vector<Inquilino*>::iterator j=minimi.begin();
+            while(j<minimi.end())
+            {
+                 if(*index==*j)
+                     return *index;
+                 j++;
+            }
+            avanza();
+        }
+
+    };
+
+           BufferInquilini buffer;
+
+
 public:
     Calendario();
 
 
-//    incarico * trovaIncarico (Data dataIncarico, int indiceIncarico) // il controller gli passa la data dell'incarico e la sua
+//    incarico * trovaIncarico (Data dataIncarico, int indiceIncarico) const? // il controller gli passa la data dell'incarico e la sua
                                                                        // posizione nella lista dell'interfaccia, questo metodo
                                                                        // ritorna il puntatore all'incarico stesso. Probabilmente
                                                                        // tra le varie robe invocherà
