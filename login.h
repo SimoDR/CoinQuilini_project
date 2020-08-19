@@ -11,6 +11,7 @@ class Login : public QWidget
 {
     Q_OBJECT
 private:
+
     Controller* _controller;
     QGridLayout* _layoutLogin;
     QLabel* _labelUser;

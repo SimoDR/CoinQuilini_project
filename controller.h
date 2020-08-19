@@ -5,18 +5,22 @@
 #include<string>
 #include <QObject>
 #include "mainwindow.h"
+#include "listainquilini.h"
 #include <QString>
 #include <QMessageBox>
-#include <vector>
-#include "listainquilini.h"
+#include "data.h"
 using std::vector;
+using std::string;
 
 class Controller : public QObject
 {
     Q_OBJECT
 private:
-    ListaInquilini _listaInquilini;
+    Mainwindow* view;
+    
 public:
+
+    ListaInquilini _listaInquilini;
     explicit Controller( QObject *parent = nullptr);
     bool login(const QString &, const QString &);   //debug, da togliere
     vector<string> getInquilini();
@@ -30,6 +34,7 @@ signals:
 
 public slots:
     void creaNuovoIncarico(vector<string> parametri); //slot per la creazione di un nuovo incarico
+
 
 };
 

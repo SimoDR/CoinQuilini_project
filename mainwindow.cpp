@@ -6,6 +6,7 @@ Mainwindow::Mainwindow(QWidget *parent, Controller* c, QString inquilino) : QMai
 {
     _mainLayout=new QHBoxLayout;
     setWindowTitle("Qoinquilini-Benvenuto " + _inquilino);
+
     //create menu bar
     addmenubar();
     //create calendar and buttons
@@ -27,6 +28,7 @@ void Mainwindow::buildAdminPanel()
 
 void Mainwindow::addbuttons()
 {
+
     _incarico= new QPushButton;
     _incarico->setText("Aggiungi un incarico");
     _listaSpesa= new QPushButton;
@@ -45,12 +47,11 @@ void Mainwindow::addbuttons()
     }
 
     //add buttons to the layout
-
-
 }
 
 void Mainwindow::addcalendar()
 {
+
     _calendar=new QCalendarWidget;
     _calendarLayout= new QVBoxLayout;
 
@@ -74,16 +75,21 @@ void Mainwindow::addlists()
     //prev list and label
     QLabel* prec= new QLabel;
     prec->setText(((_calendar->selectedDate()).addDays(-1)).toString(Qt::SystemLocaleLongDate));
+
     QListWidget* preclist= new QListWidget;
 
     //selected day list and label
     QLabel* selected = new QLabel;
+
     selected->setText((_calendar->selectedDate()).toString(Qt::SystemLocaleLongDate));
+
     QListWidget* selectedlist= new QListWidget;
 
     //next list and label
     QLabel* succ= new QLabel;
+
     succ->setText(((_calendar->selectedDate()).addDays(1)).toString(Qt::SystemLocaleLongDate));
+
     QListWidget* succlist= new QListWidget;
 
     //layout add
@@ -95,11 +101,13 @@ void Mainwindow::addlists()
     listlayout->addWidget(succ);
     listlayout->addWidget(succlist);
 
+
     _listGroup=new QGroupBox("I tuoi incarichi");
     _listGroup->setLayout(listlayout);
 
     //add to the main layout
     _mainLayout->addWidget(_listGroup);
+
 }
 
 void Mainwindow::addmenubar()
@@ -115,4 +123,5 @@ void Mainwindow::addmenubar()
     _opzioni->addAction(_logOut);
     _opzioni->addAction(_info);
     _menuBar->addMenu(_opzioni);
+
 }

@@ -1,5 +1,6 @@
 #include "login.h"
 
+
 Login::Login(QWidget *parent, Controller* c) : QWidget(parent), _controller(c)
 {
     setWindowTitle("Login");
@@ -31,17 +32,17 @@ Login::Login(QWidget *parent, Controller* c) : QWidget(parent), _controller(c)
     connect(_editUser,SIGNAL(returnPressed()), this, SLOT(trylogin()));
     connect(_editPw,SIGNAL(returnPressed()), this, SLOT(trylogin()));
     connect(_loginBut, SIGNAL(clicked()), this, SLOT(trylogin()));
+
 }
 
 //chiama il controller per check credenziali e in caso corrette chiude il login, altrimenti resetta i campi
 void Login::trylogin()
 {
-
     bool logged=_controller->login(_editUser->text(), _editPw->text());
+
     if (logged)
         close();
     else{
-
         _editUser->clear();
         _editPw->clear();
     }
