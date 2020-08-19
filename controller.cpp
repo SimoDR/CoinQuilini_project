@@ -47,6 +47,7 @@ bool Controller::login(const QString & user, const QString & pw)
  *
  * */
 
+/*
 void Controller::creaNuovoIncarico(vector<std::string> parametri)
 {
     string NomeIncarico=parametri[0];
@@ -64,7 +65,7 @@ void Controller::creaNuovoIncarico(vector<std::string> parametri)
     for(std::vector<string>::size_type i=10;i<parametri.size();i++)
     {
 
-    }
+   }
     if(TipoIncarico=="Spesa")
         Incarico * i=new Spesa(NomeIncarico,NomeIncarico)
 
@@ -80,6 +81,7 @@ void Controller::creaNuovoIncarico(vector<std::string> parametri)
 
     }
 }
+*/
 
 vector<string> Controller::getInquilini()
 {
@@ -114,10 +116,4 @@ void Controller::checkAdmin(unsigned int pos)
 unsigned short Controller::isAdmin(const std::string & user) const
 {
    return _listaInquilini.isAdmin(user);
-}
-
-
-void Controller::creaNuovoIncarico(vector<std::string> parametri)
-{
-
 }

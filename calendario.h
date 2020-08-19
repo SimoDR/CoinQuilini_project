@@ -2,6 +2,7 @@
 #define CALENDARIO_H
 #include "data.h"
 //#include "dList.h"
+#include "incarico.h"
 
 class Calendario
 {

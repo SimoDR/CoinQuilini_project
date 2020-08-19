@@ -9,6 +9,7 @@
 #include <QString>
 #include <QMessageBox>
 #include "data.h"
+#include "calendario.h"
 using std::vector;
 using std::string;
 

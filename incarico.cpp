@@ -1,4 +1,4 @@
-#include "Incarico.h"
+#include "incarico.h"
 #include<math.h>
 
 // COSTANTI PER CALCOLO PUNTEGGIO
