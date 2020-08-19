@@ -67,7 +67,6 @@ signals:
 
 private slots:
    void buildAdminPanel();
-
 };
 
 #endif // MAINWINDOW_H
