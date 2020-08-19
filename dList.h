@@ -40,6 +40,7 @@ public:
     void insertBack(const T &t);
     void popFront();
     void popBack();
+    unsigned int countElements();
     bool operator<(const dList &d) const;
 
     class iterator
@@ -223,6 +224,15 @@ void dList<T>::popBack()
         }
         delete temp;
     }
+}
+
+template <class T>
+unsigned int dList<T>::countElements()
+{
+    unsigned int cont=0;
+    for (auto i=begin(); i!=end();++i)
+        cont++;
+    return cont;
 }
 
 template <class T>

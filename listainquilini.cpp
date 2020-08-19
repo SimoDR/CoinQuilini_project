@@ -3,7 +3,7 @@
 ListaInquilini::ListaInquilini()
 {
     importXml();
-    creaInserisci("ADMIN", "admin", "admin");
+    creaInserisci("ADMIN", "admin", "admin"); //creainserisci controlla se l'inquilino già esiste
 }
 
 ListaInquilini::~ListaInquilini()
