@@ -22,6 +22,7 @@ public:
     ListaInquilini();
     ~ListaInquilini();
     void rimuovi(unsigned int);
+    vector<Inquilino*> getInquilini() const;
     Inquilino *getInquilino(unsigned int) const;
     Inquilino *getInquilino(const string &) const;
     bool checkCredenziali(const string&,const string &) const;

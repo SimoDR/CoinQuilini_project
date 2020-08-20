@@ -27,6 +27,7 @@ public:
     void setIncaricato(const Inquilino *);
 	bool getSvolto() const;
     void setSvolto();
+    Inquilino * getIncaricato() const;
     virtual ~Incarico() {}
 	virtual Incarico* clone() const =0;
     virtual bool posponi (const Data&) const; // ritorna false di default

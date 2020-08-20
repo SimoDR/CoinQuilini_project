@@ -23,17 +23,14 @@ dList<Giorno>::iterator Calendario::iteratoreFromData(dList<Giorno>::iterator it
     return iteratoreIniziale;
 }
 
-Calendario::Calendario()
-{
 
-}
 
 bool Calendario::insert(Incarico * daInserire, const Data & dataInCuiInserire, int numeroOccorrenze, int cadenzaIncarico)
 {
     dList<Giorno>::iterator iteratoreIniziale=_iteratoreCorrente;
     while(numeroOccorrenze>0)
     {
-        Inquilino * incaricato=ottieniIncaricato(); //da fare tramite buffer DA FARE
+        Inquilino * incaricato=ottieniIncaricato(iteratoreIniziale); //da fare tramite buffer DA FARE
         daInserire->setIncaricato(incaricato);
         dList<Giorno>::iterator iteratoreInCuiInserire=iteratoreFromData(iteratoreIniziale, dataInCuiInserire);
         *iteratoreInCuiInserire._incarichiDelGiorno.push_back(daInserire);

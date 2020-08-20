@@ -79,7 +79,7 @@ void Controller::creaNuovoIncarico(vector<std::string> parametri)
     else if(tipoIncarico=="Cucina")
         i=new Cucina(nomeIncarico,tempoStimato,numeroCommensali);
     else if(tipoIncarico=="Bolletta")
-        i=new Bolletta(nomeIncarico,importo,dataLimite); //partecipanti
+        i=new Bolletta(nomeIncarico,importo,dataLimite); //partecipanti????
 
 
     bool successo=insert(i,dataInizio,numeroOccorrenze,cadenzaIncarico);
@@ -95,6 +95,7 @@ vector<string> Controller::getInquilini()
 void Controller::rimuoviInquilino(unsigned int pos)
 {
     _listaInquilini.rimuovi(pos);
+    _calendario.rimuoviDalBuffer(pos);
 }
 
 vector<std::string> Controller::getInquilinoPos(unsigned int pos)
@@ -105,6 +106,7 @@ vector<std::string> Controller::getInquilinoPos(unsigned int pos)
 void Controller::aggiungiInquilino(const QString & user, const QString & pw)
 {
     _listaInquilini.creaInserisci("INQUILINO", user.toStdString(), pw.toStdString());
+    _calendario.aggiungiAlBuffer(_listaInquilini.getInquilino(user.toStdString()));
 }
 
 void Controller::modificaInquilino(const QString &user, const QString & pw, unsigned int pos)

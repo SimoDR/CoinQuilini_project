@@ -27,7 +27,12 @@ void Incarico::setNome(const string& s){
     _incaricato = i;
 }*/
 void Incarico::setSvolto(){
-	_svolto=true;
+    _svolto=true;
+}
+
+Inquilino *Incarico::getIncaricato() const
+{
+    return _incaricato;
 }
 bool Incarico::getSvolto() const{
 	return _svolto;
