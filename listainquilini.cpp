@@ -31,6 +31,16 @@ void ListaInquilini::rimuovi(unsigned int pos)
     }
 }
 
+vector<Inquilino*> ListaInquilini::getInquilini() const
+{
+    vector<Inquilino*> lista;
+    for(dList<Inquilino*>::const_iterator cit=_listaInquilini.cbegin(); cit!=_listaInquilini.cend(); ++cit)
+    {
+        lista.push_back(*cit);
+    }
+    return lista;
+}
+
 Inquilino *ListaInquilini::getInquilino(unsigned int pos) const
 {
     unsigned int cont=0;

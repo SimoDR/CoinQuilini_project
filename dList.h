@@ -1,6 +1,7 @@
 #ifndef DLIST_H
 #define DLIST_H
 #include <iostream>
+#include <type_traits>
 using std::cout;
 using std::endl;
 
@@ -40,7 +41,7 @@ public:
     void insertBack(const T &t);
     void popFront();
     void popBack();
-    unsigned int countElements();
+    unsigned int countElements() const;
     bool operator<(const dList &d) const;
 
     class iterator
@@ -100,6 +101,7 @@ dList<T>::nodo::nodo(const T &t, dList<T>::nodo *p, dList::nodo *n) : info(t), p
 template <class T>
 dList<T>::nodo::~nodo() {
     delete next;
+    if(std::is_pointer<T>::value)
     delete info;
 }
 
@@ -227,7 +229,7 @@ void dList<T>::popBack()
 }
 
 template <class T>
-unsigned int dList<T>::countElements()
+unsigned int dList<T>::countElements() const
 {
     unsigned int cont=0;
     for (auto i=begin(); i!=end();++i)
@@ -236,7 +238,7 @@ unsigned int dList<T>::countElements()
 }
 
 template <class T>
-typename dList<T>::iterator dList<T>::insert(iterator i, const T &t) //inseruisce t prima del nodo puntato da i e ritorna l'iteratore che punta al nuovo nodo
+typename dList<T>::iterator dList<T>::insert(iterator i, const T &t) //inserisce t prima del nodo puntato da i e ritorna l'iteratore che punta al nuovo nodo
 {
     if (i.ptr == nullptr) //la lista è vuota
     {
@@ -506,4 +508,4 @@ TODO (forse):
     - eccezioni all'inserimento e modifica?
     - input e output?
     questi due non presenti in stl::list
-        */
+*/
