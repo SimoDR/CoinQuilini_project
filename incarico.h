@@ -24,6 +24,7 @@ public:
 	//Incarico(string nome,Inquilino * incaricato=nullptr,bool svolto=false): _nome(nome),_incaricato(incaricato),_svolto(svolto) {} //da sistemare
 	void setNome(const string&);
     void setIncaricato(Inquilino *);
+    Inquilino* getIncaricato() const;
 	bool getSvolto() const;
     void setSvolto();
     virtual ~Incarico() = 0;

@@ -17,6 +17,11 @@ void Incarico::setIncaricato(Inquilino * i){
     _incaricato = i;
 }
 
+Inquilino *Incarico::getIncaricato() const
+{
+    return _incaricato;
+}
+
 bool Incarico::getSvolto() const{
     return _svolto;
 }

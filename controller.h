@@ -10,6 +10,13 @@
 #include <QMessageBox>
 #include "data.h"
 #include "calendario.h"
+
+#include "pulizia.h"
+#include "spesa.h"
+#include "spazzatura.h"
+#include "cucina.h"
+#include "bolletta.h"
+
 using std::vector;
 using std::string;
 
