@@ -22,7 +22,7 @@ protected:
 	void controlloSoglia(unsigned short int &) const; // bisogna gestire eccezioni che possono causare l'overflow del punteggio (es. mille commensali)
 
 public:
-	//Incarico(string nome,Inquilino * incaricato=nullptr,bool svolto=false): _nome(nome),_incaricato(incaricato),_svolto(svolto) {} //da sistemare
+    Incarico(string nome,Inquilino * incaricato=nullptr,bool svolto=false); //da sistemare
 	void setNome(const string&);
     void setIncaricato(const Inquilino *);
 	bool getSvolto() const;
@@ -44,7 +44,7 @@ private:
 	static double _pesoPagamento;
 
 public:
-	//Pagamento(string nome,double importo,Inquilino * incaricato=nullptr,bool svolto=false): Incarico(nome,incaricato,svolto),_importo(importo) {}
+    Pagamento(string nome,double importo,Inquilino * incaricato=nullptr,bool svolto=false);
 	void setImporto(const double&);
 	virtual ~Pagamento()=0;
 	virtual string generaNota() const;
@@ -60,8 +60,7 @@ private:
     Data _dataLimite;
     vector<const Inquilino *> _partecipanti;
 public:
-	//Bolletta(string nome,double importo,const Data& dataLimite,const vector<Inquilino>& partecipanti,Inquilino * incaricato=nullptr,bool svolto=false): 
-	//	Pagamento(nome,importo,incaricato,svolto), _dataLimite(datalimite), _partecipanti(partecipanti) {}
+    Bolletta(string nome,double importo,const Data& dataLimite,const vector<const Inquilino *>& partecipanti,Inquilino * incaricato=nullptr,bool svolto=false);
 	virtual ~Bolletta() {} 
 	virtual Bolletta* clone() const;
     virtual bool posponi (const Data&) const;
@@ -76,7 +75,7 @@ private:
 	int _tempoStimato; //secondi
 	static unsigned short int _pesoFaccenda;
 public:
-	//Faccenda(string nome,int tempoStimato,Inquilino * incaricato=nullptr,bool svolto=false): Incarico(nome,incaricato,svolto), _tempoStimato(tempoStimato) {}
+    Faccenda(string nome,int tempoStimato,Inquilino * incaricato=nullptr,bool svolto=false);
 	virtual ~Faccenda()=0;
 	virtual string generaNota() const;
 	// virtual import
@@ -91,8 +90,7 @@ private:
     static unsigned short int _pesoSpesa;
     unsigned short int _numeroArticoli;
 public:
-	//Spesa(string nome,double importo,int tempoStimato,unsigned short int numeroArticoli,Inquilino * incaricato=nullptr,bool svolto=false):
-	//	Incarico(nome,incaricato,svolto),Pagamento(nome,importo,incaricato,svolto),Faccenda(nome,tempoStimato,incaricato,svolto), _numeroArticoli(numeroArticoli) {}
+    Spesa(string nome,double importo,int tempoStimato,unsigned short int numeroArticoli,Inquilino * incaricato=nullptr,bool svolto=false);
 	virtual ~Spesa() {}; //???
 	virtual Spesa* clone() const;
     virtual bool posponi (const Data&) const;
@@ -111,8 +109,7 @@ private:
 	unsigned short int _stanzeDaPulire; //eccezioni: limitare numero delle camere
 	static unsigned short int _pesoPulizia; 
 public:
-	//Pulizia(string nome,int tempoStimato,unsigned short int stanzeDaPulire,Inquilino * incaricato=nullptr,bool svolto=false): 
-	//	Faccenda(nome,tempoStimato,incaricato,svolto), _stanzeDaPulire(stanzeDaPulire) {}
+    Pulizia(string nome,int tempoStimato,unsigned short int stanzeDaPulire,Inquilino * incaricato=nullptr,bool svolto=false);
 	virtual ~Pulizia() {}
 	virtual Pulizia* clone() const;
 	//virtual bool posponi (const Data&) const; 
@@ -129,8 +126,7 @@ private:
 	unsigned short int _numeroCommensali; //eccezioni: limitare numero commensali
 	static double _pesoCucina;
 public:
-	//Cucina(string nome,int tempoStimato,unsigned short int numeroCommensali,Inquilino * incaricato=nullptr,bool svolto=false): 
-	//	Faccenda(nome,tempoStimato,incaricato,svolto), _numeroCommensali(numeroCommensali) {}
+    Cucina(string nome,int tempoStimato,unsigned short int numeroCommensali,Inquilino * incaricato=nullptr,bool svolto=false);
 	virtual ~Cucina() {}
 	virtual Cucina* clone() const;
 	virtual string generaNota() const;
@@ -146,8 +142,7 @@ class Spazzatura: public Faccenda
 private:
 	static unsigned short int _pesoSpazzatura;
 public:
-	//Cucina(string nome,int tempoStimato,Inquilino * incaricato=nullptr,bool svolto=false): 
-	//	Faccenda(nome,tempoStimato,incaricato,svolto) {}
+    Spazzatura(string nome,int tempoStimato,Inquilino * incaricato=nullptr,bool svolto=false);
 	virtual ~Spazzatura() {}
 	virtual Spazzatura* clone() const;
 	virtual string generaNota() const;
