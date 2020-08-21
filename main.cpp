@@ -1,18 +1,18 @@
 #include <iostream>
 #include<vector>
 #include <QApplication>
-//#include "calendario.h"
-//#include "login.h"
+#include "calendario.h"
+#include "login.h"
 
-//int main(int argc, char *argv[])
-//{
-//    QApplication a(argc, argv);
-//    Controller controller;
-//    Login l(nullptr, &controller);
-//    l.show();
-//    return a.exec();
+int main(int argc, char *argv[])
+{
+    QApplication a(argc, argv);
+    Controller controller;
+    Login l(nullptr, &controller);
+    l.show();
+    return a.exec();
 
-//}
+}
 
 
 
@@ -20,23 +20,23 @@
 //********************************
 
 
-#include "listaspesa.h"
-#include<iostream>
+//#include "listaspesa.h"
+//#include<iostream>
 
-using std::cout;
-using std::endl;
+//using std::cout;
+//using std::endl;
 
 
-int main(){
-	ListaSpesa lista;
-	lista.aggiungiListaSpesa("fichi secchi");
-	lista.aggiungiListaSpesa("asparagi");
-	lista.aggiungiListaSpesa("banane");
-	cout<<lista<<"****"<<endl;
-	lista.rimuoviListaSpesa("mela");
-	lista.rimuoviListaSpesa("banane");
-	cout<<lista;
-}
+//int main(){
+//	ListaSpesa lista;
+//	lista.aggiungiListaSpesa("fichi secchi");
+//	lista.aggiungiListaSpesa("asparagi");
+//	lista.aggiungiListaSpesa("banane");
+//	cout<<lista<<"****"<<endl;
+//	lista.rimuoviListaSpesa("mela");
+//	lista.rimuoviListaSpesa("banane");
+//	cout<<lista;
+//}
 
 
 
