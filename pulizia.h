@@ -9,8 +9,8 @@ private:
     unsigned short int _stanzeDaPulire; //eccezioni: limitare numero delle camere
     static unsigned short int _pesoPulizia;
 public:
-    //Pulizia(string nome,int tempoStimato,unsigned short int stanzeDaPulire,Inquilino * incaricato=nullptr,bool svolto=false):
-    //	Faccenda(nome,tempoStimato,incaricato,svolto), _stanzeDaPulire(stanzeDaPulire) {}
+    Pulizia(string nome,int tempoStimato,unsigned short int stanzeDaPulire,Inquilino * incaricato=nullptr,bool svolto=false):
+        Incarico(nome,incaricato,svolto),Faccenda(nome,tempoStimato,incaricato,svolto), _stanzeDaPulire(stanzeDaPulire) {}
     virtual ~Pulizia() {}
     virtual Pulizia* clone() const;
     virtual bool posponi (const Data d=Data()) const;

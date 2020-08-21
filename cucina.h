@@ -10,8 +10,8 @@ private:
     unsigned short int _numeroCommensali; //eccezioni: limitare numero commensali
     static double _pesoCucina;
 public:
-    //Cucina(string nome,int tempoStimato,unsigned short int numeroCommensali,Inquilino * incaricato=nullptr,bool svolto=false):
-    //	Faccenda(nome,tempoStimato,incaricato,svolto), _numeroCommensali(numeroCommensali) {}
+    Cucina(string nome,int tempoStimato,unsigned short int numeroCommensali,Inquilino * incaricato=nullptr,bool svolto=false):
+        Incarico(nome,incaricato,svolto),Faccenda(nome,tempoStimato,incaricato,svolto), _numeroCommensali(numeroCommensali) {}
     virtual ~Cucina() {}
     virtual Cucina* clone() const;
     virtual string generaNota() const;

@@ -10,8 +10,8 @@ private:
     static unsigned short int _pesoSpesa;
     unsigned short int _numeroArticoli;
 public:
-    //Spesa(string nome,double importo,int tempoStimato,unsigned short int numeroArticoli,Inquilino * incaricato=nullptr,bool svolto=false):
-    //	Incarico(nome,incaricato,svolto),Pagamento(nome,importo,incaricato,svolto),Faccenda(nome,tempoStimato,incaricato,svolto), _numeroArticoli(numeroArticoli) {}
+    Spesa(string nome,double importo,int tempoStimato,unsigned short int numeroArticoli,Inquilino * incaricato=nullptr,bool svolto=false):
+        Incarico(nome,incaricato,svolto),Pagamento(nome,importo,incaricato,svolto),Faccenda(nome,tempoStimato,incaricato,svolto), _numeroArticoli(numeroArticoli) {}
     virtual ~Spesa() {};
     virtual Spesa* clone() const;
     void setArticoli(const unsigned short int &);

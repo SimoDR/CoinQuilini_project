@@ -12,8 +12,8 @@ private:
     TipologiaRifiuto _cosaButtare;
 
 public:
-    //Cucina(string nome,int tempoStimato,Inquilino * incaricato=nullptr,bool svolto=false):
-    //	Faccenda(nome,tempoStimato,incaricato,svolto) {}
+    Spazzatura(string nome,int tempoStimato,Inquilino * incaricato=nullptr,bool svolto=false):
+        Incarico(nome,incaricato,svolto),Faccenda(nome,tempoStimato,incaricato,svolto) {}
     virtual ~Spazzatura() {}
     virtual Spazzatura* clone() const;
     virtual string generaNota() const;

@@ -21,7 +21,7 @@ protected:
 	void controlloSoglia(unsigned short int &) const; // bisogna gestire eccezioni che possono causare l'overflow del punteggio (es. mille commensali)
 
 public:
-	//Incarico(string nome,Inquilino * incaricato=nullptr,bool svolto=false): _nome(nome),_incaricato(incaricato),_svolto(svolto) {} //da sistemare
+    Incarico(string nome,Inquilino * incaricato=nullptr,bool svolto=false); //da sistemare
 	void setNome(const string&);
     void setIncaricato(Inquilino *);
     Inquilino* getIncaricato() const;

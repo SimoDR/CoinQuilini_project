@@ -55,13 +55,13 @@ private:
 
 
 
-        vector<Inquilino*> trovaMinimi(dList<Giorno>::iterator iteratoreMinimo)
+        vector<Inquilino*> trovaMinimi(dList<Giorno>::iterator iteratoreMinimo) //restituisce l'inquilino (o più di uno) che ha meno incarichi già programmati in una determinata data
         {
             map<Inquilino*,int> coppie;
             map<Inquilino*,int>::iterator mit;
 
 
-            for(vector<Inquilino*>::iterator it=_inquilini.begin(); it!=_inquilini.end(); ++it) //aggiungo gli inquilini
+            for(vector<Inquilino*>::iterator it=_inquilini.begin(); it!=_inquilini.end(); ++it) //aggiungo gli inquilini, tutti con frequenza 0
             {
                 coppie[*it]=0;
             }

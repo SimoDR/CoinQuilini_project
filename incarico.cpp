@@ -4,11 +4,15 @@
 
 // Implementazione Incarico
 
+Incarico::Incarico(std::string nome, Inquilino *incaricato, bool svolto): _nome(nome),_incaricato(incaricato),_svolto(svolto) {}
+
 unsigned int Incarico::_sogliaMax=10; // max punteggio attribuibile a un incarico
 
 void Incarico::controlloSoglia(unsigned short int & x) const{
     if (x >_sogliaMax) x = _sogliaMax;
 }
+
+
 void Incarico::setNome(const string& s){
     _nome=s;
 }
