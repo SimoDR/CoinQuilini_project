@@ -15,41 +15,48 @@ int main(int argc, char *argv[])
 
 }
 
-/*
-il main della gerarchia
-********************************
 
-#include "Incarico.h"
-#include<iostream>
-using namespace std;
+//il main della gerarchia
+//********************************
 
-int main(){
-    Faccenda * spazz=new Spazzatura();
-    cout<< spazz->generaNota() <<endl;
-    cout<<spazz->Faccenda::generaNota()<<endl;
-    cout<<"Questo incarico vale: "<<spazz->calcolaPunteggio()<<" punti!"<<endl;
-    cout<<"***"<<endl;
+//#include "incarico.h"
+//#include "spazzatura.h"
+//#include "cucina.h"
+//#include "bolletta.h"
+//#include "faccenda.h"
+//#include "pagamento.h"
+//#include "pulizia.h"
+//#include "spesa.h"
 
-    Incarico * cuc=new Cucina();
-    cout<< cuc->generaNota() <<endl;
-    cout<<"Questo incarico vale: "<<cuc->calcolaPunteggio()<<" punti!"<<endl;
-    cout<<"***"<<endl;
+//#include<iostream>
+//using namespace std;
 
-    Pagamento * boll=new Bolletta();
-    boll->setImporto(50.6);
-    cout<< boll->generaNota() <<endl;
-    cout<<"Questo incarico vale: "<<boll->calcolaPunteggio()<<" punti!"<<endl;
-    cout<<"***"<<endl;
+//int main(){
+//    Faccenda * spazz=new Spazzatura("secco",20);
+//    cout<< spazz->generaNota() <<endl;
+//    cout<<spazz->Faccenda::generaNota()<<endl;
+//    cout<<"Questo incarico vale: "<<spazz->calcolaPunteggio()<<" punti!"<<endl;
+//    cout<<"***"<<endl;
 
-    Pagamento * spesa=new Spesa();
-    cout<<spesa->generaNota()<<endl;
-    spesa->setSvolto();
-    cout<<spesa->generaNota()<<endl;
-    cout<<"Questo incarico vale: "<<spesa->calcolaPunteggio()<<" punti!"<<endl;
-    cout<<"***"<<endl;
+//    Incarico * cuc=new Cucina("pranzo",60,4);
+//    cout<< cuc->generaNota() <<endl;
+//    cout<<"Questo incarico vale: "<<cuc->calcolaPunteggio()<<" punti!"<<endl;
+//    cout<<"L'incaricato è: "<<cuc->getIncaricato()<<" (punt... se 0 = non assegnato)!"<<endl;
+//    cout<<"***"<<endl;
 
-}
+//    Pagamento * boll=new Bolletta("luce-gas",250,Data(1,1,2021));
+//    boll->setImporto(50.6);
+//    cout<< boll->generaNota() <<endl;
+//    cout<<"Questo incarico vale: "<<boll->calcolaPunteggio()<<" punti!"<<endl;
+//    cout<<"***"<<endl;
 
-*/
+//    Pagamento * spesa=new Spesa("panificio",10,30,10);
+//    cout<<spesa->generaNota()<<endl;
+//    spesa->setSvolto();
+//    cout<<spesa->generaNota()<<endl;
+//    cout<<"Questo incarico vale: "<<spesa->calcolaPunteggio()<<" punti!"<<endl;
+//    cout<<"***"<<endl;
+
+//}
 
 
