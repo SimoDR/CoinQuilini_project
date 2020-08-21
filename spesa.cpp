@@ -14,11 +14,11 @@ bool Spesa::posponi(const Data d) const{
 }
 
 string Spesa::generaNota() const {
-    if ( !getSvolto() ){
+    if ( ! getSvolto() ){
         return "La lista della spesa è... "; // chiama stampaLista Spesa
     }
     else{
-        return Pagamento::generaNota();
+        return "Spesa di "+std::to_string(_numeroArticoli)+" articoli";
     }
 }
 
