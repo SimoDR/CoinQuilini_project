@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include<vector>
 #include <QApplication>
@@ -14,6 +13,32 @@ int main(int argc, char *argv[])
     return a.exec();
 
 }
+
+
+
+//il main della lista_spesa
+//********************************
+
+/*
+#include "ListaSpesa.h"
+#include<iostream>
+
+using std::cout;
+using std::endl;
+
+
+int main(){
+	ListaSpesa lista;
+	lista.aggiungiListaSpesa("fichi secchi");
+	lista.aggiungiListaSpesa("asparagi");
+	lista.aggiungiListaSpesa("banane");
+	cout<<lista<<"****"<<endl;
+	lista.rimuoviListaSpesa("mela");
+	lista.rimuoviListaSpesa("banane");
+	cout<<lista;
+}
+
+*/
 
 
 //il main della gerarchia
@@ -60,3 +85,4 @@ int main(int argc, char *argv[])
 //}
 
 
+>>>>>>> interfaccia_grafica
