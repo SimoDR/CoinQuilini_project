@@ -18,8 +18,14 @@ private:
         Data _dataDelGiorno;
         vector<Incarico*> _incarichiDelGiorno;
         Giorno(Data delGiorno);
+        void stampaGiornata() //DEBUG
+        {
+            cout<<_dataDelGiorno<<" ";
+        }
 
     };
+
+
 
     dList<Giorno> _giorni;
     dList<Giorno>::iterator _iteratoreCorrente;
@@ -32,7 +38,7 @@ private:
     // chiamata precedente nel caso di un incarico ricorrente
     dList<Giorno>::iterator iteratoreFromData(dList<Giorno>::iterator, const Data&);
 
-
+    bool checkIteratore(dList<Giorno>::iterator) const; //ritorna true sse è pte
 
     class BufferInquilini
     {
@@ -43,103 +49,29 @@ private:
         vector<Inquilino*>::iterator _index;
 
         //metodi
-        BufferInquilini(const vector<Inquilino*>& listaInquilini): _inquilini(listaInquilini), _index(_inquilini.begin()) {}
-
-
-        void avanza()
-        {
-            _index++;
-            if(_index==_inquilini.end()) _index=_inquilini.begin();
-        }
-
-
-
-        vector<Inquilino*> trovaMinimi(dList<Giorno>::iterator iteratoreMinimo) //restituisce l'inquilino (o più di uno) che ha meno incarichi già programmati in una determinata data
-        {
-            map<Inquilino*,int> coppie;
-            map<Inquilino*,int>::iterator mit;
-
-
-            for(vector<Inquilino*>::iterator it=_inquilini.begin(); it!=_inquilini.end(); ++it) //aggiungo gli inquilini, tutti con frequenza 0
-            {
-                coppie[*it]=0;
-            }
-
-            int minimo=INT_MAX;
-            for(vector<Incarico*>::iterator it=iteratoreMinimo->_incarichiDelGiorno.begin(); it!=iteratoreMinimo->_incarichiDelGiorno.end(); ++it)
-            {
-                mit=coppie.find((**it).getIncaricato());
-                mit->second++;
-                if(minimo<mit->second)
-                    minimo=mit->second;
-            }
-
-            vector<Inquilino*> minimiFinali;
-
-            for(map<Inquilino*,int>::iterator mit=coppie.begin(); mit!=coppie.end(); ++mit)
-            {
-                if(mit->second==minimo)
-                    minimiFinali.push_back(mit->first);
-            }
-
-            return minimiFinali;
-
-        }
-
-
-        Inquilino * restituisciIlMinimo(dList<Giorno>::iterator iteratoreMinimo)
-        {
-            vector<Inquilino*> minimi=trovaMinimi(iteratoreMinimo);
-            vector<Inquilino*>::iterator j=minimi.begin();
-            while(j<minimi.end())
-            {
-                if(*_index==*j)
-                    return *_index;
-                j++;
-            }
-            avanza();
-        }
+        BufferInquilini(const vector<Inquilino*>& listaInquilini);
+        void avanza();
+        vector<Inquilino*> trovaMinimi(dList<Giorno>::iterator iteratoreMinim0, bool pte);
+        Inquilino * restituisciIlMinimo(dList<Giorno>::iterator iteratoreMinimo, bool pte);
 
     };
 
     BufferInquilini _buffer;
 
 
-
-
 public:
-    Calendario(const vector<Inquilino*>& listaInquilini): _buffer(listaInquilini) {}
 
-    void aggiungiAlBuffer(Inquilino* nuovoInquilino)
+    void stampaGiorni() //DEBUG
     {
-        _buffer._inquilini.push_back(nuovoInquilino);
-        _buffer._index=_buffer._inquilini.begin();
+        for(dList<Giorno>::iterator it=_giorni.begin(); it!=_giorni.end(); ++it)
+            it->stampaGiornata();
+
     }
 
-    void rimuoviDalBuffer(unsigned int pos)
-    {
-        unsigned int cont=0;
-        vector<Inquilino*>::iterator i;
-        for(i=_buffer._inquilini.begin();i!=_buffer._inquilini.end(); ++i) {
-            if (cont==pos)
-            {
-                _buffer._inquilini.erase(i);
-                return;
-            }
-
-            cont++;
-        }
-        _buffer._index=_buffer._inquilini.begin();
-    }
-
-    Inquilino * ottieniIncaricato(dList<Giorno>::iterator iteratoreIniziale)
-    {
-        return _buffer.restituisciIlMinimo(iteratoreIniziale);
-    }
-
-
-
-
+    Calendario(const vector<Inquilino*>& listaInquilini);
+    void aggiungiAlBuffer(Inquilino* nuovoInquilino);
+    void rimuoviDalBuffer(unsigned int pos);
+    Inquilino * ottieniIncaricato(dList<Giorno>::iterator iteratoreIniziale,bool pte);
 
 
 

@@ -43,23 +43,47 @@ bool Controller::login(const QString & user, const QString & pw)
  * ..
  *
  *
+ * Se l'incarico da creare non prevede uno dei campi, questi verranno indicati con il carattere speciale "\0" e quindi ignorati
  * */
 
 
 void Controller::creaNuovoIncarico(vector<std::string> parametri)
 {
-    string nomeIncarico=parametri[0];
-    string tipoIncarico=parametri[1];
-    string nomeIncaricato=parametri[2]; //DA SISTEMARE
-    int cadenzaIncarico=std::stoi(parametri[3]);
-    int tempoStimato=std::stoi(parametri[4]);
-    unsigned short int stanzeDaPulire=std::stoi(parametri[5]);
-    unsigned short int numeroCommensali=std::stoi(parametri[6]);
-    unsigned short int numeroArticoli=std::stoi(parametri[7]);
-    int importo=std::stoi(parametri[8]);
-    Data dataLimite(parametri[9]);
-    Data dataInizio(parametri[10]);
-    int numeroOccorrenze=std::stoi(parametri[11]);
+    string nomeIncarico="\0";
+    if(parametri[0]!="\0") nomeIncarico=parametri[0];
+
+    string tipoIncarico="\0";
+    if(parametri[1]!="\0") tipoIncarico=parametri[1];
+
+    string nomeIncaricato="\0";
+    if(parametri[2]!="\0") nomeIncaricato=parametri[2]; //DA SISTEMARE
+
+    int cadenzaIncarico=0;
+    if(parametri[3]!="\0") cadenzaIncarico=std::stoi(parametri[3]);
+
+    int tempoStimato=0;
+    if(parametri[4]!="\0") tempoStimato=std::stoi(parametri[4]);
+
+    unsigned short int stanzeDaPulire;
+    if(parametri[5]!="\0") stanzeDaPulire=std::stoi(parametri[5]);
+
+    unsigned short int numeroCommensali;
+    if(parametri[6]!="\0") numeroCommensali=std::stoi(parametri[6]);
+
+    unsigned short int numeroArticoli;
+    if(parametri[7]!="\0") numeroArticoli=std::stoi(parametri[7]);
+
+    int importo=0;
+    if(parametri[8]!="\0") importo=std::stoi(parametri[8]);
+
+    Data dataLimite;
+    if(parametri[9]!="\0") dataLimite=parametri[9];
+
+    Data dataInizio;
+    if(parametri[10]!="\0") dataInizio=parametri[10];
+
+    int numeroOccorrenze=0;
+    if(parametri[11]!="\0") numeroOccorrenze=std::stoi(parametri[11]);
 
 
 
