@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include<vector>
 #include <QApplication>
@@ -95,17 +94,27 @@ int main(int argc, char *argv[])
 
 
 
+//il main della lista_spesa
+//********************************
 
 
+//#include "listaspesa.h"
+//#include<iostream>
+
+//using std::cout;
+//using std::endl;
 
 
-
-
-
-
-
-
-
+//int main(){
+//	ListaSpesa lista;
+//	lista.aggiungiListaSpesa("fichi secchi");
+//	lista.aggiungiListaSpesa("asparagi");
+//	lista.aggiungiListaSpesa("banane");
+//	cout<<lista<<"****"<<endl;
+//	lista.rimuoviListaSpesa("mela");
+//	lista.rimuoviListaSpesa("banane");
+//	cout<<lista;
+//}
 
 
 
@@ -152,5 +161,3 @@ int main(int argc, char *argv[])
 //    cout<<"***"<<endl;
 
 //}
-
-
