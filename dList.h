@@ -9,7 +9,7 @@ using std::endl;
 template <class T>
 class dList;
 
-template <class T> //dichiarazione perché è necessario che compaia quando viene dichiarata l'amicizia su trialbero
+template <class T>
 std::ostream &operator<<(std::ostream &, const dList<T> &);
 
 template <class T>
@@ -101,8 +101,8 @@ dList<T>::nodo::nodo(const T &t, dList<T>::nodo *p, dList::nodo *n) : info(t), p
 template <class T>
 dList<T>::nodo::~nodo() {
     delete next;
-    if(std::is_pointer<T>::value)
-    delete info;
+    //if(std::is_pointer<T>::value)
+        //delete info;
 }
 
 /**********************************DLIST**********************************/

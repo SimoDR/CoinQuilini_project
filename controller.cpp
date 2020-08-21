@@ -1,9 +1,8 @@
 #include "controller.h"
 
 
-Controller::Controller(QObject *parent) : QObject(parent), _listaInquilini(ListaInquilini())
-{
-}
+Controller::Controller(QObject *parent) : QObject(parent), _listaInquilini(ListaInquilini()), _calendario(_listaInquilini.getInquilini()) {}
+
 
 bool Controller::login(const QString & user, const QString & pw)
 {
@@ -41,7 +40,6 @@ bool Controller::login(const QString & user, const QString & pw)
  * 9- DataLimite
  * 10- DataInizio
  * 11- numeroOccorrenze
- * [11..parametri.size] -Partecipanti
  * ..
  *
  *
@@ -59,19 +57,16 @@ void Controller::creaNuovoIncarico(vector<std::string> parametri)
     unsigned short int numeroCommensali=std::stoi(parametri[6]);
     unsigned short int numeroArticoli=std::stoi(parametri[7]);
     int importo=std::stoi(parametri[8]);
-    Data * dataLimite=new Data(parametri[9]);
-    Data * dataInizio=new Data(parametri[10]);
+    Data dataLimite(parametri[9]);
+    Data dataInizio(parametri[10]);
     int numeroOccorrenze=std::stoi(parametri[11]);
 
-    for(std::vector<string>::size_type i=12;i<parametri.size();i++)
-    {
 
-    }
 
     Incarico * i=nullptr;
 
     if (tipoIncarico=="Pulizia")
-        i=new Pulizia(nomeIncarico,stanzeDaPulire);
+        i=new Pulizia(nomeIncarico,tempoStimato,stanzeDaPulire);
     else if(tipoIncarico=="Spesa")
         i=new Spesa(nomeIncarico,importo,tempoStimato,numeroArticoli);
     else if(tipoIncarico=="Spazzatura")
@@ -82,7 +77,7 @@ void Controller::creaNuovoIncarico(vector<std::string> parametri)
         i=new Bolletta(nomeIncarico,importo,dataLimite); //partecipanti????
 
 
-    bool successo=insert(i,dataInizio,numeroOccorrenze,cadenzaIncarico);
+    bool successo=_calendario.insert(i,dataInizio,numeroOccorrenze,cadenzaIncarico);
 
 }
 

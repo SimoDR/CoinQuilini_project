@@ -15,6 +15,7 @@ SOURCES += \
 	spazzatura.cpp \
 	spesa.cpp \
         listainquilini.cpp \
+        inquilino.cpp \
 	outofboundexception.cpp
 
 HEADERS += \
@@ -33,6 +34,7 @@ HEADERS += \
 	spazzatura.h \
 	spesa.h \
         listainquilini.h \
+        inquilino.h \
 	outofboundexception.h
 
 QT += widgets

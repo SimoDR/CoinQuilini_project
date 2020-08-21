@@ -7,7 +7,6 @@
 #include<map>
 using std::map;
 
-typedef  std::pair<Inquilino*,int> tpair;
 
 
 class Calendario
@@ -88,10 +87,6 @@ private:
         }
 
 
-
-
-
-
         Inquilino * restituisciIlMinimo(dList<Giorno>::iterator iteratoreMinimo)
         {
             vector<Inquilino*> minimi=trovaMinimi(iteratoreMinimo);
@@ -154,7 +149,7 @@ public:
     // tra le varie robe invocherà
     // iteratoreFromData(_iteratoreCorrente,dataIncarico)
 
-    bool insert(Incarico *, const Data&, int, int);
+    bool insert(Incarico *, Data&, int, int);
 
     //    creaAggiungi(vector<string> (parametri), data)
     //    bool remove(incarico*, data)
