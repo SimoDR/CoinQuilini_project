@@ -12,6 +12,7 @@ HEADERS += \
     incarico.h \
     inquilino.h \
     listainquilini.h \
+    listaspesa.h \
     login.h \
     mainwindow.h \
     outofboundexception.h \
@@ -34,6 +35,7 @@ SOURCES += \
     incarico.cpp \
     inquilino.cpp \
     listainquilini.cpp \
+    listaspesa.cpp \
     login.cpp \
     main.cpp \
     mainwindow.cpp \

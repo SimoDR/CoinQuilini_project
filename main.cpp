@@ -1,26 +1,26 @@
 #include <iostream>
 #include<vector>
 #include <QApplication>
-#include "calendario.h"
-#include "login.h"
+//#include "calendario.h"
+//#include "login.h"
 
-int main(int argc, char *argv[])
-{
-    QApplication a(argc, argv);
-    Controller controller;
-    Login l(nullptr, &controller);
-    l.show();
-    return a.exec();
+//int main(int argc, char *argv[])
+//{
+//    QApplication a(argc, argv);
+//    Controller controller;
+//    Login l(nullptr, &controller);
+//    l.show();
+//    return a.exec();
 
-}
+//}
 
 
 
 //il main della lista_spesa
 //********************************
 
-/*
-#include "ListaSpesa.h"
+
+#include "listaspesa.h"
 #include<iostream>
 
 using std::cout;
@@ -38,7 +38,6 @@ int main(){
 	cout<<lista;
 }
 
-*/
 
 
 //il main della gerarchia

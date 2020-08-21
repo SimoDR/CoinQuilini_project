@@ -1,6 +1,6 @@
 // Listaspesa.cpp
 
-#include "ListaSpesa.h"
+#include "listaspesa.h"
 
 void ListaSpesa::aggiungiListaSpesa(const string& x){
 	_listaSpesa.push_back(x);
