@@ -5,12 +5,11 @@ SOURCES += \
         mainwindow.cpp \
 	calendario.cpp \
 	data.cpp \
-	dlList.cpp \
         incarico.cpp \
 	bolletta.cpp \
 	cucina.cpp \
 	faccenda.cpp \
-	pagamento.cpp \
+        pagamento.cpp \
 	pulizia.cpp \
 	spazzatura.cpp \
 	spesa.cpp \
