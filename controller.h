@@ -40,6 +40,12 @@ public:
     void modificaInquilino(const QString &, const QString &, unsigned int);
     void checkAdmin(unsigned int);
     unsigned short int isAdmin(const string &) const;
+
+    void stampaCalendario() //DEBUG
+    {
+        _calendario.stampaGiorni();
+    }
+
 signals:
 
 public slots:

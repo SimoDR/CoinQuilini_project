@@ -23,21 +23,60 @@ dList<Calendario::Giorno>::iterator Calendario::iteratoreFromData(dList<Giorno>:
     return iteratoreIniziale;
 }
 
+bool Calendario::checkIteratore(dList<Calendario::Giorno>::iterator iteratoreDaControllare) const
+{
+    if(iteratoreDaControllare==_giorni.end())
+        return true;
+    else return false;
+}
+
+Calendario::Calendario(const vector<Inquilino *> &listaInquilini): _iteratoreCorrente(_giorni.end()), _buffer(listaInquilini) {}
+
+void Calendario::aggiungiAlBuffer(Inquilino *nuovoInquilino)
+{
+    _buffer._inquilini.push_back(nuovoInquilino);
+    _buffer._index=_buffer._inquilini.begin();
+}
+
+void Calendario::rimuoviDalBuffer(unsigned int pos)
+{
+    unsigned int cont=0;
+    vector<Inquilino*>::iterator i;
+    for(i=_buffer._inquilini.begin();i!=_buffer._inquilini.end(); ++i) {
+        if (cont==pos)
+        {
+            _buffer._inquilini.erase(i);
+            return;
+        }
+
+        cont++;
+    }
+    _buffer._index=_buffer._inquilini.begin();
+}
+
+Inquilino *Calendario::ottieniIncaricato(dList<Calendario::Giorno>::iterator iteratoreIniziale, bool pte)
+{
+    return _buffer.restituisciIlMinimo(iteratoreIniziale,pte);
+}
+
 
 
 bool Calendario::insert(Incarico * daInserire, Data & dataInCuiInserire, int numeroOccorrenze, int cadenzaIncarico)
 {
     dList<Giorno>::iterator iteratoreIniziale=_iteratoreCorrente;
+    bool pte=checkIteratore(_iteratoreCorrente);
     while(numeroOccorrenze>0)
     {
-        Inquilino * incaricato=ottieniIncaricato(iteratoreIniziale);
+        Inquilino * incaricato=ottieniIncaricato(iteratoreIniziale,pte);
         daInserire->setIncaricato(incaricato);
         dList<Giorno>::iterator iteratoreInCuiInserire=iteratoreFromData(iteratoreIniziale, dataInCuiInserire);
         iteratoreInCuiInserire->_incarichiDelGiorno.push_back(daInserire);
+
         dataInCuiInserire=dataInCuiInserire+cadenzaIncarico;
         iteratoreIniziale=iteratoreInCuiInserire;
         numeroOccorrenze--;
     }
+    return true;
 
 }
 
@@ -49,3 +88,74 @@ Calendario::Giorno::Giorno(Data dataDelGiorno): _dataDelGiorno(dataDelGiorno) {}
 
 
 
+
+Calendario::BufferInquilini::BufferInquilini(const vector<Inquilino *> &listaInquilini): _inquilini(listaInquilini), _index(_inquilini.begin()) {}
+
+void Calendario::BufferInquilini::avanza()
+{
+    _index++;
+    if(_index==_inquilini.end()) _index=_inquilini.begin();
+}
+
+vector<Inquilino *> Calendario::BufferInquilini::trovaMinimi(dList<Calendario::Giorno>::iterator iteratoreMinimo,bool pte) //restituisce l'inquilino (o più di uno) che ha meno incarichi già programmati in una determinata data
+{
+    map<Inquilino*,int> coppie;
+    map<Inquilino*,int>::iterator mit;
+
+
+    for(vector<Inquilino*>::iterator it=_inquilini.begin(); it!=_inquilini.end(); ++it) //aggiungo gli inquilini, tutti con frequenza 0
+    {
+        coppie[*it]=0;
+    }
+
+    int minimo=INT_MAX;
+
+    vector<Inquilino*> minimiFinali;
+
+    if(!pte) {
+        for(vector<Incarico*>::iterator it=iteratoreMinimo->_incarichiDelGiorno.begin(); it!=iteratoreMinimo->_incarichiDelGiorno.end(); ++it)
+        {
+
+            mit=coppie.find((**it).getIncaricato());
+            mit->second++;
+            if(minimo<mit->second)
+                minimo=mit->second;
+        }
+
+        for(map<Inquilino*,int>::iterator mit=coppie.begin(); mit!=coppie.end(); ++mit)
+        {
+            if(mit->second==minimo)
+                minimiFinali.push_back(mit->first);
+        }
+    }
+    else //se è pte
+    {
+        for(map<Inquilino*,int>::iterator mit=coppie.begin(); mit!=coppie.end(); ++mit)
+        {
+            minimiFinali.push_back(mit->first);
+        }
+    }
+
+    return minimiFinali;
+
+}
+
+Inquilino * Calendario::BufferInquilini::restituisciIlMinimo(dList<Calendario::Giorno>::iterator iteratoreMinimo,bool pte)
+{
+    vector<Inquilino*> minimi=trovaMinimi(iteratoreMinimo,pte);
+
+    vector<Inquilino*>::iterator j=minimi.begin();
+    if(!pte)
+    {
+        while(j!=minimi.end())
+        {
+            if(*_index==*j)
+                return *_index;
+
+            ++j;
+        }
+    }
+    else return *j;
+
+    avanza();
+}
