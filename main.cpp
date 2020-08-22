@@ -63,7 +63,7 @@ int main(int argc, char *argv[])
     parametri.push_back("puliziaDelSabato"); //0
     parametri.push_back("Pulizia"); //1
     parametri.push_back("\0"); //2
-    parametri.push_back("7"); //3
+    parametri.push_back("6"); //3
     parametri.push_back("20"); //4
     parametri.push_back("3"); //5
     parametri.push_back("\0"); //6
@@ -73,11 +73,38 @@ int main(int argc, char *argv[])
     parametri.push_back("22/08/2020"); //10
     parametri.push_back("4"); //11
 
+    controller.aggiungiInquilino("Simone","gay99");
+    controller.aggiungiInquilino("Antonio","pisellolungo");
+
+
+    controller.stampaBuffer();
 
     controller.creaNuovoIncarico(parametri);
 
     controller.stampaCalendario();
 
+
+    vector<string> parametri1;
+    parametri1.push_back("Plastica"); //0
+    parametri1.push_back("Spazzatura"); //1
+    parametri1.push_back("\0"); //2
+    parametri1.push_back("3"); //3
+    parametri1.push_back("5"); //4
+    parametri1.push_back("\0"); //5
+    parametri1.push_back("\0"); //6
+    parametri1.push_back("\0"); //7
+    parametri1.push_back("\0"); //8
+    parametri1.push_back("\0"); //9
+    parametri1.push_back("22/08/2020"); //10
+    parametri1.push_back("2"); //11
+
+    controller.creaNuovoIncarico(parametri1);
+
+
+    controller.stampaCalendario();
+
+    controller.rimuoviInquilino(2);
+    controller.rimuoviInquilino(1);
 
 
 

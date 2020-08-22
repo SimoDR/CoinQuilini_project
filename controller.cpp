@@ -100,7 +100,6 @@ void Controller::creaNuovoIncarico(vector<std::string> parametri)
     else if(tipoIncarico=="Bolletta")
         i=new Bolletta(nomeIncarico,importo,dataLimite); //partecipanti????
 
-
     bool successo=_calendario.insert(i,dataInizio,numeroOccorrenze,cadenzaIncarico);
 
 }
@@ -126,6 +125,7 @@ void Controller::aggiungiInquilino(const QString & user, const QString & pw)
 {
     _listaInquilini.creaInserisci("INQUILINO", user.toStdString(), pw.toStdString());
     _calendario.aggiungiAlBuffer(_listaInquilini.getInquilino(user.toStdString()));
+
 }
 
 void Controller::modificaInquilino(const QString &user, const QString & pw, unsigned int pos)

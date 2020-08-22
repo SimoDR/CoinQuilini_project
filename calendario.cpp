@@ -5,7 +5,12 @@ dList<Calendario::Giorno>::iterator Calendario::iteratoreFromData(dList<Giorno>:
     bool trovato=false;
     while(!trovato)
     {
-        if(iteratoreIniziale->_dataDelGiorno>inCuiInserire) //il giorno non c'è, bisogna crearlo
+        if(checkIteratore(iteratoreIniziale)) //se è pte
+        {
+            iteratoreIniziale=_giorni.insert(iteratoreIniziale,Giorno(inCuiInserire));
+            trovato=true;
+        }
+        else if(iteratoreIniziale->_dataDelGiorno>inCuiInserire) //il giorno non c'è, bisogna crearlo
         {
             _giorni.insert(iteratoreIniziale,Giorno(inCuiInserire));
             trovato=true;
@@ -54,9 +59,10 @@ void Calendario::rimuoviDalBuffer(unsigned int pos)
     _buffer._index=_buffer._inquilini.begin();
 }
 
-Inquilino *Calendario::ottieniIncaricato(dList<Calendario::Giorno>::iterator iteratoreIniziale, bool pte)
+Inquilino * Calendario:: ottieniIncaricato(dList<Calendario::Giorno>::iterator iteratoreIniziale, bool pte)
 {
     return _buffer.restituisciIlMinimo(iteratoreIniziale,pte);
+
 }
 
 
@@ -65,12 +71,22 @@ bool Calendario::insert(Incarico * daInserire, Data & dataInCuiInserire, int num
 {
     dList<Giorno>::iterator iteratoreIniziale=_iteratoreCorrente;
     bool pte=checkIteratore(_iteratoreCorrente);
+    bool vuoti=checkIteratore(_giorni.begin()); //se _giorni è vuota
+    if(!vuoti)
+    {
+        pte=false;
+        iteratoreIniziale=_giorni.begin();
+    }
     while(numeroOccorrenze>0)
     {
+
         Inquilino * incaricato=ottieniIncaricato(iteratoreIniziale,pte);
+        _buffer.avanza();
+
         daInserire->setIncaricato(incaricato);
+
         dList<Giorno>::iterator iteratoreInCuiInserire=iteratoreFromData(iteratoreIniziale, dataInCuiInserire);
-        iteratoreInCuiInserire->_incarichiDelGiorno.push_back(daInserire);
+        iteratoreInCuiInserire->_incarichiDelGiorno.push_back(daInserire->clone());
 
         dataInCuiInserire=dataInCuiInserire+cadenzaIncarico;
         iteratoreIniziale=iteratoreInCuiInserire;
@@ -108,7 +124,14 @@ vector<Inquilino *> Calendario::BufferInquilini::trovaMinimi(dList<Calendario::G
         coppie[*it]=0;
     }
 
+//    cout<<"*****"<<endl;
+//    for(map<Inquilino*,int>::iterator mit=coppie.begin(); mit!=coppie.end(); ++mit) //debug
+//    {
+//        cout<<(*mit).first->getNome()<<endl;
+//    }
+
     int minimo=INT_MAX;
+//    cout<<"*****"<<endl;
 
     vector<Inquilino*> minimiFinali;
 
@@ -143,19 +166,21 @@ vector<Inquilino *> Calendario::BufferInquilini::trovaMinimi(dList<Calendario::G
 Inquilino * Calendario::BufferInquilini::restituisciIlMinimo(dList<Calendario::Giorno>::iterator iteratoreMinimo,bool pte)
 {
     vector<Inquilino*> minimi=trovaMinimi(iteratoreMinimo,pte);
+//    cout<<"--------"<<endl;
+//    for(vector<Inquilino*>::iterator it=minimi.begin(); it!=minimi.end(); ++it) //DEBUG
+//        cout<<(*it)->getNome()<<endl;
 
     vector<Inquilino*>::iterator j=minimi.begin();
-    if(!pte)
-    {
+
         while(j!=minimi.end())
         {
             if(*_index==*j)
+            {
+                //cout<<(*_index)->getNome()<<" ";
                 return *_index;
-
-            ++j;
+            }
+            else ++j;
         }
-    }
-    else return *j;
 
-    avanza();
+
 }

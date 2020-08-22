@@ -20,7 +20,10 @@ private:
         Giorno(Data delGiorno);
         void stampaGiornata() //DEBUG
         {
-            cout<<_dataDelGiorno<<" ";
+            cout<<_dataDelGiorno<<": ";
+            for(vector<Incarico*>::iterator it=_incarichiDelGiorno.begin(); it!=_incarichiDelGiorno.end(); ++it)
+                cout<<(*it)->getIncaricato()->getNome()<<" ";
+            cout<<endl;
         }
 
     };
@@ -40,13 +43,26 @@ private:
 
     bool checkIteratore(dList<Giorno>::iterator) const; //ritorna true sse è pte
 
-    class BufferInquilini
+
+
+
+
+
+public:
+    class BufferInquilini //DA METTERE PRIVATA
     {
+    public: //DA TOGLIERE
         friend class Calendario;
 
         //campi dati
         vector<Inquilino*> _inquilini;
         vector<Inquilino*>::iterator _index;
+
+        void stampaBuffer()
+        {
+            for(vector<Inquilino*>::iterator it=_inquilini.begin(); it!=_inquilini.end(); ++it)
+                cout<<(*it)->getNome()<<endl;
+        }
 
         //metodi
         BufferInquilini(const vector<Inquilino*>& listaInquilini);
@@ -55,11 +71,7 @@ private:
         Inquilino * restituisciIlMinimo(dList<Giorno>::iterator iteratoreMinimo, bool pte);
 
     };
-
-    BufferInquilini _buffer;
-
-
-public:
+     BufferInquilini _buffer; //da mettere privato
 
     void stampaGiorni() //DEBUG
     {
