@@ -13,7 +13,6 @@ using std::ostream;
 using std::endl;
 
 class ListaSpesa{
-	//friend class Spesa;
 	friend ostream& operator<<(ostream&, const ListaSpesa&);
 private:
 	vector<string> _listaSpesa;
@@ -22,7 +21,8 @@ private:
 	//~ListaSpesa();
 public:
 	void aggiungiListaSpesa(const string&);
-	void rimuoviListaSpesa(const string&);
+    void rimuoviListaSpesa(const string&);
+    void svuotaListaSpesa();
 	//export/import;
 };
 

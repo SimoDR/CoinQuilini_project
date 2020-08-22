@@ -13,7 +13,12 @@ void ListaSpesa::rimuoviListaSpesa(const string& x){
 			_listaSpesa.erase(it);
 			tolto=true;
 		}
-	}
+    }
+}
+
+void ListaSpesa::svuotaListaSpesa()
+{
+    _listaSpesa.clear();
 }
 
 ostream& operator<<(ostream& os, const ListaSpesa& ls){
