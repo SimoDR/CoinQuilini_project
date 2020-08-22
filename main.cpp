@@ -1,20 +1,11 @@
-//#include <iostream>
-//#include<vector>
-//#include <QApplication>
-//#include "calendario.h"
-//#include "login.h"
+//main originario
 
-//int main(int argc, char *argv[])
-//{
-//    QApplication a(argc, argv);
-//    Controller controller;
-//    Login l(nullptr, &controller);
-//    l.show();
-//    return a.exec();
-//}
+#include <iostream>
+#include<vector>
+#include <QApplication>
+#include "calendario.h"
+#include "login.h"
 
-
-/*
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
@@ -22,8 +13,9 @@ int main(int argc, char *argv[])
     Login l(nullptr, &controller);
     l.show();
     return a.exec();
+}
 
-}*/
+/*
 
 #include "incarico.h"
 //#include "spazzatura.h"
@@ -88,34 +80,12 @@ int main(int argc, char *argv[])
 
 }
 
-//il main della lista_spesa
-//********************************
-
-
-//#include "listaspesa.h"
-//#include<iostream>
-
-//using std::cout;
-//using std::endl;
-
-
-//int main(){
-//	ListaSpesa lista;
-//	lista.aggiungiListaSpesa("fichi secchi");
-//	lista.aggiungiListaSpesa("asparagi");
-//	lista.aggiungiListaSpesa("banane");
-//	cout<<lista<<"****"<<endl;
-//	lista.rimuoviListaSpesa("mela");
-//	lista.rimuoviListaSpesa("banane");
-//	cout<<lista;
-//}
-
-
-
+*/
 
 //il main della gerarchia
 //********************************
-// 
+
+
 // #include "incarico.h"
 // #include "spazzatura.h"
 // #include "cucina.h"
