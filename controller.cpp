@@ -1,8 +1,8 @@
 #include "controller.h"
 
 
-Controller::Controller(QObject *parent) : QObject(parent), _listaInquilini(ListaInquilini()), _calendario(_listaInquilini.getInquilini()) {}
-
+Controller::Controller(QObject *parent) : QObject(parent), _listaInquilini(ListaInquilini()), _calendario(Data("20/08/2020"),_listaInquilini.getInquilini()) {}
+//DA METTERE DATA ODIERNA
 
 bool Controller::login(const QString & user, const QString & pw)
 {
@@ -86,7 +86,6 @@ void Controller::creaNuovoIncarico(vector<std::string> parametri)
     if(parametri[11]!="\0") numeroOccorrenze=std::stoi(parametri[11]);
 
 
-
     Incarico * i=nullptr;
 
     if (tipoIncarico=="Pulizia")
@@ -131,6 +130,7 @@ void Controller::aggiungiInquilino(const QString & user, const QString & pw)
 void Controller::modificaInquilino(const QString &user, const QString & pw, unsigned int pos)
 {
     _listaInquilini.modifica(user.toStdString(), pw.toStdString(), pos);
+    //da sistemare per _calendario
 }
 
 void Controller::checkAdmin(unsigned int pos)

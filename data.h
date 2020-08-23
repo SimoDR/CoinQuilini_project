@@ -50,6 +50,7 @@ public:
     bool operator<(const Data&) const;
     bool operator>(const Data&) const;
     bool operator==(const Data&) const;
+    bool operator !=(const Data&) const;
 
 
 

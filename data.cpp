@@ -235,6 +235,11 @@ bool Data::operator==(const Data & d) const
     return _annoCorrente==d._annoCorrente && _meseCorrente==d._meseCorrente && _giornoCorrente==d._giornoCorrente;
 }
 
+bool Data::operator !=(const Data & d) const
+{
+    return _annoCorrente!=d._annoCorrente || _meseCorrente!=d._meseCorrente || _giornoCorrente!=d._giornoCorrente;
+}
+
 
 
 std::ostream &operator<<(std::ostream &os, const Data &d)

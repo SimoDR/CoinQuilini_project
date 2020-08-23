@@ -1,6 +1,6 @@
 //#include <iostream>
 //#include<vector>
-//#include <QApplication>
+#include <QApplication>
 //#include "calendario.h"
 //#include "login.h"
 
@@ -81,12 +81,12 @@ int main(int argc, char *argv[])
     controller.aggiungiInquilino("Simone","gay99");
     controller.aggiungiInquilino("Antonio","pisellolungo");
 
-
-    controller.stampaBuffer();
+    //cout<<controller._calendario.getDataDiOggi();
+    //controller.stampaBuffer();
 
     controller.creaNuovoIncarico(parametri);
 
-    controller.stampaCalendario();
+    //controller.stampaCalendario();
 
 
     vector<string> parametri1;
@@ -103,8 +103,26 @@ int main(int argc, char *argv[])
     parametri1.push_back("22/08/2020"); //10
     parametri1.push_back("2"); //11
 
-    controller.creaNuovoIncarico(parametri1);
+    //controller.creaNuovoIncarico(parametri1);
 
+
+
+
+    vector<string> parametri2;
+    parametri2.push_back("PastaAlTonno"); //0
+    parametri2.push_back("Cucina"); //1
+    parametri2.push_back("\0"); //2
+    parametri2.push_back("12"); //3
+    parametri2.push_back("10"); //4
+    parametri2.push_back("\0"); //5
+    parametri2.push_back("10"); //6
+    parametri2.push_back("\0"); //7
+    parametri2.push_back("\0"); //8
+    parametri2.push_back("\0"); //9
+    parametri2.push_back("22/08/2020"); //10
+    parametri2.push_back("3"); //11
+
+    controller.creaNuovoIncarico(parametri2);
 
     controller.stampaCalendario();
 

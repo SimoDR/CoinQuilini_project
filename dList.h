@@ -41,6 +41,7 @@ public:
     void insertBack(const T &t);
     void popFront();
     void popBack();
+    bool empty() const;
     unsigned int countElements() const;
     bool operator<(const dList &d) const;
 
@@ -226,6 +227,12 @@ void dList<T>::popBack()
         }
         delete temp;
     }
+}
+
+template <class T>
+bool dList<T>::empty() const
+{
+    return (first==nullptr && last==nullptr);
 }
 
 template <class T>
