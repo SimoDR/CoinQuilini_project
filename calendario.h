@@ -59,7 +59,7 @@ public:
         vector<Inquilino*> _inquilini;
         vector<Inquilino*>::iterator _index;
 
-        void stampaBuffer()
+        void stampaBuffer() //debug
         {
             for(vector<Inquilino*>::iterator it=_inquilini.begin(); it!=_inquilini.end(); ++it)
                 cout<<(*it)->getNome()<<endl;

@@ -122,7 +122,7 @@ Calendario::Giorno::Giorno(Data dataDelGiorno): _dataDelGiorno(dataDelGiorno) {}
 
 
 
-Calendario::BufferInquilini::BufferInquilini(const vector<Inquilino *> &listaInquilini): _inquilini(listaInquilini), _index(_inquilini.begin()) {}
+Calendario::BufferInquilini::BufferInquilini(const vector<Inquilino *>& listaInquilini): _inquilini(listaInquilini), _index(_inquilini.begin()) {}
 
 void Calendario::BufferInquilini::avanza()
 {
@@ -172,7 +172,7 @@ vector<Inquilino *> Calendario::BufferInquilini::trovaMinimi(dList<Calendario::G
                 minimo=mitt->second;
 
         }
-        cout<<"Minimo="<<minimo<<endl;
+        cout<<"Minimo="<<minimo<<endl; //debug
 
 
         for(map<Inquilino*,int>::iterator mit=coppie.begin(); mit!=coppie.end(); ++mit)
