@@ -9,6 +9,8 @@ ListaInquilini::ListaInquilini()
 ListaInquilini::~ListaInquilini()
 {
     exportXml();
+    for (auto i=_listaInquilini.begin();i!=_listaInquilini.end();++i)
+        delete *i;
 }
 
 void ListaInquilini::aggiungi(Inquilino * nuovo)
