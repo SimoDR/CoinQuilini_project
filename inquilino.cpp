@@ -14,7 +14,6 @@ void Inquilino::setCD(const double& cd)
 void Inquilino::setPunteggio(const unsigned short int & punti)
 {
     _punteggio += punti;
-    _punteggio = _punteggio + punti;
     if (_punteggio > _puntiMax)
         _punteggio = _puntiMax;
     else if (_punteggio < _puntiMin)
@@ -27,9 +26,6 @@ unsigned short int Inquilino::isAdmin() const
 bool Inquilino::puoPosporre() const
 {
     return _punteggio >= _sogliaPosponi;
-    if (_punteggio >= _sogliaPosponi)
-        return true;
-    return false;
 }
 
 double Inquilino::getCreditoDebito() const{
