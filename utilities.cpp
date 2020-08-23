@@ -5,7 +5,7 @@ void assignWithXml(QXmlStreamReader & xmlInput, const std::string tag, std::stri
 {
     xmlInput.readNextStartElement();
     if (xmlInput.name() != QString::fromStdString(tag))
-        throw new std::runtime_error("errore nel parsing del documento");
+        throw new std::runtime_error("errore durante il parsing del documento");
     string = (xmlInput.readElementText()).toStdString();
 }
 

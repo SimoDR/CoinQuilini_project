@@ -160,17 +160,18 @@ void ListaInquilini::importXml()
                     }
                 }
                 else
-                    throw new std::runtime_error("Errore nel parsing del documento");
+                    throw new std::runtime_error("Errore durante l'import della lista degli inquilini");
             }
             else
-                throw new std::runtime_error("Errore nella lettura del documento");
+                throw new std::runtime_error("Errore durante l'import della lista degli inquilini");
 
             file.close();
         }
+        else
+            throw new std::runtime_error("Database di inquilini non trovato");
     }
     catch(std::runtime_error * e)
     {
-        creaInserisci("ADMIN", "admin", "admin");
         showMessage(QString::fromStdString(e->what()));
     }
 
