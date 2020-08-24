@@ -20,7 +20,10 @@ private:
         Giorno(Data delGiorno);
         void stampaGiornata() //DEBUG
         {
-            cout<<_dataDelGiorno<<" ";
+            cout<<_dataDelGiorno<<": ";
+            for(vector<Incarico*>::iterator it=_incarichiDelGiorno.begin(); it!=_incarichiDelGiorno.end(); ++it)
+                cout<<(*it)->getNome()<<" ("<<(*it)->getIncaricato()->getNome()<<") ";
+            cout<<endl;
         }
 
     };
@@ -29,6 +32,7 @@ private:
 
     dList<Giorno> _giorni;
     dList<Giorno>::iterator _iteratoreCorrente;
+
 
     // serve a convertire una data in input (es: la data
     // in cui si vuole inserire un incarico) nell'
@@ -40,26 +44,35 @@ private:
 
     bool checkIteratore(dList<Giorno>::iterator) const; //ritorna true sse è pte
 
-    class BufferInquilini
+    dList<Giorno>::iterator inizializzaCalendario(const Data&);
+
+
+
+
+public:
+    class BufferInquilini //DA METTERE PRIVATA
     {
+    public: //DA TOGLIERE
         friend class Calendario;
 
         //campi dati
         vector<Inquilino*> _inquilini;
         vector<Inquilino*>::iterator _index;
 
+        void stampaBuffer() //debug
+        {
+            for(vector<Inquilino*>::iterator it=_inquilini.begin(); it!=_inquilini.end(); ++it)
+                cout<<(*it)->getNome()<<endl;
+        }
+
         //metodi
         BufferInquilini(const vector<Inquilino*>& listaInquilini);
         void avanza();
-        vector<Inquilino*> trovaMinimi(dList<Giorno>::iterator iteratoreMinim0, bool pte);
-        Inquilino * restituisciIlMinimo(dList<Giorno>::iterator iteratoreMinimo, bool pte);
+        vector<Inquilino*> trovaMinimi(dList<Giorno>::iterator iteratoreMinim0);
+        Inquilino * restituisciIlMinimo(dList<Giorno>::iterator iteratoreMinimo);
 
     };
-
-    BufferInquilini _buffer;
-
-
-public:
+     BufferInquilini _buffer; //da mettere privato
 
     void stampaGiorni() //DEBUG
     {
@@ -68,11 +81,15 @@ public:
 
     }
 
-    Calendario(const vector<Inquilino*>& listaInquilini);
+    Calendario(const Data&, const vector<Inquilino*>& listaInquilini);
     void aggiungiAlBuffer(Inquilino* nuovoInquilino);
     void rimuoviDalBuffer(unsigned int pos);
-    Inquilino * ottieniIncaricato(dList<Giorno>::iterator iteratoreIniziale,bool pte);
-
+    Inquilino * ottieniIncaricato(dList<Giorno>::iterator iteratoreIniziale);
+    void incrementaData();
+    const Data& getDataDiOggi() const //debug
+    {
+        return _iteratoreCorrente->_dataDelGiorno;
+    }
 
 
     // incarico * trovaIncarico (Data dataIncarico, int indiceIncarico) const? // il controller gli passa la data dell'incarico e la sua

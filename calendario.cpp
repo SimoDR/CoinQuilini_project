@@ -5,16 +5,18 @@ dList<Calendario::Giorno>::iterator Calendario::iteratoreFromData(dList<Giorno>:
     bool trovato=false;
     while(!trovato)
     {
-        if(iteratoreIniziale->_dataDelGiorno>inCuiInserire) //il giorno non c'è, bisogna crearlo
+
+        if(iteratoreIniziale==_giorni.end() || iteratoreIniziale->_dataDelGiorno>inCuiInserire) //il giorno non c'è, bisogna crearlo
         {
-            _giorni.insert(iteratoreIniziale,Giorno(inCuiInserire));
+            iteratoreIniziale=_giorni.insert(iteratoreIniziale,Giorno(inCuiInserire));
             trovato=true;
         }
         else if(iteratoreIniziale->_dataDelGiorno<inCuiInserire ) //non ho ancora raggiunto il giorno
         {
+
             ++iteratoreIniziale;
         }
-        else //trovato, ritorna semplicemente
+        else if(iteratoreIniziale->_dataDelGiorno==inCuiInserire)//trovato, ritorna semplicemente
         {
             trovato=true;
         }
@@ -30,7 +32,13 @@ bool Calendario::checkIteratore(dList<Calendario::Giorno>::iterator iteratoreDaC
     else return false;
 }
 
-Calendario::Calendario(const vector<Inquilino *> &listaInquilini): _iteratoreCorrente(_giorni.end()), _buffer(listaInquilini) {}
+dList<Calendario::Giorno>::iterator Calendario::inizializzaCalendario(const Data& odierna)
+{
+    _giorni.insertBack(Giorno(odierna));
+    return _giorni.begin();
+}
+
+Calendario::Calendario(const Data& odierna, const vector<Inquilino *> &listaInquilini): _iteratoreCorrente(inizializzaCalendario(odierna)), _buffer(listaInquilini) {}
 
 void Calendario::aggiungiAlBuffer(Inquilino *nuovoInquilino)
 {
@@ -54,9 +62,23 @@ void Calendario::rimuoviDalBuffer(unsigned int pos)
     _buffer._index=_buffer._inquilini.begin();
 }
 
-Inquilino *Calendario::ottieniIncaricato(dList<Calendario::Giorno>::iterator iteratoreIniziale, bool pte)
+Inquilino * Calendario:: ottieniIncaricato(dList<Calendario::Giorno>::iterator iteratoreIniziale)
 {
-    return _buffer.restituisciIlMinimo(iteratoreIniziale,pte);
+    return _buffer.restituisciIlMinimo(iteratoreIniziale);
+
+}
+
+void Calendario::incrementaData()
+{
+    Data dataOdierna=_iteratoreCorrente->_dataDelGiorno;
+    dList<Giorno>::iterator giornoSuccessivo=++_iteratoreCorrente;
+    if(_iteratoreCorrente->_incarichiDelGiorno.empty()) //se non ci sono incarichi nel giorno odierno
+    {
+        giornoSuccessivo=_giorni.remove(_iteratoreCorrente);
+    }
+    if(giornoSuccessivo==_giorni.end() || giornoSuccessivo->_dataDelGiorno!=dataOdierna+1)//se il nodo successivo non corrisponde al giorno successivo del calendario oppure è pte
+        _iteratoreCorrente=_giorni.insert(giornoSuccessivo,Giorno(dataOdierna+1));
+
 }
 
 
@@ -64,13 +86,24 @@ Inquilino *Calendario::ottieniIncaricato(dList<Calendario::Giorno>::iterator ite
 bool Calendario::insert(Incarico * daInserire, Data & dataInCuiInserire, int numeroOccorrenze, int cadenzaIncarico)
 {
     dList<Giorno>::iterator iteratoreIniziale=_iteratoreCorrente;
-    bool pte=checkIteratore(_iteratoreCorrente);
+
+    Inquilino * incaricato=nullptr;
+    dList<Giorno>::iterator iteratoreInCuiInserire;
     while(numeroOccorrenze>0)
     {
-        Inquilino * incaricato=ottieniIncaricato(iteratoreIniziale,pte);
+
+        iteratoreInCuiInserire=iteratoreFromData(iteratoreIniziale, dataInCuiInserire);
+
+        incaricato=ottieniIncaricato(iteratoreInCuiInserire);
+
+        //cout<<incaricato->getNome()<<": incaricato"<<endl; //debug
+        cout<<daInserire->getNome()<<endl; //debug
+        _buffer.avanza();
+
         daInserire->setIncaricato(incaricato);
-        dList<Giorno>::iterator iteratoreInCuiInserire=iteratoreFromData(iteratoreIniziale, dataInCuiInserire);
-        iteratoreInCuiInserire->_incarichiDelGiorno.push_back(daInserire);
+
+
+        iteratoreInCuiInserire->_incarichiDelGiorno.push_back(daInserire->clone());
 
         dataInCuiInserire=dataInCuiInserire+cadenzaIncarico;
         iteratoreIniziale=iteratoreInCuiInserire;
@@ -89,7 +122,7 @@ Calendario::Giorno::Giorno(Data dataDelGiorno): _dataDelGiorno(dataDelGiorno) {}
 
 
 
-Calendario::BufferInquilini::BufferInquilini(const vector<Inquilino *> &listaInquilini): _inquilini(listaInquilini), _index(_inquilini.begin()) {}
+Calendario::BufferInquilini::BufferInquilini(const vector<Inquilino *>& listaInquilini): _inquilini(listaInquilini), _index(_inquilini.begin()) {}
 
 void Calendario::BufferInquilini::avanza()
 {
@@ -97,65 +130,89 @@ void Calendario::BufferInquilini::avanza()
     if(_index==_inquilini.end()) _index=_inquilini.begin();
 }
 
-vector<Inquilino *> Calendario::BufferInquilini::trovaMinimi(dList<Calendario::Giorno>::iterator iteratoreMinimo,bool pte) //restituisce l'inquilino (o più di uno) che ha meno incarichi già programmati in una determinata data
+vector<Inquilino *> Calendario::BufferInquilini::trovaMinimi(dList<Calendario::Giorno>::iterator iteratoreMinimo) //restituisce l'inquilino (o più di uno) che ha meno incarichi già programmati in una determinata data
 {
     map<Inquilino*,int> coppie;
-    map<Inquilino*,int>::iterator mit;
+    map<Inquilino*,int>::iterator mitt;
 
 
+
+    cout<<"-------"<<endl;
     for(vector<Inquilino*>::iterator it=_inquilini.begin(); it!=_inquilini.end(); ++it) //aggiungo gli inquilini, tutti con frequenza 0
     {
         coppie[*it]=0;
+        //cout<<(*it)->getNome()<<" stocazzo"<<endl;
+
     }
+    cout<<"-------"<<endl;
+
+    cout<<"*****"<<endl;
+    for(map<Inquilino*,int>::iterator mit=coppie.begin(); mit!=coppie.end(); ++mit) //debug
+    {
+        cout<<(*mit).first->getNome()<<endl;
+    }
+    cout<<"*****"<<endl;
 
     int minimo=INT_MAX;
 
-    vector<Inquilino*> minimiFinali;
 
-    if(!pte) {
+    vector<Inquilino*> finaliZero;
+    vector<Inquilino*> minimiFinali;
+    bool zero=false;
+
+
+
         for(vector<Incarico*>::iterator it=iteratoreMinimo->_incarichiDelGiorno.begin(); it!=iteratoreMinimo->_incarichiDelGiorno.end(); ++it)
         {
 
-            mit=coppie.find((**it).getIncaricato());
-            mit->second++;
-            if(minimo<mit->second)
-                minimo=mit->second;
+            mitt=coppie.find((**it).getIncaricato());
+            cout<<(*mitt).first->getNome()<<": trovato"<<endl; //debug
+            mitt->second++;
+            if(minimo>mitt->second)
+                minimo=mitt->second;
+
         }
+        cout<<"Minimo="<<minimo<<endl; //debug
+
 
         for(map<Inquilino*,int>::iterator mit=coppie.begin(); mit!=coppie.end(); ++mit)
         {
-            if(mit->second==minimo)
+
+            if(mit->second==0)
+            {
+                finaliZero.push_back(mit->first);
+                cout<<mit->first->getNome()<<" "<<mit->second<<" : minimi finali"<<endl; //debug
+                zero=true;
+            }
+            else if(mit->second==minimo && !zero)
+            {
                 minimiFinali.push_back(mit->first);
+                 cout<<mit->first->getNome()<<" "<<mit->second<<" : minimi finali"<<endl; //debug
+            }
         }
-    }
-    else //se è pte
-    {
-        for(map<Inquilino*,int>::iterator mit=coppie.begin(); mit!=coppie.end(); ++mit)
-        {
-            minimiFinali.push_back(mit->first);
-        }
-    }
 
-    return minimiFinali;
+
+    return zero ? finaliZero : minimiFinali;
 
 }
 
-Inquilino * Calendario::BufferInquilini::restituisciIlMinimo(dList<Calendario::Giorno>::iterator iteratoreMinimo,bool pte)
+Inquilino * Calendario::BufferInquilini::restituisciIlMinimo(dList<Calendario::Giorno>::iterator iteratoreMinimo)
 {
-    vector<Inquilino*> minimi=trovaMinimi(iteratoreMinimo,pte);
+    vector<Inquilino*> minimi=trovaMinimi(iteratoreMinimo);
+//    cout<<"--------"<<endl;
+//    for(vector<Inquilino*>::iterator it=minimi.begin(); it!=minimi.end(); ++it) //DEBUG
+//        cout<<(*it)->getNome()<<endl;
 
     vector<Inquilino*>::iterator j=minimi.begin();
-    if(!pte)
-    {
+
         while(j!=minimi.end())
         {
             if(*_index==*j)
+            {
+                cout<<(*_index)->getNome()<<" ";
                 return *_index;
-
-            ++j;
+            }
+            else ++j;
         }
-    }
-    else return *j;
 
-    avanza();
 }

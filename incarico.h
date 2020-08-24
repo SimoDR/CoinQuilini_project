@@ -23,6 +23,7 @@ protected:
 public:
     Incarico(string nome,Inquilino * incaricato=nullptr,bool svolto=false); //da sistemare
 	void setNome(const string&);
+    string getNome() const {return _nome;} //debug
     void setIncaricato(Inquilino *);
     Inquilino* getIncaricato() const;
 	bool getSvolto() const;
