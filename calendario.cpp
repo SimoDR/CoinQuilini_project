@@ -81,10 +81,29 @@ void Calendario::incrementaData()
 
 }
 
+Incarico *Calendario::trovaIncarico(const Data &dataIncarico, int indiceIncarico)
+{
+    dList<Giorno>::iterator giornoIncarico=iteratoreFromData(_iteratoreCorrente,dataIncarico);
+
+    int indice=0;
+    for(vector<Incarico*>::iterator it=giornoIncarico->_incarichiDelGiorno.begin(); it!=giornoIncarico->_incarichiDelGiorno.end(); ++it)
+    {
+        if(indice==indiceIncarico)
+            return *it;
+        indice++;
+    }
+}
+
 
 
 bool Calendario::insert(Incarico * daInserire, Data & dataInCuiInserire, int numeroOccorrenze, int cadenzaIncarico)
 {
+    bool assegnato=false;
+    if(numeroOccorrenze==1 && daInserire->getIncaricato()!=nullptr) //è già stato assegnato
+        assegnato=true;
+
+
+
     dList<Giorno>::iterator iteratoreIniziale=_iteratoreCorrente;
 
     Inquilino * incaricato=nullptr;
@@ -94,13 +113,13 @@ bool Calendario::insert(Incarico * daInserire, Data & dataInCuiInserire, int num
 
         iteratoreInCuiInserire=iteratoreFromData(iteratoreIniziale, dataInCuiInserire);
 
-        incaricato=ottieniIncaricato(iteratoreInCuiInserire);
+        if(!assegnato) incaricato=ottieniIncaricato(iteratoreInCuiInserire);
 
         //cout<<incaricato->getNome()<<": incaricato"<<endl; //debug
         cout<<daInserire->getNome()<<endl; //debug
         _buffer.avanza();
 
-        daInserire->setIncaricato(incaricato);
+        if(!assegnato) daInserire->setIncaricato(incaricato);
 
 
         iteratoreInCuiInserire->_incarichiDelGiorno.push_back(daInserire->clone());
@@ -111,6 +130,40 @@ bool Calendario::insert(Incarico * daInserire, Data & dataInCuiInserire, int num
     }
     return true;
 
+}
+
+bool Calendario::remove(Incarico *daRimuovere, const Data &dataIncarico)
+{
+    bool rimosso=false;
+    dList<Giorno>::iterator giornoIncarico=iteratoreFromData(_iteratoreCorrente,dataIncarico);
+    for(vector<Incarico*>::iterator it=giornoIncarico->_incarichiDelGiorno.begin(); it!=giornoIncarico->_incarichiDelGiorno.end(); ++it)
+    {
+        if(daRimuovere==*it)
+        {
+            giornoIncarico->_incarichiDelGiorno.erase(it);
+            rimosso=true;
+        }
+
+    }
+    return rimosso;
+}
+
+bool Calendario::posponiIncarico(Incarico * daPosporre, unsigned int quantoPosporre, const Data& dataIncarico)
+{
+    bool posposto=false;
+    Data dataInCuiInserire=dataIncarico+quantoPosporre;
+    bool possibilePosporre=daPosporre->posponi(dataInCuiInserire);
+    if (possibilePosporre)
+    {
+       remove(daPosporre,dataIncarico); //rimuovo da dov'è
+       dList<Giorno>::iterator iteratoreInCuiInserire=iteratoreFromData(_iteratoreCorrente, dataInCuiInserire);
+       iteratoreInCuiInserire->_incarichiDelGiorno.push_back(daPosporre->clone());
+       posposto=true;
+
+       //GESTIRE PUNTEGGI????
+
+    }
+    return posposto;
 }
 
 
@@ -199,20 +252,26 @@ vector<Inquilino *> Calendario::BufferInquilini::trovaMinimi(dList<Calendario::G
 Inquilino * Calendario::BufferInquilini::restituisciIlMinimo(dList<Calendario::Giorno>::iterator iteratoreMinimo)
 {
     vector<Inquilino*> minimi=trovaMinimi(iteratoreMinimo);
-//    cout<<"--------"<<endl;
-//    for(vector<Inquilino*>::iterator it=minimi.begin(); it!=minimi.end(); ++it) //DEBUG
-//        cout<<(*it)->getNome()<<endl;
+    cout<<"--------"<<endl;
+    for(vector<Inquilino*>::iterator it=minimi.begin(); it!=minimi.end(); ++it) //DEBUG
+        cout<<(*it)->getNome()<<": minimi trovati"<<endl;
+    cout<<(*_index)->getNome()<<": indice"<<endl;
+    cout<<"--------"<<endl;
 
-    vector<Inquilino*>::iterator j=minimi.begin();
 
-        while(j!=minimi.end())
+    bool trovato=false;
+    while(!trovato)
+    {
+        for(vector<Inquilino*>::iterator j=minimi.begin(); j!=minimi.end(); ++j)
         {
             if(*_index==*j)
             {
-                cout<<(*_index)->getNome()<<" ";
-                return *_index;
+                trovato=true;
             }
-            else ++j;
         }
+        if(!trovato) avanza();
+     }
+    cout<<(*_index)->getNome()<<" ";
+    return *_index;
 
 }

@@ -92,7 +92,8 @@ public:
     }
 
 
-    // incarico * trovaIncarico (Data dataIncarico, int indiceIncarico) const? // il controller gli passa la data dell'incarico e la sua
+    Incarico * trovaIncarico (const Data& dataIncarico, int indiceIncarico);
+    // il controller gli passa la data dell'incarico e la sua
     // posizione nella lista dell'interfaccia, questo metodo
     // ritorna il puntatore all'incarico stesso. Probabilmente
     // tra le varie robe invocherà
@@ -100,9 +101,10 @@ public:
 
     bool insert(Incarico *, Data&, int, int);
 
-    //    creaAggiungi(vector<string> (parametri), data)
-    //    bool remove(incarico*, data)
-    //    bool insertrec(incarico *, data inizio, int cadenza, data datafine (o numerooccorrenze))
+    bool remove(Incarico * daRimuovere, const Data& dataIncarico);
+
+    bool posponiIncarico(Incarico * daPosporre, unsigned int quantoPosporre, const Data& dataIncarico);
+
     //    importacalendario(fileXML)
     //    esportacalendario()
     //    iterator *getCurrent()
