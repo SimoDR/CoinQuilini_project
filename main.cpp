@@ -198,12 +198,9 @@ controller.rimuoviInquilino(6);
 //    controller.stampaCalendario();
 
 
-    controller.rimuoviInquilino(2);
-    controller.rimuoviInquilino(1);
-    controller.rimuoviInquilino(3);
-    controller.rimuoviInquilino(4);
-    controller.rimuoviInquilino(5);
-    controller.rimuoviInquilino(6);
+//    controller.rimuoviInquilino(2);
+//    controller.rimuoviInquilino(1);
+
 
 
 }

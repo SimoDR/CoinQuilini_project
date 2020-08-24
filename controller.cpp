@@ -111,6 +111,13 @@ void Controller::creaNuovoIncarico(vector<std::string> parametri)
 
 }
 
+void Controller::modificaIncarico(const Data &dataIncarico, int indiceIncarico, vector<std::string> parametri)
+{
+    rimuoviIncarico(dataIncarico,indiceIncarico);
+
+    creaNuovoIncarico(parametri);
+}
+
 void Controller::rimuoviIncarico(const Data &dataIncarico, int indiceIncarico)
 {
     _calendario.remove(_calendario.trovaIncarico(dataIncarico,indiceIncarico),dataIncarico);
@@ -153,6 +160,8 @@ void Controller::incrementaGiorno()
 }
 
 
+
+
 vector<string> Controller::getInquilini()
 {
     return _listaInquilini.inquilini();
@@ -161,7 +170,7 @@ vector<string> Controller::getInquilini()
 void Controller::rimuoviInquilino(unsigned int pos)
 {
     _listaInquilini.rimuovi(pos);
-    _calendario.rimuoviDalBuffer(pos);
+    _calendario.rimuoviInquilino(pos);
 }
 
 vector<std::string> Controller::getInquilinoPos(unsigned int pos)
