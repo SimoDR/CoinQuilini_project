@@ -202,6 +202,7 @@ controller.rimuoviInquilino(6);
 //    controller.rimuoviInquilino(1);
 
 
+
 }
 
 

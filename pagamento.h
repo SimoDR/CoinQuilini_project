@@ -12,6 +12,7 @@ private:
 public:
     Pagamento(string nome,double importo,Inquilino * incaricato=nullptr,bool svolto=false): Incarico(nome,incaricato,svolto),_importo(importo) {}
     void setImporto(const double&);
+    double getImporto() const;
     virtual ~Pagamento()=0;
     virtual string generaNota() const;
     // virtual import //da definire opportunamente

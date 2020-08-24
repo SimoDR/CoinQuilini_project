@@ -191,6 +191,13 @@ bool Calendario::posponiIncarico(Incarico * daPosporre, unsigned int quantoPospo
     return posposto;
 }
 
+void Calendario::setCredito(Pagamento * p, vector<Inquilino*> lista) const
+{
+    double quota= p->getImporto() / lista.size();
+    for(vector<Inquilino*>::iterator it=lista.begin(); it!=lista.end(); ++it)
+    {
+        (*it)->setCD(-quota);
+
 void Calendario::checkIncarichiSvolti()
 {
     for(vector<Incarico*>::iterator it=_iteratoreCorrente->_incarichiDelGiorno.begin(); it!=_iteratoreCorrente->_incarichiDelGiorno.end(); ++it)

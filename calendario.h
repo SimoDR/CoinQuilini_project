@@ -5,6 +5,7 @@
 #include "incarico.h"
 #include "listainquilini.h"
 #include<map>
+#include"pagamento.h"
 using std::map;
 
 
@@ -105,8 +106,9 @@ public:
 
     bool posponiIncarico(Incarico * daPosporre, unsigned int quantoPosporre,const Data& dataIncarico);
 
-    void checkIncarichiSvolti();
+    void setCredito(Pagamento*, vector<Inquilino*>) const;
 
+    void checkIncarichiSvolti();
 
 
     //    importacalendario(fileXML)
