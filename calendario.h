@@ -83,7 +83,7 @@ public:
 
     Calendario(const Data&, const vector<Inquilino*>& listaInquilini);
     void aggiungiAlBuffer(Inquilino* nuovoInquilino);
-    void rimuoviDalBuffer(unsigned int pos);
+    void rimuoviInquilino(unsigned int pos);
     Inquilino * ottieniIncaricato(dList<Giorno>::iterator iteratoreIniziale);
     void incrementaData();
     const Data& getDataDiOggi() const //debug

@@ -34,7 +34,7 @@ public:
     explicit Controller( QObject *parent = nullptr);
     bool login(const QString &, const QString &);   //debug, da togliere
     vector<string> getInquilini();
-    void rimuoviInquilino(unsigned int);
+    void rimuoviInquilino(unsigned int); //da controllare
     vector<string> getInquilinoPos(unsigned int);
     void aggiungiInquilino(const QString &, const QString &);
     void modificaInquilino(const QString &, const QString &, unsigned int);
@@ -65,6 +65,8 @@ public slots:
     void setIncaricoSvolto(const Data& dataIncarico, int indiceIncarico);
 
     void incrementaGiorno(); //MESSAGGIO PER CHI NON HA SVOLTO
+
+    void modificaIncarico(const Data &dataIncarico, int indiceIncarico, vector<string> parametri);
 
 };
 

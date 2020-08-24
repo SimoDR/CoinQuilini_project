@@ -46,20 +46,37 @@ void Calendario::aggiungiAlBuffer(Inquilino *nuovoInquilino)
     _buffer._index=_buffer._inquilini.begin();
 }
 
-void Calendario::rimuoviDalBuffer(unsigned int pos)
+void Calendario::rimuoviInquilino(unsigned int pos) //da Debuggare
 {
+    bool trovato=false;
     unsigned int cont=0;
-    vector<Inquilino*>::iterator i;
-    for(i=_buffer._inquilini.begin();i!=_buffer._inquilini.end(); ++i) {
+
+    Inquilino * daRimuovere=nullptr;
+    for(vector<Inquilino*>::iterator i=_buffer._inquilini.begin();i!=_buffer._inquilini.end() && !trovato; ++i) {
         if (cont==pos)
         {
+            daRimuovere=*i;
             _buffer._inquilini.erase(i);
-            return;
+            trovato=true;;
         }
 
         cont++;
     }
     _buffer._index=_buffer._inquilini.begin();
+
+    Incarico * daRiassegnare=nullptr;
+
+    for(dList<Giorno>::iterator x=_iteratoreCorrente; x!=_giorni.end(); ++x) //riassegnamento automatico per ogni incarico che era dell'inquilino che se ne va
+    {
+        for(vector<Incarico*>::iterator y=(*x)._incarichiDelGiorno.begin(); y!=(*x)._incarichiDelGiorno.end(); ++y)
+        {
+            if((*y)->getIncaricato()==daRimuovere)
+            {
+                daRiassegnare=*y;
+                daRiassegnare->setIncaricato(ottieniIncaricato(x));
+            }
+        }
+    }
 }
 
 Inquilino * Calendario:: ottieniIncaricato(dList<Calendario::Giorno>::iterator iteratoreIniziale)
