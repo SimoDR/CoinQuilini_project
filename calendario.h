@@ -105,8 +105,9 @@ public:
 
     void checkIncarichiSvolti();
 
-    void setCredito(Pagamento*, vector<Inquilino*>);
+    void setCredito(Pagamento*, vector<Inquilino*> &);
 
+    vector<std::pair<string,double>> resetCD(vector<Inquilino *> &);
 
     //    importacalendario(fileXML)
     //    esportacalendario()

@@ -191,7 +191,7 @@ bool Calendario::posponiIncarico(Incarico * daPosporre, unsigned int quantoPospo
     return posposto;
 }
 
-void Calendario::setCredito(Pagamento * p, vector<Inquilino*> lista)
+void Calendario::setCredito(Pagamento * p, vector<Inquilino*> & lista)
 {
     if (p->getSvolto()){
         p->getIncaricato()->setCD(p->getImporto());
@@ -323,4 +323,16 @@ Inquilino * Calendario::BufferInquilini::restituisciIlMinimo(dList<Calendario::G
     cout<<(*_index)->getNome()<<" ";
     return *_index;
 
+}
+
+vector<std::pair<string,double>> Calendario::resetCD(vector<Inquilino *> & lista)
+{
+    vector<std::pair<string,double> > cdCasa;
+    for(auto ci = lista.cbegin(); ci != lista.cend(); ++ci){
+        cdCasa.push_back(std::make_pair ((*ci)->getNome(), (*ci)->getCreditoDebito()) );
+
+        //reset CD
+       (*ci)->setCD( -(*ci)->getCreditoDebito() );
+    }
+    return cdCasa;
 }

@@ -1,19 +1,20 @@
 
-//#include <iostream>
-//#include<vector>
-//#include <QApplication>
-//#include "calendario.h"
-//#include "login.h"
+#include <iostream>
+#include<vector>
+#include <QApplication>
+#include "calendario.h"
+#include "login.h"
 
-//int main(int argc, char *argv[])
-//{
-//    QApplication a(argc, argv);
-//    Controller controller;
-//    Login l(nullptr, &controller);
-//    l.show();
-//    return a.exec();
-//}
+int main(int argc, char *argv[])
+{
+    QApplication a(argc, argv);
+    Controller controller;
+    Login l(nullptr, &controller);
+    l.show();
+    return a.exec();
+}
 
+/*
 #include "incarico.h"
 //#include "spazzatura.h"
 //#include "cucina.h"
@@ -215,8 +216,6 @@ controller.rimuoviInquilino(6);
 
 
 //il main della gerarchia
-//********************************
-
 
 // #include "incarico.h"
 // #include "spazzatura.h"
@@ -268,3 +267,5 @@ controller.rimuoviInquilino(6);
 //     cout<<lista<<endl;
 
 // }
+
+*/

@@ -177,16 +177,6 @@ void ListaInquilini::importXml()
 
 }
 
-void ListaInquilini::resetCD()
-{
-    for(auto ci = _listaInquilini.cbegin(); ci != _listaInquilini.cend(); ++ci){
-        //stampa CD(?)
-        cout << (*ci)->getNome() << "situazione contabile:" << (*ci)->getCreditoDebito() << endl;
-        //reset CD
-       (*ci)->setCD( -(*ci)->getCreditoDebito() );
-    }
-}
-
 void ListaInquilini::exportXml() const
 {
     QFile file("listainquilini.xml");
