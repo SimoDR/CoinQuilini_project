@@ -90,8 +90,6 @@ Incarico *Calendario::trovaIncarico(const Data &dataIncarico, int indiceIncarico
     {
         if(indice==indiceIncarico)
         {
-
-
             return *it;
         }
         indice++;
@@ -182,6 +180,16 @@ void Calendario::setCredito(Pagamento * p, vector<Inquilino*> lista) const
     for(vector<Inquilino*>::iterator it=lista.begin(); it!=lista.end(); ++it)
     {
         (*it)->setCD(-quota);
+
+void Calendario::checkIncarichiSvolti()
+{
+    for(vector<Incarico*>::iterator it=_iteratoreCorrente->_incarichiDelGiorno.begin(); it!=_iteratoreCorrente->_incarichiDelGiorno.end(); ++it)
+    {
+        if(!((*it)->getSvolto())) //se non è stato svolto
+        {
+            (*it)->getIncaricato()->setPunteggio((*it)->calcolaPunteggio());
+            //MESSAGGIO: NON L'HAI SVOLTO!!
+        }
     }
 }
 

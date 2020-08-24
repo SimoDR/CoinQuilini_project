@@ -64,7 +64,7 @@ public slots:
 
     void setIncaricoSvolto(const Data& dataIncarico, int indiceIncarico);
 
-    void incrementaGiorno();
+    void incrementaGiorno(); //MESSAGGIO PER CHI NON HA SVOLTO
 
 };
 

@@ -108,6 +108,8 @@ public:
 
     void setCredito(Pagamento*, vector<Inquilino*>) const;
 
+    void checkIncarichiSvolti();
+
 
     //    importacalendario(fileXML)
     //    esportacalendario()
