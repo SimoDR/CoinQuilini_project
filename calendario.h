@@ -105,6 +105,8 @@ public:
 
     bool posponiIncarico(Incarico * daPosporre, unsigned int quantoPosporre,const Data& dataIncarico);
 
+    void checkIncarichiSvolti();
+
 
 
     //    importacalendario(fileXML)

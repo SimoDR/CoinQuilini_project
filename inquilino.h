@@ -27,7 +27,7 @@ public:
     virtual unsigned short int isAdmin() const;   //ritorna un intero che indica la categoria dell'utente (0 per Inquilino)
     bool puoPosporre() const; //bool indica se l'inquilino può o no posporre
     double getCreditoDebito() const;
-    unsigned short int getPunteggio() const;
+    short int getPunteggio() const;
     string getNome() const;
     bool isLogged(const string &,const string &) const;
     virtual std::string getLabel() const;

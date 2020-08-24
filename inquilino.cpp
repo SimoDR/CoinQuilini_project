@@ -56,7 +56,7 @@ void Inquilino::exportXml(QXmlStreamWriter & xmlOutput) const
     xmlOutput.writeEndElement();
 }
 
-unsigned short int Inquilino::getPunteggio() const{
+short int Inquilino::getPunteggio() const{
     return _punteggio;
 }
 

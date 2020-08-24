@@ -90,8 +90,6 @@ Incarico *Calendario::trovaIncarico(const Data &dataIncarico, int indiceIncarico
     {
         if(indice==indiceIncarico)
         {
-
-
             return *it;
         }
         indice++;
@@ -174,6 +172,18 @@ bool Calendario::posponiIncarico(Incarico * daPosporre, unsigned int quantoPospo
 
     }
     return posposto;
+}
+
+void Calendario::checkIncarichiSvolti()
+{
+    for(vector<Incarico*>::iterator it=_iteratoreCorrente->_incarichiDelGiorno.begin(); it!=_iteratoreCorrente->_incarichiDelGiorno.end(); ++it)
+    {
+        if(!((*it)->getSvolto())) //se non è stato svolto
+        {
+            (*it)->getIncaricato()->setPunteggio((*it)->calcolaPunteggio());
+            //MESSAGGIO: NON L'HAI SVOLTO!!
+        }
+    }
 }
 
 
