@@ -118,6 +118,7 @@ void Controller::rimuoviIncarico(const Data &dataIncarico, int indiceIncarico)
 
 bool Controller::posponiIncarico(const Data &dataIncarico, int indiceIncarico, unsigned int quantoPosporre) //DA GESTIRE PUNTEGGI??
 {
+
     return _calendario.posponiIncarico(_calendario.trovaIncarico(dataIncarico,indiceIncarico),quantoPosporre,dataIncarico);
 }
 

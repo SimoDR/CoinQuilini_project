@@ -145,13 +145,20 @@ void Data::parsingDaStringa(string inputString)
     }
 }
 
-const Data &Data::operator+(unsigned short addendo) const
+Data Data::operator+(unsigned short addendo) const
 {
-    Data daRitornare;
+    Data daRitornare(*this);
     daRitornare._giornoCorrente = _giornoCorrente + addendo;
     daRitornare.aggiustaLimiti();
     return daRitornare;
 }
+
+//const Data &Data::operator+(unsigned short addendo)
+//{
+//    _giornoCorrente = _giornoCorrente + addendo;
+//    aggiustaLimiti();
+//    return *this;
+//}
 
 const Data &Data::aggiungiSettimane(unsigned short numero)
 {

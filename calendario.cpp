@@ -89,9 +89,14 @@ Incarico *Calendario::trovaIncarico(const Data &dataIncarico, int indiceIncarico
     for(vector<Incarico*>::iterator it=giornoIncarico->_incarichiDelGiorno.begin(); it!=giornoIncarico->_incarichiDelGiorno.end(); ++it)
     {
         if(indice==indiceIncarico)
+        {
+
+
             return *it;
+        }
         indice++;
     }
+
 }
 
 
@@ -136,23 +141,28 @@ bool Calendario::remove(Incarico *daRimuovere, const Data &dataIncarico)
 {
     bool rimosso=false;
     dList<Giorno>::iterator giornoIncarico=iteratoreFromData(_iteratoreCorrente,dataIncarico);
-    for(vector<Incarico*>::iterator it=giornoIncarico->_incarichiDelGiorno.begin(); it!=giornoIncarico->_incarichiDelGiorno.end(); ++it)
+    for(vector<Incarico*>::iterator it=giornoIncarico->_incarichiDelGiorno.begin(); it!=giornoIncarico->_incarichiDelGiorno.end() && !rimosso; ++it)
     {
         if(daRimuovere==*it)
         {
             giornoIncarico->_incarichiDelGiorno.erase(it);
             rimosso=true;
         }
-
     }
+
+    if(giornoIncarico->_incarichiDelGiorno.empty()) //se ora non c'è più neanche un incarico, tolgo il giorno perchè non serve più
+        _giorni.remove(giornoIncarico);
     return rimosso;
 }
 
 bool Calendario::posponiIncarico(Incarico * daPosporre, unsigned int quantoPosporre, const Data& dataIncarico)
 {
+
     bool posposto=false;
     Data dataInCuiInserire=dataIncarico+quantoPosporre;
     bool possibilePosporre=daPosporre->posponi(dataInCuiInserire);
+
+
     if (possibilePosporre)
     {
        remove(daPosporre,dataIncarico); //rimuovo da dov'è
