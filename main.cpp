@@ -1,9 +1,6 @@
-<<<<<<< HEAD
-//main originario
-=======
 //#include <iostream>
 //#include<vector>
-#include <QApplication>
+//#include <QApplication>
 //#include "calendario.h"
 //#include "login.h"
 
@@ -15,24 +12,8 @@
 //    l.show();
 //    return a.exec();
 //}
->>>>>>> e187aa803463fdd0bef37be77b959e44b4bda318
 
-#include <iostream>
-#include<vector>
-#include <QApplication>
-#include "calendario.h"
-#include "login.h"
 
-int main(int argc, char *argv[])
-{
-    QApplication a(argc, argv);
-    Controller controller;
-    Login l(nullptr, &controller);
-    l.show();
-    return a.exec();
-}
-
-/*
 
 #include "incarico.h"
 //#include "spazzatura.h"
@@ -51,6 +32,7 @@ int main(int argc, char *argv[])
 #include "incarico.h"
 #include "inquilino.h"
 #include "listainquilini.h"
+#include <QApplication>
 
 int main(int argc, char *argv[])
 {
@@ -170,11 +152,7 @@ controller.rimuoviInquilino(3);
 controller.rimuoviInquilino(4);
 controller.rimuoviInquilino(5);
 controller.rimuoviInquilino(6);
-
-
 }
-
-*/
 
 //il main della gerarchia
 //********************************
