@@ -43,7 +43,7 @@ private:
 public:
     Data(string inputString);
     Data(unsigned short int=1,unsigned short int=1,unsigned short int=1980);
-    const Data& operator+(unsigned short int) const;
+    Data operator+(unsigned short int) const;
     const Data& aggiungiSettimane(unsigned short int);
     const Data& aggiungiMesi(unsigned short int);
     const Data& aggiungiAnni(unsigned short int);

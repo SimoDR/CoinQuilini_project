@@ -103,7 +103,7 @@ public:
 
     bool remove(Incarico * daRimuovere, const Data& dataIncarico);
 
-    bool posponiIncarico(Incarico * daPosporre, unsigned int quantoPosporre, const Data& dataIncarico);
+    bool posponiIncarico(Incarico * daPosporre, unsigned int quantoPosporre,const Data& dataIncarico);
 
     //    importacalendario(fileXML)
     //    esportacalendario()

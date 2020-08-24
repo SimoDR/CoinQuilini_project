@@ -54,6 +54,7 @@ int main(int argc, char *argv[])
 //    Data dataInizio(parametri[10]);
 //    int numeroOccorrenze=std::stoi(parametri[11]);
 
+
     vector<string> parametri;
     parametri.push_back("puliziaDelSabato"); //0
     parametri.push_back("Pulizia"); //1
@@ -112,12 +113,12 @@ controller.rimuoviInquilino(6);
 
 
     vector<string> parametri2;
-    parametri2.push_back("PastaAllaSpazzatura"); //0
-    parametri2.push_back("Spazzatura"); //1
+    parametri2.push_back("PuliziaCessi"); //0
+    parametri2.push_back("Pulizia"); //1
     parametri2.push_back("\0"); //2
     parametri2.push_back("12"); //3
     parametri2.push_back("10"); //4
-    parametri2.push_back("\0"); //5
+    parametri2.push_back("2"); //5
     parametri2.push_back("\0"); //6
     parametri2.push_back("\0"); //7
     parametri2.push_back("\0"); //8
@@ -177,30 +178,44 @@ controller.rimuoviInquilino(6);
 
     controller.stampaCalendario();
 
+
+
+    cout<<"Rimuovi incarico"<<endl;
+    controller.rimuoviIncarico(Data("22/08/2020"),1);
+    controller.stampaCalendario();
+
+    cout<<"Rimuovi incarico"<<endl;
+    controller.rimuoviIncarico(Data("9/09/2020"),0);
+    controller.stampaCalendario();
+
+    cout<<"Posponi incarico"<<endl;
+    controller.posponiIncarico(Data("22/08/2020"),0,3);
+    controller.stampaCalendario();
+
+
+    cout<<"Posponi incarico"<<endl;
+    controller.posponiIncarico(Data("15/09/2020"),0,3);
+    controller.stampaCalendario();
+
+
     controller.rimuoviInquilino(2);
     controller.rimuoviInquilino(1);
-<<<<<<< HEAD
-controller.rimuoviInquilino(3);
-controller.rimuoviInquilino(4);
-controller.rimuoviInquilino(5);
-controller.rimuoviInquilino(6);
-}
-
-=======
     controller.rimuoviInquilino(3);
     controller.rimuoviInquilino(4);
     controller.rimuoviInquilino(5);
     controller.rimuoviInquilino(6);
 
-
-
-
-
 }
 
 
 
->>>>>>> e0dd7ff0a7f974a56bb9cf2375410da8e9ded44d
+
+
+
+
+
+
+
 //il main della gerarchia
 //********************************
 
