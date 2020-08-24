@@ -56,7 +56,7 @@ void Controller::creaNuovoIncarico(vector<std::string> parametri)
     if(parametri[1]!="\0") tipoIncarico=parametri[1];
 
     string nomeIncaricato="\0";
-    if(parametri[2]!="\0") nomeIncaricato=parametri[2]; //DA SISTEMARE
+    if(parametri[2]!="\0") nomeIncaricato=parametri[2];
 
     int cadenzaIncarico=0;
     if(parametri[3]!="\0") cadenzaIncarico=std::stoi(parametri[3]);
@@ -88,6 +88,11 @@ void Controller::creaNuovoIncarico(vector<std::string> parametri)
 
     Incarico * i=nullptr;
 
+
+
+
+
+
     if (tipoIncarico=="Pulizia")
         i=new Pulizia(nomeIncarico,tempoStimato,stanzeDaPulire);
     else if(tipoIncarico=="Spesa")
@@ -99,8 +104,21 @@ void Controller::creaNuovoIncarico(vector<std::string> parametri)
     else if(tipoIncarico=="Bolletta")
         i=new Bolletta(nomeIncarico,importo,dataLimite); //partecipanti????
 
+    if(numeroOccorrenze==1 && nomeIncaricato!="\0") //assegnazione manuale dell'incaricato essendo evento singolo
+        i->setIncaricato(_listaInquilini.getInquilino(nomeIncaricato));
+
     bool successo=_calendario.insert(i,dataInizio,numeroOccorrenze,cadenzaIncarico);
 
+}
+
+void Controller::rimuoviIncarico(const Data &dataIncarico, int indiceIncarico)
+{
+    _calendario.remove(_calendario.trovaIncarico(dataIncarico,indiceIncarico),dataIncarico);
+}
+
+bool Controller::posponiIncarico(const Data &dataIncarico, int indiceIncarico, unsigned int quantoPosporre) //DA GESTIRE PUNTEGGI??
+{
+    return _calendario.posponiIncarico(_calendario.trovaIncarico(dataIncarico,indiceIncarico),quantoPosporre,dataIncarico);
 }
 
 
