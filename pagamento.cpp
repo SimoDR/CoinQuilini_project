@@ -6,6 +6,11 @@ void Pagamento::setImporto(const double& x){
     _importo=x;
 }
 
+double Pagamento::getImporto() const
+{
+    return _importo;
+}
+
 Pagamento::~Pagamento() {}
 
 string Pagamento::generaNota() const {

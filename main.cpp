@@ -205,6 +205,7 @@ controller.rimuoviInquilino(6);
     controller.rimuoviInquilino(5);
     controller.rimuoviInquilino(6);
 
+
 }
 
 
