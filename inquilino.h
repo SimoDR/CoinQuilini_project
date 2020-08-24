@@ -23,7 +23,7 @@ public:
     Inquilino(const string&, const string&);        //utente da nome e pw
     void modifica(const string&, const string&); //modifica username e/o password
     void setCD(const double&);            //modifica il credito/debito aggiungendo (o togliendo se negativo)
-    void setPunteggio(const unsigned short int&);  //modifica il punteggio aggiungendo (o togliendo se negativo)
+    void setPunteggio(short int);  //modifica il punteggio aggiungendo (o togliendo se negativo) //occhio al passaggio per rif costante
     virtual unsigned short int isAdmin() const;   //ritorna un intero che indica la categoria dell'utente (0 per Inquilino)
     bool puoPosporre() const; //bool indica se l'inquilino può o no posporre
     double getCreditoDebito() const;

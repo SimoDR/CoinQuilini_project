@@ -116,10 +116,40 @@ void Controller::rimuoviIncarico(const Data &dataIncarico, int indiceIncarico)
     _calendario.remove(_calendario.trovaIncarico(dataIncarico,indiceIncarico),dataIncarico);
 }
 
-bool Controller::posponiIncarico(const Data &dataIncarico, int indiceIncarico, unsigned int quantoPosporre) //DA GESTIRE PUNTEGGI??
+bool Controller::posponiIncarico(const Data &dataIncarico, int indiceIncarico, unsigned int quantoPosporre, unsigned int posizioneInquilinoRichiedente) //DA GESTIRE PUNTEGGI??
 {
+    Inquilino * richiedente=_listaInquilini.getInquilino(posizioneInquilinoRichiedente);
+    if(richiedente->puoPosporre())
+    {
+        richiedente->setPunteggio(-4);
+        return _calendario.posponiIncarico(_calendario.trovaIncarico(dataIncarico,indiceIncarico),quantoPosporre,dataIncarico);
+    }
+    else
+    {
+        //MESSAGGIO: NON PUOI POSPORRE!
+        return false;
+    }
 
-    return _calendario.posponiIncarico(_calendario.trovaIncarico(dataIncarico,indiceIncarico),quantoPosporre,dataIncarico);
+}
+
+bool Controller::riassegnaIncarico(const Data &dataIncarico, int indiceIncarico, unsigned int posizioneInquilino)
+{
+    Incarico * daRiassegnare=_calendario.trovaIncarico(dataIncarico,indiceIncarico);
+    Inquilino * nuovoIncaricato=_listaInquilini.getInquilino(posizioneInquilino);
+    daRiassegnare->setIncaricato(nuovoIncaricato);
+}
+
+void Controller::setIncaricoSvolto(const Data & dataIncarico, int indiceIncarico)
+{
+    Incarico * svolto=_calendario.trovaIncarico(dataIncarico,indiceIncarico);
+    svolto->setSvolto();
+}
+
+void Controller::incrementaGiorno()
+{
+    _calendario.checkIncarichiSvolti();
+    _calendario.incrementaData();
+
 }
 
 
@@ -149,7 +179,7 @@ void Controller::aggiungiInquilino(const QString & user, const QString & pw)
 void Controller::modificaInquilino(const QString &user, const QString & pw, unsigned int pos)
 {
     _listaInquilini.modifica(user.toStdString(), pw.toStdString(), pos);
-    //da sistemare per _calendario
+    //da sistemare per _calendario? Forse non serve
 }
 
 void Controller::checkAdmin(unsigned int pos)

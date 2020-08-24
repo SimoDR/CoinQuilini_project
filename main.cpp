@@ -188,14 +188,14 @@ controller.rimuoviInquilino(6);
     controller.rimuoviIncarico(Data("9/09/2020"),0);
     controller.stampaCalendario();
 
-    cout<<"Posponi incarico"<<endl;
-    controller.posponiIncarico(Data("22/08/2020"),0,3);
-    controller.stampaCalendario();
+//    cout<<"Posponi incarico"<<endl;
+//    controller.posponiIncarico(Data("22/08/2020"),0,3);
+//    controller.stampaCalendario();
 
 
-    cout<<"Posponi incarico"<<endl;
-    controller.posponiIncarico(Data("15/09/2020"),0,3);
-    controller.stampaCalendario();
+//    cout<<"Posponi incarico"<<endl;
+//    controller.posponiIncarico(Data("15/09/2020"),0,3);
+//    controller.stampaCalendario();
 
 
     controller.rimuoviInquilino(2);

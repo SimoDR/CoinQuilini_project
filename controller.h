@@ -53,12 +53,18 @@ public:
 signals:
 
 public slots:
+
     void creaNuovoIncarico(vector<string> parametri); //slot per la creazione di un nuovo incarico
 
     void rimuoviIncarico(const Data& dataIncarico, int indiceIncarico);
 
-    bool posponiIncarico(const Data& dataIncarico, int indiceIncarico, unsigned int quantoPosporre);
+    bool posponiIncarico(const Data& dataIncarico, int indiceIncarico, unsigned int quantoPosporre, unsigned int posizioneInquilinoRichiedente); //MESSAGGIO DA DARE IN CASO NEGATIVO
 
+    bool riassegnaIncarico(const Data& dataIncarico, int indiceIncarico, unsigned int posNuovo); //solo l'admin
+
+    void setIncaricoSvolto(const Data& dataIncarico, int indiceIncarico);
+
+    void incrementaGiorno();
 
 };
 

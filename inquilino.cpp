@@ -11,7 +11,7 @@ void Inquilino::setCD(const double& cd)
 {
     _creditoDebito = _creditoDebito + cd;
 }
-void Inquilino::setPunteggio(const unsigned short int & punti)
+void Inquilino::setPunteggio(short int punti)
 {
     _punteggio += punti;
     if (_punteggio > _puntiMax)
