@@ -47,9 +47,6 @@ private:
 
     dList<Giorno>::iterator inizializzaCalendario(const Data&);
 
-
-
-
 public:
     class BufferInquilini //DA METTERE PRIVATA
     {
@@ -106,9 +103,9 @@ public:
 
     bool posponiIncarico(Incarico * daPosporre, unsigned int quantoPosporre,const Data& dataIncarico);
 
-    void setCredito(Pagamento*, vector<Inquilino*>) const;
-
     void checkIncarichiSvolti();
+
+    void setCredito(Pagamento*, vector<Inquilino*>);
 
 
     //    importacalendario(fileXML)
