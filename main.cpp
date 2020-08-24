@@ -1,6 +1,5 @@
-<<<<<<< HEAD
+
 //main originario
-=======
 //#include <iostream>
 //#include<vector>
 #include <QApplication>
@@ -15,24 +14,24 @@
 //    l.show();
 //    return a.exec();
 //}
->>>>>>> e187aa803463fdd0bef37be77b959e44b4bda318
 
-#include <iostream>
-#include<vector>
-#include <QApplication>
-#include "calendario.h"
-#include "login.h"
 
-int main(int argc, char *argv[])
-{
-    QApplication a(argc, argv);
-    Controller controller;
-    Login l(nullptr, &controller);
-    l.show();
-    return a.exec();
-}
+//#include <iostream>
+//#include<vector>
+//#include <QApplication>
+//#include "calendario.h"
+//#include "login.h"
 
-/*
+//int main(int argc, char *argv[])
+//{
+//    QApplication a(argc, argv);
+//    Controller controller;
+//    Login l(nullptr, &controller);
+//    l.show();
+//    return a.exec();
+//}
+
+
 
 #include "incarico.h"
 //#include "spazzatura.h"
@@ -131,13 +130,13 @@ controller.rimuoviInquilino(6);
 
 
     vector<string> parametri2;
-    parametri2.push_back("PastaAlTonno"); //0
-    parametri2.push_back("Cucina"); //1
+    parametri2.push_back("PastaAllaSpazzatura"); //0
+    parametri2.push_back("Spazzatura"); //1
     parametri2.push_back("\0"); //2
     parametri2.push_back("12"); //3
     parametri2.push_back("10"); //4
     parametri2.push_back("\0"); //5
-    parametri2.push_back("10"); //6
+    parametri2.push_back("\0"); //6
     parametri2.push_back("\0"); //7
     parametri2.push_back("\0"); //8
     parametri2.push_back("\0"); //9
@@ -147,34 +146,69 @@ controller.rimuoviInquilino(6);
     controller.creaNuovoIncarico(parametri2);
 
     vector<string> parametri3;
-    parametri3.push_back("PastaAllaMerda"); //0
+    parametri3.push_back("Burger King"); //0
     parametri3.push_back("Cucina"); //1
     parametri3.push_back("\0"); //2
-    parametri3.push_back("1"); //3
+    parametri3.push_back("2"); //3
     parametri3.push_back("10"); //4
     parametri3.push_back("\0"); //5
     parametri3.push_back("10"); //6
     parametri3.push_back("\0"); //7
     parametri3.push_back("\0"); //8
     parametri3.push_back("\0"); //9
-    parametri3.push_back("25/08/2020"); //10
+    parametri3.push_back("22/08/2020"); //10
     parametri3.push_back("6"); //11
 
     controller.creaNuovoIncarico(parametri3);
+
+    vector<string> parametri4;
+    parametri4.push_back("PastaAllaMerda"); //0
+    parametri4.push_back("Cucina"); //1
+    parametri4.push_back("\0"); //2
+    parametri4.push_back("1"); //3
+    parametri4.push_back("10"); //4
+    parametri4.push_back("\0"); //5
+    parametri4.push_back("10"); //6
+    parametri4.push_back("\0"); //7
+    parametri4.push_back("\0"); //8
+    parametri4.push_back("\0"); //9
+    parametri4.push_back("25/08/2020"); //10
+    parametri4.push_back("6"); //11
+
+    controller.creaNuovoIncarico(parametri4);
+
+    vector<string> parametri5;
+    parametri5.push_back("McDonald"); //0
+    parametri5.push_back("Cucina"); //1
+    parametri5.push_back("\0"); //2
+    parametri5.push_back("1"); //3
+    parametri5.push_back("10"); //4
+    parametri5.push_back("\0"); //5
+    parametri5.push_back("10"); //6
+    parametri5.push_back("\0"); //7
+    parametri5.push_back("\0"); //8
+    parametri5.push_back("\0"); //9
+    parametri5.push_back("22/08/2020"); //10
+    parametri5.push_back("6"); //11
+
+    controller.creaNuovoIncarico(parametri5);
 
     controller.stampaCalendario();
 
     controller.rimuoviInquilino(2);
     controller.rimuoviInquilino(1);
-controller.rimuoviInquilino(3);
-controller.rimuoviInquilino(4);
-controller.rimuoviInquilino(5);
-controller.rimuoviInquilino(6);
+    controller.rimuoviInquilino(3);
+    controller.rimuoviInquilino(4);
+    controller.rimuoviInquilino(5);
+    controller.rimuoviInquilino(6);
+
+
+
 
 
 }
 
-*/
+
 
 //il main della gerarchia
 //********************************

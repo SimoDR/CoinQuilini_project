@@ -199,20 +199,26 @@ vector<Inquilino *> Calendario::BufferInquilini::trovaMinimi(dList<Calendario::G
 Inquilino * Calendario::BufferInquilini::restituisciIlMinimo(dList<Calendario::Giorno>::iterator iteratoreMinimo)
 {
     vector<Inquilino*> minimi=trovaMinimi(iteratoreMinimo);
-//    cout<<"--------"<<endl;
-//    for(vector<Inquilino*>::iterator it=minimi.begin(); it!=minimi.end(); ++it) //DEBUG
-//        cout<<(*it)->getNome()<<endl;
+    cout<<"--------"<<endl;
+    for(vector<Inquilino*>::iterator it=minimi.begin(); it!=minimi.end(); ++it) //DEBUG
+        cout<<(*it)->getNome()<<": minimi trovati"<<endl;
+    cout<<(*_index)->getNome()<<": indice"<<endl;
+    cout<<"--------"<<endl;
 
-    vector<Inquilino*>::iterator j=minimi.begin();
 
-        while(j!=minimi.end())
+    bool trovato=false;
+    while(!trovato)
+    {
+        for(vector<Inquilino*>::iterator j=minimi.begin(); j!=minimi.end(); ++j)
         {
             if(*_index==*j)
             {
-                cout<<(*_index)->getNome()<<" ";
-                return *_index;
+                trovato=true;
             }
-            else ++j;
         }
+        if(!trovato) avanza();
+     }
+    cout<<(*_index)->getNome()<<" ";
+    return *_index;
 
 }
