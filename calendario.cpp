@@ -50,18 +50,29 @@ void Calendario::rimuoviInquilino(unsigned int pos) //da Debuggare
 {
     bool trovato=false;
     unsigned int cont=0;
+    cout<<pos<<" pos"<<endl;
+
 
     Inquilino * daRimuovere=nullptr;
-    for(vector<Inquilino*>::iterator i=_buffer._inquilini.begin();i!=_buffer._inquilini.end() && !trovato; ++i) {
+    for(vector<Inquilino*>::iterator i=_buffer._inquilini.begin();i!=_buffer._inquilini.end() && !trovato; ++i)
+    {
+        cout<<pos<<" pos"<<endl;
+        cout<<cont<<" cont"<<endl;
+
         if (cont==pos)
         {
             daRimuovere=*i;
+            cout<<daRimuovere->getNome()<<" da rimuovere"<<endl;
             _buffer._inquilini.erase(i);
-            trovato=true;;
+            trovato=true;
         }
 
         cont++;
     }
+    cout<<"+*+*+*+*"<<endl;
+    _buffer.stampaBuffer();
+    cout<<"+*+*+*+*"<<endl;
+
     _buffer._index=_buffer._inquilini.begin();
 
     Incarico * daRiassegnare=nullptr;
@@ -73,6 +84,7 @@ void Calendario::rimuoviInquilino(unsigned int pos) //da Debuggare
             if((*y)->getIncaricato()==daRimuovere)
             {
                 daRiassegnare=*y;
+                daRiassegnare->setIncaricato(nullptr);
                 daRiassegnare->setIncaricato(ottieniIncaricato(x));
             }
         }
@@ -267,11 +279,14 @@ vector<Inquilino *> Calendario::BufferInquilini::trovaMinimi(dList<Calendario::G
         for(vector<Incarico*>::iterator it=iteratoreMinimo->_incarichiDelGiorno.begin(); it!=iteratoreMinimo->_incarichiDelGiorno.end(); ++it)
         {
 
+            if((**it).getIncaricato())
+            {
             mitt=coppie.find((**it).getIncaricato());
             cout<<(*mitt).first->getNome()<<": trovato"<<endl; //debug
             mitt->second++;
             if(minimo>mitt->second)
                 minimo=mitt->second;
+            }
 
         }
         cout<<"Minimo="<<minimo<<endl; //debug

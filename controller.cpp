@@ -171,6 +171,7 @@ void Controller::rimuoviInquilino(unsigned int pos)
 {
     _listaInquilini.rimuovi(pos);
     _calendario.rimuoviInquilino(pos);
+
 }
 
 vector<std::string> Controller::getInquilinoPos(unsigned int pos)
