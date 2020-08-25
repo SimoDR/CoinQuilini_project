@@ -79,16 +79,26 @@ void Calendario::rimuoviInquilino(unsigned int pos) //da Debuggare
 
     for(dList<Giorno>::iterator x=_iteratoreCorrente; x!=_giorni.end(); ++x) //riassegnamento automatico per ogni incarico che era dell'inquilino che se ne va
     {
-        for(vector<Incarico*>::iterator y=(*x)._incarichiDelGiorno.begin(); y!=(*x)._incarichiDelGiorno.end(); ++y)
+        for(vector<Incarico*>::iterator y=(*x)._incarichiDelGiorno.begin(); y!=(*x)._incarichiDelGiorno.end(); ++y) //imposto a nullptr tutti gli incaricati da rimuovere della giornata
         {
             if((*y)->getIncaricato()==daRimuovere)
             {
                 daRiassegnare=*y;
                 daRiassegnare->setIncaricato(nullptr);
+
+            }
+        }
+        for(vector<Incarico*>::iterator y=(*x)._incarichiDelGiorno.begin(); y!=(*x)._incarichiDelGiorno.end(); ++y) //riassegno tutti gli incaricati impostati a nullptr
+        {
+            if((*y)->getIncaricato()==nullptr)
+            {
+                daRiassegnare=*y;
                 daRiassegnare->setIncaricato(ottieniIncaricato(x));
+                _buffer.avanza();
             }
         }
     }
+
 }
 
 Inquilino * Calendario:: ottieniIncaricato(dList<Calendario::Giorno>::iterator iteratoreIniziale)
@@ -267,7 +277,7 @@ vector<Inquilino *> Calendario::BufferInquilini::trovaMinimi(dList<Calendario::G
     }
     cout<<"*****"<<endl;
 
-    int minimo=INT_MAX;
+
 
 
     vector<Inquilino*> finaliZero;
@@ -278,17 +288,29 @@ vector<Inquilino *> Calendario::BufferInquilini::trovaMinimi(dList<Calendario::G
 
         for(vector<Incarico*>::iterator it=iteratoreMinimo->_incarichiDelGiorno.begin(); it!=iteratoreMinimo->_incarichiDelGiorno.end(); ++it)
         {
+            cout<<(**it).getNome()<<" nome incarico"<<endl;
 
-            if((**it).getIncaricato())
+            if((**it).getIncaricato()) //se non è nullptr, cioè se non è da riassegnare
             {
+                cout<<"stocazzo1"<<endl;
             mitt=coppie.find((**it).getIncaricato());
             cout<<(*mitt).first->getNome()<<": trovato"<<endl; //debug
-            mitt->second++;
-            if(minimo>mitt->second)
-                minimo=mitt->second;
+
+            mitt->second++; //aumento la frequenza dell'inquilino trovato
             }
+            cout<<"stocazzo"<<endl;
+
 
         }
+
+        int minimo=INT_MAX;
+        for(map<Inquilino*,int>::iterator mit=coppie.begin(); mit!=coppie.end(); ++mit)
+        {
+            if(mit->second<minimo)
+                minimo=mit->second;
+        }
+
+
         cout<<"Minimo="<<minimo<<endl; //debug
 
 
@@ -321,7 +343,6 @@ Inquilino * Calendario::BufferInquilini::restituisciIlMinimo(dList<Calendario::G
         cout<<(*it)->getNome()<<": minimi trovati"<<endl;
     cout<<(*_index)->getNome()<<": indice"<<endl;
     cout<<"--------"<<endl;
-
 
     bool trovato=false;
     while(!trovato)
