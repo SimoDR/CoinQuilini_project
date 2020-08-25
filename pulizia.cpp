@@ -19,3 +19,10 @@ unsigned short int Pulizia::calcolaPunteggio() const{
     return p;
 }
 
+void Pulizia::exportXml(QXmlStreamWriter & xmlOutput) const
+{
+    xmlOutput.writeStartElement(QString::fromStdString("PULIZIA"));
+    Faccenda::exportXml(xmlOutput);
+    xmlOutput.writeTextElement("stanzeDaPulire", QString::fromStdString(std::to_string(_stanzeDaPulire)));
+    xmlOutput.writeEndElement();
+}

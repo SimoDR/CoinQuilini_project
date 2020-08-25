@@ -15,7 +15,7 @@ public:
     double getImporto() const;
     virtual ~Pagamento()=0;
     virtual string generaNota() const;
-    // virtual import //da definire opportunamente
+    void exportXml(QXmlStreamWriter & xmlOutput) const;
     virtual unsigned short int calcolaPunteggio() const;
 };
 

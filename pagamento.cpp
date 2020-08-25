@@ -28,3 +28,9 @@ unsigned short int Pagamento::calcolaPunteggio() const{
         return p;
     }
 }
+
+void Pagamento::exportXml(QXmlStreamWriter & xmlOutput) const
+{
+    Incarico::exportXml(xmlOutput);
+    xmlOutput.writeTextElement("importo", QString::fromStdString(std::to_string(_importo)));
+}

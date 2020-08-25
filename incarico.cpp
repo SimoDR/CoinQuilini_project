@@ -39,3 +39,14 @@ Incarico::~Incarico() {}
 bool Incarico::posponi (const Data d) const{
     return false; //un incarico non è posponibile di default
 }
+
+void Incarico::exportXml(QXmlStreamWriter & xmlOutput) const
+{
+    xmlOutput.writeTextElement("nome", QString::fromStdString(_nome));
+    _incaricato->exportXml(xmlOutput);
+    xmlOutput.writeTextElement("svolto", _svolto ? "si" : "no");
+}
+
+
+
+

@@ -17,7 +17,7 @@ public:
     virtual ~Spazzatura() {}
     virtual Spazzatura* clone() const;
     virtual string generaNota() const;
-    // virtual import
+    void exportXml(QXmlStreamWriter & xmlOutput) const;
     virtual unsigned short int calcolaPunteggio() const;
 };
 

@@ -32,8 +32,11 @@ public:
 	virtual Incarico* clone() const =0;
     virtual bool posponi (const Data d=Data()) const;
     virtual string generaNota() const =0;
+
+    virtual void exportXml(QXmlStreamWriter&) const;
+
 	// virtual import //da definire opportunamente
-	virtual unsigned short int calcolaPunteggio() const=0;
+    virtual unsigned short int calcolaPunteggio() const=0;
 };
 
 #endif

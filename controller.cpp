@@ -169,8 +169,9 @@ vector<string> Controller::getInquilini()
 
 void Controller::rimuoviInquilino(unsigned int pos)
 {
-    _listaInquilini.rimuovi(pos);
     _calendario.rimuoviInquilino(pos);
+    _listaInquilini.rimuovi(pos);
+
 
 }
 

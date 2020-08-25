@@ -22,6 +22,12 @@ Data::Data(unsigned short int giorno, unsigned short int mese, unsigned short in
     }
 }
 
+std::string Data::dataToString() const
+{
+    string daRitornare=std::to_string(_giornoCorrente)+"/"+std::to_string(_meseCorrente)+"/"+std::to_string(_annoCorrente);
+    return daRitornare;
+}
+
 Data::Data(std::string inputString)
 {
     try

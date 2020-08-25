@@ -11,7 +11,7 @@ public:
     Faccenda(string nome,int tempoStimato,Inquilino * incaricato=nullptr,bool svolto=false);
     virtual ~Faccenda()=0;
     virtual string generaNota() const;
-    // virtual import
+    virtual void exportXml(QXmlStreamWriter&) const;
     virtual unsigned short int calcolaPunteggio() const;
 };
 
