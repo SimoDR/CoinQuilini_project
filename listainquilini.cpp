@@ -20,6 +20,7 @@ void ListaInquilini::aggiungi(Inquilino * nuovo)
 
 void ListaInquilini::rimuovi(unsigned int pos)
 {
+    resetCD();
     unsigned int cont=0;
     dList<Inquilino*>::iterator i;
     for(i=_listaInquilini.begin();i!=_listaInquilini.end(); ++i) {
@@ -175,6 +176,23 @@ void ListaInquilini::importXml()
         showMessage(QString::fromStdString(e->what()));
     }
 
+}
+
+void ListaInquilini::resetCD()
+{
+    vector<std::pair<string,double> > cdCasa;
+    for(auto ci = _listaInquilini.cbegin(); ci != _listaInquilini.cend(); ++ci){
+       (*ci)->setCD( -(*ci)->getCreditoDebito() );
+    }
+}
+
+vector<std::pair<string,double>> ListaInquilini::getCdCasa() const
+{
+    vector<std::pair<string,double> > cdCasa;
+    for(auto ci = _listaInquilini.cbegin(); ci != _listaInquilini.cend(); ++ci){
+        cdCasa.push_back(std::make_pair ((*ci)->getNome(), (*ci)->getCreditoDebito()) );
+    }
+    return cdCasa;
 }
 
 void ListaInquilini::exportXml() const

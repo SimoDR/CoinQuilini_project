@@ -360,15 +360,3 @@ Inquilino * Calendario::BufferInquilini::restituisciIlMinimo(dList<Calendario::G
     return *_index;
 
 }
-
-vector<std::pair<string,double>> Calendario::resetCD(vector<Inquilino *> & lista)
-{
-    vector<std::pair<string,double> > cdCasa;
-    for(auto ci = lista.cbegin(); ci != lista.cend(); ++ci){
-        cdCasa.push_back(std::make_pair ((*ci)->getNome(), (*ci)->getCreditoDebito()) );
-
-        //reset CD
-       (*ci)->setCD( -(*ci)->getCreditoDebito() );
-    }
-    return cdCasa;
-}

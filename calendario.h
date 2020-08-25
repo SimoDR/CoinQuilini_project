@@ -107,8 +107,6 @@ public:
 
     void setCredito(Pagamento*, vector<Inquilino*> &);
 
-    vector<std::pair<string,double>> resetCD(vector<Inquilino *> &);
-
     //    importacalendario(fileXML)
     //    esportacalendario()
     //    iterator *getCurrent()
