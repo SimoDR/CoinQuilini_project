@@ -12,9 +12,12 @@ int main(int argc, char *argv[])
     Login l(nullptr, &controller);
     l.show();
     return a.exec();
+
+    std::make_money(10.5,currency::EUR);
+
 }*/
 
-
+/*
 #include "incarico.h"
 //#include "spazzatura.h"
 //#include "cucina.h"
@@ -194,38 +197,34 @@ int main(int argc, char *argv[])
     controller.rimuoviInquilino(1);
 
     controller.stampaCalendario();
-
-
-
-
 }
 
 
 
 
+*/
 
 
 
 
 
+// il main della gerarchia
 
-//il main della gerarchia
-
-// #include "incarico.h"
-// #include "spazzatura.h"
-// #include "cucina.h"
-// #include "bolletta.h"
-// #include "faccenda.h"
-// #include "pagamento.h"
-// #include "pulizia.h"
-// #include "spesa.h"
-// #include "listaspesa.h"
+ #include "incarico.h"
+ #include "spazzatura.h"
+ #include "cucina.h"
+ #include "bolletta.h"
+ #include "faccenda.h"
+ #include "pagamento.h"
+ #include "pulizia.h"
+ #include "spesa.h"
+ #include "listaspesa.h"
 
 
-// #include<iostream>
-// using namespace std;
+ #include<iostream>
+ using namespace std;
 
-// int main(){
+ int main(){
 //     Faccenda * spazz=new Spazzatura("secco",20);
 //     cout<< spazz->generaNota() <<endl;
 //     cout<<spazz->Faccenda::generaNota()<<endl;
@@ -244,22 +243,20 @@ int main(int argc, char *argv[])
 //     cout<<"Questo incarico vale: "<<boll->calcolaPunteggio()<<" punti!"<<endl;
 //     cout<<"***"<<endl;
 
-//     Pagamento * spesa=new Spesa("panificio",10,30,10);
-//     cout<<spesa->generaNota()<<endl;
-//     spesa->setSvolto();
-//     cout<<spesa->generaNota()<<endl;
-//     cout<<"Questo incarico vale: "<<spesa->calcolaPunteggio()<<" punti!"<<endl;
-//     cout<<"***"<<endl;
+     Spesa * spesa=new Spesa("panificio",10,30,10);
+     spesa->aggiungiListaSpesa("banane");
+     spesa->aggiungiListaSpesa("zucchine");
+     spesa->aggiungiListaSpesa("meloni");
+     spesa->rimuoviListaSpesa("errore");
+     spesa->rimuoviListaSpesa("zucchine");
 
-//     ListaSpesa lista;
-//     lista.aggiungiListaSpesa("fichi secchi");
-//     lista.aggiungiListaSpesa("asparagi");
-//     lista.aggiungiListaSpesa("banane");
-//     cout<<lista<<"****"<<endl;
-//     lista.rimuoviListaSpesa("mela");
-//     lista.rimuoviListaSpesa("banane");
-//     cout<<lista<<endl;
+     cout<<spesa->generaNota()<<endl;
+     spesa->setSvolto();
+     cout<<spesa->generaNota()<<endl;
+     cout<<"Questo incarico vale: "<<spesa->calcolaPunteggio()<<" punti!"<<endl;
+     cout<<"***"<<endl;
 
-// }
+
+ }
 
 

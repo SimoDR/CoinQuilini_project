@@ -20,7 +20,11 @@ string Pagamento::generaNota() const {
 }
 
 unsigned short int Pagamento::calcolaPunteggio() const{
-    unsigned short int p=_importo/_pesoPagamento;
-    controlloSoglia(p);
-    return p;
+    if (_pesoPagamento>_importo) return 1;
+    else
+    {
+        unsigned short int p=_importo/_pesoPagamento;
+        controlloSoglia(p);
+        return p;
+    }
 }
