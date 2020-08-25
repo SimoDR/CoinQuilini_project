@@ -22,6 +22,14 @@ string Spesa::generaNota() const {
     }
 }
 
+void Spesa::exportXml(QXmlStreamWriter & xmlOutput) const
+{
+    xmlOutput.writeStartElement(QString::fromStdString("SPESA"));
+    Faccenda::exportXml(xmlOutput);
+    xmlOutput.writeTextElement("numeroArticoli", QString::fromStdString(std::to_string(_numeroArticoli)));
+    xmlOutput.writeEndElement();
+}
+
 //ricordarsi di aggiornare _articoli quando viene conclusa una spesa
 
 unsigned short int Spesa::calcolaPunteggio() const{

@@ -17,6 +17,7 @@ public:
     void setArticoli(const unsigned short int &);
     virtual bool posponi (const Data d=Data()) const;
     virtual string generaNota() const;
+    void exportXml(QXmlStreamWriter & xmlOutput) const;
     virtual unsigned short int calcolaPunteggio() const;
     // virtual import
 };

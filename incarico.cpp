@@ -43,10 +43,24 @@ bool Incarico::posponi (const Data d) const{
 void Incarico::exportXml(QXmlStreamWriter & xmlOutput) const
 {
     xmlOutput.writeTextElement("nome", QString::fromStdString(_nome));
-    _incaricato->exportXml(xmlOutput);
+    xmlOutput.writeTextElement("nomeIncaricato", QString::fromStdString(_incaricato->getNome()));
     xmlOutput.writeTextElement("svolto", _svolto ? "si" : "no");
 }
 
+void Incarico::importXml(QXmlStreamReader & xmlInput, vector<string> & parametri)
+{
+
+    string nome,incaricato,svolto;
+
+    assignWithXml(xmlInput, "nome", nome);
+    assignWithXml(xmlInput, "nomeIncaricato", incaricato);
+    assignWithXml(xmlInput, "svolto", svolto);
+
+    parametri[0]=nome;
+    parametri[1]=incaricato;
+    parametri[12]=incaricato;
+
+}
 
 
 

@@ -40,7 +40,7 @@ bool Controller::login(const QString & user, const QString & pw)
  * 9- DataLimite
  * 10- DataInizio
  * 11- numeroOccorrenze
- * ..
+ * 12- svolto
  *
  *
  * Se l'incarico da creare non prevede uno dei campi, questi verranno indicati con il carattere speciale "\0" e quindi ignorati
@@ -85,6 +85,13 @@ void Controller::creaNuovoIncarico(vector<std::string> parametri)
     int numeroOccorrenze=0;
     if(parametri[11]!="\0") numeroOccorrenze=std::stoi(parametri[11]);
 
+    bool svolto=false;
+    if(parametri[12]!="\0")
+    {
+        if(parametri[12]=="si")
+            svolto=true;
+        else svolto=false;
+    }
 
     Incarico * i=nullptr;
 
@@ -106,6 +113,8 @@ void Controller::creaNuovoIncarico(vector<std::string> parametri)
 
     if(numeroOccorrenze==1 && nomeIncaricato!="\0") //assegnazione manuale dell'incaricato essendo evento singolo
         i->setIncaricato(_listaInquilini.getInquilino(nomeIncaricato));
+    if(svolto)
+        i->setSvolto();
 
     bool successo=_calendario.insert(i,dataInizio,numeroOccorrenze,cadenzaIncarico);
 

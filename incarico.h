@@ -7,6 +7,9 @@
 #include<string>
 #include "inquilino.h"
 #include "data.h"
+#include <QXmlStreamWriter>
+#include <QFile>
+#include "utilities.h"
 using std::string;
 
 class Incarico
@@ -34,7 +37,7 @@ public:
     virtual string generaNota() const =0;
 
     virtual void exportXml(QXmlStreamWriter&) const;
-
+    virtual void importXml(QXmlStreamReader & xmlInput, vector<string>& parametri); //parametri è il vettore che si passa: vector<string> parametri(12,"\0");
 	// virtual import //da definire opportunamente
     virtual unsigned short int calcolaPunteggio() const=0;
 };

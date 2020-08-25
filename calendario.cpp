@@ -231,8 +231,12 @@ void Calendario::checkIncarichiSvolti()
     {
         if(!((*it)->getSvolto())) //se non è stato svolto
         {
-            (*it)->getIncaricato()->setPunteggio((*it)->calcolaPunteggio());
+            (*it)->getIncaricato()->setPunteggio(-((*it)->calcolaPunteggio()/2));
             //MESSAGGIO: NON L'HAI SVOLTO!!
+        }
+        else
+        {
+            (*it)->getIncaricato()->setPunteggio((*it)->calcolaPunteggio());
         }
     }
 }
