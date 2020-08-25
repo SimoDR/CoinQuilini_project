@@ -34,6 +34,8 @@ public:
     unsigned short int isAdmin(const string &) const;
     void exportXml() const;
     void importXml();
+    void resetCD();
+    vector<std::pair<string, double> > getCdCasa() const;
 };
 
 #endif // LISTAINQUILINI_H
