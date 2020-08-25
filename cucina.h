@@ -18,6 +18,9 @@ public:
     // virtual import
     virtual unsigned short int calcolaPunteggio() const;
 
+    virtual void exportXml(QXmlStreamWriter&) const;
+
+
 };
 
 #endif // CUCINA_H

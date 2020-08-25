@@ -12,7 +12,11 @@ public:
     virtual ~Bolletta() {}
     virtual Bolletta* clone() const;
     virtual bool posponi (const Data d=Data()) const;
-    // virtual import //da definire opportunamente
+
+    virtual void exportXml(QXmlStreamWriter&) const;
+
+
+
 };
 
 #endif // BOLLETTA_H

@@ -14,3 +14,11 @@ unsigned short int Cucina::calcolaPunteggio() const{
     controlloSoglia(p);
     return p;
 }
+
+void Cucina::exportXml(QXmlStreamWriter & xmlOutput) const
+{
+    xmlOutput.writeStartElement(QString::fromStdString("CUCINA"));
+    Faccenda::exportXml(xmlOutput);
+    xmlOutput.writeTextElement("numeroCommensali", QString::fromStdString(std::to_string(_numeroCommensali)));
+    xmlOutput.writeEndElement();
+}

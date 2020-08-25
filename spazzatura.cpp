@@ -10,6 +10,15 @@ string Spazzatura::generaNota() const {
     //return s1+_cosaButtare;
 }
 
+void Spazzatura::exportXml(QXmlStreamWriter &xmlOutput) const
+{
+    xmlOutput.writeStartElement(QString::fromStdString("SPAZZATURA"));
+    Faccenda::exportXml(xmlOutput);
+    xmlOutput.writeTextElement("pesoSpazzatura", QString::fromStdString(std::to_string(_pesoSpazzatura)));
+    xmlOutput.writeEndElement();
+
+}
+
 unsigned short int Spazzatura::calcolaPunteggio() const{
     unsigned short int p=_pesoSpazzatura;
     controlloSoglia(p);

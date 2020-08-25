@@ -11,6 +11,13 @@ string Faccenda::generaNota() const {
     string s2=" minuti";
     return s1+std::to_string(_tempoStimato)+s2;
 }
+
+void Faccenda::exportXml(QXmlStreamWriter & xmlOutput) const
+{
+    Incarico::exportXml(xmlOutput);
+    xmlOutput.writeTextElement("tempoStimato", QString::fromStdString(std::to_string(_tempoStimato)));
+}
+
 unsigned short int Faccenda::calcolaPunteggio() const{
     return _tempoStimato/_pesoFaccenda;
 }
