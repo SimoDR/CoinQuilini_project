@@ -11,6 +11,7 @@ public:
     virtual ~Bolletta() {}
     virtual Bolletta* clone() const;
     virtual bool posponi (const Data& d=Data()) const;
+    virtual string getLabel() const;
     virtual void exportXml(QXmlStreamWriter&) const;
 };
 

@@ -70,6 +70,8 @@ public slots:
 
     void importXmlCalendario();
 
+    vector<string> incarichiGiorno(string giorno, vector<string> & incaricati);
+
 };
 
 #endif // CONTROLLER_H

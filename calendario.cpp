@@ -145,7 +145,7 @@ Incarico *Calendario::trovaIncarico(const Data &dataIncarico, int indiceIncarico
 
 
 
-void Calendario::insert(Incarico * daInserire, Data & dataInCuiInserire, int numeroOccorrenze, int cadenzaIncarico)
+void Calendario::insert(Incarico * daInserire, Data  dataInCuiInserire, int numeroOccorrenze, int cadenzaIncarico)
 {
     bool assegnato=false;
     if(numeroOccorrenze==1 && daInserire->getIncaricato()!=nullptr) //è già stato assegnato
@@ -541,5 +541,44 @@ void Calendario::creaNuovoIncarico(const vector<string>& parametri)
         i->setSvolto();
 
     insert(i,dataInizio,numeroOccorrenze,cadenzaIncarico);
+}
+
+void Calendario::incarichiGiorno(const Data & giorno, vector<std::string> & tipiIncarichi, vector<string> & incaricati) const
+{
+    dList<Giorno>::iterator iteratoreIniziale=_giorni.begin();
+    bool trovato=false;
+    try{
+    while(!trovato)
+    {
+        if(iteratoreIniziale==_giorni.end() || iteratoreIniziale->_dataDelGiorno>giorno) //il giorno non c'è
+        {
+            break;
+            throw new std::runtime_error("Attenzione! Giorno non presente.");
+        }
+        else if(iteratoreIniziale->_dataDelGiorno<giorno ) //non ho ancora raggiunto il giorno
+        {
+            ++iteratoreIniziale;
+        }
+        else if(iteratoreIniziale->_dataDelGiorno==giorno)//trovato, ritorna semplicemente
+        {
+            trovato=true;
+        }
+    }
+    }
+    catch(std::runtime_error * e)
+    {
+        showMessage(QString::fromStdString(e->what()));
+    }
+
+    if(trovato)
+    {
+        for(vector<Incarico*>::const_iterator cit=iteratoreIniziale->_incarichiDelGiorno.begin(); cit!=iteratoreIniziale->_incarichiDelGiorno.end(); ++cit)
+        {
+            incaricati.push_back((*cit)->getIncaricato()->getNome());
+            tipiIncarichi.push_back((*cit)->getLabel());
+        }
+
+    }
+
 }
 

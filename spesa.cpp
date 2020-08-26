@@ -47,6 +47,8 @@ void Spesa::importXml(QXmlStreamReader & xmlInput, vector<string> & parametri)
     parametri[7]=numeroArticoli;
 }
 
+std::string Spesa::getLabel() const {return "Spesa";}
+
 //ricordarsi di aggiornare _articoli quando viene conclusa una spesa
 
 

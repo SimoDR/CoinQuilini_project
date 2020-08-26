@@ -10,6 +10,8 @@ bool Bolletta::posponi(const Data& d) const
     return d < _dataLimite ? true : false;
 }
 
+std::string Bolletta::getLabel() const {return "Bolletta";}
+
 void Bolletta::exportXml(QXmlStreamWriter & xmlOutput) const
 {
     xmlOutput.writeStartElement(QString::fromStdString("BOLLETTA"));

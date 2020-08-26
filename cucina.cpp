@@ -22,6 +22,8 @@ void Cucina::exportXml(QXmlStreamWriter & xmlOutput) const
     xmlOutput.writeEndElement();
 }
 
+std::string Cucina::getLabel() const {return "Cucina";}
+
 void Cucina::importXml(QXmlStreamReader & xmlInput, vector<string> & parametri)
 {
     Faccenda::importXml(xmlInput,parametri);

@@ -34,7 +34,7 @@ public:
 	virtual Incarico* clone() const =0;
     virtual bool posponi (const Data & d=Data()) const;  //debug parametro d non sempre utilizzato
     virtual string generaNota() const =0;
-
+    virtual string getLabel() const =0;
     virtual void exportXml(QXmlStreamWriter&) const;
     void importXml(QXmlStreamReader & xmlInput, vector<string>& parametri); //parametri è il vettore che si passa: vector<string> parametri(12,"\0");
     virtual unsigned short int calcolaPunteggio() const=0;

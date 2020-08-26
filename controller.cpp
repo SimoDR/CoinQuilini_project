@@ -22,8 +22,6 @@ bool Controller::login(const QString & user, const QString & pw)
         return false;
     }
 
-
-
 }
 
 /*
@@ -95,6 +93,14 @@ void Controller::incrementaGiorno()
     _calendario.checkIncarichiSvolti();
     _calendario.incrementaData();
 
+}
+
+vector<std::string> Controller::incarichiGiorno(string dataGiorno, vector<std::string> & incaricati)
+{
+    vector<string> tipiIncarichi;
+    Data giorno(dataGiorno);
+    _calendario.incarichiGiorno(giorno,tipiIncarichi,incaricati);
+    return tipiIncarichi;
 }
 
 

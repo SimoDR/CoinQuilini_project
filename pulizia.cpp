@@ -26,6 +26,8 @@ void Pulizia::exportXml(QXmlStreamWriter & xmlOutput) const
     xmlOutput.writeEndElement();
 }
 
+std::string Pulizia::getLabel() const {return "Pulizia";}
+
 void Pulizia::importXml(QXmlStreamReader & xmlInput, vector<string> & parametri)
 {
     Faccenda::importXml(xmlInput,parametri);

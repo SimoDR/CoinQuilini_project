@@ -30,6 +30,8 @@ void Spazzatura::importXml(QXmlStreamReader & xmlInput, vector<string> & paramet
     parametri[13]=cosaButtare;
 }
 
+std::string Spazzatura::getLabel() const {return "Spazzatura";}
+
 unsigned short int Spazzatura::calcolaPunteggio() const{
     return controlloSoglia(_pesoSpazzatura);
 }
