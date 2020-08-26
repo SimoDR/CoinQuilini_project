@@ -25,3 +25,14 @@ void Pulizia::exportXml(QXmlStreamWriter & xmlOutput) const
     xmlOutput.writeTextElement("stanzeDaPulire", QString::fromStdString(std::to_string(_stanzeDaPulire)));
     xmlOutput.writeEndElement();
 }
+
+void Pulizia::importXml(QXmlStreamReader & xmlInput, vector<string> & parametri)
+{
+    Faccenda::importXml(xmlInput,parametri);
+
+    string stanzeDaPulire;
+
+    assignWithXml(xmlInput, "stanzeDaPulire", stanzeDaPulire);
+
+    parametri[5]=stanzeDaPulire;
+}

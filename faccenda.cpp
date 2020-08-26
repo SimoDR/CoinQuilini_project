@@ -17,6 +17,18 @@ void Faccenda::exportXml(QXmlStreamWriter & xmlOutput) const
     xmlOutput.writeTextElement("tempoStimato", QString::fromStdString(std::to_string(_tempoStimato)));
 }
 
+void Faccenda::importXml(QXmlStreamReader & xmlInput, vector<string> & parametri)
+{
+
+    Incarico::importXml(xmlInput,parametri);
+    string tempoStimato;
+
+    assignWithXml(xmlInput, "tempoStimato", tempoStimato);
+
+    parametri[4]=tempoStimato;
+
+}
+
 unsigned short int Faccenda::calcolaPunteggio() const{
     return controlloSoglia(_tempoStimato/_pesoFaccenda);
 }

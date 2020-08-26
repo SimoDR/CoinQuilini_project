@@ -3,7 +3,13 @@
 #include "data.h"
 #include "dList.h"
 #include "incarico.h"
+#include "spesa.h"
+#include "cucina.h"
+#include "pulizia.h"
+#include "spazzatura.h"
+#include "bolletta.h"
 #include "listainquilini.h"
+
 #include<map>
 #include"pagamento.h"
 using std::map;
@@ -95,6 +101,7 @@ public:
     // tra le varie robe invocherà
     // iteratoreFromData(_iteratoreCorrente,dataIncarico)
 
+
     void insert(Incarico *, Data&, int, int);
 
     void remove(Incarico * daRimuovere, const Data& dataIncarico);
@@ -104,6 +111,12 @@ public:
     void checkIncarichiSvolti();
 
     void setCredito(Pagamento*, vector<Inquilino*> &);
+
+    void exportXml() const;
+
+    void importXml();
+
+
 
     //    importacalendario(fileXML)
     //    esportacalendario()

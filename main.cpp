@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
     return a.exec();
 }*/
 
-/*
+
 #include "incarico.h"
 //#include "spazzatura.h"
 //#include "cucina.h"
@@ -39,20 +39,20 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
     Controller controller;
 
-
-//    string nomeIncarico=parametri[0];
-//    string tipoIncarico=parametri[1];
-//    string nomeIncaricato=parametri[2]; //DA SISTEMARE
-//    int cadenzaIncarico=std::stoi(parametri[3]);
-//    int tempoStimato=std::stoi(parametri[4]);
-//    unsigned short int stanzeDaPulire=std::stoi(parametri[5]);
-//    unsigned short int numeroCommensali=std::stoi(parametri[6]);
-//    unsigned short int numeroArticoli=std::stoi(parametri[7]);
-//    int importo=std::stoi(parametri[8]);
-//    Data dataLimite(parametri[9]);
-//    Data dataInizio(parametri[10]);
-//    int numeroOccorrenze=std::stoi(parametri[11]);
-
+/*
+    string nomeIncarico=parametri[0];
+    string tipoIncarico=parametri[1];
+    string nomeIncaricato=parametri[2]; //DA SISTEMARE
+    int cadenzaIncarico=std::stoi(parametri[3]);
+    int tempoStimato=std::stoi(parametri[4]);
+    unsigned short int stanzeDaPulire=std::stoi(parametri[5]);
+    unsigned short int numeroCommensali=std::stoi(parametri[6]);
+    unsigned short int numeroArticoli=std::stoi(parametri[7]);
+    int importo=std::stoi(parametri[8]);
+    Data dataLimite(parametri[9]);
+    Data dataInizio(parametri[10]);
+    int numeroOccorrenze=std::stoi(parametri[11]);
+*/
 
     vector<string> parametri;
     parametri.push_back("puliziaDelSabato"); //0
@@ -68,6 +68,8 @@ int main(int argc, char *argv[])
     parametri.push_back("22/08/2020"); //10
     parametri.push_back("4"); //11
     parametri.push_back("\0"); //12
+    parametri.push_back("\0"); //13
+
 
 
 
@@ -95,6 +97,8 @@ int main(int argc, char *argv[])
     parametri1.push_back("22/08/2020"); //10
     parametri1.push_back("2"); //11
     parametri1.push_back("\0"); //12
+    parametri1.push_back("\0"); //13
+
 
     controller.creaNuovoIncarico(parametri1);
 
@@ -115,6 +119,8 @@ int main(int argc, char *argv[])
     parametri2.push_back("22/08/2020"); //10
     parametri2.push_back("3"); //11
     parametri2.push_back("\0"); //12
+    parametri2.push_back("\0"); //13
+
 
     controller.creaNuovoIncarico(parametri2);
 
@@ -132,6 +138,8 @@ int main(int argc, char *argv[])
     parametri3.push_back("22/08/2020"); //10
     parametri3.push_back("6"); //11
     parametri3.push_back("\0"); //12
+    parametri3.push_back("\0"); //13
+
 
     controller.creaNuovoIncarico(parametri3);
 
@@ -149,6 +157,8 @@ int main(int argc, char *argv[])
     parametri4.push_back("25/08/2020"); //10
     parametri4.push_back("6"); //11
     parametri4.push_back("\0"); //12
+    parametri4.push_back("\0"); //13
+
 
     controller.creaNuovoIncarico(parametri4);
 
@@ -166,6 +176,8 @@ int main(int argc, char *argv[])
     parametri5.push_back("22/08/2020"); //10
     parametri5.push_back("6"); //11
     parametri5.push_back("\0"); //12
+    parametri5.push_back("\0"); //13
+
 
     controller.creaNuovoIncarico(parametri5);
 
@@ -206,15 +218,17 @@ int main(int argc, char *argv[])
     controller.rimuoviInquilino(1);
     controller.stampaCalendario();
 
+    Data prova("31/10/1981");
+    cout<<prova<<endl;
 
 }
 
-*/
 
 
 
 
 
+/*
 
 // il main della gerarchia
 
@@ -269,3 +283,4 @@ int main(int argc, char *argv[])
  }
 
 
+*/

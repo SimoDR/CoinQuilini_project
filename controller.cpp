@@ -184,6 +184,65 @@ void Controller::incrementaGiorno()
 
 }
 
+void Controller::importXmlCalendario()
+{
+    QFile file("calendario.xml");
+    try {
+        if (file.open(QFile::ReadOnly | QFile::Text))
+        {
+            QXmlStreamReader xmlInput(&file);
+            if (xmlInput.readNextStartElement())
+            {
+                if (xmlInput.name() == "CALENDARIO")
+                {
+                    string dataCorrente;
+                    while(xmlInput.readNextStartElement())
+                    {
+                        vector<string> parametri(12,"\0");
+                        assignWithXml(xmlInput, "DATA", dataCorrente);
+                        if (xmlInput.name() == "SPESA") {
+                            Spesa * i=nullptr;
+                            i->Spesa::importXml(xmlInput,parametri);
+                        }
+                        if (xmlInput.name() == "CUCINA") {
+                            Cucina * i=nullptr;
+                            i->Cucina::importXml(xmlInput,parametri);
+                        }
+                        if (xmlInput.name() == "PULIZIA") {
+                            Pulizia * i=nullptr;
+                            i->Pulizia::importXml(xmlInput,parametri);
+                        }
+                        if (xmlInput.name() == "SPAZZATURA") {
+                            Spazzatura * i=nullptr;
+                            i->Spazzatura::importXml(xmlInput,parametri);
+                        }
+                        if (xmlInput.name() == "BOLLETTA") {
+                            Bolletta * i=nullptr;
+                            i->Bolletta::importXml(xmlInput,parametri);
+                        }
+                        parametri[10]=dataCorrente;
+                        creaNuovoIncarico(parametri);
+                        xmlInput.skipCurrentElement(); //per uscire dallo "scope"(?)
+                    }
+                }
+                else
+                    throw new std::runtime_error("Errore durante l'import del calendario");
+            }
+            else
+                throw new std::runtime_error("Errore durante l'import del calendario");
+
+            file.close();
+        }
+        else
+            throw new std::runtime_error("Calendario non trovato");
+    }
+    catch(std::runtime_error * e)
+    {
+        showMessage(QString::fromStdString(e->what()));
+    }
+
+}
+
 
 
 

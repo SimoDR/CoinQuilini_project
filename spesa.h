@@ -19,6 +19,8 @@ public:
     virtual bool posponi (const Data& d=Data()) const;
     virtual string generaNota() const;
     void exportXml(QXmlStreamWriter & xmlOutput) const;
+    void importXml(QXmlStreamReader & xmlInput, vector<string> & parametri);
+
     virtual unsigned short int calcolaPunteggio() const;
     vector<string> getListaSpesa() const;
     void aggiungiListaSpesa(const string&);

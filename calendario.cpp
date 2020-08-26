@@ -138,6 +138,8 @@ Incarico *Calendario::trovaIncarico(const Data &dataIncarico, int indiceIncarico
 
 
 
+
+
 void Calendario::insert(Incarico * daInserire, Data & dataInCuiInserire, int numeroOccorrenze, int cadenzaIncarico)
 {
     bool assegnato=false;
@@ -363,3 +365,30 @@ Inquilino * Calendario::BufferInquilini::restituisciIlMinimo(dList<Calendario::G
     return *_index;
 
 }
+
+void Calendario::exportXml() const //salva solo gli incarichi del calendario, non il buffer (che viene creato nuovo a partire dalla lista inquilini)
+{
+    QFile file("calendario.xml");
+    file.open(QIODevice::WriteOnly);
+    QXmlStreamWriter xmlOutput(&file);
+    xmlOutput.setAutoFormatting(true);
+    xmlOutput.writeStartDocument();
+    xmlOutput.writeStartElement("CALENDARIO");
+
+
+    for(dList<Giorno>::const_iterator x=_giorni.cbegin(); x!=_giorni.cend(); ++x)
+    {
+        for(vector<Incarico*>::const_iterator y=(*x)._incarichiDelGiorno.cbegin(); y!=(*x)._incarichiDelGiorno.cbegin(); ++y)
+        {
+            xmlOutput.writeTextElement("DATA", QString::fromStdString((x->_dataDelGiorno).dataToString()));
+            (*y)->exportXml(xmlOutput);
+        }
+    }
+
+    xmlOutput.writeEndElement();
+    xmlOutput.writeEndDocument();
+    file.close();
+}
+
+
+

@@ -37,6 +37,16 @@ void Spesa::exportXml(QXmlStreamWriter & xmlOutput) const
     xmlOutput.writeEndElement();
 }
 
+void Spesa::importXml(QXmlStreamReader & xmlInput, vector<string> & parametri)
+{
+    Faccenda::importXml(xmlInput,parametri);
+
+    string numeroArticoli;
+    assignWithXml(xmlInput, "numeroArticoli", numeroArticoli);
+
+    parametri[7]=numeroArticoli;
+}
+
 //ricordarsi di aggiornare _articoli quando viene conclusa una spesa
 
 

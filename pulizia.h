@@ -14,7 +14,8 @@ public:
     virtual Pulizia* clone() const;
     virtual bool posponi (const Data& d=Data()) const;
     virtual string generaNota() const;
-    void exportXml(QXmlStreamWriter & xmlOutput) const;
+    virtual void exportXml(QXmlStreamWriter & xmlOutput) const;
+    void importXml(QXmlStreamReader & xmlInput, vector<string> & parametri);
     virtual unsigned short int calcolaPunteggio() const;
 };
 

@@ -29,3 +29,15 @@ void Pagamento::exportXml(QXmlStreamWriter & xmlOutput) const
     Incarico::exportXml(xmlOutput);
     xmlOutput.writeTextElement("importo", QString::fromStdString(std::to_string(_importo)));
 }
+
+void Pagamento::importXml(QXmlStreamReader & xmlInput, vector<string> & parametri)
+{
+    Incarico::importXml(xmlInput,parametri);
+
+    string importo;
+
+    assignWithXml(xmlInput, "importo", importo);
+
+    parametri[8]=importo;
+
+}

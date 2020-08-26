@@ -67,6 +67,7 @@ public slots:
 
     void incrementaGiorno(); //MESSAGGIO PER CHI NON HA SVOLTO
 
+    void importXmlCalendario();
 
 };
 

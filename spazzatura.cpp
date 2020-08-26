@@ -15,9 +15,19 @@ void Spazzatura::exportXml(QXmlStreamWriter &xmlOutput) const
 {
     xmlOutput.writeStartElement(QString::fromStdString("SPAZZATURA"));
     Faccenda::exportXml(xmlOutput);
-    xmlOutput.writeTextElement("pesoSpazzatura", QString::fromStdString(std::to_string(_pesoSpazzatura)));
+    xmlOutput.writeTextElement("cosaButtare", QString::fromStdString(_cosaButtare));
     xmlOutput.writeEndElement();
 
+}
+
+void Spazzatura::importXml(QXmlStreamReader & xmlInput, vector<string> & parametri)
+{
+    Faccenda::importXml(xmlInput,parametri);
+
+    string cosaButtare;
+    assignWithXml(xmlInput, "cosaButtare", cosaButtare);
+
+    parametri[13]=cosaButtare;
 }
 
 unsigned short int Spazzatura::calcolaPunteggio() const{

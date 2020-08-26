@@ -37,7 +37,7 @@ public:
     virtual string generaNota() const =0;
 
     virtual void exportXml(QXmlStreamWriter&) const;
-    virtual void importXml(QXmlStreamReader & xmlInput, vector<string>& parametri); //parametri è il vettore che si passa: vector<string> parametri(12,"\0");
+    void importXml(QXmlStreamReader & xmlInput, vector<string>& parametri); //parametri è il vettore che si passa: vector<string> parametri(12,"\0");
     virtual unsigned short int calcolaPunteggio() const=0;
 };
 

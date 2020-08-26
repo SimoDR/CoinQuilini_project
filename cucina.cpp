@@ -21,3 +21,14 @@ void Cucina::exportXml(QXmlStreamWriter & xmlOutput) const
     xmlOutput.writeTextElement("numeroCommensali", QString::fromStdString(std::to_string(_numeroCommensali)));
     xmlOutput.writeEndElement();
 }
+
+void Cucina::importXml(QXmlStreamReader & xmlInput, vector<string> & parametri)
+{
+    Faccenda::importXml(xmlInput,parametri);
+
+    string numeroCommensali;
+
+    assignWithXml(xmlInput, "numeroCommensali", numeroCommensali);
+
+    parametri[6]=numeroCommensali;
+}
