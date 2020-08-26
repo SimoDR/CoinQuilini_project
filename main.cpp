@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
 }
 */
 
-/*
+
 
 
 
@@ -44,18 +44,18 @@ int main(int argc, char *argv[])
     Controller controller;
 
 
-    string nomeIncarico=parametri[0];
-    string tipoIncarico=parametri[1];
-    string nomeIncaricato=parametri[2]; //DA SISTEMARE
-    int cadenzaIncarico=std::stoi(parametri[3]);
-    int tempoStimato=std::stoi(parametri[4]);
-    unsigned short int stanzeDaPulire=std::stoi(parametri[5]);
-    unsigned short int numeroCommensali=std::stoi(parametri[6]);
-    unsigned short int numeroArticoli=std::stoi(parametri[7]);
-    int importo=std::stoi(parametri[8]);
-    Data dataLimite(parametri[9]);
-    Data dataInizio(parametri[10]);
-    int numeroOccorrenze=std::stoi(parametri[11]);
+//    string nomeIncarico=parametri[0];
+//    string tipoIncarico=parametri[1];
+//    string nomeIncaricato=parametri[2]; //DA SISTEMARE
+//    int cadenzaIncarico=std::stoi(parametri[3]);
+//    int tempoStimato=std::stoi(parametri[4]);
+//    unsigned short int stanzeDaPulire=std::stoi(parametri[5]);
+//    unsigned short int numeroCommensali=std::stoi(parametri[6]);
+//    unsigned short int numeroArticoli=std::stoi(parametri[7]);
+//    int importo=std::stoi(parametri[8]);
+//    Data dataLimite(parametri[9]);
+//    Data dataInizio(parametri[10]);
+//    int numeroOccorrenze=std::stoi(parametri[11]);
 
 
     vector<string> parametri;
@@ -222,18 +222,16 @@ int main(int argc, char *argv[])
     controller.rimuoviInquilino(1);
     controller.stampaCalendario();
 
-    Data prova("31/10/1981");
-    cout<<prova<<endl;
 
 }
 
 
-*/
 
 
 
 
 
+/*
 
 
 //il main della gerarchia
@@ -295,6 +293,6 @@ int main(int argc, char *argv[])
 
  }
 
-
+*/
 
 

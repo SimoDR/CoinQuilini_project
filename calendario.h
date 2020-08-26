@@ -34,7 +34,6 @@ private:
     };
 
 
-
     dList<Giorno> _giorni;
     dList<Giorno>::iterator _iteratoreCorrente;
 
@@ -84,6 +83,7 @@ public:
     }
 
     Calendario(const Data&, const vector<Inquilino*>& listaInquilini);
+    ~Calendario();
     void aggiungiAlBuffer(Inquilino* nuovoInquilino);
     void rimuoviInquilino(unsigned int pos);
     Inquilino * ottieniIncaricato(dList<Giorno>::iterator iteratoreIniziale);
@@ -115,6 +115,9 @@ public:
     void exportXml() const;
 
     void importXml();
+
+    void creaNuovoIncarico(const vector<string>& parametri);
+
 
 
 

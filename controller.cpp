@@ -50,93 +50,7 @@ bool Controller::login(const QString & user, const QString & pw)
 
 void Controller::creaNuovoIncarico(vector<std::string> parametri)
 {
-
-    string nomeIncarico="\0";
-    if(parametri[0]!="\0") nomeIncarico=parametri[0];
-
-    string tipoIncarico="\0";
-    if(parametri[1]!="\0") tipoIncarico=parametri[1];
-
-    string nomeIncaricato="\0";
-    if(parametri[2]!="\0") nomeIncaricato=parametri[2];
-
-    int cadenzaIncarico=0;
-    if(parametri[3]!="\0") cadenzaIncarico=std::stoi(parametri[3]);
-
-    int tempoStimato=0;
-    if(parametri[4]!="\0") tempoStimato=std::stoi(parametri[4]);
-
-    unsigned short int stanzeDaPulire;
-    if(parametri[5]!="\0") stanzeDaPulire=std::stoi(parametri[5]);
-
-
-    unsigned short int numeroCommensali;
-    if(parametri[6]!="\0") numeroCommensali=std::stoi(parametri[6]);
-
-    unsigned short int numeroArticoli;
-    if(parametri[7]!="\0") numeroArticoli=std::stoi(parametri[7]);
-
-    float importo=0;
-    if(parametri[8]!="\0") importo= std::stof(parametri[8]);
-    Data dataLimite;
-    if(parametri[9]!="\0") dataLimite=parametri[9];
-
-    Data dataInizio;
-    if(parametri[10]!="\0") dataInizio=parametri[10];
-
-    try{
-    if(dataInizio<_calendario.getDataDiOggi())
-        throw new std::invalid_argument("Attenzione! La data di inserimento dell'incarico dev'essere successiva alla data di oggi");
-    }
-    catch (std::invalid_argument *e)
-    {
-       showMessage(QString::fromStdString(e->what()));
-    }
-
-    int numeroOccorrenze=1;
-    if(parametri[11]!="\0") numeroOccorrenze=std::stoi(parametri[11]);
-
-    try{
-    if(numeroOccorrenze==0)
-        throw new std::invalid_argument("Attenzione! Le occorrenze devono essere almeno una (incarico semplice)");
-    }
-    catch (std::invalid_argument *e)
-    {
-       showMessage(QString::fromStdString(e->what()));
-    }
-
-
-    bool svolto=false;
-    if(parametri[12]!="\0")
-    {
-        if(parametri[12]=="si")
-            svolto=true;
-        else svolto=false;
-    }
-
-    string cosaButtare="\0";
-    if(parametri[13]!="\0") cosaButtare=parametri[13];
-
-    Incarico * i=nullptr;
-
-    if (tipoIncarico=="Pulizia")
-        i=new Pulizia(nomeIncarico,tempoStimato,stanzeDaPulire);
-    else if(tipoIncarico=="Spesa")
-        i=new Spesa(nomeIncarico,importo,tempoStimato,numeroArticoli);
-    else if(tipoIncarico=="Spazzatura")
-        i=new Spazzatura(nomeIncarico,cosaButtare,tempoStimato);
-    else if(tipoIncarico=="Cucina")
-        i=new Cucina(nomeIncarico,tempoStimato,numeroCommensali);
-    else if(tipoIncarico=="Bolletta")
-        i=new Bolletta(nomeIncarico,importo,dataLimite); //partecipanti????
-
-    if(numeroOccorrenze==1 && nomeIncaricato!="\0") //assegnazione manuale dell'incaricato essendo evento singolo
-        i->setIncaricato(_listaInquilini.getInquilino(nomeIncaricato));
-    if(svolto) //per l'import
-        i->setSvolto();
-
-    _calendario.insert(i,dataInizio,numeroOccorrenze,cadenzaIncarico);
-
+    _calendario.creaNuovoIncarico(parametri);
 }
 
 
@@ -183,64 +97,7 @@ void Controller::incrementaGiorno()
 
 }
 
-void Controller::importXmlCalendario()
-{
-    QFile file("calendario.xml");
-    try {
-        if (file.open(QFile::ReadOnly | QFile::Text))
-        {
-            QXmlStreamReader xmlInput(&file);
-            if (xmlInput.readNextStartElement())
-            {
-                if (xmlInput.name() == "CALENDARIO")
-                {
-                    string dataCorrente;
-                    while(xmlInput.readNextStartElement())
-                    {
-                        vector<string> parametri(12,"\0");
-                        assignWithXml(xmlInput, "DATA", dataCorrente);
-                        if (xmlInput.name() == "SPESA") {
-                            Spesa * i=nullptr;
-                            i->Spesa::importXml(xmlInput,parametri);
-                        }
-                        if (xmlInput.name() == "CUCINA") {
-                            Cucina * i=nullptr;
-                            i->Cucina::importXml(xmlInput,parametri);
-                        }
-                        if (xmlInput.name() == "PULIZIA") {
-                            Pulizia * i=nullptr;
-                            i->Pulizia::importXml(xmlInput,parametri);
-                        }
-                        if (xmlInput.name() == "SPAZZATURA") {
-                            Spazzatura * i=nullptr;
-                            i->Spazzatura::importXml(xmlInput,parametri);
-                        }
-                        if (xmlInput.name() == "BOLLETTA") {
-                            Bolletta * i=nullptr;
-                            i->Bolletta::importXml(xmlInput,parametri);
-                        }
-                        parametri[10]=dataCorrente;
-                        creaNuovoIncarico(parametri);
-                        xmlInput.skipCurrentElement(); //per uscire dallo "scope"(?)
-                    }
-                }
-                else
-                    throw new std::runtime_error("Errore durante l'import del calendario");
-            }
-            else
-                throw new std::runtime_error("Errore durante l'import del calendario");
 
-            file.close();
-        }
-        else
-            throw new std::runtime_error("Calendario non trovato");
-    }
-    catch(std::runtime_error * e)
-    {
-        showMessage(QString::fromStdString(e->what()));
-    }
-
-}
 
 
 
