@@ -269,7 +269,6 @@ int main(int argc, char *argv[])
      cout<<"Questo incarico vale: "<<spesa->calcolaPunteggio()<<" punti!"<<endl;
      cout<<"***"<<endl;
 
-
  }
 
 
