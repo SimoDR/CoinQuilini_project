@@ -26,11 +26,31 @@ void Mainwindow::buildAdminPanel()
     adminpanel->show();
 }
 
+void Mainwindow::buildSelezione()
+{
+    SelezioneDialog * select= new SelezioneDialog(this);
+    connect(select, SIGNAL(datiSelezionati(const QString &, bool)),this, SLOT(buildForm(const QString &, bool)));
+    select->show();
+}
+
+void Mainwindow::buildForm(const QString & tipo, bool regolare)
+{
+    FormIncarico *form=new FormIncarico(tipo, regolare, _controller->getInquilini(), this);
+    form->show();
+    connect(form, SIGNAL(inviaDati(const vector<string> &)), this, SLOT(buildIncarico(const vector<string> &)));
+}
+
+void Mainwindow::buildIncarico(const vector<string> & parametri)
+{
+    _controller->creaNuovoIncarico(parametri);
+}
+
 void Mainwindow::addbuttons()
 {
 
     _incarico= new QPushButton;
     _incarico->setText("Aggiungi un incarico");
+    connect(_incarico, SIGNAL(clicked()), this, SLOT(buildSelezione()));
     _listaSpesa= new QPushButton;
     _listaSpesa->setText("lista della spesa");
     _creDeb= new QPushButton;
