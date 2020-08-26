@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
     return a.exec();
 }*/
 
-
+/*
 #include "incarico.h"
 //#include "spazzatura.h"
 //#include "cucina.h"
@@ -209,14 +209,13 @@ int main(int argc, char *argv[])
 
 }
 
+*/
 
 
 
 
 
 
-
-/*
 // il main della gerarchia
 
  #include "incarico.h"
@@ -268,5 +267,5 @@ int main(int argc, char *argv[])
 
 
  }
-*/
+
 
