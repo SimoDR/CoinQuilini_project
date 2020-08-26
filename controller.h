@@ -60,13 +60,13 @@ public slots:
 
     bool posponiIncarico(const Data& dataIncarico, int indiceIncarico, unsigned int quantoPosporre, unsigned int posizioneInquilinoRichiedente); //MESSAGGIO DA DARE IN CASO NEGATIVO
 
-    bool riassegnaIncarico(const Data& dataIncarico, int indiceIncarico, unsigned int posNuovo); //solo l'admin
+    bool riassegnaIncarico(const Data& dataIncarico, int indiceIncarico, unsigned int posNuovo); //solo l'admin //FARE
 
     void setIncaricoSvolto(const Data& dataIncarico, int indiceIncarico);
 
     void incrementaGiorno(); //MESSAGGIO PER CHI NON HA SVOLTO
 
-    void modificaIncarico(const Data &dataIncarico, int indiceIncarico, vector<string> parametri);
+    void modificaIncarico(const Data &dataIncarico, int indiceIncarico, vector<string> parametri); //da togliere
 
 };
 
