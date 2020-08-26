@@ -17,6 +17,7 @@
 #include <QGroupBox> //layout with a title
 #include "selezionedialog.h"
 #include "formincarico.h"
+#include "listaincarichi.h"
 
 class Controller;
 
@@ -72,6 +73,7 @@ private slots:
    void buildSelezione();
    void buildForm(const QString &, bool);
    void buildIncarico(const vector<string> &);
+   void buildListaIncarichi(const QDate &);
 };
 
 #endif // MAINWINDOW_H
