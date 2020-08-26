@@ -16,7 +16,7 @@ double Pagamento::getImporto() const
 Pagamento::~Pagamento() {}
 
 string Pagamento::generaNota() const {
-    return "L'importo di questa spesa è: "+std::to_string(_importo)+" €";
+    return Incarico::generaNota()+"//"+std::to_string(_importo);
 }
 
 unsigned short int Pagamento::calcolaPunteggio() const{

@@ -43,6 +43,12 @@ bool Incarico::posponi (const Data& d) const{
     return false; //un incarico non è posponibile di default
 }
 
+std::string Incarico::generaNota() const
+//debug-feature simbolo di separazione ha bisogno di essere salvato in un campo statico (e non essere usato)
+{
+    return _nome + "//" + (_incaricato ? _incaricato->getNome() : "xxx" ) + "//" + (_svolto ? "Y" : "N") ;
+}
+
 void Incarico::exportXml(QXmlStreamWriter & xmlOutput) const
 {
     xmlOutput.writeTextElement("nome", QString::fromStdString(_nome));

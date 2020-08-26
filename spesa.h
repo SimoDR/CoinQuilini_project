@@ -10,7 +10,7 @@ class Spesa: public Pagamento, public Faccenda
 {
 private:
     static unsigned short int _pesoSpesa;
-    static vector<string> _listaSpesa;
+    static vector<string> _listaSpesa; //debug
     unsigned short int _numeroArticoli;
 public:
     Spesa(const string& nome,double importo,int tempoStimato,unsigned short int numeroArticoli=0,Inquilino * incaricato=nullptr,bool svolto=false);
@@ -22,10 +22,10 @@ public:
     void importXml(QXmlStreamReader & xmlInput, vector<string> & parametri);
     virtual string getLabel() const;
     virtual unsigned short int calcolaPunteggio() const;
-    vector<string> getListaSpesa() const;
-    void aggiungiListaSpesa(const string&);
-    void rimuoviListaSpesa(const string&);
-    void svuotaListaSpesa();
+    vector<string> getListaSpesa() const; //debug
+    void aggiungiListaSpesa(const string&); //debug
+    void rimuoviListaSpesa(const string&); //debug
+    void svuotaListaSpesa(); //debug
     void setArticoli();
 };
 
