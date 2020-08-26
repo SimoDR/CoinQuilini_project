@@ -16,6 +16,7 @@
 #include "spazzatura.h"
 #include "cucina.h"
 #include "bolletta.h"
+#include "utilities.h"
 
 using std::vector;
 using std::string;
@@ -58,15 +59,14 @@ public slots:
 
     void rimuoviIncarico(const Data& dataIncarico, int indiceIncarico);
 
-    bool posponiIncarico(const Data& dataIncarico, int indiceIncarico, unsigned int quantoPosporre, unsigned int posizioneInquilinoRichiedente); //MESSAGGIO DA DARE IN CASO NEGATIVO
+    void posponiIncarico(const Data& dataIncarico, int indiceIncarico, unsigned int quantoPosporre, unsigned int posizioneInquilinoRichiedente); //MESSAGGIO DA DARE IN CASO NEGATIVO
 
-    bool riassegnaIncarico(const Data& dataIncarico, int indiceIncarico, unsigned int posNuovo); //solo l'admin //FARE
+    void riassegnaIncarico(const Data& dataIncarico, int indiceIncarico, string nomeInquilino); //solo l'admin
 
     void setIncaricoSvolto(const Data& dataIncarico, int indiceIncarico);
 
     void incrementaGiorno(); //MESSAGGIO PER CHI NON HA SVOLTO
 
-    void modificaIncarico(const Data &dataIncarico, int indiceIncarico, vector<string> parametri); //da togliere
 
 };
 

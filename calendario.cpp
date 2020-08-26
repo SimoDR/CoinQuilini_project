@@ -138,12 +138,11 @@ Incarico *Calendario::trovaIncarico(const Data &dataIncarico, int indiceIncarico
 
 
 
-bool Calendario::insert(Incarico * daInserire, Data & dataInCuiInserire, int numeroOccorrenze, int cadenzaIncarico)
+void Calendario::insert(Incarico * daInserire, Data & dataInCuiInserire, int numeroOccorrenze, int cadenzaIncarico)
 {
     bool assegnato=false;
     if(numeroOccorrenze==1 && daInserire->getIncaricato()!=nullptr) //è già stato assegnato
         assegnato=true;
-
 
 
     dList<Giorno>::iterator iteratoreIniziale=_iteratoreCorrente;
@@ -158,6 +157,7 @@ bool Calendario::insert(Incarico * daInserire, Data & dataInCuiInserire, int num
         if(!assegnato) incaricato=ottieniIncaricato(iteratoreInCuiInserire);
 
         //cout<<incaricato->getNome()<<": incaricato"<<endl; //debug
+
         cout<<daInserire->getNome()<<endl; //debug
         _buffer.avanza();
 
@@ -170,11 +170,11 @@ bool Calendario::insert(Incarico * daInserire, Data & dataInCuiInserire, int num
         iteratoreIniziale=iteratoreInCuiInserire;
         numeroOccorrenze--;
     }
-    return true;
+
 
 }
 
-bool Calendario::remove(Incarico *daRimuovere, const Data &dataIncarico)
+void Calendario::remove(Incarico *daRimuovere, const Data &dataIncarico)
 {
     bool rimosso=false;
     dList<Giorno>::iterator giornoIncarico=iteratoreFromData(_iteratoreCorrente,dataIncarico);
@@ -189,13 +189,12 @@ bool Calendario::remove(Incarico *daRimuovere, const Data &dataIncarico)
 
     if(giornoIncarico->_incarichiDelGiorno.empty()) //se ora non c'è più neanche un incarico, tolgo il giorno perchè non serve più
         _giorni.remove(giornoIncarico);
-    return rimosso;
 }
 
-bool Calendario::posponiIncarico(Incarico * daPosporre, unsigned int quantoPosporre, const Data& dataIncarico)
+void Calendario::posponiIncarico(Incarico * daPosporre, unsigned int quantoPosporre, const Data& dataIncarico)
 {
 
-    bool posposto=false;
+
     Data dataInCuiInserire=dataIncarico+quantoPosporre;
     bool possibilePosporre=daPosporre->posponi(dataInCuiInserire);
 
@@ -205,12 +204,13 @@ bool Calendario::posponiIncarico(Incarico * daPosporre, unsigned int quantoPospo
        remove(daPosporre,dataIncarico); //rimuovo da dov'è
        dList<Giorno>::iterator iteratoreInCuiInserire=iteratoreFromData(_iteratoreCorrente, dataInCuiInserire);
        iteratoreInCuiInserire->_incarichiDelGiorno.push_back(daPosporre->clone());
-       posposto=true;
+       int decurtazione=daPosporre->calcolaPunteggio()/2;
+       daPosporre->getIncaricato()->setPunteggio(decurtazione);
 
-       //GESTIRE PUNTEGGI????
-
+       showMessage(QString::fromStdString("Incarico posposto con successo! Tuttavia ti sono stati decurtati "+std::to_string(decurtazione)+" punti"));
     }
-    return posposto;
+    else
+        showMessage(QString::fromStdString("Impossibile posporre! L'incarico ha delle limitazioni che impediscono di posporlo al giorno "+dataInCuiInserire.dataToString()));
 }
 
 void Calendario::setCredito(Pagamento * p, vector<Inquilino*> & lista)
@@ -231,7 +231,7 @@ void Calendario::checkIncarichiSvolti()
     {
         if(!((*it)->getSvolto())) //se non è stato svolto
         {
-            (*it)->getIncaricato()->setPunteggio(-((*it)->calcolaPunteggio()/2));
+            (*it)->getIncaricato()->setPunteggio((*it)->calcolaPunteggio());
             //MESSAGGIO: NON L'HAI SVOLTO!!
         }
         else
@@ -269,7 +269,7 @@ vector<Inquilino *> Calendario::BufferInquilini::trovaMinimi(dList<Calendario::G
     for(vector<Inquilino*>::iterator it=_inquilini.begin(); it!=_inquilini.end(); ++it) //aggiungo gli inquilini, tutti con frequenza 0
     {
         coppie[*it]=0;
-        //cout<<(*it)->getNome()<<" stocazzo"<<endl;
+        cout<<(*it)->getNome()<<" stocazzo"<<endl;
 
     }
     cout<<"-------"<<endl;
@@ -280,7 +280,6 @@ vector<Inquilino *> Calendario::BufferInquilini::trovaMinimi(dList<Calendario::G
         cout<<(*mit).first->getNome()<<endl;
     }
     cout<<"*****"<<endl;
-
 
 
 

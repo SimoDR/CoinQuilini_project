@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
     return a.exec();
 }*/
 
-/*
+
 #include "incarico.h"
 //#include "spazzatura.h"
 //#include "cucina.h"
@@ -67,16 +67,18 @@ int main(int argc, char *argv[])
     parametri.push_back("\0"); //9
     parametri.push_back("22/08/2020"); //10
     parametri.push_back("4"); //11
+    parametri.push_back("\0"); //12
+
 
 
 
     controller.aggiungiInquilino("Simone","gay99");
+
     controller.aggiungiInquilino("Antonio","pisellolungo");
     controller.aggiungiInquilino("Francesco","Il montanaro");
 
 
     controller.creaNuovoIncarico(parametri);
-
 
 
     vector<string> parametri1;
@@ -92,6 +94,7 @@ int main(int argc, char *argv[])
     parametri1.push_back("\0"); //9
     parametri1.push_back("22/08/2020"); //10
     parametri1.push_back("2"); //11
+    parametri1.push_back("\0"); //12
 
     controller.creaNuovoIncarico(parametri1);
 
@@ -111,6 +114,7 @@ int main(int argc, char *argv[])
     parametri2.push_back("\0"); //9
     parametri2.push_back("22/08/2020"); //10
     parametri2.push_back("3"); //11
+    parametri2.push_back("\0"); //12
 
     controller.creaNuovoIncarico(parametri2);
 
@@ -127,6 +131,7 @@ int main(int argc, char *argv[])
     parametri3.push_back("\0"); //9
     parametri3.push_back("22/08/2020"); //10
     parametri3.push_back("6"); //11
+    parametri3.push_back("\0"); //12
 
     controller.creaNuovoIncarico(parametri3);
 
@@ -143,6 +148,7 @@ int main(int argc, char *argv[])
     parametri4.push_back("\0"); //9
     parametri4.push_back("25/08/2020"); //10
     parametri4.push_back("6"); //11
+    parametri4.push_back("\0"); //12
 
     controller.creaNuovoIncarico(parametri4);
 
@@ -159,6 +165,7 @@ int main(int argc, char *argv[])
     parametri5.push_back("\0"); //9
     parametri5.push_back("22/08/2020"); //10
     parametri5.push_back("6"); //11
+    parametri5.push_back("\0"); //12
 
     controller.creaNuovoIncarico(parametri5);
 
@@ -186,26 +193,30 @@ int main(int argc, char *argv[])
 
 
     cout<<controller.getInquilinoPos(1)[0]<<" inquilino da rimuovere"<<endl;
-    controller.rimuoviInquilino(1);
-
-    controller.stampaCalendario();
-    controller.rimuoviInquilino(1);
 
     controller.stampaCalendario();
 
     controller.rimuoviInquilino(1);
     controller.stampaCalendario();
+
+    controller.rimuoviInquilino(1);
+    controller.stampaCalendario();
+
+
+    controller.rimuoviInquilino(1);
+    controller.stampaCalendario();
+
 
 }
 
 
 
 
-*/
 
 
 
 
+/*
 // il main della gerarchia
 
  #include "incarico.h"
@@ -257,5 +268,5 @@ int main(int argc, char *argv[])
 
 
  }
-
+*/
 
