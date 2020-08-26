@@ -3,7 +3,7 @@
 unsigned short int Pulizia::_pesoPulizia=3; // => 3 punti ogni stanza pulita
 
 Pulizia::Pulizia(const std::string& nome, int tempoStimato, unsigned short stanzeDaPulire, Inquilino *incaricato, bool svolto):
-    Faccenda(nome,tempoStimato,incaricato,svolto), _stanzeDaPulire(stanzeDaPulire) {}
+    Incarico(nome,incaricato,svolto), Faccenda(tempoStimato), _stanzeDaPulire(stanzeDaPulire) {}
 
 Pulizia* Pulizia::clone() const {return new Pulizia(*this);}
 

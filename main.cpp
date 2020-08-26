@@ -1,4 +1,4 @@
-*/
+/*
 #include <iostream>
 #include<vector>
 #include <QApplication>
@@ -232,6 +232,7 @@ int main(int argc, char *argv[])
 
  int main(){
      Faccenda * spazz=new Spazzatura("ritiro rifiuti", "secco",20);
+     cout << spazz->getNome() <<endl;
      cout << spazz->getIncaricato() <<endl;
      cout<< spazz->generaNota() <<endl;
      cout<<spazz->Faccenda::generaNota()<<endl;
@@ -239,12 +240,14 @@ int main(int argc, char *argv[])
      cout<<"***"<<endl;
 
      Incarico * cuc=new Cucina("pranzo",60,4);
+     cout << cuc->getNome() <<endl;
      cout<< cuc->generaNota() <<endl;
      cout<<"Questo incarico vale: "<<cuc->calcolaPunteggio()<<" punti!"<<endl;
      cout<<"L'incaricato è: "<<cuc->getIncaricato()<<" (punt... se 0 = non assegnato)!"<<endl;
      cout<<"***"<<endl;
 
      Pagamento * boll=new Bolletta("luce-gas",250,Data(1,1,2021));
+     cout << boll->getNome() <<endl;
      boll->setImporto(50.6);
      cout<< boll->generaNota() <<endl;
      cout<<"Questo incarico vale: "<<boll->calcolaPunteggio()<<" punti!"<<endl;
@@ -257,14 +260,14 @@ int main(int argc, char *argv[])
      spesa->rimuoviListaSpesa("errore");
      spesa->rimuoviListaSpesa("zucchine");
 
+     cout << spesa->getNome() <<endl;
      cout<<spesa->generaNota()<<endl;
      spesa->setSvolto();
      cout<<spesa->generaNota()<<endl;
      cout<<"Questo incarico vale: "<<spesa->calcolaPunteggio()<<" punti!"<<endl;
      cout<<"***"<<endl;
 
-
  }
-*/
 
+*/
 

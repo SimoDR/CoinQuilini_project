@@ -13,6 +13,7 @@ unsigned short int Incarico::_sogliaMin=1;  // min punteggio attribuibile a un i
 unsigned short int Incarico::controlloSoglia(int x){
     if (x > _sogliaMax) x = _sogliaMax;
     else if (x < _sogliaMin) x = _sogliaMin;
+    return x;
 }
 
 void Incarico::setNome(const string& s){
