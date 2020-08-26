@@ -10,8 +10,7 @@ private:
     static double _pesoPagamento;
 
 public:
-    Pagamento(const string& nome,double importo,Inquilino * incaricato=nullptr,bool svolto=false);
-    Pagamento() {}
+    Pagamento(double importo);
     void setImporto(double);
     double getImporto() const;
     virtual ~Pagamento()=0;

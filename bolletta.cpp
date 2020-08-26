@@ -1,7 +1,7 @@
 #include "bolletta.h"
 
 Bolletta::Bolletta(const std::string & nome, double importo, const Data &dataLimite, Inquilino *incaricato, bool svolto):
-    Pagamento(nome,importo,incaricato,svolto), _dataLimite(dataLimite) {}
+    Incarico(nome,incaricato,svolto), Pagamento(importo), _dataLimite(dataLimite) {}
 
 Bolletta* Bolletta::clone() const {return new Bolletta(*this);}
 
