@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
 */
 
 
-
+/*
 
 
 #include "incarico.h"
@@ -227,11 +227,11 @@ int main(int argc, char *argv[])
 
 
 
+*/
 
 
 
 
-/*
 
 
 //il main della gerarchia
@@ -256,43 +256,39 @@ int main(int argc, char *argv[])
 
  int main(){
      Faccenda * spazz=new Spazzatura("ritiro rifiuti", "secco",20);
-     cout << spazz->getNome() <<endl;
-     cout << spazz->getIncaricato() <<endl;
      cout<< spazz->generaNota() <<endl;
      cout<<spazz->Faccenda::generaNota()<<endl;
      cout<<"Questo incarico vale: "<<spazz->calcolaPunteggio()<<" punti!"<<endl;
      cout<<"***"<<endl;
 
-     Incarico * cuc=new Cucina("pranzo",60,4);
-     cout << cuc->getNome() <<endl;
-     cout<< cuc->generaNota() <<endl;
-     cout<<"Questo incarico vale: "<<cuc->calcolaPunteggio()<<" punti!"<<endl;
-     cout<<"L'incaricato è: "<<cuc->getIncaricato()<<" (punt... se 0 = non assegnato)!"<<endl;
-     cout<<"***"<<endl;
+//     Incarico * cuc=new Cucina("pranzo",60,4);
+//     cout << cuc->getNome() <<endl;
+//     cout<< cuc->generaNota() <<endl;
+//     cout<<"Questo incarico vale: "<<cuc->calcolaPunteggio()<<" punti!"<<endl;
+//     cout<<"L'incaricato è: "<<cuc->getIncaricato()<<" (punt... se 0 = non assegnato)!"<<endl;
+//     cout<<"***"<<endl;
 
-     Pagamento * boll=new Bolletta("luce-gas",250,Data(1,1,2021));
-     cout << boll->getNome() <<endl;
-     boll->setImporto(50.6);
-     cout<< boll->generaNota() <<endl;
-     cout<<"Questo incarico vale: "<<boll->calcolaPunteggio()<<" punti!"<<endl;
-     cout<<"***"<<endl;
+//     Pagamento * boll=new Bolletta("luce-gas",250,Data(1,1,2021));
+//     cout << boll->getNome() <<endl;
+//     boll->setImporto(50.6);
+//     cout<< boll->generaNota() <<endl;
+//     cout<<"Questo incarico vale: "<<boll->calcolaPunteggio()<<" punti!"<<endl;
+//     cout<<"***"<<endl;
 
-     Spesa * spesa=new Spesa("panificio",10,30,10);
-     spesa->aggiungiListaSpesa("banane");
-     spesa->aggiungiListaSpesa("zucchine");
-     spesa->aggiungiListaSpesa("meloni");
-     spesa->rimuoviListaSpesa("errore");
-     spesa->rimuoviListaSpesa("zucchine");
+//     Spesa * spesa=new Spesa("panificio",10,30,10);
+//     spesa->aggiungiListaSpesa("banane");
+//     spesa->aggiungiListaSpesa("zucchine");
+//     spesa->aggiungiListaSpesa("meloni");
+//     spesa->rimuoviListaSpesa("errore");
+//     spesa->rimuoviListaSpesa("zucchine");
 
-     cout << spesa->getNome() <<endl;
-     cout<<spesa->generaNota()<<endl;
-     spesa->setSvolto();
-     cout<<spesa->generaNota()<<endl;
-     cout<<"Questo incarico vale: "<<spesa->calcolaPunteggio()<<" punti!"<<endl;
-     cout<<"***"<<endl;
+//     cout << spesa->getNome() <<endl;
+//     cout<<spesa->generaNota()<<endl;
+//     spesa->setSvolto();
+//     cout<<spesa->generaNota()<<endl;
+//     cout<<"Questo incarico vale: "<<spesa->calcolaPunteggio()<<" punti!"<<endl;
+//     cout<<"***"<<endl;
 
  }
-
-*/
 
 

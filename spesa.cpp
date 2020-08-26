@@ -15,18 +15,7 @@ bool Spesa::posponi(const Data& d) const
 
 string Spesa::generaNota() const
 {
-    if ( ! getSvolto() ){
-
-        //debug: non smart da rivedere
-        string elenco="";
-        for (vector<string>::const_iterator cit = _listaSpesa.begin() ; cit != _listaSpesa.end(); cit++){
-            elenco+=*cit+" ";
-        }
-        return elenco;
-    }
-    else{
-        return "Spesa di "+std::to_string(_numeroArticoli)+" articoli";
-    }
+    return "||SPESA//"+Incarico::generaNota()+"//"+Faccenda::generaNota()+"//"+std::to_string(_numeroArticoli)+"Andiamo a fare compere!";
 }
 
 void Spesa::exportXml(QXmlStreamWriter & xmlOutput) const

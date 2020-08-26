@@ -13,6 +13,7 @@ public:
     virtual bool posponi (const Data& d=Data()) const;
     virtual string getLabel() const;
     virtual void exportXml(QXmlStreamWriter&) const;
+    virtual string generaNota() const;
 };
 
 #endif // BOLLETTA_H
