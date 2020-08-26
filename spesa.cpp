@@ -3,6 +3,9 @@
 unsigned short int Spesa::_pesoSpesa=10; // => 1 punto ogni 10 articoli comprati
 vector<string> Spesa::_listaSpesa;
 
+Spesa::Spesa(std::string nome, double importo, int tempoStimato, unsigned short numeroArticoli, Inquilino *incaricato, bool svolto):
+    Pagamento(nome,importo,incaricato,svolto),Faccenda(nome,tempoStimato,incaricato,svolto), _numeroArticoli(numeroArticoli) {}
+
 Spesa* Spesa::clone() const {return new Spesa(*this);}
 
 bool Spesa::posponi(const Data d) const

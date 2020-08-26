@@ -3,17 +3,14 @@
 
 #include "faccenda.h"
 
-enum TipologiaRifiuto{secco, umido, plastica, carta, verde, vetro};
-
 class Spazzatura: public Faccenda
 {
 private:
     static unsigned short int _pesoSpazzatura;
-    TipologiaRifiuto _cosaButtare;
+    string _cosaButtare;
 
 public:
-    Spazzatura(string nome,int tempoStimato,Inquilino * incaricato=nullptr,bool svolto=false):
-        Incarico(nome,incaricato,svolto),Faccenda(nome,tempoStimato,incaricato,svolto) {}
+    Spazzatura(string nome, string cosaButtare,int tempoStimato, Inquilino * incaricato=nullptr,bool svolto=false);
     virtual ~Spazzatura() {}
     virtual Spazzatura* clone() const;
     virtual string generaNota() const;

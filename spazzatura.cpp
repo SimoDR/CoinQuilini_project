@@ -2,12 +2,13 @@
 
 unsigned short int Spazzatura::_pesoSpazzatura=3; // => 3 punti ogni incarico spazzatura assolto
 
+Spazzatura::Spazzatura(std::string nome, std::string cosaButtare, int tempoStimato, Inquilino *incaricato, bool svolto):
+    Faccenda(nome,tempoStimato,incaricato,svolto), _cosaButtare(cosaButtare) {}
+
 Spazzatura* Spazzatura::clone() const {return new Spazzatura(*this);}
 
 string Spazzatura::generaNota() const {
-    string s1="Oggi tocca a ";
-    return s1;
-    //return s1+_cosaButtare;
+    return "Oggi tocca a " + _cosaButtare;
 }
 
 void Spazzatura::exportXml(QXmlStreamWriter &xmlOutput) const

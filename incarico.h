@@ -17,14 +17,15 @@ class Incarico
 private:
 	string _nome;
     Inquilino* _incaricato;
-    bool _svolto=false;
+    bool _svolto;
 	static unsigned int _sogliaMax;
 
 protected:
 	void controlloSoglia(unsigned short int &) const; // bisogna gestire eccezioni che possono causare l'overflow del punteggio (es. mille commensali)
 
 public:
-    Incarico(string nome,Inquilino * incaricato=nullptr,bool svolto=false); //da sistemare
+    Incarico(string nome,Inquilino * incaricato=nullptr,bool svolto=false);
+    Incarico() {}
 	void setNome(const string&);
     string getNome() const {return _nome;} //debug
     void setIncaricato(Inquilino *);

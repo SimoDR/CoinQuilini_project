@@ -2,7 +2,8 @@
 
 unsigned short int Faccenda::_pesoFaccenda=60; // => 1 punto ogni 60 minuti
 
-Faccenda::Faccenda(std::string nome, int tempoStimato, Inquilino *incaricato, bool svolto): Incarico(nome,incaricato,svolto), _tempoStimato(tempoStimato) {}
+Faccenda::Faccenda(std::string nome, int tempoStimato, Inquilino *incaricato, bool svolto):
+    Incarico(nome,incaricato,svolto), _tempoStimato(tempoStimato) {}
 
 Faccenda::~Faccenda() {}
 

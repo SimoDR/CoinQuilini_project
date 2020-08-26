@@ -41,6 +41,7 @@ bool Controller::login(const QString & user, const QString & pw)
  * 10- DataInizio
  * 11- numeroOccorrenze
  * 12- svolto
+ * 13- CosaButtare
  *
  *
  * Se l'incarico da creare non prevede uno dei campi, questi verranno indicati con il carattere speciale "\0" e quindi ignorati
@@ -93,6 +94,11 @@ void Controller::creaNuovoIncarico(vector<std::string> parametri)
         else svolto=false;
     }
 
+    string cosaButtare="\0";
+    if(parametri[13]!="\0") cosaButtare=parametri[13];
+
+
+
     Incarico * i=nullptr;
 
 
@@ -105,7 +111,7 @@ void Controller::creaNuovoIncarico(vector<std::string> parametri)
     else if(tipoIncarico=="Spesa")
         i=new Spesa(nomeIncarico,importo,tempoStimato,numeroArticoli);
     else if(tipoIncarico=="Spazzatura")
-        i=new Spazzatura(nomeIncarico,tempoStimato);
+        i=new Spazzatura(nomeIncarico,cosaButtare,tempoStimato);
     else if(tipoIncarico=="Cucina")
         i=new Cucina(nomeIncarico,tempoStimato,numeroCommensali);
     else if(tipoIncarico=="Bolletta")

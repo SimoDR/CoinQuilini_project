@@ -13,8 +13,7 @@ private:
     static vector<string> _listaSpesa;
     unsigned short int _numeroArticoli;
 public:
-    Spesa(string nome,double importo,int tempoStimato,unsigned short int numeroArticoli=0,Inquilino * incaricato=nullptr,bool svolto=false):
-        Incarico(nome,incaricato,svolto),Pagamento(nome,importo,incaricato,svolto),Faccenda(nome,tempoStimato,incaricato,svolto), _numeroArticoli(numeroArticoli) {}
+    Spesa(string nome,double importo,int tempoStimato,unsigned short int numeroArticoli=0,Inquilino * incaricato=nullptr,bool svolto=false);
     virtual ~Spesa() {};
     virtual Spesa* clone() const;
     virtual bool posponi (const Data d=Data()) const;
