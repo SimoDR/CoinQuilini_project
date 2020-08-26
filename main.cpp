@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
 }
 */
 
-
+/*
 
 
 
@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
     Controller controller;
 
-/*
+
     string nomeIncarico=parametri[0];
     string tipoIncarico=parametri[1];
     string nomeIncaricato=parametri[2]; //DA SISTEMARE
@@ -56,7 +56,7 @@ int main(int argc, char *argv[])
     Data dataLimite(parametri[9]);
     Data dataInizio(parametri[10]);
     int numeroOccorrenze=std::stoi(parametri[11]);
-*/
+
 
     vector<string> parametri;
     parametri.push_back("puliziaDelSabato"); //0
@@ -228,12 +228,12 @@ int main(int argc, char *argv[])
 }
 
 
+*/
 
 
 
 
 
-/*
 
 
 //il main della gerarchia
@@ -295,6 +295,6 @@ int main(int argc, char *argv[])
 
  }
 
-*/
+
 
 

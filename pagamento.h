@@ -7,11 +7,10 @@ class Pagamento: virtual public Incarico
 {
 private:
     float _importo;
-    static double _pesoPagamento;
+    static unsigned short int _pesoPagamento;
 
 public:
-    Pagamento(const string& nome,float importo,Inquilino * incaricato=nullptr,bool svolto=false);
-    Pagamento() {}
+    Pagamento(float importo);
     void setImporto(double);
     double getImporto() const;
     virtual ~Pagamento()=0;
