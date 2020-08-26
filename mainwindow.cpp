@@ -45,6 +45,15 @@ void Mainwindow::buildIncarico(const vector<string> & parametri)
     _controller->creaNuovoIncarico(parametri);
 }
 
+void Mainwindow::buildListaIncarichi(const QDate & giorno)
+{
+    string data=giorno.toString("d/M/yyyy").toStdString();
+    vector<string> incaricati;
+    vector<string> incarichi=_controller->incarichiGiorno(data, incaricati);
+    ListaIncarichi *lista=new ListaIncarichi(giorno.toString("d/M/yyyy"),_controller->isAdmin(_inquilino.toStdString()), incarichi, incaricati, this);
+    lista->show();
+}
+
 void Mainwindow::addbuttons()
 {
 
@@ -73,6 +82,7 @@ void Mainwindow::addcalendar()
 {
 
     _calendar=new QCalendarWidget;
+    connect(_calendar, SIGNAL(activated(const QDate &)), this, SLOT(buildListaIncarichi(const QDate &)));
     _calendarLayout= new QVBoxLayout;
 
     //add calendar to the layout

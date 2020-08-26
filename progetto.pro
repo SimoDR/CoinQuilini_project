@@ -13,6 +13,7 @@ HEADERS += \
     formincarico.h \
     incarico.h \
     inquilino.h \
+    listaincarichi.h \
     listainquilini.h \
     login.h \
     mainwindow.h \
@@ -38,6 +39,7 @@ SOURCES += \
     formincarico.cpp \
     incarico.cpp \
     inquilino.cpp \
+    listaincarichi.cpp \
     listainquilini.cpp \
     login.cpp \
     main.cpp \
