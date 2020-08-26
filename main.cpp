@@ -206,7 +206,6 @@ int main(int argc, char *argv[])
 
 
 
-
 // il main della gerarchia
 
  #include "incarico.h"
