@@ -7,20 +7,15 @@
 class Cucina: public Faccenda
 {
 private:
-    unsigned short int _numeroCommensali; //eccezioni: limitare numero commensali
+    unsigned short int _numeroCommensali;
     static double _pesoCucina;
 public:
-    Cucina(string nome,int tempoStimato,unsigned short int numeroCommensali,Inquilino * incaricato=nullptr,bool svolto=false):
-        Incarico(nome,incaricato,svolto),Faccenda(nome,tempoStimato,incaricato,svolto), _numeroCommensali(numeroCommensali) {}
+    Cucina(const string & nome,int tempoStimato,unsigned short int numeroCommensali,Inquilino * incaricato=nullptr,bool svolto=false);
     virtual ~Cucina() {}
     virtual Cucina* clone() const;
     virtual string generaNota() const;
-    // virtual import
     virtual unsigned short int calcolaPunteggio() const;
-
     virtual void exportXml(QXmlStreamWriter&) const;
-
-
 };
 
 #endif // CUCINA_H

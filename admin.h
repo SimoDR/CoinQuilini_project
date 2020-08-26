@@ -6,9 +6,9 @@ class Admin : public Inquilino
 {
     friend class ListaInquilini;
     public:
-        Admin(string, string);
+        Admin(const string&, const string&);
         virtual unsigned short int isAdmin() const;
-        virtual bool puoposporre();
+        virtual bool puoposporre() const;
         virtual std::string getLabel() const;
 };
 

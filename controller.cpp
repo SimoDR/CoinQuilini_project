@@ -41,6 +41,7 @@ bool Controller::login(const QString & user, const QString & pw)
  * 10- DataInizio
  * 11- numeroOccorrenze
  * 12- svolto
+ * 13- CosaButtare
  *
  *
  * Se l'incarico da creare non prevede uno dei campi, questi verranno indicati con il carattere speciale "\0" e quindi ignorati
@@ -49,6 +50,7 @@ bool Controller::login(const QString & user, const QString & pw)
 
 void Controller::creaNuovoIncarico(vector<std::string> parametri)
 {
+
     string nomeIncarico="\0";
     if(parametri[0]!="\0") nomeIncarico=parametri[0];
 
@@ -67,6 +69,7 @@ void Controller::creaNuovoIncarico(vector<std::string> parametri)
     unsigned short int stanzeDaPulire;
     if(parametri[5]!="\0") stanzeDaPulire=std::stoi(parametri[5]);
 
+
     unsigned short int numeroCommensali;
     if(parametri[6]!="\0") numeroCommensali=std::stoi(parametri[6]);
 
@@ -82,8 +85,27 @@ void Controller::creaNuovoIncarico(vector<std::string> parametri)
     Data dataInizio;
     if(parametri[10]!="\0") dataInizio=parametri[10];
 
-    int numeroOccorrenze=0;
+    try{
+    if(dataInizio<_calendario.getDataDiOggi())
+        throw new std::invalid_argument("Attenzione! La data di inserimento dell'incarico dev'essere successiva alla data di oggi");
+    }
+    catch (std::invalid_argument *e)
+    {
+       showMessage(QString::fromStdString(e->what()));
+    }
+
+    int numeroOccorrenze=1;
     if(parametri[11]!="\0") numeroOccorrenze=std::stoi(parametri[11]);
+
+    try{
+    if(numeroOccorrenze==0)
+        throw new std::invalid_argument("Attenzione! Le occorrenze devono essere almeno una (incarico semplice)");
+    }
+    catch (std::invalid_argument *e)
+    {
+       showMessage(QString::fromStdString(e->what()));
+    }
+
 
     bool svolto=false;
     if(parametri[12]!="\0")
@@ -93,19 +115,17 @@ void Controller::creaNuovoIncarico(vector<std::string> parametri)
         else svolto=false;
     }
 
+    string cosaButtare="\0";
+    if(parametri[13]!="\0") cosaButtare=parametri[13];
+
     Incarico * i=nullptr;
-
-
-
-
-
 
     if (tipoIncarico=="Pulizia")
         i=new Pulizia(nomeIncarico,tempoStimato,stanzeDaPulire);
     else if(tipoIncarico=="Spesa")
         i=new Spesa(nomeIncarico,importo,tempoStimato,numeroArticoli);
     else if(tipoIncarico=="Spazzatura")
-        i=new Spazzatura(nomeIncarico,tempoStimato);
+        i=new Spazzatura(nomeIncarico,cosaButtare,tempoStimato);
     else if(tipoIncarico=="Cucina")
         i=new Cucina(nomeIncarico,tempoStimato,numeroCommensali);
     else if(tipoIncarico=="Bolletta")
@@ -113,45 +133,41 @@ void Controller::creaNuovoIncarico(vector<std::string> parametri)
 
     if(numeroOccorrenze==1 && nomeIncaricato!="\0") //assegnazione manuale dell'incaricato essendo evento singolo
         i->setIncaricato(_listaInquilini.getInquilino(nomeIncaricato));
-    if(svolto)
+    if(svolto) //per l'import
         i->setSvolto();
 
-    bool successo=_calendario.insert(i,dataInizio,numeroOccorrenze,cadenzaIncarico);
+    _calendario.insert(i,dataInizio,numeroOccorrenze,cadenzaIncarico);
 
 }
 
-void Controller::modificaIncarico(const Data &dataIncarico, int indiceIncarico, vector<std::string> parametri)
-{
-    rimuoviIncarico(dataIncarico,indiceIncarico);
 
-    creaNuovoIncarico(parametri);
-}
 
 void Controller::rimuoviIncarico(const Data &dataIncarico, int indiceIncarico)
 {
     _calendario.remove(_calendario.trovaIncarico(dataIncarico,indiceIncarico),dataIncarico);
 }
 
-bool Controller::posponiIncarico(const Data &dataIncarico, int indiceIncarico, unsigned int quantoPosporre, unsigned int posizioneInquilinoRichiedente) //DA GESTIRE PUNTEGGI??
+void Controller::posponiIncarico(const Data &dataIncarico, int indiceIncarico, unsigned int quantoPosporre, unsigned int posizioneInquilinoRichiedente) //DA GESTIRE PUNTEGGI??
 {
     Inquilino * richiedente=_listaInquilini.getInquilino(posizioneInquilinoRichiedente);
     if(richiedente->puoPosporre())
     {
-        richiedente->setPunteggio(-4);
-        return _calendario.posponiIncarico(_calendario.trovaIncarico(dataIncarico,indiceIncarico),quantoPosporre,dataIncarico);
+
+        _calendario.posponiIncarico(_calendario.trovaIncarico(dataIncarico,indiceIncarico),quantoPosporre,dataIncarico);
     }
     else
     {
         //MESSAGGIO: NON PUOI POSPORRE!
-        return false;
+        showMessage(QString::fromStdString("Spiacente: non hai i requisiti sufficienti per posporre questo incarico!"));
+
     }
 
 }
 
-bool Controller::riassegnaIncarico(const Data &dataIncarico, int indiceIncarico, unsigned int posizioneInquilino)
+void Controller::riassegnaIncarico(const Data &dataIncarico, int indiceIncarico, string nomeInquilino)
 {
     Incarico * daRiassegnare=_calendario.trovaIncarico(dataIncarico,indiceIncarico);
-    Inquilino * nuovoIncaricato=_listaInquilini.getInquilino(posizioneInquilino);
+    Inquilino * nuovoIncaricato=_listaInquilini.getInquilino(nomeInquilino);
     daRiassegnare->setIncaricato(nuovoIncaricato);
 }
 

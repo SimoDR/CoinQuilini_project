@@ -56,6 +56,8 @@ Inquilino *ListaInquilini::getInquilino(unsigned int pos) const
     return *i;   //se pos è out of bound ritorna iteratore past the end
 }
 
+
+
 Inquilino *ListaInquilini::getInquilino(const std::string & user) const
 {
     dList<Inquilino*>::iterator i;
@@ -65,6 +67,7 @@ Inquilino *ListaInquilini::getInquilino(const std::string & user) const
     }
     return *i;   //se pos è out of bound ritorna iteratore past the end
 }
+
 bool ListaInquilini::checkCredenziali(const std::string & user, const std::string & pw) const
 {
     dList<Inquilino*>::iterator i;

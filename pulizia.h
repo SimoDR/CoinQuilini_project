@@ -6,14 +6,13 @@
 class Pulizia: public Faccenda
 {
 private:
-    unsigned short int _stanzeDaPulire; //eccezioni: limitare numero delle camere
+    unsigned short int _stanzeDaPulire;
     static unsigned short int _pesoPulizia;
 public:
-    Pulizia(string nome,int tempoStimato,unsigned short int stanzeDaPulire,Inquilino * incaricato=nullptr,bool svolto=false):
-        Incarico(nome,incaricato,svolto),Faccenda(nome,tempoStimato,incaricato,svolto), _stanzeDaPulire(stanzeDaPulire) {}
+    Pulizia(const string& nome,int tempoStimato,unsigned short int stanzeDaPulire,Inquilino * incaricato=nullptr,bool svolto=false);
     virtual ~Pulizia() {}
     virtual Pulizia* clone() const;
-    virtual bool posponi (const Data d=Data()) const;
+    virtual bool posponi (const Data& d=Data()) const;
     virtual string generaNota() const;
     void exportXml(QXmlStreamWriter & xmlOutput) const;
     virtual unsigned short int calcolaPunteggio() const;

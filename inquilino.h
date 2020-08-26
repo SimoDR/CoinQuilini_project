@@ -22,14 +22,14 @@ private:
 public:
     Inquilino(const string&, const string&);        //utente da nome e pw
     void modifica(const string&, const string&); //modifica username e/o password
-    void setCD(const double&);            //modifica il credito/debito aggiungendo (o togliendo se negativo)
-    void setPunteggio(short int);  //modifica il punteggio aggiungendo (o togliendo se negativo) //occhio al passaggio per rif costante
+    void setCD(double);            //modifica il credito/debito aggiungendo (o togliendo se negativo)
+    void setPunteggio(short int);  //modifica il punteggio aggiungendo (o togliendo se negativo)
     virtual unsigned short int isAdmin() const;   //ritorna un intero che indica la categoria dell'utente (0 per Inquilino)
     bool puoPosporre() const; //bool indica se l'inquilino può o no posporre
     double getCreditoDebito() const;
-    short int getPunteggio() const;
+    unsigned short int getPunteggio() const;
     string getNome() const;
-    bool isLogged(const string &,const string &) const;
+    bool isLogged(const string &, const string &) const;
     virtual std::string getLabel() const;
     void exportXml(QXmlStreamWriter&) const;
     virtual ~Inquilino(){}

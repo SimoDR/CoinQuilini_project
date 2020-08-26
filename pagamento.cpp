@@ -2,7 +2,10 @@
 
 double Pagamento::_pesoPagamento=30; // => l'incarico vale 1 punto ogni 30 euro di importo
 
-void Pagamento::setImporto(const double& x){
+Pagamento::Pagamento(const std::string& nome, double importo, Inquilino *incaricato, bool svolto):
+    Incarico(nome,incaricato,svolto),_importo(importo) {}
+
+void Pagamento::setImporto(double x){
     _importo=x;
 }
 
@@ -14,19 +17,11 @@ double Pagamento::getImporto() const
 Pagamento::~Pagamento() {}
 
 string Pagamento::generaNota() const {
-    string s1="L'importo di questa spesa è: ";
-    string s2=" €";
-    return s1+std::to_string(_importo)+s2;
+    return "L'importo di questa spesa è: "+std::to_string(_importo)+" €";
 }
 
 unsigned short int Pagamento::calcolaPunteggio() const{
-    if (_pesoPagamento>_importo) return 1;
-    else
-    {
-        unsigned short int p=_importo/_pesoPagamento;
-        controlloSoglia(p);
-        return p;
-    }
+    return controlloSoglia(_importo/_pesoPagamento);
 }
 
 void Pagamento::exportXml(QXmlStreamWriter & xmlOutput) const

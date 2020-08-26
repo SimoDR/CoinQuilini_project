@@ -3,6 +3,8 @@
 #include<iostream>
 #include<vector>
 #include<string>
+#include "utilities.h"
+
 #include "outofboundexception.h"
 #include<sstream>
 #include<stdexcept>

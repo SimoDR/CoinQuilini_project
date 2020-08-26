@@ -8,8 +8,6 @@
 #include"pagamento.h"
 using std::map;
 
-
-
 class Calendario
 {
 private:
@@ -97,11 +95,11 @@ public:
     // tra le varie robe invocherà
     // iteratoreFromData(_iteratoreCorrente,dataIncarico)
 
-    bool insert(Incarico *, Data&, int, int);
+    void insert(Incarico *, Data&, int, int);
 
-    bool remove(Incarico * daRimuovere, const Data& dataIncarico);
+    void remove(Incarico * daRimuovere, const Data& dataIncarico);
 
-    bool posponiIncarico(Incarico * daPosporre, unsigned int quantoPosporre,const Data& dataIncarico);
+    void posponiIncarico(Incarico * daPosporre, unsigned int quantoPosporre,const Data& dataIncarico);
 
     void checkIncarichiSvolti();
 
