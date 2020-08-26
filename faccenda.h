@@ -8,7 +8,7 @@ private:
     int _tempoStimato; // minuti per effettuare la faccenda
     static unsigned short int _pesoFaccenda;
 public:
-    Faccenda(string nome,int tempoStimato,Inquilino * incaricato=nullptr,bool svolto=false);
+    Faccenda(const string& nome,int tempoStimato,Inquilino * incaricato=nullptr,bool svolto=false);
     virtual ~Faccenda()=0;
     virtual string generaNota() const;
     virtual void exportXml(QXmlStreamWriter&) const;

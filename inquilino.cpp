@@ -7,7 +7,7 @@ void Inquilino::modifica(const string& user, const string& pw)
     _user = user;
     _password = pw;
 }
-void Inquilino::setCD(const double& cd)
+void Inquilino::setCD(double cd)
 {
     _creditoDebito = _creditoDebito + cd;
 }
@@ -56,7 +56,7 @@ void Inquilino::exportXml(QXmlStreamWriter & xmlOutput) const
     xmlOutput.writeEndElement();
 }
 
-short int Inquilino::getPunteggio() const{
+unsigned short int Inquilino::getPunteggio() const{
     return _punteggio;
 }
 

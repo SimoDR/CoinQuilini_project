@@ -18,13 +18,12 @@ private:
 	string _nome;
     Inquilino* _incaricato;
     bool _svolto;
-	static unsigned int _sogliaMax;
-
+    static unsigned short int _sogliaMax;
+    static unsigned short int _sogliaMin;
 protected:
-	void controlloSoglia(unsigned short int &) const; // bisogna gestire eccezioni che possono causare l'overflow del punteggio (es. mille commensali)
-
+    static unsigned short int controlloSoglia(int);
 public:
-    Incarico(string nome,Inquilino * incaricato=nullptr,bool svolto=false);
+    Incarico(const string& nome,Inquilino * incaricato=nullptr,bool svolto=false);
     Incarico() {}
 	void setNome(const string&);
     string getNome() const {return _nome;} //debug
@@ -34,12 +33,11 @@ public:
     void setSvolto();
     virtual ~Incarico() = 0;
 	virtual Incarico* clone() const =0;
-    virtual bool posponi (const Data d=Data()) const;
+    virtual bool posponi (const Data & d=Data()) const;  //debug parametro d non sempre utilizzato
     virtual string generaNota() const =0;
 
     virtual void exportXml(QXmlStreamWriter&) const;
     virtual void importXml(QXmlStreamReader & xmlInput, vector<string>& parametri); //parametri è il vettore che si passa: vector<string> parametri(12,"\0");
-	// virtual import //da definire opportunamente
     virtual unsigned short int calcolaPunteggio() const=0;
 };
 

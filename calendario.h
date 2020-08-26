@@ -8,8 +8,6 @@
 #include"pagamento.h"
 using std::map;
 
-
-
 class Calendario
 {
 private:

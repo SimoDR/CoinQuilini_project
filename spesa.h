@@ -13,14 +13,13 @@ private:
     static vector<string> _listaSpesa;
     unsigned short int _numeroArticoli;
 public:
-    Spesa(string nome,double importo,int tempoStimato,unsigned short int numeroArticoli=0,Inquilino * incaricato=nullptr,bool svolto=false);
+    Spesa(const string& nome,double importo,int tempoStimato,unsigned short int numeroArticoli=0,Inquilino * incaricato=nullptr,bool svolto=false);
     virtual ~Spesa() {};
     virtual Spesa* clone() const;
-    virtual bool posponi (const Data d=Data()) const;
+    virtual bool posponi (const Data& d=Data()) const;
     virtual string generaNota() const;
     void exportXml(QXmlStreamWriter & xmlOutput) const;
     virtual unsigned short int calcolaPunteggio() const;
-    // virtual import
     vector<string> getListaSpesa() const;
     void aggiungiListaSpesa(const string&);
     void rimuoviListaSpesa(const string&);

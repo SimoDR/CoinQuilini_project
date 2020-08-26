@@ -3,12 +3,12 @@
 unsigned short int Spesa::_pesoSpesa=10; // => 1 punto ogni 10 articoli comprati
 vector<string> Spesa::_listaSpesa;
 
-Spesa::Spesa(std::string nome, double importo, int tempoStimato, unsigned short numeroArticoli, Inquilino *incaricato, bool svolto):
+Spesa::Spesa(const std::string& nome, double importo, int tempoStimato, unsigned short numeroArticoli, Inquilino *incaricato, bool svolto):
     Pagamento(nome,importo,incaricato,svolto),Faccenda(nome,tempoStimato,incaricato,svolto), _numeroArticoli(numeroArticoli) {}
 
 Spesa* Spesa::clone() const {return new Spesa(*this);}
 
-bool Spesa::posponi(const Data d) const
+bool Spesa::posponi(const Data& d) const
 {
     return true;
 }
@@ -17,7 +17,7 @@ string Spesa::generaNota() const
 {
     if ( ! getSvolto() ){
 
-        //non smart da rivedere
+        //debug: non smart da rivedere
         string elenco="";
         for (vector<string>::const_iterator cit = _listaSpesa.begin() ; cit != _listaSpesa.end(); cit++){
             elenco+=*cit+" ";
@@ -42,16 +42,7 @@ void Spesa::exportXml(QXmlStreamWriter & xmlOutput) const
 
 unsigned short int Spesa::calcolaPunteggio() const
 {
-    if (_numeroArticoli<_pesoSpesa)
-    {
-        return Pagamento::calcolaPunteggio();
-    }
-    else
-    {
-        unsigned short int p=_numeroArticoli/_pesoSpesa;
-        controlloSoglia(p);
-        return p;
-    }
+    return controlloSoglia(_numeroArticoli/_pesoSpesa);
 }
 
 void Spesa::setArticoli()

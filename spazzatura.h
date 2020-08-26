@@ -10,7 +10,7 @@ private:
     string _cosaButtare;
 
 public:
-    Spazzatura(string nome, string cosaButtare,int tempoStimato, Inquilino * incaricato=nullptr,bool svolto=false);
+    Spazzatura(const string& nome, string cosaButtare,int tempoStimato, Inquilino * incaricato=nullptr,bool svolto=false);
     virtual ~Spazzatura() {}
     virtual Spazzatura* clone() const;
     virtual string generaNota() const;

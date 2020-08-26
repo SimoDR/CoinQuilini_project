@@ -242,18 +242,18 @@ int main(int argc, char *argv[])
      cout<<"Questo incarico vale: "<<boll->calcolaPunteggio()<<" punti!"<<endl;
      cout<<"***"<<endl;
 
-//     Spesa * spesa=new Spesa("panificio",10,30,10);
-//     spesa->aggiungiListaSpesa("banane");
-//     spesa->aggiungiListaSpesa("zucchine");
-//     spesa->aggiungiListaSpesa("meloni");
-//     spesa->rimuoviListaSpesa("errore");
-//     spesa->rimuoviListaSpesa("zucchine");
+     Spesa * spesa=new Spesa("panificio",10,30,10);
+     spesa->aggiungiListaSpesa("banane");
+     spesa->aggiungiListaSpesa("zucchine");
+     spesa->aggiungiListaSpesa("meloni");
+     spesa->rimuoviListaSpesa("errore");
+     spesa->rimuoviListaSpesa("zucchine");
 
-//     cout<<spesa->generaNota()<<endl;
-//     spesa->setSvolto();
-//     cout<<spesa->generaNota()<<endl;
-//     cout<<"Questo incarico vale: "<<spesa->calcolaPunteggio()<<" punti!"<<endl;
-//     cout<<"***"<<endl;
+     cout<<spesa->generaNota()<<endl;
+     spesa->setSvolto();
+     cout<<spesa->generaNota()<<endl;
+     cout<<"Questo incarico vale: "<<spesa->calcolaPunteggio()<<" punti!"<<endl;
+     cout<<"***"<<endl;
 
 
  }
