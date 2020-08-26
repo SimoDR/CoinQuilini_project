@@ -3,14 +3,14 @@
 
 
 
-FormIncarico::FormIncarico(const QString &tipo, bool regolare, vector<string> inquilini, QWidget *parent): QDialog(parent),_tipo(tipo),_regolare(regolare), _nome(new QLabel("Nome:")), _nomeEdit(new QLineEdit),_data(new QLabel("Data:")), _dataEdit(new QLineEdit), _inquilini(new QLabel("Incaricato:")),_combo(new QComboBox), _ok(new QPushButton("Ok")), _no(new QPushButton("Annulla")), _layout(new QGridLayout), _buttons(new QHBoxLayout), _mainLayout(new QVBoxLayout)
+FormIncarico::FormIncarico(const QString &tipo, bool regolare, vector<string> inquilini, QWidget *parent): QDialog(parent),_tipo(tipo),_regolare(regolare), _nome(new QLabel("Nome:")), _nomeEdit(new QLineEdit),_data(new QLabel("Data:")), _dataEdit(new QDateEdit), _inquilini(new QLabel("Incaricato:")),_combo(new QComboBox), _ok(new QPushButton("Ok")), _no(new QPushButton("Annulla")), _layout(new QGridLayout), _buttons(new QHBoxLayout), _mainLayout(new QVBoxLayout)
 {
     setWindowTitle("Creazione incarico "+ tipo);
     setModal(true);
     _layout->addWidget(_nome,1,1);
     _layout->addWidget(_nomeEdit,1,2);
     _layout->addWidget(_data,2,1);
-    _dataEdit->setInputMask("d9/d9/9999");
+    _dataEdit->setMinimumDate(QDate::currentDate());
     _layout->addWidget(_dataEdit,2,2);
         _layout->addWidget(_inquilini,3,1);
     buildCombo(inquilini);
@@ -29,8 +29,8 @@ FormIncarico::FormIncarico(const QString &tipo, bool regolare, vector<string> in
         _layout->addWidget(_importo,4,2);
         QLabel *dataLimite= new QLabel("Data limite:");
         _layout->addWidget(dataLimite,5,1);
-        _dataLimite=new QLineEdit;
-        _dataLimite->setInputMask("d9/d9/9999");
+        _dataLimite=new QSpinBox;
+        _dataLimite->setRange(1,30);
         _layout->addWidget(_dataLimite,5,2);
     }
     if (tipo=="Spesa")
@@ -132,15 +132,13 @@ void FormIncarico::raccogliDati()
     if(_tipo=="Spesa" || _tipo=="Bolletta")
         parametri[8]=(_importo->text()).toStdString();
     if(_tipo=="Bolletta")
-        parametri[9]=(_dataLimite->text()).toStdString();
-    parametri[10]=(_dataEdit->text()).toStdString();
+        parametri[9]=std::to_string(_dataLimite->value());
+    parametri[10]=((_dataEdit->date()).toString("d/M/yyyy")).toStdString();
     if(_regolare)
         parametri[11]=std::to_string(_nOccorrenze->value());
     if(_tipo=="Spazzatura")
         parametri[13]=(_rifiuto->currentText()).toStdString();
     emit inviaDati(parametri);
-
-
 }
 void FormIncarico::buildCombo(const vector<std::string> & inquilini)
 {

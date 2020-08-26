@@ -61,6 +61,7 @@ private:
     void addcalendar();
     void addlists();
     void addmenubar();
+    void populateList(QListWidget *, const QString &, const QDate &);
     QString login();
 
 public:

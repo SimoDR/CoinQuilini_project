@@ -16,7 +16,10 @@ void ListaIncarichi::buildLista(const vector<std::string> & incarichi, const vec
 {
     int cont=0;
     for(auto ci=incarichi.cbegin();ci!=incarichi.cend();ci++)
+    {
         _lista->addItem(QString::fromStdString(incarichi[cont])+ "        " + QString::fromStdString(incaricati[cont]));
+        cont++;
+    }
     _mainLayout->addWidget(_lista);
 }
 

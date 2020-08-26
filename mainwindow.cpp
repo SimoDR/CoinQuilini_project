@@ -107,6 +107,7 @@ void Mainwindow::addlists()
     prec->setText(((_calendar->selectedDate()).addDays(-1)).toString(Qt::SystemLocaleLongDate));
 
     QListWidget* preclist= new QListWidget;
+    populateList(preclist, _inquilino, (_calendar->selectedDate()).addDays(-1));
 
     //selected day list and label
     QLabel* selected = new QLabel;
@@ -114,6 +115,7 @@ void Mainwindow::addlists()
     selected->setText((_calendar->selectedDate()).toString(Qt::SystemLocaleLongDate));
 
     QListWidget* selectedlist= new QListWidget;
+    populateList(selectedlist, _inquilino, (_calendar->selectedDate()));
 
     //next list and label
     QLabel* succ= new QLabel;
@@ -121,7 +123,7 @@ void Mainwindow::addlists()
     succ->setText(((_calendar->selectedDate()).addDays(1)).toString(Qt::SystemLocaleLongDate));
 
     QListWidget* succlist= new QListWidget;
-
+    populateList(succlist, _inquilino, (_calendar->selectedDate()).addDays(1));
     //layout add
     QVBoxLayout* listlayout = new QVBoxLayout;
     listlayout->addWidget(prec);
@@ -153,5 +155,23 @@ void Mainwindow::addmenubar()
     _opzioni->addAction(_logOut);
     _opzioni->addAction(_info);
     _menuBar->addMenu(_opzioni);
+
+}
+
+void Mainwindow::populateList(QListWidget *lista, const QString & utente, const QDate & giorno)
+{
+    string data=giorno.toString("d/M/yyyy").toStdString();
+    vector<string> incaricati;
+    vector<string> incarichi=_controller->incarichiGiorno(data, incaricati);
+    for(auto ci=incarichi.cbegin();ci!=incarichi.cend();ci++)
+        lista->addItem(QString::fromStdString(*ci));
+    int cont=0;
+    for(auto ci=incarichi.cbegin();ci!=incarichi.cend();ci++)
+    {
+        if(incaricati[cont]!=utente.toStdString())
+            (lista->item(cont))->setHidden(true);
+        cont++;
+    }
+
 
 }

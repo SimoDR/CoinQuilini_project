@@ -24,7 +24,7 @@ private:
     QLabel *_nome;
     QLineEdit * _nomeEdit;
     QLabel * _data;
-    QLineEdit * _dataEdit;
+    QDateEdit * _dataEdit;
     QLabel * _inquilini;
     QComboBox * _combo;
     QPushButton *_ok;
@@ -32,7 +32,7 @@ private:
     QGridLayout * _layout;
     QSpinBox * _tempoStimato;
     QLineEdit * _importo;
-    QLineEdit * _dataLimite;
+    QSpinBox * _dataLimite;
     QSpinBox * _commensali;
     QSpinBox * _nStanze;
     QComboBox * _rifiuto;
