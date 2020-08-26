@@ -49,7 +49,6 @@ void Incarico::exportXml(QXmlStreamWriter & xmlOutput) const
 
 void Incarico::importXml(QXmlStreamReader & xmlInput, vector<string> & parametri)
 {
-
     string nome,incaricato,svolto;
 
     assignWithXml(xmlInput, "nome", nome);
@@ -59,7 +58,6 @@ void Incarico::importXml(QXmlStreamReader & xmlInput, vector<string> & parametri
     parametri[0]=nome;
     parametri[1]=incaricato;
     parametri[12]=incaricato;
-
 }
 
 

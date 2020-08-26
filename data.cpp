@@ -16,9 +16,9 @@ Data::Data(unsigned short int giorno, unsigned short int mese, unsigned short in
     {
         checkLimiti();
     }
-    catch (std::domain_error *exc)
+    catch(std::domain_error * e)
     {
-        cout << exc->what() << endl;
+        showMessage(QString::fromStdString(e->what()));
     }
 }
 
@@ -34,18 +34,18 @@ Data::Data(std::string inputString)
     {
         parsingDaStringa(inputString);
     }
-    catch (std::invalid_argument *exc)
+    catch (std::invalid_argument *e)
     {
-        cout << exc->what() << endl;
+        showMessage(QString::fromStdString(e->what()));
     }
 
     try
     {
         checkLimiti();
     }
-    catch (std::domain_error *exc)
+    catch (std::domain_error *e)
     {
-        cout << exc->what() << endl;
+        showMessage(QString::fromStdString(e->what()));
     }
 }
 
@@ -77,6 +77,7 @@ bool Data::isBisestile() const
 
 void Data::checkLimiti()
 {
+
     setMaxGiorni();
     if (_giornoCorrente > _maxGiorni || _giornoCorrente < _minGiorni)
     {
@@ -88,10 +89,13 @@ void Data::checkLimiti()
     }
     if (_annoCorrente < _minAnni || _annoCorrente > _maxAnni)
         throw new OutOfBoundException("anno");
+
+
 }
 
 void Data::aggiustaLimiti()
 {
+
     if (_meseCorrente <= _maxMesi && _meseCorrente >= _minMesi)
         setMaxGiorni();
 
@@ -115,10 +119,13 @@ void Data::aggiustaLimiti()
 
     if (_annoCorrente < _minAnni)
         _annoCorrente = _minAnni;
+
     else if (_annoCorrente > _maxAnni)
     {
         throw new OutOfBoundException("anno");
     }
+
+
 }
 
 void Data::parsingDaStringa(string inputString)
@@ -141,6 +148,8 @@ void Data::parsingDaStringa(string inputString)
                 stringAnno = stringAnno + (*it);
         }
     }
+
+
     if (stringGiorno.empty() || stringMese.empty() || stringAnno.empty())
         throw new std::invalid_argument("Parametri inseriti non correttamente");
     else
@@ -149,6 +158,9 @@ void Data::parsingDaStringa(string inputString)
         _meseCorrente = stoi(stringMese);
         _annoCorrente = stoi(stringAnno);
     }
+
+
+
 }
 
 Data Data::operator+(unsigned short addendo) const
@@ -159,19 +171,18 @@ Data Data::operator+(unsigned short addendo) const
     return daRitornare;
 }
 
-//const Data &Data::operator+(unsigned short addendo)
-//{
-//    _giornoCorrente = _giornoCorrente + addendo;
-//    aggiustaLimiti();
-//    return *this;
-//}
+
 
 const Data &Data::aggiungiSettimane(unsigned short numero)
 {
     for (unsigned short int i = 0; i < numero; i++)
     {
         this->operator+(7);
-        aggiustaLimiti();
+        try{ aggiustaLimiti(); }
+        catch (std::domain_error *e)
+        {
+            showMessage(QString::fromStdString(e->what()));
+        }
     }
     return *this;
 }
@@ -181,7 +192,11 @@ const Data &Data::aggiungiMesi(unsigned short numero)
     for (unsigned short int i = 0; i < numero; i++)
     {
         this->operator+(30);
-        aggiustaLimiti();
+        try{ aggiustaLimiti(); }
+        catch (std::domain_error *e)
+        {
+            showMessage(QString::fromStdString(e->what()));
+        }
     }
     return *this;
 }
@@ -191,7 +206,11 @@ const Data &Data::aggiungiAnni(unsigned short numero)
     for (unsigned short int i = 0; i < numero; i++)
     {
         _annoCorrente++;
-        aggiustaLimiti();
+        try{ aggiustaLimiti(); }
+        catch (std::domain_error *e)
+        {
+            showMessage(QString::fromStdString(e->what()));
+        }
     }
     return *this;
 }
