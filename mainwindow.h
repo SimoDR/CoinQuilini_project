@@ -15,6 +15,8 @@
 #include <QMenu>
 #include <QAction>
 #include <QGroupBox> //layout with a title
+#include "selezionedialog.h"
+#include "formincarico.h"
 
 class Controller;
 
@@ -67,6 +69,8 @@ signals:
 
 private slots:
    void buildAdminPanel();
+   void buildSelezione();
+   void buildForm(const QString &, bool);
 };
 
 #endif // MAINWINDOW_H

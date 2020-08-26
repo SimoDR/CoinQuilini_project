@@ -3,7 +3,7 @@
 
 #include "faccenda.h"
 
-enum TipologiaRifiuto{secco, umido, plastica, carta, verde, vetro};
+enum TipologiaRifiuto{secco, umido, plastica, carta, vetro};
 
 class Spazzatura: public Faccenda
 {

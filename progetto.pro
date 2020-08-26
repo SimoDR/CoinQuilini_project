@@ -10,6 +10,7 @@ HEADERS += \
     data.h \
     euro.h \
     faccenda.h \
+    formincarico.h \
     incarico.h \
     inquilino.h \
     listainquilini.h \
@@ -18,6 +19,7 @@ HEADERS += \
     outofboundexception.h \
     pagamento.h \
     pulizia.h \
+    selezionedialog.h \
     spazzatura.h \
     spesa.h \
     utilities.h
@@ -33,6 +35,7 @@ SOURCES += \
     data.cpp \
     euro.cpp \
     faccenda.cpp \
+    formincarico.cpp \
     incarico.cpp \
     inquilino.cpp \
     listainquilini.cpp \
@@ -42,6 +45,7 @@ SOURCES += \
     outofboundexception.cpp \
     pagamento.cpp \
     pulizia.cpp \
+    selezionedialog.cpp \
     spazzatura.cpp \
     spesa.cpp \
     utilities.cpp
