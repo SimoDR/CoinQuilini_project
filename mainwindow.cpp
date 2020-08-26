@@ -37,6 +37,12 @@ void Mainwindow::buildForm(const QString & tipo, bool regolare)
 {
     FormIncarico *form=new FormIncarico(tipo, regolare, _controller->getInquilini(), this);
     form->show();
+    connect(form, SIGNAL(inviaDati(const vector<string> &)), this, SLOT(buildIncarico(const vector<string> &)));
+}
+
+void Mainwindow::buildIncarico(const vector<string> & parametri)
+{
+    _controller->creaNuovoIncarico(parametri);
 }
 
 void Mainwindow::addbuttons()

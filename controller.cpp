@@ -76,9 +76,8 @@ void Controller::creaNuovoIncarico(vector<std::string> parametri)
     unsigned short int numeroArticoli;
     if(parametri[7]!="\0") numeroArticoli=std::stoi(parametri[7]);
 
-    int importo=0;
-    if(parametri[8]!="\0") importo=std::stoi(parametri[8]);
-
+    float importo=0;
+    if(parametri[8]!="\0") importo= std::stof(parametri[8]);
     Data dataLimite;
     if(parametri[9]!="\0") dataLimite=parametri[9];
 

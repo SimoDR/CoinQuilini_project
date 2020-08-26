@@ -71,6 +71,7 @@ private slots:
    void buildAdminPanel();
    void buildSelezione();
    void buildForm(const QString &, bool);
+   void buildIncarico(const vector<string> &);
 };
 
 #endif // MAINWINDOW_H

@@ -24,7 +24,7 @@ private:
     QLabel *_nome;
     QLineEdit * _nomeEdit;
     QLabel * _data;
-    QDateEdit * _dataEdit;
+    QLineEdit * _dataEdit;
     QLabel * _inquilini;
     QComboBox * _combo;
     QPushButton *_ok;
@@ -32,7 +32,7 @@ private:
     QGridLayout * _layout;
     QSpinBox * _tempoStimato;
     QLineEdit * _importo;
-    QDateEdit * _dataLimite;
+    QLineEdit * _dataLimite;
     QSpinBox * _commensali;
     QSpinBox * _nStanze;
     QComboBox * _rifiuto;
@@ -47,6 +47,8 @@ public:
     FormIncarico(const QString & tipo, bool regolare, vector<string> inquilini, QWidget *parent=nullptr);
 private slots:
     void raccogliDati();
+signals:
+    void inviaDati(const vector<string> &);
 };
 
 #endif // FORMINCARICO_H

@@ -3,6 +3,7 @@
 
 #include<vector>
 #include<string>
+#include <stdlib.h>
 #include <QObject>
 #include "mainwindow.h"
 #include "listainquilini.h"

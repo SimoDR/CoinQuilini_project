@@ -3,14 +3,14 @@
 
 
 
-FormIncarico::FormIncarico(const QString &tipo, bool regolare, vector<string> inquilini, QWidget *parent): QDialog(parent),_tipo(tipo),_regolare(regolare), _nome(new QLabel("Nome:")), _nomeEdit(new QLineEdit),_data(new QLabel("Data:")), _dataEdit(new QDateEdit), _inquilini(new QLabel("Incaricato:")),_combo(new QComboBox), _ok(new QPushButton("Ok")), _no(new QPushButton("Annulla")), _layout(new QGridLayout), _buttons(new QHBoxLayout), _mainLayout(new QVBoxLayout)
+FormIncarico::FormIncarico(const QString &tipo, bool regolare, vector<string> inquilini, QWidget *parent): QDialog(parent),_tipo(tipo),_regolare(regolare), _nome(new QLabel("Nome:")), _nomeEdit(new QLineEdit),_data(new QLabel("Data:")), _dataEdit(new QLineEdit), _inquilini(new QLabel("Incaricato:")),_combo(new QComboBox), _ok(new QPushButton("Ok")), _no(new QPushButton("Annulla")), _layout(new QGridLayout), _buttons(new QHBoxLayout), _mainLayout(new QVBoxLayout)
 {
     setWindowTitle("Creazione incarico "+ tipo);
     setModal(true);
     _layout->addWidget(_nome,1,1);
     _layout->addWidget(_nomeEdit,1,2);
     _layout->addWidget(_data,2,1);
-    _dataEdit->setMinimumDate(QDate::currentDate());
+    _dataEdit->setInputMask("d9/d9/9999");
     _layout->addWidget(_dataEdit,2,2);
         _layout->addWidget(_inquilini,3,1);
     buildCombo(inquilini);
@@ -25,12 +25,12 @@ FormIncarico::FormIncarico(const QString &tipo, bool regolare, vector<string> in
         QLabel *importo= new QLabel("Importo:");
         _layout->addWidget(importo,4,1);
         _importo=new QLineEdit;
-        _importo->setInputMask("D0,99");
+        _importo->setInputMask("d9.99");
         _layout->addWidget(_importo,4,2);
         QLabel *dataLimite= new QLabel("Data limite:");
         _layout->addWidget(dataLimite,5,1);
-        _dataLimite=new QDateEdit;
-        _dataLimite->setMinimumDate(QDate::currentDate());
+        _dataLimite=new QLineEdit;
+        _dataLimite->setInputMask("d9/d9/9999");
         _layout->addWidget(_dataLimite,5,2);
     }
     if (tipo=="Spesa")
@@ -38,7 +38,7 @@ FormIncarico::FormIncarico(const QString &tipo, bool regolare, vector<string> in
         QLabel *importo= new QLabel("Importo:");
         _layout->addWidget(importo,4,1);
         _importo=new QLineEdit;
-        _importo->setInputMask("D0,99");
+        _importo->setInputMask("d9.99");
         _layout->addWidget(_importo,4,2);
         QLabel* tempo= new QLabel("Tempo stimato (in minuti):");
         _layout->addWidget(tempo,5,1);
@@ -96,7 +96,7 @@ FormIncarico::FormIncarico(const QString &tipo, bool regolare, vector<string> in
     if(regolare)
     {
         QGridLayout *regolare=new QGridLayout;
-        QLabel* cadenza= new QLabel("Cadenza (gni quanti giorni):");
+        QLabel* cadenza= new QLabel("Cadenza (ogni quanti giorni):");
         regolare->addWidget(cadenza,1,1);
         _cadenza=new QSpinBox;
         _cadenza->setRange(1,365);
@@ -114,31 +114,31 @@ FormIncarico::FormIncarico(const QString &tipo, bool regolare, vector<string> in
 
 void FormIncarico::raccogliDati()
 {
-    vector<string> parametri(13,"\0");
+    vector<string> parametri(14,"\0");
     parametri[0]=(_nomeEdit->text()).toStdString();
     parametri[1]=_tipo.toStdString();
     if(_combo->currentText()!="Assegna in automatico")
         parametri[2]=(_combo->currentText()).toStdString();
     if(_regolare)
-        parametri[3]=_cadenza->value();
+        parametri[3]=std::to_string(_cadenza->value());
     if(_tipo!="Bolletta")
-        parametri[4]=_tempoStimato->value();
+        parametri[4]=std::to_string(_tempoStimato->value());
     if(_tipo=="Pulizia")
-        parametri[5]=_nStanze->value();
+        parametri[5]=std::to_string(_nStanze->value());
     if(_tipo=="Cucina")
-        parametri[6]=_commensali->value();
+        parametri[6]=std::to_string(_commensali->value());
     if(_tipo=="Spesa")
-        parametri[7]=_articoli->value();
+        parametri[7]=std::to_string(_articoli->value());
     if(_tipo=="Spesa" || _tipo=="Bolletta")
         parametri[8]=(_importo->text()).toStdString();
     if(_tipo=="Bolletta")
         parametri[9]=(_dataLimite->text()).toStdString();
     parametri[10]=(_dataEdit->text()).toStdString();
     if(_regolare)
-        parametri[11]=_nOccorrenze->value();
+        parametri[11]=std::to_string(_nOccorrenze->value());
     if(_tipo=="Spazzatura")
         parametri[13]=(_rifiuto->currentText()).toStdString();
-
+    emit inviaDati(parametri);
 
 
 }
