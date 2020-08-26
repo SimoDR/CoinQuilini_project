@@ -1,4 +1,4 @@
-/*
+*/
 #include <iostream>
 #include<vector>
 #include <QApplication>
@@ -12,7 +12,8 @@ int main(int argc, char *argv[])
     Login l(nullptr, &controller);
     l.show();
     return a.exec();
-}*/
+}
+*/
 
 
 #include "incarico.h"
@@ -209,14 +210,10 @@ int main(int argc, char *argv[])
 
 }
 
-
-
-
-
-
-
-
 /*
+//il main della gerarchia
+// ********************************
+
 // il main della gerarchia
 
  #include "incarico.h"
@@ -269,4 +266,5 @@ int main(int argc, char *argv[])
 
  }
 */
+
 
