@@ -26,3 +26,14 @@ std::string Bolletta::generaNota() const
             + "//" + Pagamento::generaNota() + "//" + _dataLimite.dataToString()
             + "//" + "A pagare e morire si fa sempre in tempo!";
 }
+
+void Bolletta::importXml(QXmlStreamReader & xmlInput, vector<string> & parametri)
+{
+    Pagamento::importXml(xmlInput,parametri);
+
+    string dataLimite;
+
+    assignWithXml(xmlInput, "dataLimite", dataLimite);
+
+    parametri[9]=dataLimite;
+}

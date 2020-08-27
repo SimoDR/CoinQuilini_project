@@ -16,7 +16,7 @@ public:
     virtual string generaNota() const;
     virtual void exportXml(QXmlStreamWriter & xmlOutput) const;
     virtual string getLabel() const;
-    void importXml(QXmlStreamReader & xmlInput, vector<string> & parametri);
+    static void importXml(QXmlStreamReader & xmlInput, vector<string> & parametri);
     virtual unsigned short int calcolaPunteggio() const;
 };
 

@@ -12,7 +12,7 @@ public:
     virtual ~Faccenda()=0;
     virtual string generaNota() const;
     virtual void exportXml(QXmlStreamWriter&) const;
-    void importXml(QXmlStreamReader & xmlInput, vector<string> & parametri);
+    static void importXml(QXmlStreamReader & xmlInput, vector<string> & parametri);
     virtual unsigned short int calcolaPunteggio() const;
 };
 

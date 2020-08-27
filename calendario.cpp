@@ -38,12 +38,25 @@ dList<Calendario::Giorno>::iterator Calendario::inizializzaCalendario(const Data
     return _giorni.begin();
 }
 
-Calendario::Calendario(const Data& odierna, const vector<Inquilino *> &listaInquilini): _iteratoreCorrente(inizializzaCalendario(odierna)), _buffer(listaInquilini) {}
+Calendario::Calendario(const Data& odierna, const vector<Inquilino *> &listaInquilini): _iteratoreCorrente(inizializzaCalendario(odierna)), _buffer(listaInquilini)
+{
+    importXml();
+}
 
 Calendario::~Calendario()
 {
-    //da fare
+    exportXml();
+
+    for(dList<Giorno>::iterator x=_giorni.begin(); x!=_giorni.end(); ++x)
+    {
+        for(vector<Incarico*>::iterator y=(*x)._incarichiDelGiorno.begin(); y!=(*x)._incarichiDelGiorno.begin(); ++y)
+        {
+            delete *y;
+        }
+    }
 }
+
+
 
 void Calendario::aggiungiAlBuffer(Inquilino *nuovoInquilino)
 {
@@ -265,6 +278,17 @@ void Calendario::BufferInquilini::avanza()
     if(_index==_inquilini.end()) _index=_inquilini.begin();
 }
 
+Inquilino * Calendario::BufferInquilini::getInquilino(std::string nome) const
+{
+    vector<Inquilino*>::const_iterator cit;
+    for(cit=_inquilini.begin(); cit!=_inquilini.end(); ++cit)
+    {
+        if((*cit)->getNome()==nome)
+            return *cit;
+    }
+    return *cit; //pte
+}
+
 vector<Inquilino *> Calendario::BufferInquilini::trovaMinimi(dList<Calendario::Giorno>::iterator iteratoreMinimo) //restituisce l'inquilino (o più di uno) che ha meno incarichi già programmati in una determinata data
 {
     map<Inquilino*,int> coppie;
@@ -412,28 +436,23 @@ void Calendario::importXml()
                         vector<string> parametri(12,"\0");
                         assignWithXml(xmlInput, "DATA", dataCorrente);
                         if (xmlInput.name() == "SPESA") {
-                            Spesa * i=nullptr;
-                            i->Spesa::importXml(xmlInput,parametri);
+                            Spesa::importXml(xmlInput,parametri);
                         }
                         if (xmlInput.name() == "CUCINA") {
-                            Cucina * i=nullptr;
-                            i->Cucina::importXml(xmlInput,parametri);
+                            Cucina::importXml(xmlInput,parametri);
                         }
                         if (xmlInput.name() == "PULIZIA") {
-                            Pulizia * i=nullptr;
-                            i->Pulizia::importXml(xmlInput,parametri);
+                            Pulizia::importXml(xmlInput,parametri);
                         }
                         if (xmlInput.name() == "SPAZZATURA") {
-                            Spazzatura * i=nullptr;
-                            i->Spazzatura::importXml(xmlInput,parametri);
+                            Spazzatura::importXml(xmlInput,parametri);
                         }
                         if (xmlInput.name() == "BOLLETTA") {
-                            Bolletta * i=nullptr;
-                            i->Bolletta::importXml(xmlInput,parametri);
+                            Bolletta::importXml(xmlInput,parametri);
                         }
                         parametri[10]=dataCorrente;
                         creaNuovoIncarico(parametri);
-                        xmlInput.skipCurrentElement(); //per uscire dallo "scope"(?)
+                        xmlInput.skipCurrentElement();
                     }
                 }
                 else
@@ -536,12 +555,15 @@ void Calendario::creaNuovoIncarico(const vector<string>& parametri)
         i=new Bolletta(nomeIncarico,importo,dataLimite); //partecipanti????
 
     if(numeroOccorrenze==1 && nomeIncaricato!="\0") //assegnazione manuale dell'incaricato essendo evento singolo
-        i->setIncaricato(_listaInquilini.getInquilino(nomeIncaricato));
+        i->setIncaricato(_buffer.getInquilino(nomeIncaricato));
     if(svolto) //per l'import
         i->setSvolto();
 
     insert(i,dataInizio,numeroOccorrenze,cadenzaIncarico);
 }
+
+
+
 
 void Calendario::incarichiGiorno(const Data & giorno, vector<std::string> & tipiIncarichi, vector<string> & incaricati) const
 {

@@ -69,7 +69,6 @@ public slots:
 
     void incrementaGiorno(); //MESSAGGIO PER CHI NON HA SVOLTO
 
-    void importXmlCalendario();
 
     vector<string> incarichiGiorno(string giorno, vector<string> & incaricati);
 

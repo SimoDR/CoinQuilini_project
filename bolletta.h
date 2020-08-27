@@ -14,6 +14,7 @@ public:
     virtual string getLabel() const;
     virtual void exportXml(QXmlStreamWriter&) const;
     virtual string generaNota() const;
+    static void importXml(QXmlStreamReader & xmlInput, vector<string> & parametri);
 };
 
 #endif // BOLLETTA_H

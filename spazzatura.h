@@ -15,7 +15,7 @@ public:
     virtual Spazzatura* clone() const;
     virtual string generaNota() const;
     virtual void exportXml(QXmlStreamWriter & xmlOutput) const;
-    void importXml(QXmlStreamReader & xmlInput, vector<string> & parametri);
+    static void importXml(QXmlStreamReader & xmlInput, vector<string> & parametri);
     virtual string getLabel() const;
     virtual unsigned short int calcolaPunteggio() const;
 };

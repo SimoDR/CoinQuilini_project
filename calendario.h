@@ -69,6 +69,7 @@ public:
         //metodi
         BufferInquilini(const vector<Inquilino*>& listaInquilini);
         void avanza();
+        Inquilino * getInquilino(string nome) const;
         vector<Inquilino*> trovaMinimi(dList<Giorno>::iterator iteratoreMinim0);
         Inquilino * restituisciIlMinimo(dList<Giorno>::iterator iteratoreMinimo);
 

@@ -1,4 +1,4 @@
-
+/*
 #include <iostream>
 #include<vector>
 #include <QApplication>
@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
 }
 
 
-/*
+*/
 
 
 #include "incarico.h"
@@ -227,7 +227,7 @@ int main(int argc, char *argv[])
 
 
 
-
+/*
 
 
 
