@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
     Controller controller;
     return a.exec();
 }
-*/
+
 
 
 #include "incarico.h"
@@ -205,7 +205,7 @@ int main(int argc, char *argv[])
 
 
 
-/*
+*/
 
 
 //il main della gerarchia
@@ -263,4 +263,4 @@ int main(int argc, char *argv[])
  }
 
 
-*/
+

@@ -1,7 +1,7 @@
 #include "login.h"
 
 
-Login::Login(Controller* c) : QWidget(c), _controller(c)
+Login::Login(Controller* c) : _controller(c)
 {
     setWindowTitle("Login");
     //user label

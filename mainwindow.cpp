@@ -53,16 +53,12 @@ void Mainwindow::buildListaIncarichi(const QDate & giorno)
     ListaIncarichi *lista=new ListaIncarichi(giorno.toString("d/M/yyyy"),_controller->isAdmin(_inquilino.toStdString()), incarichi, incaricati, this);
     lista->show();
 }
-
-<<<<<<< HEAD
-=======
 void Mainwindow::logOut()
 {
     this->close();
     _controller->buildLogin();
 }
 
->>>>>>> parent of 0b89d27... Revert "aggiornato meccanismo di login (ma non testato)"
 void Mainwindow::addbuttons()
 {
 
