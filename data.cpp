@@ -171,49 +171,23 @@ Data Data::operator+(unsigned short addendo) const
     return daRitornare;
 }
 
-
-
-const Data &Data::aggiungiSettimane(unsigned short numero)
+int Data::differenza(const Data & daRaggiungere) const
 {
-    for (unsigned short int i = 0; i < numero; i++)
+    Data diPartenza(*this);
+    int count=0;
+    while(diPartenza<daRaggiungere)
     {
-        this->operator+(7);
-        try{ aggiustaLimiti(); }
-        catch (std::domain_error *e)
-        {
-            showMessage(QString::fromStdString(e->what()));
-        }
+        diPartenza=diPartenza+1;
+        count++;
     }
-    return *this;
+    return count;
 }
 
-const Data &Data::aggiungiMesi(unsigned short numero)
-{
-    for (unsigned short int i = 0; i < numero; i++)
-    {
-        this->operator+(30);
-        try{ aggiustaLimiti(); }
-        catch (std::domain_error *e)
-        {
-            showMessage(QString::fromStdString(e->what()));
-        }
-    }
-    return *this;
-}
 
-const Data &Data::aggiungiAnni(unsigned short numero)
-{
-    for (unsigned short int i = 0; i < numero; i++)
-    {
-        _annoCorrente++;
-        try{ aggiustaLimiti(); }
-        catch (std::domain_error *e)
-        {
-            showMessage(QString::fromStdString(e->what()));
-        }
-    }
-    return *this;
-}
+
+
+
+
 
 bool Data::operator<(const Data & d) const
 {
@@ -280,3 +254,5 @@ std::ostream &operator<<(std::ostream &os, const Data &d)
     os << d._giornoCorrente << "/" << d._meseCorrente << "/" << d._annoCorrente;
     return os;
 }
+
+

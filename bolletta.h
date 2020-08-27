@@ -7,8 +7,9 @@ class Bolletta: public Pagamento{
 private:
     Data _dataLimite;
 public:
-    Bolletta(const string & nome,float importo,const Data& dataLimite,Inquilino * incaricato=nullptr,bool svolto=false);
+    Bolletta(const string & nome,float importo,const Data& dataLimite=Data(),Inquilino * incaricato=nullptr,bool svolto=false);
     virtual ~Bolletta() {}
+    virtual void setDataLimite(const Data&);
     virtual Bolletta* clone() const;
     virtual bool posponi (const Data& d=Data()) const;
     virtual string getLabel() const;

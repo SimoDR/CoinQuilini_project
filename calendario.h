@@ -27,7 +27,14 @@ private:
         {
             cout<<_dataDelGiorno<<": ";
             for(vector<Incarico*>::iterator it=_incarichiDelGiorno.begin(); it!=_incarichiDelGiorno.end(); ++it)
+            {
+
                 cout<<(*it)->getNome()<<" ("<<(*it)->getIncaricato()->getNome()<<") ";
+//                if(dynamic_cast<Bolletta*>(*it))
+//                {
+//                    cout<<(*it)->generaNota()<<endl;
+//                }
+            }
             cout<<endl;
         }
 
@@ -103,7 +110,7 @@ public:
     // iteratoreFromData(_iteratoreCorrente,dataIncarico)
 
 
-    void insert(Incarico *, Data, int, int);
+    void insert(Incarico *, Data, int, int, int);
 
     void remove(Incarico * daRimuovere, const Data& dataIncarico);
 

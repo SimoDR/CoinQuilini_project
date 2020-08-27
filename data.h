@@ -47,9 +47,8 @@ public:
     Data(unsigned short int=1,unsigned short int=1,unsigned short int=1980);
     string dataToString() const;
     Data operator+(unsigned short int) const;
-    const Data& aggiungiSettimane(unsigned short int);
-    const Data& aggiungiMesi(unsigned short int);
-    const Data& aggiungiAnni(unsigned short int);
+    int operator+(const Data&) const;
+    int differenza(const Data&) const;
     bool operator<(const Data&) const;
     bool operator>(const Data&) const;
     bool operator==(const Data&) const;

@@ -3,6 +3,11 @@
 Bolletta::Bolletta(const std::string & nome, float importo, const Data &dataLimite, Inquilino *incaricato, bool svolto):
     Incarico(nome,incaricato,svolto), Pagamento(importo), _dataLimite(dataLimite) {}
 
+void Bolletta::setDataLimite(const Data& dataLimite)
+{
+    _dataLimite=dataLimite;
+}
+
 Bolletta* Bolletta::clone() const {return new Bolletta(*this);}
 
 bool Bolletta::posponi(const Data& d) const
@@ -35,6 +40,10 @@ void Bolletta::importXml(QXmlStreamReader & xmlInput, vector<string> & parametri
 
     assignWithXml(xmlInput, "dataLimite", dataLimite);
 
-    parametri[9]=dataLimite;
+    Data diPartenza=parametri[10];
+    Data daRaggiungere(dataLimite);
+    int scostamento=Data(diPartenza).differenza(dataLimite);
+
+    parametri[9]=std::to_string(scostamento);
     parametri[1]="Bolletta";
 }

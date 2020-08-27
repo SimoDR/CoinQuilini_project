@@ -13,6 +13,8 @@ public:
     Cucina(const string & nome,int tempoStimato,unsigned short int numeroCommensali,Inquilino * incaricato=nullptr,bool svolto=false);
     virtual ~Cucina() {}
     virtual Cucina* clone() const;
+    virtual void setDataLimite(const Data&) {}
+
     virtual string generaNota() const;
     virtual unsigned short int calcolaPunteggio() const;
     virtual void exportXml(QXmlStreamWriter&,string data) const;

@@ -142,7 +142,7 @@ Incarico *Calendario::trovaIncarico(const Data &dataIncarico, int indiceIncarico
 
 
 
-void Calendario::insert(Incarico * daInserire, Data  dataInCuiInserire, int numeroOccorrenze, int cadenzaIncarico)
+void Calendario::insert(Incarico * daInserire, Data  dataInCuiInserire, int numeroOccorrenze, int cadenzaIncarico, int scostamentoDataLimite)
 {
     bool assegnato=false;
     if(numeroOccorrenze==1 && daInserire->getIncaricato()!=nullptr) //è già stato assegnato
@@ -166,8 +166,7 @@ void Calendario::insert(Incarico * daInserire, Data  dataInCuiInserire, int nume
         _buffer.avanza();
 
         if(!assegnato) daInserire->setIncaricato(incaricato);
-
-
+        daInserire->setDataLimite(dataInCuiInserire+scostamentoDataLimite);
         iteratoreInCuiInserire->_incarichiDelGiorno.push_back(daInserire->clone());
 
         dataInCuiInserire=dataInCuiInserire+cadenzaIncarico;
@@ -503,11 +502,16 @@ void Calendario::creaNuovoIncarico(const vector<string>& parametri)
 
     float importo=0;
     if(parametri[8]!="\0") importo= std::stof(parametri[8]);
-    Data dataLimite;
-    if(parametri[9]!="\0") dataLimite=parametri[9];
+
+    int scostamento=0;
+    if(parametri[9]!="\0") scostamento=std::stoi(parametri[9]);
 
     Data dataInizio;
     if(parametri[10]!="\0") dataInizio=parametri[10];
+
+
+
+
 
     try{
     if(dataInizio<getDataDiOggi())
@@ -553,7 +557,7 @@ void Calendario::creaNuovoIncarico(const vector<string>& parametri)
     else if(tipoIncarico=="Cucina")
         i=new Cucina(nomeIncarico,tempoStimato,numeroCommensali);
     else if(tipoIncarico=="Bolletta")
-        i=new Bolletta(nomeIncarico,importo,dataLimite); //partecipanti????
+        i=new Bolletta(nomeIncarico,importo); //partecipanti????
 
 
     if(numeroOccorrenze==1 && nomeIncaricato!="\0") //assegnazione manuale dell'incaricato essendo evento singolo
@@ -561,7 +565,7 @@ void Calendario::creaNuovoIncarico(const vector<string>& parametri)
     if(svolto) //per l'import
         i->setSvolto();
 
-    insert(i,dataInizio,numeroOccorrenze,cadenzaIncarico);
+    insert(i,dataInizio,numeroOccorrenze,cadenzaIncarico,scostamento);
 }
 
 

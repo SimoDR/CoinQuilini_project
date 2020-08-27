@@ -35,7 +35,7 @@ bool Controller::login(const QString & user, const QString & pw)
  * 6- NumeroCommensali
  * 7- numeroArticoli
  * 8- Importo
- * 9- DataLimite
+ * 9- DataLimite: intesa come discostamento in giorni dalla dataInizio //intero
  * 10- DataInizio
  * 11- numeroOccorrenze
  * 12- svolto

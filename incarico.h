@@ -25,11 +25,13 @@ protected:
 public:
     Incarico(const string& nome,Inquilino * incaricato=nullptr,bool svolto=false);
 	void setNome(const string&);
+
     string getNome() const {return _nome;} //debug
     void setIncaricato(Inquilino *);
     Inquilino* getIncaricato() const;
 	bool getSvolto() const;
     void setSvolto();
+    virtual void setDataLimite(const Data&) =0;
     virtual ~Incarico() = 0;
 	virtual Incarico* clone() const =0;
     virtual bool posponi (const Data & d=Data()) const;  //debug parametro d non sempre utilizzato
