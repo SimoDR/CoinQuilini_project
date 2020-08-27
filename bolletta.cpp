@@ -22,8 +22,8 @@ void Bolletta::exportXml(QXmlStreamWriter & xmlOutput) const
 
 std::string Bolletta::generaNota() const
 {
-    return "||BOLLETTA//"+ Incarico::generaNota()
-            + "//" + Pagamento::generaNota() + "//" + _dataLimite.dataToString()
+    return "||BOLLETTA//"
+            + Pagamento::generaNota() + "//" + _dataLimite.dataToString()
             + "//" + "A pagare e morire si fa sempre in tempo!";
 }
 
