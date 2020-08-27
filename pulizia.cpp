@@ -12,7 +12,7 @@ bool Pulizia::posponi(const Data& d) const{
 }
 
 string Pulizia::generaNota() const {
-    return "||PULIZIA//"+Incarico::generaNota()+"//"+Faccenda::generaNota()+"//"+std::to_string(_stanzeDaPulire)+"Cenerentola tocca a te!";
+    return "||PULIZIA//"+Faccenda::generaNota()+"//"+std::to_string(_stanzeDaPulire)+"//"+"Cenerentola tocca a te!";
 }
 unsigned short int Pulizia::calcolaPunteggio() const{
     return controlloSoglia(_stanzeDaPulire*_pesoPulizia);
