@@ -404,10 +404,9 @@ void Calendario::exportXml() const //salva solo gli incarichi del calendario, no
     xmlOutput.writeStartDocument();
     xmlOutput.writeStartElement("CALENDARIO");
 
-
     for(dList<Giorno>::const_iterator x=_giorni.cbegin(); x!=_giorni.cend(); ++x)
     {
-        for(vector<Incarico*>::const_iterator y=(*x)._incarichiDelGiorno.cbegin(); y!=(*x)._incarichiDelGiorno.cbegin(); ++y)
+        for(vector<Incarico*>::const_iterator y=(*x)._incarichiDelGiorno.cbegin(); y!=(*x)._incarichiDelGiorno.end(); ++y)
         {
             xmlOutput.writeTextElement("DATA", QString::fromStdString((x->_dataDelGiorno).dataToString()));
             (*y)->exportXml(xmlOutput);
@@ -434,7 +433,10 @@ void Calendario::importXml()
                     while(xmlInput.readNextStartElement())
                     {
                         vector<string> parametri(12,"\0");
+
                         assignWithXml(xmlInput, "DATA", dataCorrente);
+                        cout<<dataCorrente<<" data"<<endl; //PERCHè NON LA RIEMPI???????????
+
                         if (xmlInput.name() == "SPESA") {
                             Spesa::importXml(xmlInput,parametri);
                         }
@@ -450,8 +452,10 @@ void Calendario::importXml()
                         if (xmlInput.name() == "BOLLETTA") {
                             Bolletta::importXml(xmlInput,parametri);
                         }
+
                         parametri[10]=dataCorrente;
                         creaNuovoIncarico(parametri);
+
                         xmlInput.skipCurrentElement();
                     }
                 }

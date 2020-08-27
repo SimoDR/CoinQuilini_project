@@ -155,7 +155,8 @@ void ListaInquilini::importXml()
                 if (xmlInput.name() == "INQUILINI")
                 {
                     std::string user, pw;
-                    while(xmlInput.readNextStartElement()) {
+                    while(xmlInput.readNextStartElement())
+                    {
                         std::string tipo=((xmlInput.name().toString()).toStdString());
                         assignWithXml(xmlInput, "nome", user);
                         assignWithXml(xmlInput, "password", pw);
