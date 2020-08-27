@@ -1,4 +1,4 @@
-/*
+
 #include <iostream>
 #include<vector>
 #include <QApplication>
@@ -9,11 +9,8 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     Controller controller;
-    Login l(nullptr, &controller);
-    l.show();
     return a.exec();
 }
-*/
 
 
 /*
@@ -227,7 +224,7 @@ int main(int argc, char *argv[])
 
 
 
-*/
+
 
 
 
@@ -291,4 +288,5 @@ int main(int argc, char *argv[])
 
  }
 
+*/
 
