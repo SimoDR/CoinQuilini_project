@@ -21,7 +21,7 @@ private:
     QPushButton* _loginBut;
 
 public:
-    Login(QWidget *parent, Controller*);
+    Login(Controller*);
 
 signals:
 private slots:
