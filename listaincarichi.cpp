@@ -30,4 +30,5 @@ ListaIncarichi::ListaIncarichi(QString data, bool admin, vector<std::string> inc
     buildLista(incarichi, incaricati);
     if(admin)
         buildButtons();
+    setLayout(_mainLayout);
 }

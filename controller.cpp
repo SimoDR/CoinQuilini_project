@@ -1,7 +1,11 @@
 #include "controller.h"
+#include "login.h"
 
 
-Controller::Controller(QObject *parent) : QObject(parent), _listaInquilini(ListaInquilini()), _calendario(Data("20/08/2020"),_listaInquilini.getInquilini()) {}
+Controller::Controller(QObject *parent) : QObject(parent), _listaInquilini(ListaInquilini()), _calendario(Data("20/08/2020"),_listaInquilini.getInquilini())
+{
+    buildLogin();
+}
 //DA METTERE DATA ODIERNA
 
 bool Controller::login(const QString & user, const QString & pw)
@@ -9,7 +13,6 @@ bool Controller::login(const QString & user, const QString & pw)
     if (_listaInquilini.checkCredenziali(user.toStdString(), pw.toStdString()))
     {
         Mainwindow * mainwindow= new Mainwindow(nullptr, this, user);
-        setParent(mainwindow);
         mainwindow->show();
         return true;
     }
@@ -35,7 +38,7 @@ bool Controller::login(const QString & user, const QString & pw)
  * 6- NumeroCommensali
  * 7- numeroArticoli
  * 8- Importo
- * 9- DataLimite: intesa come discostamento in giorni dalla dataInizio //intero
+ * 9- DataLimite
  * 10- DataInizio
  * 11- numeroOccorrenze
  * 12- svolto
@@ -146,5 +149,11 @@ void Controller::checkAdmin(unsigned int pos)
 
 unsigned short Controller::isAdmin(const std::string & user) const
 {
-   return _listaInquilini.isAdmin(user);
+    return _listaInquilini.isAdmin(user);
+}
+
+void Controller::buildLogin()
+{
+    Login * login(new Login(this));
+    login->show();
 }

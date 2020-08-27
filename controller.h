@@ -27,7 +27,7 @@ class Controller : public QObject
     Q_OBJECT
 private:
     Mainwindow* view;
-    
+
 public:
 
     ListaInquilini _listaInquilini;
@@ -42,6 +42,7 @@ public:
     void modificaInquilino(const QString &, const QString &, unsigned int);
     void checkAdmin(unsigned int);
     unsigned short int isAdmin(const string &) const;
+    void buildLogin();
 
     void stampaCalendario() //DEBUG
     {

@@ -64,17 +64,20 @@ private:
     void populateList(QListWidget *, const QString &, const QDate &);
     QString login();
 
+
 public:
     explicit Mainwindow(QWidget *parent, Controller*, QString);
 
 signals:
 
 private slots:
-   void buildAdminPanel();
-   void buildSelezione();
-   void buildForm(const QString &, bool);
-   void buildIncarico(const vector<string> &);
-   void buildListaIncarichi(const QDate &);
+    void buildAdminPanel();
+    void buildSelezione();
+    void buildForm(const QString &, bool);
+    void buildIncarico(const vector<string> &);
+    void buildListaIncarichi(const QDate &);
+    void logOut();
+    void refreshlists(const QDate &giorno);
 };
 
 #endif // MAINWINDOW_H
