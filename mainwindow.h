@@ -75,6 +75,7 @@ private slots:
    void buildForm(const QString &, bool);
    void buildIncarico(const vector<string> &);
    void buildListaIncarichi(const QDate &);
+   void logOut();
 };
 
 #endif // MAINWINDOW_H

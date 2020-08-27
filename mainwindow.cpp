@@ -54,6 +54,12 @@ void Mainwindow::buildListaIncarichi(const QDate & giorno)
     lista->show();
 }
 
+void Mainwindow::logOut()
+{
+    this->close();
+    _controller->ogin
+}
+
 void Mainwindow::addbuttons()
 {
 
@@ -148,9 +154,11 @@ void Mainwindow::addmenubar()
     _file=new QMenu("File");
     _esci=new QAction("Esci");
     _file->addAction(_esci);
+    connect(_esci, SIGNAL(triggered()), this, SLOT(close()));
     _menuBar->addMenu(_file);
     _opzioni= new QMenu("Opzioni");
     _logOut=new QAction("Log out");
+    connect(_logOut, SIGNAL(triggered()), this, SLOT(logOut()));
     _info=new QAction("info");         //this action could open a messagebox with the instructions and informations about the program
     _opzioni->addAction(_logOut);
     _opzioni->addAction(_info);
