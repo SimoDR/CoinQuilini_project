@@ -57,7 +57,7 @@ void Mainwindow::buildListaIncarichi(const QDate & giorno)
 void Mainwindow::logOut()
 {
     this->close();
-    _controller->buildLogin();
+    _controller->ogin
 }
 
 void Mainwindow::addbuttons()
