@@ -27,6 +27,7 @@ class Controller : public QObject
     Q_OBJECT
 private:
     Mainwindow* view;
+    //void impostaStile();
 
 public:
 

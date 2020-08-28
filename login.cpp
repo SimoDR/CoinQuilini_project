@@ -1,6 +1,15 @@
 #include "login.h"
 
 
+void Login::impostaStile()
+{
+    QFile file(":/resources/style.css");
+    file.open(QFile::ReadOnly);
+    QString styleSheet = QLatin1String(file.readAll());
+
+    setStyleSheet(styleSheet);
+}
+
 Login::Login(Controller* c, QWidget *parent) : QWidget(parent), _controller(c)
 {
     setWindowTitle("Login");
@@ -29,6 +38,8 @@ Login::Login(Controller* c, QWidget *parent) : QWidget(parent), _controller(c)
     _layoutLogin->setSizeConstraint(QLayout::SetFixedSize);
 
     setLayout(_layoutLogin);
+
+    impostaStile();
     connect(_editUser,SIGNAL(returnPressed()), this, SLOT(trylogin()));
     connect(_editPw,SIGNAL(returnPressed()), this, SLOT(trylogin()));
     connect(_loginBut, SIGNAL(clicked()), this, SLOT(trylogin()));

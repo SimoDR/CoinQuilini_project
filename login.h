@@ -20,6 +20,8 @@ private:
     QLineEdit* _editPw;
     QPushButton* _loginBut;
 
+    void impostaStile();
+
 public:
     Login(Controller*, QWidget *parent=nullptr);
 

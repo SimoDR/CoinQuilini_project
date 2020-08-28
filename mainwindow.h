@@ -78,6 +78,7 @@ private slots:
     void buildListaIncarichi(const QDate &);
     void logOut();
     void refreshlists(const QDate &giorno);
+    void impostaStile();
 };
 
 #endif // MAINWINDOW_H

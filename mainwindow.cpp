@@ -17,6 +17,16 @@ Mainwindow::Mainwindow(QWidget *parent, Controller* c, QString inquilino) : QMai
     _mainWidget=new QWidget;
     _mainWidget->setLayout(_mainLayout);
     setCentralWidget(_mainWidget);
+    impostaStile();
+}
+
+void Mainwindow::impostaStile()
+{
+    QFile file(":/resources/style.css");
+    file.open(QFile::ReadOnly);
+    QString styleSheet = QLatin1String(file.readAll());
+
+    setStyleSheet(styleSheet);
 }
 
 

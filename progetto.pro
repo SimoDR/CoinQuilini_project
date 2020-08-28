@@ -55,3 +55,6 @@ SOURCES += \
 
 
 QT += widgets
+
+RESOURCES += \
+    Resources.qrc

@@ -2,11 +2,14 @@
 #include "login.h"
 
 
+
+
 Controller::Controller(QObject *parent) : QObject(parent), _listaInquilini(ListaInquilini()), _calendario(Data::unixDateToData(std::chrono::system_clock::now()),_listaInquilini.getInquilini())
 {
     buildLogin();
 }
-//DA METTERE DATA ODIERNA
+
+
 
 bool Controller::login(const QString & user, const QString & pw)
 {
