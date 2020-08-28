@@ -13,7 +13,14 @@ void assignWithXml(QXmlStreamReader & xmlInput, const std::string tag, std::stri
 void showMessage(const QString & message)
 {
     QMessageBox * m= new QMessageBox;
-    m->setWindowTitle("Errore");
+    m->setWindowTitle("Alert");
     m->setText(message);
+
+    QFile file(":/resources/style.css");
+    file.open(QFile::ReadOnly);
+    QString styleSheet = QLatin1String(file.readAll());
+
+    m->setStyleSheet(styleSheet);
+
     m->exec();
 }

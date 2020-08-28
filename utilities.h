@@ -6,6 +6,7 @@
 #include <iostream>
 #include <QMessageBox>
 #include <stdexcept>
+#include "QFile"
 
 //class error message
 

@@ -5,6 +5,7 @@
 
 FormIncarico::FormIncarico(const QString &tipo, bool regolare, vector<string> inquilini, QWidget *parent): QDialog(parent),_tipo(tipo),_regolare(regolare), _nome(new QLabel("Nome:")), _nomeEdit(new QLineEdit),_data(new QLabel("Data:")), _dataEdit(new QDateEdit), _inquilini(new QLabel("Incaricato:")),_combo(new QComboBox), _ok(new QPushButton("Ok")), _no(new QPushButton("Annulla")), _layout(new QGridLayout), _buttons(new QHBoxLayout), _mainLayout(new QVBoxLayout)
 {
+    _tipo=tipo;
     setWindowTitle("Creazione incarico "+ tipo);
     setModal(true);
     _layout->addWidget(_nome,1,1);
@@ -17,9 +18,8 @@ FormIncarico::FormIncarico(const QString &tipo, bool regolare, vector<string> in
     _layout->addWidget(_combo,3,2);
     _buttons->addWidget(_ok);
     _buttons->addWidget(_no);
-    connect(_ok, SIGNAL(clicked()), this, SLOT(close()));
-    connect(_no, SIGNAL(clicked()), this, SLOT(close()));
-    connect(_ok, SIGNAL(clicked()), this, SLOT(raccogliDati()));
+
+
     if(tipo=="Bolletta")
     {
         QLabel *importo= new QLabel("Importo:");
@@ -32,6 +32,7 @@ FormIncarico::FormIncarico(const QString &tipo, bool regolare, vector<string> in
         _dataLimite=new QSpinBox;
         _dataLimite->setRange(1,30);
         _layout->addWidget(_dataLimite,5,2);
+
     }
     if (tipo=="Spesa")
     {
@@ -50,6 +51,7 @@ FormIncarico::FormIncarico(const QString &tipo, bool regolare, vector<string> in
         _articoli=new QSpinBox;
         _articoli->setRange(1,100);
         _layout->addWidget(_articoli,6,2);
+
     }
     if (tipo=="Pulizia")
     {
@@ -63,6 +65,7 @@ FormIncarico::FormIncarico(const QString &tipo, bool regolare, vector<string> in
         _nStanze=new QSpinBox;
         _nStanze->setRange(1,20);
         _layout->addWidget(_nStanze,5,2);
+
     }
     if (tipo=="Cucina")
     {
@@ -90,6 +93,7 @@ FormIncarico::FormIncarico(const QString &tipo, bool regolare, vector<string> in
         _rifiuto=new QComboBox;
         _rifiuto->addItems(QStringList() <<"Secco" << "Umido" << "Plastica"<< "Carta"<< "Vetro");
         _layout->addWidget(_rifiuto,5,2);
+
     }
     _mainLayout->addLayout(_layout);
 
@@ -108,8 +112,14 @@ FormIncarico::FormIncarico(const QString &tipo, bool regolare, vector<string> in
         regolare->addWidget(_nOccorrenze,2,2);
         _mainLayout->addLayout(regolare);
     }
+
     _mainLayout->addLayout(_buttons);
     setLayout(_mainLayout);
+
+    connect(_ok, SIGNAL(clicked()), this, SLOT(controllaCampi()));
+    connect(_no, SIGNAL(clicked()), this, SLOT(close()));
+
+
 }
 
 void FormIncarico::raccogliDati()
@@ -139,6 +149,51 @@ void FormIncarico::raccogliDati()
     if(_tipo=="Spazzatura")
         parametri[13]=(_rifiuto->currentText()).toStdString();
     emit inviaDati(parametri);
+}
+
+void FormIncarico::controllaCampi()
+{
+    bool errore=false;
+    if(_tipo=="Bolletta")
+    {
+        if(_nomeEdit->text().isEmpty() || !_importo->isModified())
+            errore=true;
+    }
+    if (_tipo=="Spesa")
+    {
+        if(_nomeEdit->text().isEmpty() || !_importo->isModified())
+            errore=true;
+    }
+    if (_tipo=="Pulizia")
+    {
+        if(_nomeEdit->text().isEmpty())
+            errore=true;
+    }
+    if (_tipo=="Cucina")
+    {
+        if(_nomeEdit->text().isEmpty())
+            errore=true;
+
+    }
+    if (_tipo=="Spazzatura")
+    {
+        if(_nomeEdit->text().isEmpty())
+            errore=true;
+    }
+
+    if(!errore)
+    {
+        raccogliDati();
+        close();
+    }
+    else
+    {
+        showMessage("Attenzione! Tutti i campi devono essere valorizzati");
+        disconnect(_ok, SIGNAL(clicked()), this, SLOT(controllaCampi()));
+        connect(_ok, SIGNAL(clicked()), this, SLOT(controllaCampi()));
+        connect(_no, SIGNAL(clicked()), this, SLOT(close()));
+    }
+
 }
 void FormIncarico::buildCombo(const vector<std::string> & inquilini)
 {
