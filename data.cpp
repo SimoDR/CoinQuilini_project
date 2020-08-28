@@ -247,6 +247,44 @@ bool Data::operator !=(const Data & d) const
     return _annoCorrente!=d._annoCorrente || _meseCorrente!=d._meseCorrente || _giornoCorrente!=d._giornoCorrente;
 }
 
+Data Data::unixDateToData(const std::chrono::time_point<std::chrono::system_clock> & unixDate)
+{
+    std::time_t dataOggi = std::chrono::system_clock::to_time_t(unixDate);
+    string unixString=std::ctime(&dataOggi);
+
+    string meseUnix=unixString.substr(4,3);
+    string giorno=unixString.substr(8,2);
+    string anno=unixString.substr(20,4);
+    string mese;
+
+    if(meseUnix=="Jan")
+        mese="1";
+    else if(meseUnix=="Feb")
+        mese="2";
+    else if(meseUnix=="Mar")
+        mese="3";
+    else if(meseUnix=="Apr")
+        mese="4";
+    else if(meseUnix=="May")
+        mese="5";
+    else if(meseUnix=="Jun")
+        mese="6";
+    else if(meseUnix=="Jul")
+        mese="7";
+    else if(meseUnix=="Aug")
+        mese="8";
+    else if(meseUnix=="Sep")
+        mese="9";
+    else if(meseUnix=="Oct")
+        mese="10";
+    else if(meseUnix=="Nov")
+        mese="11";
+    else if(meseUnix=="Dec")
+        mese="12";
+
+    return Data(giorno+"/"+mese+"/"+anno);
+}
+
 
 
 std::ostream &operator<<(std::ostream &os, const Data &d)

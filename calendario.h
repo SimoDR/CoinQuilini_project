@@ -110,7 +110,7 @@ public:
     // iteratoreFromData(_iteratoreCorrente,dataIncarico)
 
 
-    void insert(Incarico *, Data, int, int, int);
+    void insert(Incarico *, Data, int, int, int, bool);
 
     void remove(Incarico * daRimuovere, const Data& dataIncarico);
 
@@ -124,7 +124,7 @@ public:
 
     void importXml();
 
-    void creaNuovoIncarico(const vector<string>& parametri);
+    void creaNuovoIncarico(const vector<string>& parametri,bool import);
 
     void incarichiGiorno(const Data & giorno, vector<std::string> & tipiIncarichi, vector<string> & incaricati) const;
 

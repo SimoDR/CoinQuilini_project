@@ -34,8 +34,8 @@ bool Calendario::checkIteratore(dList<Calendario::Giorno>::iterator iteratoreDaC
 
 dList<Calendario::Giorno>::iterator Calendario::inizializzaCalendario(const Data& odierna)
 {
-    _giorni.insertBack(Giorno(odierna));
-    return _giorni.begin();
+    dList<Calendario::Giorno>::iterator iteratoreInCuiInserire=iteratoreFromData(_giorni.begin(),odierna);
+    return iteratoreInCuiInserire;
 }
 
 
@@ -142,21 +142,22 @@ Incarico *Calendario::trovaIncarico(const Data &dataIncarico, int indiceIncarico
 
 
 
-void Calendario::insert(Incarico * daInserire, Data  dataInCuiInserire, int numeroOccorrenze, int cadenzaIncarico, int scostamentoDataLimite)
+void Calendario::insert(Incarico * daInserire, Data  dataInCuiInserire, int numeroOccorrenze, int cadenzaIncarico, int scostamentoDataLimite, bool import)
 {
     bool assegnato=false;
-    if(numeroOccorrenze==1 && daInserire->getIncaricato()!=nullptr) //è già stato assegnato
+    if(daInserire->getIncaricato()!=nullptr) //è già stato assegnato
         assegnato=true;
 
 
     dList<Giorno>::iterator iteratoreIniziale=_iteratoreCorrente;
+    dList<Giorno>::iterator iteratoreInizialeImport=_giorni.begin();
 
     Inquilino * incaricato=nullptr;
     dList<Giorno>::iterator iteratoreInCuiInserire;
     while(numeroOccorrenze>0)
     {
-
-        iteratoreInCuiInserire=iteratoreFromData(iteratoreIniziale, dataInCuiInserire);
+        if(import) iteratoreInCuiInserire=iteratoreFromData(iteratoreInizialeImport, dataInCuiInserire);
+        else iteratoreInCuiInserire=iteratoreFromData(iteratoreIniziale, dataInCuiInserire);
 
         if(!assegnato) incaricato=ottieniIncaricato(iteratoreInCuiInserire);
 
@@ -170,7 +171,8 @@ void Calendario::insert(Incarico * daInserire, Data  dataInCuiInserire, int nume
         iteratoreInCuiInserire->_incarichiDelGiorno.push_back(daInserire->clone());
 
         dataInCuiInserire=dataInCuiInserire+cadenzaIncarico;
-        iteratoreIniziale=iteratoreInCuiInserire;
+        if(!import) iteratoreIniziale=iteratoreInCuiInserire;
+        else iteratoreInizialeImport=iteratoreInCuiInserire;
         numeroOccorrenze--;
     }
 
@@ -451,7 +453,7 @@ void Calendario::importXml()
                         }
 
 
-                        creaNuovoIncarico(parametri);
+                        creaNuovoIncarico(parametri,true);
                         xmlInput.skipCurrentElement();
                     }
                 }
@@ -473,7 +475,7 @@ void Calendario::importXml()
 
 }
 
-void Calendario::creaNuovoIncarico(const vector<string>& parametri)
+void Calendario::creaNuovoIncarico(const vector<string>& parametri,bool import)
 {
     string nomeIncarico="\0";
     if(parametri[0]!="\0") nomeIncarico=parametri[0];
@@ -512,14 +514,15 @@ void Calendario::creaNuovoIncarico(const vector<string>& parametri)
 
 
 
-
-    try{
-    if(dataInizio<getDataDiOggi())
-        throw new std::invalid_argument("Attenzione! La data di inserimento dell'incarico dev'essere successiva alla data di oggi");
-    }
-    catch (std::invalid_argument *e)
-    {
-       showMessage(QString::fromStdString(e->what()));
+    if(!import) {
+        try{
+        if(dataInizio<getDataDiOggi())
+            throw new std::invalid_argument("Attenzione! La data di inserimento dell'incarico dev'essere successiva alla data di oggi");
+        }
+        catch (std::invalid_argument *e)
+        {
+           showMessage(QString::fromStdString(e->what()));
+        }
     }
 
     int numeroOccorrenze=1;
@@ -560,12 +563,12 @@ void Calendario::creaNuovoIncarico(const vector<string>& parametri)
         i=new Bolletta(nomeIncarico,importo); //partecipanti????
 
 
-    if(numeroOccorrenze==1 && nomeIncaricato!="\0") //assegnazione manuale dell'incaricato essendo evento singolo
+    if(nomeIncaricato!="\0") //assegnazione manuale dell'incaricato
         i->setIncaricato(_buffer.getInquilino(nomeIncaricato));
     if(svolto) //per l'import
         i->setSvolto();
 
-    insert(i,dataInizio,numeroOccorrenze,cadenzaIncarico,scostamento);
+    insert(i,dataInizio,numeroOccorrenze,cadenzaIncarico,scostamento,import);
 }
 
 

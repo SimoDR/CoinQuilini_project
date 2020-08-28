@@ -5,6 +5,10 @@
 #include<string>
 #include "utilities.h"
 
+#include <iostream>
+#include <chrono>
+#include <ctime>
+
 #include "outofboundexception.h"
 #include<sstream>
 #include<stdexcept>
@@ -35,6 +39,7 @@ private:
     unsigned short int _maxGiorni;
 
 
+
     bool isBisestile() const;
     void setMaxGiorni();
     void checkLimiti();
@@ -53,6 +58,7 @@ public:
     bool operator>(const Data&) const;
     bool operator==(const Data&) const;
     bool operator !=(const Data&) const;
+    static Data unixDateToData(const std::chrono::time_point<std::chrono::system_clock>&);
 
 
 

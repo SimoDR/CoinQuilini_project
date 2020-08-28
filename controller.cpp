@@ -2,7 +2,7 @@
 #include "login.h"
 
 
-Controller::Controller(QObject *parent) : QObject(parent), _listaInquilini(ListaInquilini()), _calendario(Data("20/08/2020"),_listaInquilini.getInquilini())
+Controller::Controller(QObject *parent) : QObject(parent), _listaInquilini(ListaInquilini()), _calendario(Data::unixDateToData(std::chrono::system_clock::now()),_listaInquilini.getInquilini())
 {
     buildLogin();
 }
@@ -51,7 +51,7 @@ bool Controller::login(const QString & user, const QString & pw)
 
 void Controller::creaNuovoIncarico(vector<std::string> parametri)
 {
-    _calendario.creaNuovoIncarico(parametri);
+    _calendario.creaNuovoIncarico(parametri,false);
 }
 
 
