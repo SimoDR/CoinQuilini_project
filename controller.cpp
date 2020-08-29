@@ -60,12 +60,12 @@ void Controller::creaNuovoIncarico(vector<std::string> parametri)
 
 
 
-void Controller::rimuoviIncarico(const Data &dataIncarico, int indiceIncarico)
+void Controller::rimuoviIncarico(const Data &dataIncarico, unsigned int indiceIncarico)
 {
     _calendario.remove(_calendario.trovaIncarico(dataIncarico,indiceIncarico),dataIncarico);
 }
 
-void Controller::posponiIncarico(const Data &dataIncarico, int indiceIncarico, unsigned int quantoPosporre, unsigned int posizioneInquilinoRichiedente) //DA GESTIRE PUNTEGGI??
+void Controller::posponiIncarico(const Data &dataIncarico, unsigned int indiceIncarico, unsigned int quantoPosporre, unsigned int posizioneInquilinoRichiedente) //DA GESTIRE PUNTEGGI??
 {
     Inquilino * richiedente=_listaInquilini.getInquilino(posizioneInquilinoRichiedente);
     if(richiedente->puoPosporre())
@@ -82,14 +82,14 @@ void Controller::posponiIncarico(const Data &dataIncarico, int indiceIncarico, u
 
 }
 
-void Controller::riassegnaIncarico(const Data &dataIncarico, int indiceIncarico, string nomeInquilino)
+void Controller::riassegnaIncarico(const Data &dataIncarico, unsigned int indiceIncarico, string nomeInquilino)
 {
     Incarico * daRiassegnare=_calendario.trovaIncarico(dataIncarico,indiceIncarico);
     Inquilino * nuovoIncaricato=_listaInquilini.getInquilino(nomeInquilino);
     daRiassegnare->setIncaricato(nuovoIncaricato);
 }
 
-void Controller::setIncaricoSvolto(const Data & dataIncarico, int indiceIncarico)
+void Controller::setIncaricoSvolto(const Data & dataIncarico, unsigned int indiceIncarico)
 {
     Incarico * svolto=_calendario.trovaIncarico(dataIncarico,indiceIncarico);
     svolto->setSvolto();

@@ -245,7 +245,7 @@ void Calendario::setCredito(Pagamento * p, vector<Inquilino*> & lista)
 void Calendario::checkIncarichiSvolti()
 {
     string inadempienti;
-    inadempienti="Attenzione: è scattata la mezzanotte e alcuni inquilini non hanno svolto gli incarichi assegnati ieri. A costoro verranno decurtati dei punti: \n";
+    inadempienti="Attenzione: è scattata la mezzanotte e alcuni inquilini non hanno svolto gli incarichi assegnati per ieri. A costoro verranno decurtati dei punti: \n";
 
     bool almenoUno=false;
 
