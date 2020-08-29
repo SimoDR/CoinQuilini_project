@@ -2,7 +2,7 @@
 
 unsigned short int Spazzatura::_pesoSpazzatura=3; // => 3 punti ogni incarico spazzatura assolto
 
-Spazzatura::Spazzatura(const std::string& nome, std::string cosaButtare, int tempoStimato, Inquilino *incaricato, bool svolto):
+Spazzatura::Spazzatura(const std::string& nome, const std::string & cosaButtare, int tempoStimato, Inquilino *incaricato, bool svolto):
     Incarico(nome,incaricato,svolto), Faccenda(tempoStimato), _cosaButtare(cosaButtare) {}
 
 Spazzatura* Spazzatura::clone() const {return new Spazzatura(*this);}

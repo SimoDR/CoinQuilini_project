@@ -10,7 +10,7 @@ private:
     unsigned short int _numeroCommensali;
     static double _pesoCucina;
 public:
-    Cucina(const string & nome,int tempoStimato,unsigned short int numeroCommensali,Inquilino * incaricato=nullptr,bool svolto=false);
+    Cucina(const string & nome="cucina",int tempoStimato=60,unsigned short int numeroCommensali=4,Inquilino * incaricato=nullptr,bool svolto=false);
     virtual ~Cucina() {}
     virtual Cucina* clone() const;
     virtual void setDataLimite(const Data&) {}
