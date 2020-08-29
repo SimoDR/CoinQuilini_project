@@ -19,7 +19,7 @@ Mainwindow::Mainwindow(QWidget *parent, Controller* c, QString inquilino) : QMai
     setCentralWidget(_mainWidget);
     impostaStile();
     inizializzaTimer();
-    _controller->checkIncarichiSvoltiIeri();
+    _controller->checkIncarichiSvoltiPassato();
 
 }
 

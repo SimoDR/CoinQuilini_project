@@ -69,8 +69,7 @@ public slots:
 
     void incrementaGiorno(); //MESSAGGIO PER CHI NON HA SVOLTO
 
-
-    void checkIncarichiSvoltiIeri();
+    void checkIncarichiSvoltiPassato();
 
     void buildNota(const QDate &data, unsigned int pos);
 
