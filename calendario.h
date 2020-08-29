@@ -43,7 +43,7 @@ private:
 
     dList<Giorno> _giorni;
     dList<Giorno>::iterator _iteratoreCorrente;
-
+    vector<string> _nonSvoltiImport;
 
     // serve a convertire una data in input (es: la data
     // in cui si vuole inserire un incarico) nell'
@@ -56,6 +56,8 @@ private:
     bool checkIteratore(dList<Giorno>::iterator) const; //ritorna true sse è pte
 
     dList<Giorno>::iterator inizializzaCalendario(const Data&);
+
+
 
 public:
     class BufferInquilini //DA METTERE PRIVATA
@@ -116,7 +118,9 @@ public:
 
     void posponiIncarico(Incarico * daPosporre, unsigned int quantoPosporre,const Data& dataIncarico);
 
-    void checkIncarichiSvolti(bool);
+    void checkIncarichiSvolti();
+
+    void checkIncarichiSvoltiPassato();
 
     void setCredito(Pagamento*, vector<Inquilino*> &);
 
