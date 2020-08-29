@@ -15,7 +15,9 @@ bool Spesa::posponi(const Data& d) const
 
 string Spesa::generaNota() const
 {
-    return "SPESA\n\n"+Faccenda::generaNota()+"\nPunteggio: "+std::to_string(calcolaPunteggio())+" punti \n"+"Numero articoli: "+std::to_string(_numeroArticoli)+"\n\n"+"Andiamo a fare compere!";
+    return "SPESA\n\n"+Faccenda::generaNota()+
+            "\nPunteggio: "+std::to_string(calcolaPunteggio())+" punti \n"+"Numero articoli: "+
+            std::to_string(_numeroArticoli)+"\n\n"+"Andiamo a fare compere!";
 }
 
 void Spesa::exportXml(QXmlStreamWriter & xmlOutput,string data) const
