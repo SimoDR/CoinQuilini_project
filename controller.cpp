@@ -17,7 +17,7 @@ bool Controller::login(const QString & user, const QString & pw)
     {
         Mainwindow * mainwindow= new Mainwindow(nullptr, this, user);
         mainwindow->show();
-        checkIncarichiSvoltiIeri();
+        checkIncarichiSvoltiPassato();
         return true;
     }
     //altrimenti ritorna messaggio di errore
@@ -170,6 +170,6 @@ void Controller::buildLogin()
 
 void Controller::buildNota(const QDate & data, unsigned int pos)
 {
-    Incarico* i= _calendario.trovaIncarico((data.toString("d/M/yyyy")).toStdString(),pos);
+    Incarico* i= _calendario.trovaIncarico((data.toString("d/M/yyyy")).toStdString(),pos,true);
     showSuccess(QString::fromStdString(i->generaNota()));
 }

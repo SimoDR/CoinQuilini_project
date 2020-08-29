@@ -122,9 +122,11 @@ void Calendario::incrementaData()
 
 }
 
-Incarico *Calendario::trovaIncarico(const Data &dataIncarico, unsigned int indiceIncarico)
+Incarico *Calendario::trovaIncarico(const Data &dataIncarico, unsigned int indiceIncarico, bool passato)
 {
-    dList<Giorno>::iterator giornoIncarico=iteratoreFromData(_iteratoreCorrente,dataIncarico);
+    dList<Giorno>::iterator giornoIncarico;
+    if(passato) giornoIncarico=iteratoreFromData(_giorni.begin(),dataIncarico);
+    else giornoIncarico=iteratoreFromData(_iteratoreCorrente,dataIncarico);
 
     unsigned int indice=0;
     for(vector<Incarico*>::iterator it=giornoIncarico->_incarichiDelGiorno.begin(); it!=giornoIncarico->_incarichiDelGiorno.end(); ++it)
