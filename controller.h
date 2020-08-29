@@ -26,15 +26,14 @@ class Controller : public QObject
 {
     Q_OBJECT
 private:
-    Mainwindow* view;
-
-public:
-
     ListaInquilini _listaInquilini;
     Calendario _calendario; //DA COSTRUIRE dando la _listaInquilini
+public:
+
+
 
     explicit Controller( QObject *parent = nullptr);
-    bool login(const QString &, const QString &);   //debug, da togliere
+    bool login(const QString &, const QString &);
     vector<string> getInquilini();
     void rimuoviInquilino(unsigned int); //da controllare
     vector<string> getInquilinoPos(unsigned int);

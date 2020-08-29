@@ -17,6 +17,7 @@ bool Controller::login(const QString & user, const QString & pw)
     {
         Mainwindow * mainwindow= new Mainwindow(nullptr, this, user);
         mainwindow->show();
+        checkIncarichiSvoltiIeri();
         return true;
     }
     //altrimenti ritorna messaggio di errore
