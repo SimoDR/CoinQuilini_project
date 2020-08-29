@@ -156,12 +156,12 @@ void FormIncarico::controllaCampi()
     bool errore=false;
     if(_tipo=="Bolletta")
     {
-        if(_nomeEdit->text().isEmpty() || !_importo->isModified())
+        if(_nomeEdit->text().isEmpty() || _importo->text().toStdString()==".")
             errore=true;
     }
     if (_tipo=="Spesa")
     {
-        if(_nomeEdit->text().isEmpty() || !_importo->isModified())
+        if(_nomeEdit->text().isEmpty() || _importo->text().toStdString()==".")
             errore=true;
     }
     if (_tipo=="Pulizia")
