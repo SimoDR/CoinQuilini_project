@@ -8,7 +8,7 @@ Spazzatura::Spazzatura(const std::string& nome, std::string cosaButtare, int tem
 Spazzatura* Spazzatura::clone() const {return new Spazzatura(*this);}
 
 string Spazzatura::generaNota() const {
-    return "||SPAZZATURA//"+Faccenda::generaNota()+"//"+_cosaButtare+"//"+"Liberiamoci di questa spazzatura!";
+    return "SPAZZATURA\n\n"+Faccenda::generaNota()+"\nPunteggio: "+std::to_string(calcolaPunteggio())+" punti \n"+"Tipologia rifiuto: " + _cosaButtare+"\n\n"+"Liberiamoci di questa spazzatura!";
 }
 
 void Spazzatura::exportXml(QXmlStreamWriter &xmlOutput,string data) const

@@ -44,9 +44,9 @@ bool Incarico::posponi (const Data& d) const{
 }
 
 std::string Incarico::generaNota() const
-//debug-feature simbolo di separazione ha bisogno di essere salvato in un campo statico (e non essere usato)
 {
-    return _nome + "//" + (_incaricato ? _incaricato->getNome() : "xxx" ) + "//" + (_svolto ? "Y" : "N") ;
+    return "Nome: " + _nome + "\n" + "Incaricato: " + (_incaricato ? _incaricato->getNome() : "xxx" )
+            + "\n" + "Stato: " + (_svolto ? "svolto" : "non svolto");
 }
 
 void Incarico::exportXml(QXmlStreamWriter & xmlOutput,string data) const
