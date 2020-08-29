@@ -33,7 +33,7 @@ private:
     QVBoxLayout* _calendarLayout;
     QCalendarWidget* _calendar;
     QPushButton* _incarico;
-    QPushButton* _listaSpesa;
+    QPushButton* _punteggio;
     QPushButton* _creDeb;
     QPushButton* _admin;
     //layout 3 liste

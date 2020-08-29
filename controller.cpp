@@ -165,3 +165,9 @@ void Controller::buildLogin()
     Login * login(new Login(this));
     login->show();
 }
+
+void Controller::buildNota(const QDate & data, unsigned int pos)
+{
+    Incarico* i= _calendario.trovaIncarico((data.toString("d/M/yyyy")).toStdString(),pos);
+    showMessage(QString::fromStdString(i->generaNota()));
+}

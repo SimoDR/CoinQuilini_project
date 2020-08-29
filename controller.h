@@ -70,7 +70,11 @@ public slots:
 
     void incrementaGiorno(); //MESSAGGIO PER CHI NON HA SVOLTO
 
+
     void checkIncarichiSvoltiIeri();
+
+    void buildNota(const QDate &data, unsigned int pos);
+
 
     vector<string> incarichiGiorno(string giorno, vector<string> & incaricati);
 

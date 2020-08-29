@@ -7,7 +7,7 @@ Faccenda::Faccenda(int tempoStimato): _tempoStimato(tempoStimato) {}
 Faccenda::~Faccenda() {}
 
 string Faccenda::generaNota() const {
-    return Incarico::generaNota()+"//"+std::to_string(_tempoStimato);
+    return Incarico::generaNota()+"\n" + "Tempo stimato: "+std::to_string(_tempoStimato)+" minuti";
 }
 
 void Faccenda::exportXml(QXmlStreamWriter & xmlOutput,string data) const

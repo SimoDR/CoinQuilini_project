@@ -28,8 +28,6 @@ void Mainwindow::impostaStile()
 
     setStyleSheet(styleSheet);
 }
-
-
 void Mainwindow::buildAdminPanel()
 {
     adminPanel* adminpanel= new adminPanel(_controller,this);
@@ -63,6 +61,7 @@ void Mainwindow::buildListaIncarichi(const QDate & giorno)
     vector<string> incarichi=_controller->incarichiGiorno(data, incaricati);
     ListaIncarichi *lista=new ListaIncarichi(giorno.toString("d/M/yyyy"),_controller->isAdmin(_inquilino.toStdString()), incarichi, incaricati, this);
     lista->show();
+    connect(lista, SIGNAL(datiIncarico(const QDate &, unsigned int )), _controller, SLOT(buildNota(const QDate &, unsigned int)));
 }
 void Mainwindow::logOut()
 {
@@ -72,26 +71,29 @@ void Mainwindow::logOut()
 
 void Mainwindow::refreshlists(const QDate & giorno)
 {
+    _prec->setText((giorno.addDays(-1)).toString(Qt::SystemLocaleLongDate));
     populateList(_precList, _inquilino,giorno.addDays(-1));
+    _selected->setText(giorno.toString(Qt::SystemLocaleLongDate));
     populateList(_selectedList, _inquilino,giorno);
+    _succ->setText((giorno.addDays(1)).toString(Qt::SystemLocaleLongDate));
     populateList(_succList, _inquilino,giorno.addDays(1));
 }
 
 void Mainwindow::addbuttons()
 {
-
-    _incarico= new QPushButton;
-    _incarico->setText("Aggiungi un incarico");
-    connect(_incarico, SIGNAL(clicked()), this, SLOT(buildSelezione()));
-    _listaSpesa= new QPushButton;
-    _listaSpesa->setText("lista della spesa");
+    _punteggio= new QPushButton;
+    _punteggio->setText("Il tuo punteggio");
     _creDeb= new QPushButton;
     _creDeb->setText("il tuo credito / debito");
-    _calendarLayout->addWidget(_incarico);
-    _calendarLayout->addWidget(_listaSpesa);
+    _calendarLayout->addWidget(_punteggio);
     _calendarLayout->addWidget(_creDeb);
 
     if (_controller->isAdmin(_inquilino.toStdString())) {
+        _incarico= new QPushButton;
+        _incarico->setText("Aggiungi un incarico");
+        _calendarLayout->addWidget(_incarico);
+
+        connect(_incarico, SIGNAL(clicked()), this, SLOT(buildSelezione()));
         _admin= new QPushButton;
         _admin->setText("Apri pannello admin");
         connect(_admin, SIGNAL(clicked()), this, SLOT(buildAdminPanel()));
@@ -127,34 +129,32 @@ void Mainwindow::addlists()
 
 
     //prev list and label
-    QLabel* prec= new QLabel;
-    prec->setText(((_calendar->selectedDate()).addDays(-1)).toString(Qt::SystemLocaleLongDate));
+    _prec= new QLabel;
+    _prec->setText(((_calendar->selectedDate()).addDays(-1)).toString(Qt::SystemLocaleLongDate));
 
     _precList= new QListWidget;
     populateList(_precList, _inquilino, (_calendar->selectedDate()).addDays(-1));
 
     //selected day list and label
-    QLabel* selected = new QLabel;
-
-    selected->setText((_calendar->selectedDate()).toString(Qt::SystemLocaleLongDate));
+    _selected = new QLabel;
+    _selected->setText((_calendar->selectedDate()).toString(Qt::SystemLocaleLongDate));
 
     _selectedList= new QListWidget;
     populateList(_selectedList, _inquilino, (_calendar->selectedDate()));
 
     //next list and label
-    QLabel* succ= new QLabel;
-
-    succ->setText(((_calendar->selectedDate()).addDays(1)).toString(Qt::SystemLocaleLongDate));
+    _succ= new QLabel;
+    _succ->setText(((_calendar->selectedDate()).addDays(1)).toString(Qt::SystemLocaleLongDate));
 
     _succList= new QListWidget;
     populateList(_succList, _inquilino, (_calendar->selectedDate()).addDays(1));
     //layout add
     QVBoxLayout* listlayout = new QVBoxLayout;
-    listlayout->addWidget(prec);
+    listlayout->addWidget(_prec);
     listlayout->addWidget(_precList);
-    listlayout->addWidget(selected);
+    listlayout->addWidget(_selected);
     listlayout->addWidget(_selectedList);
-    listlayout->addWidget(succ);
+    listlayout->addWidget(_succ);
     listlayout->addWidget(_succList);
 
 
@@ -198,6 +198,4 @@ void Mainwindow::populateList(QListWidget *lista, const QString & utente, const 
             (lista->item(cont))->setHidden(true);
         cont++;
     }
-
-
 }
