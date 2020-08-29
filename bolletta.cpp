@@ -28,7 +28,8 @@ void Bolletta::exportXml(QXmlStreamWriter & xmlOutput,string data) const
 std::string Bolletta::generaNota() const
 {
     return "BOLLETTA\n\n"
-            + Pagamento::generaNota() + "\nPunteggio: "+std::to_string(calcolaPunteggio())+" punti \n" + "Numero giorni (del possibile posticipo dell'incarico): " + _dataLimite.dataToString()
+            + Pagamento::generaNota() + "\nPunteggio: "+std::to_string(calcolaPunteggio())+" punti \n" +
+            "Data limite (per posporre): " + _dataLimite.dataToString()
             + "\n\n" + "A pagare e morire si fa sempre in tempo!";
 }
 

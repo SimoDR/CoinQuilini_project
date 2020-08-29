@@ -8,7 +8,7 @@ Incarico::Incarico(const std::string& nome, Inquilino *incaricato, bool svolto):
     _nome(nome),_incaricato(incaricato),_svolto(svolto) {}
 
 unsigned short int Incarico::_sogliaMax=10; // max punteggio attribuibile a un incarico
-unsigned short int Incarico::_sogliaMin=1;  // min punteggio attribuibile a un incarico
+unsigned short int Incarico::_sogliaMin=2;  // min punteggio attribuibile a un incarico
 
 unsigned short int Incarico::controlloSoglia(int x){
     if (x > _sogliaMax) x = _sogliaMax;
