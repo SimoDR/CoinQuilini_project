@@ -13,7 +13,8 @@ private:
     static vector<string> _listaSpesa; //debug
     unsigned short int _numeroArticoli;
 public:
-    Spesa(const string& nome,double importo,int tempoStimato,unsigned short int numeroArticoli=0,Inquilino * incaricato=nullptr,bool svolto=false);
+    Spesa(const string& nome="spesa",float importo=0,int tempoStimato=60,
+          unsigned short int numeroArticoli=0,Inquilino * incaricato=nullptr,bool svolto=false);
     virtual ~Spesa() {};
     virtual void setDataLimite(const Data&) {}
 

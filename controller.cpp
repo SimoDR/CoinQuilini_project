@@ -97,15 +97,16 @@ void Controller::setIncaricoSvolto(const Data & dataIncarico, int indiceIncarico
 
 void Controller::incrementaGiorno()
 {
-    _calendario.checkIncarichiSvolti(false);
+    _calendario.checkIncarichiSvolti();
     _calendario.incrementaData();
 
 }
 
-void Controller::checkIncarichiSvoltiIeri()
+void Controller::checkIncarichiSvoltiPassato()
 {
-    _calendario.checkIncarichiSvolti(true);
+    _calendario.checkIncarichiSvoltiPassato();
 }
+
 
 vector<std::string> Controller::incarichiGiorno(string dataGiorno, vector<std::string> & incaricati)
 {

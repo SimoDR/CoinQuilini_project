@@ -168,6 +168,16 @@ void Calendario::insert(Incarico * daInserire, Data  dataInCuiInserire, int nume
 
         if(!assegnato) daInserire->setIncaricato(incaricato);
         daInserire->setDataLimite(dataInCuiInserire+scostamentoDataLimite);
+
+        if(import && daInserire->getSvolto()==false && iteratoreInCuiInserire!=_iteratoreCorrente) //se non è stato svolto, è import e non è di oggi
+        {
+            daInserire->getIncaricato()->setPunteggio(-daInserire->calcolaPunteggio()); //tolgo punti all'interessato
+            daInserire->setSvolto(); //imposto svolto che così non sia rilevabile alla prossima apertura
+            _nonSvoltiImport.push_back(daInserire->getIncaricato()->getNome()); //segno nome
+            _nonSvoltiImport.push_back(daInserire->getLabel()); //tipo incarico
+            _nonSvoltiImport.push_back(std::to_string(daInserire->calcolaPunteggio())); //punti sottratti
+        }
+
         iteratoreInCuiInserire->_incarichiDelGiorno.push_back(daInserire->clone());
 
         dataInCuiInserire=dataInCuiInserire+cadenzaIncarico;
@@ -230,21 +240,14 @@ void Calendario::setCredito(Pagamento * p, vector<Inquilino*> & lista)
     }
 }
 
-void Calendario::checkIncarichiSvolti(bool ieri)
+void Calendario::checkIncarichiSvolti()
 {
     string inadempienti;
-    inadempienti="Attenzione: alcuni inquilini non hanno svolto gli incarichi assegnati. \n";
-    dList<Giorno>::iterator iteratoreDaControllare=_iteratoreCorrente;
-    if(ieri)
-    {
-        if(iteratoreDaControllare==_giorni.begin()) //controllo che non sia il primo giorno
-            return;
-        else --iteratoreDaControllare;
-    }
+    inadempienti="Attenzione: è scattata la mezzanotte e alcuni inquilini non hanno svolto gli incarichi assegnati ieri. A costoro verranno decurtati dei punti: \n";
 
     bool almenoUno=false;
 
-    for(vector<Incarico*>::iterator it=iteratoreDaControllare->_incarichiDelGiorno.begin(); it!=iteratoreDaControllare->_incarichiDelGiorno.end(); ++it)
+    for(vector<Incarico*>::iterator it=_iteratoreCorrente->_incarichiDelGiorno.begin(); it!=_iteratoreCorrente->_incarichiDelGiorno.end(); ++it)
     {
         if(!((*it)->getSvolto())) //se non è stato svolto
         {
@@ -252,8 +255,9 @@ void Calendario::checkIncarichiSvolti(bool ieri)
             inadempienti.append((*it)->getIncaricato()->getNome());
             inadempienti.append(" non ha svolto l'incarico ");
             inadempienti.append((*it)->getLabel());
+            inadempienti.append(" (-"+std::to_string((*it)->calcolaPunteggio())+ ((*it)->calcolaPunteggio() > 1 ? +" punti)" : " punto)"));
             inadempienti.append(".\n");
-            (*it)->getIncaricato()->setPunteggio((*it)->calcolaPunteggio());
+            (*it)->getIncaricato()->setPunteggio(-(*it)->calcolaPunteggio());
             (*it)->setSvolto();
         }
         else
@@ -261,7 +265,32 @@ void Calendario::checkIncarichiSvolti(bool ieri)
             (*it)->getIncaricato()->setPunteggio((*it)->calcolaPunteggio());
         }
     }
-    inadempienti.append("Dei punti verranno decurtati dagli inquilini sopracitati.");
+    inadempienti.append("\nI sopracitati incarichi sono ora impostati come svolti. Sara' compito degli inquilini calendarizzarli nuovamente.");
+    if(almenoUno)
+    {
+        showMessage(QString::fromStdString(inadempienti));
+    }
+}
+
+void Calendario::checkIncarichiSvoltiPassato()
+{
+    string inadempienti;
+    inadempienti="Attenzione: alcuni inquilini non hanno svolto gli incarichi assegnati nei giorni scorsi. A costoro verranno decurtati dei punti: \n";
+    vector<string>::const_iterator cit=_nonSvoltiImport.begin();
+    bool almenoUno=false;
+    while(cit!=_nonSvoltiImport.end())
+    {
+        almenoUno=true;
+        inadempienti.append(*cit);
+        ++cit;
+        inadempienti.append(" non ha svolto l'incarico ");
+        inadempienti.append(*cit);
+        ++cit;
+        inadempienti.append(" (-"+ *cit + (std::stoi(*cit) > 1 ? +" punti)" : " punto)"));
+        inadempienti.append(".\n");
+        ++cit;
+    }
+    inadempienti.append("\nI sopracitati incarichi sono ora impostati come svolti. Sara' compito degli inquilini calendarizzarli nuovamente.");
     if(almenoUno)
     {
         showMessage(QString::fromStdString(inadempienti));
@@ -402,7 +431,7 @@ Inquilino * Calendario::BufferInquilini::restituisciIlMinimo(dList<Calendario::G
 
 }
 
-Calendario::Calendario(const Data& odierna, const vector<Inquilino *> &listaInquilini): _iteratoreCorrente(inizializzaCalendario(odierna)), _buffer(listaInquilini)
+Calendario::Calendario(const Data& odierna, const vector<Inquilino *> &listaInquilini): _iteratoreCorrente(inizializzaCalendario(odierna)) ,_buffer(listaInquilini)
 {
     importXml();
 }
@@ -452,7 +481,7 @@ void Calendario::importXml()
             if (xmlInput.readNextStartElement())
             {
                 if (xmlInput.name() == "CALENDARIO")
-                {
+                {             
                     while(xmlInput.readNextStartElement())
                     {
                         vector<string> parametri(14,"\0");
@@ -478,6 +507,7 @@ void Calendario::importXml()
                         creaNuovoIncarico(parametri,true);
                         xmlInput.skipCurrentElement();
                     }
+
                 }
                 else
                     throw new std::runtime_error("Errore durante l'import del calendario");
@@ -587,6 +617,7 @@ void Calendario::creaNuovoIncarico(const vector<string>& parametri,bool import)
 
     if(nomeIncaricato!="\0") //assegnazione manuale dell'incaricato
         i->setIncaricato(_buffer.getInquilino(nomeIncaricato));
+
     if(svolto) //per l'import
         i->setSvolto();
 

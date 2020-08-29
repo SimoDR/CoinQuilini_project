@@ -29,7 +29,7 @@ void showMessage(const QString & message)
 void showSuccess(const QString & message)
 {
     QMessageBox * m= new QMessageBox;
-    m->setWindowTitle("Success");
+    m->setWindowTitle("Info");
     m->setIcon(QMessageBox::Information);
     m->setText(message);
 
