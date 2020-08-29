@@ -7,6 +7,7 @@
 #include <QGridLayout>
 #include <QPushButton>
 #include <QString>
+#include "utilities.h"
 
 class CreaModificaInquilino : public QDialog
 {
@@ -26,6 +27,7 @@ private:
     void buildButtons();
 
 private slots:
+    void checkDati();
     void raccogliDati();    //per raccogliere i dati dell'editline
 signals:
     void invia(const QString&, const QString &);  //invia i dati al pannello admin

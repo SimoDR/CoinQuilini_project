@@ -28,8 +28,26 @@ void CreaModificaInquilino::buildButtons()
     _no->setText("Indietro");
     _layout->addWidget(_no,4,1,1,2);
     connect(_no, SIGNAL(clicked()), this, SLOT(close()));
-    connect(_yes, SIGNAL(clicked()), this, SLOT(raccogliDati()));
-    connect(_yes, SIGNAL(clicked()), this, SLOT(close()));
+    connect(_yes, SIGNAL(clicked()), this, SLOT(checkDati()));
+}
+
+void CreaModificaInquilino::checkDati()
+{
+    bool errore=false;
+    if(_useredit->text().isEmpty() || _pwedit->text().isEmpty())
+        errore=true;
+    if(!errore)
+    {
+        raccogliDati();
+        close();
+        showSuccess("Inquilino aggiunto con successo");
+    }
+    else
+    {
+        disconnect(_yes, SIGNAL(clicked()), this, SLOT(checkDati()));
+        connect(_yes, SIGNAL(clicked()), this, SLOT(checkDati()));
+        showMessage("Attenzione! I campi user e password non possono essere vuoti");
+    }
 }
 
 void CreaModificaInquilino::raccogliDati()
