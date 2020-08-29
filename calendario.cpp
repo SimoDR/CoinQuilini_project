@@ -1,4 +1,4 @@
-#include "calendario.h"
+﻿#include "calendario.h"
 
 dList<Calendario::Giorno>::iterator Calendario::iteratoreFromData(dList<Giorno>::iterator iteratoreIniziale, const Data& inCuiInserire)
 {
@@ -230,19 +230,41 @@ void Calendario::setCredito(Pagamento * p, vector<Inquilino*> & lista)
     }
 }
 
-void Calendario::checkIncarichiSvolti()
+void Calendario::checkIncarichiSvolti(bool ieri)
 {
-    for(vector<Incarico*>::iterator it=_iteratoreCorrente->_incarichiDelGiorno.begin(); it!=_iteratoreCorrente->_incarichiDelGiorno.end(); ++it)
+    string inadempienti;
+    inadempienti="Attenzione: alcuni inquilini non hanno svolto gli incarichi assegnati. \n";
+    dList<Giorno>::iterator iteratoreDaControllare=_iteratoreCorrente;
+    if(ieri)
+    {
+        if(iteratoreDaControllare==_giorni.begin()) //controllo che non sia il primo giorno
+            return;
+        else --iteratoreDaControllare;
+    }
+
+    bool almenoUno=false;
+
+    for(vector<Incarico*>::iterator it=iteratoreDaControllare->_incarichiDelGiorno.begin(); it!=iteratoreDaControllare->_incarichiDelGiorno.end(); ++it)
     {
         if(!((*it)->getSvolto())) //se non è stato svolto
         {
+            almenoUno=true;
+            inadempienti.append((*it)->getIncaricato()->getNome());
+            inadempienti.append(" non ha svolto l'incarico ");
+            inadempienti.append((*it)->getLabel());
+            inadempienti.append(".\n");
             (*it)->getIncaricato()->setPunteggio((*it)->calcolaPunteggio());
-            //MESSAGGIO: NON L'HAI SVOLTO!!
+            (*it)->setSvolto();
         }
         else
         {
             (*it)->getIncaricato()->setPunteggio((*it)->calcolaPunteggio());
         }
+    }
+    inadempienti.append("Dei punti verranno decurtati dagli inquilini sopracitati.");
+    if(almenoUno)
+    {
+        showMessage(QString::fromStdString(inadempienti));
     }
 }
 

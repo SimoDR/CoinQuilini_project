@@ -70,6 +70,7 @@ public slots:
 
     void incrementaGiorno(); //MESSAGGIO PER CHI NON HA SVOLTO
 
+    void checkIncarichiSvoltiIeri();
 
     vector<string> incarichiGiorno(string giorno, vector<string> & incaricati);
 

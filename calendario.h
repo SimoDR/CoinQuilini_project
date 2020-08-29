@@ -116,7 +116,7 @@ public:
 
     void posponiIncarico(Incarico * daPosporre, unsigned int quantoPosporre,const Data& dataIncarico);
 
-    void checkIncarichiSvolti();
+    void checkIncarichiSvolti(bool);
 
     void setCredito(Pagamento*, vector<Inquilino*> &);
 

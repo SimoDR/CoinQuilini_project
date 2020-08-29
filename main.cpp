@@ -1,4 +1,4 @@
-
+/*
 #include <iostream>
 #include<vector>
 #include <QApplication>
@@ -11,9 +11,9 @@ int main(int argc, char *argv[])
     Controller controller;
     return a.exec();
 }
+*/
 
 
-/*
 #include "incarico.h"
 //#include "spazzatura.h"
 //#include "cucina.h"
@@ -167,6 +167,8 @@ int main(int argc, char *argv[])
 
     controller.stampaCalendario();
 
+    controller.checkIncarichiSvoltiIeri();
+
 
 
 //    //test di rimozione/posposizione incarichi e rimozione inquilini
@@ -203,7 +205,7 @@ int main(int argc, char *argv[])
 
 }
 
-*/
+
 
 
 
