@@ -102,7 +102,7 @@ public:
     }
 
 
-    Incarico * trovaIncarico (const Data& dataIncarico, int indiceIncarico);
+    Incarico * trovaIncarico(const Data& dataIncarico, unsigned int indiceIncarico);
     // il controller gli passa la data dell'incarico e la sua
     // posizione nella lista dell'interfaccia, questo metodo
     // ritorna il puntatore all'incarico stesso. Probabilmente

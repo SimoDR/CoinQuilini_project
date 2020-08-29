@@ -44,7 +44,7 @@ FormIncarico::FormIncarico(const QString &tipo, bool regolare, vector<string> in
         _layout->addWidget(tempo,5,1);
         _tempoStimato=new QSpinBox;
         _tempoStimato->setRange(1,180);
-        _layout->addWidget(_tempoStimato,6,2);
+        _layout->addWidget(_tempoStimato,5,2);
         QLabel* articoli= new QLabel("Numero di articoli da acquistare:");
         _layout->addWidget(articoli,6,1);
         _articoli=new QSpinBox;
