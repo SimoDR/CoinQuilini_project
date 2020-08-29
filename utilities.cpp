@@ -14,6 +14,23 @@ void showMessage(const QString & message)
 {
     QMessageBox * m= new QMessageBox;
     m->setWindowTitle("Alert");
+    m->setIcon(QMessageBox::Warning);
+    m->setText(message);
+
+    QFile file(":/resources/style.css");
+    file.open(QFile::ReadOnly);
+    QString styleSheet = QLatin1String(file.readAll());
+
+    m->setStyleSheet(styleSheet);
+
+    m->exec();
+}
+
+void showSuccess(const QString & message)
+{
+    QMessageBox * m= new QMessageBox;
+    m->setWindowTitle("Success");
+    m->setIcon(QMessageBox::Information);
     m->setText(message);
 
     QFile file(":/resources/style.css");

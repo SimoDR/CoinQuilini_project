@@ -185,6 +185,7 @@ void FormIncarico::controllaCampi()
     {
         raccogliDati();
         close();
+        showSuccess("Incarico inserito con successo");
     }
     else
     {

@@ -15,6 +15,8 @@
 #include <QMenu>
 #include <QAction>
 #include <QGroupBox> //layout with a title
+#include <QTimer>
+#include "data.h"
 #include "selezionedialog.h"
 #include "formincarico.h"
 #include "listaincarichi.h"
@@ -57,12 +59,17 @@ private:
     //inquilino loggato
     QString _inquilino;
 
+    QTimer * _timer;
+
+    Data _dataOdierna;
+
     void addbuttons();
     void addcalendar();
     void addlists();
     void addmenubar();
     void populateList(QListWidget *, const QString &, const QDate &);
     QString login();
+    void inizializzaTimer();
 
 
 public:
@@ -79,6 +86,7 @@ private slots:
     void logOut();
     void refreshlists(const QDate &giorno);
     void impostaStile();
+    void mezzanotte();
 };
 
 #endif // MAINWINDOW_H

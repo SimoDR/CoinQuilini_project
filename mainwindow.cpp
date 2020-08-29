@@ -2,10 +2,10 @@
 #include "controller.h"
 #include "adminpanel.h"
 
-Mainwindow::Mainwindow(QWidget *parent, Controller* c, QString inquilino) : QMainWindow(parent),  _controller(c), _inquilino(inquilino)
+Mainwindow::Mainwindow(QWidget *parent, Controller* c, QString inquilino) : QMainWindow(parent),  _controller(c), _inquilino(inquilino), _dataOdierna(Data::unixDateToData(std::chrono::system_clock::now()))
 {
     _mainLayout=new QHBoxLayout;
-    setWindowTitle("Qoinquilini-Benvenuto " + _inquilino);
+    setWindowTitle("CoinQuilini - Benvenuto " + _inquilino);
 
     //create menu bar
     addmenubar();
@@ -18,6 +18,9 @@ Mainwindow::Mainwindow(QWidget *parent, Controller* c, QString inquilino) : QMai
     _mainWidget->setLayout(_mainLayout);
     setCentralWidget(_mainWidget);
     impostaStile();
+    inizializzaTimer();
+    _controller->checkIncarichiSvoltiIeri();
+
 }
 
 void Mainwindow::impostaStile()
@@ -27,6 +30,15 @@ void Mainwindow::impostaStile()
     QString styleSheet = QLatin1String(file.readAll());
 
     setStyleSheet(styleSheet);
+}
+
+void Mainwindow::mezzanotte()
+{
+    Data adesso=Data::unixDateToData(std::chrono::system_clock::now());
+    if(adesso != _dataOdierna)
+    {
+        _controller->incrementaGiorno();
+    }
 }
 void Mainwindow::buildAdminPanel()
 {
@@ -198,4 +210,13 @@ void Mainwindow::populateList(QListWidget *lista, const QString & utente, const 
             (lista->item(cont))->setHidden(true);
         cont++;
     }
+}
+
+void Mainwindow::inizializzaTimer()
+{
+    _timer = new QTimer(this);
+    connect(_timer, SIGNAL(timeout()), this, SLOT(mezzanotte()));
+    _timer->setInterval(10000);
+    _timer->setSingleShot(false);
+    _timer->start();
 }

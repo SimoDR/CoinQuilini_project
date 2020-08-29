@@ -1,4 +1,4 @@
-/*
+
 #include <iostream>
 #include<vector>
 #include <QApplication>
@@ -11,9 +11,9 @@ int main(int argc, char *argv[])
     Controller controller;
     return a.exec();
 }
-*/
 
 
+/*
 #include "incarico.h"
 //#include "spazzatura.h"
 //#include "cucina.h"
@@ -207,7 +207,7 @@ int main(int argc, char *argv[])
 
 
 
-
+*/
 
 
 
