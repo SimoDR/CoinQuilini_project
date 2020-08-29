@@ -12,6 +12,7 @@
 #include <QPushButton>
 #include <vector>
 #include <string>
+#include "utilities.h"
 using std::vector;
 using std::string;
 
@@ -47,6 +48,7 @@ public:
     FormIncarico(const QString & tipo, bool regolare, vector<string> inquilini, QWidget *parent=nullptr);
 private slots:
     void raccogliDati();
+    void controllaCampi();
 signals:
     void inviaDati(const vector<string> &);
 };
