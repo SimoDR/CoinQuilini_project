@@ -2,6 +2,8 @@
 #define PAGAMENTO_H
 
 #include "incarico.h"
+#include <iomanip>
+#include <sstream>
 
 class Pagamento: virtual public Incarico
 {
