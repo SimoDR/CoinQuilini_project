@@ -171,7 +171,7 @@ void Calendario::insert(Incarico * daInserire, Data  dataInCuiInserire, int nume
         if(!assegnato) daInserire->setIncaricato(incaricato);
         daInserire->setDataLimite(dataInCuiInserire+scostamentoDataLimite);
 
-        if(import && daInserire->getSvolto()==false && iteratoreInCuiInserire!=_iteratoreCorrente) //se non è stato svolto, è import e non è di oggi
+        if(import && daInserire->getSvolto()==false && iteratoreInCuiInserire->_dataDelGiorno<_iteratoreCorrente->_dataDelGiorno) //se non è stato svolto, è import ed è nel passato
         {
             daInserire->getIncaricato()->setPunteggio(-daInserire->calcolaPunteggio()); //tolgo punti all'interessato
             daInserire->setSvolto(); //imposto svolto che così non sia rilevabile alla prossima apertura
