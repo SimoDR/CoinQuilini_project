@@ -60,7 +60,7 @@ void Controller::creaNuovoIncarico(vector<std::string> parametri)
 
 
 
-void Controller::rimuoviIncarico(const Data &dataIncarico, int indiceIncarico)
+void Controller::rimuoviIncarico(const Data &dataIncarico, unsigned int indiceIncarico)
 {
     _calendario.remove(_calendario.trovaIncarico(dataIncarico,indiceIncarico),dataIncarico);
 }
@@ -82,7 +82,7 @@ void Controller::posponiIncarico(const Data &dataIncarico, int indiceIncarico, u
 
 }
 
-void Controller::riassegnaIncarico(const Data &dataIncarico, int indiceIncarico, string nomeInquilino)
+void Controller::riassegnaIncarico(const Data & dataIncarico, unsigned int indiceIncarico, const string & nomeInquilino)
 {
     Incarico * daRiassegnare=_calendario.trovaIncarico(dataIncarico,indiceIncarico);
     Inquilino * nuovoIncaricato=_listaInquilini.getInquilino(nomeInquilino);

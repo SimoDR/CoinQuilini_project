@@ -20,6 +20,7 @@ HEADERS += \
     outofboundexception.h \
     pagamento.h \
     pulizia.h \
+    riassegnadialog.h \
     selezionedialog.h \
     spazzatura.h \
     spesa.h \
@@ -47,6 +48,7 @@ SOURCES += \
     outofboundexception.cpp \
     pagamento.cpp \
     pulizia.cpp \
+    riassegnadialog.cpp \
     selezionedialog.cpp \
     spazzatura.cpp \
     spesa.cpp \

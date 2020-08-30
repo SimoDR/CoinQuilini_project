@@ -58,11 +58,11 @@ public slots:
 
     void creaNuovoIncarico(vector<string> parametri); //slot per la creazione di un nuovo incarico
 
-    void rimuoviIncarico(const Data& dataIncarico, int indiceIncarico);
+    void rimuoviIncarico(const Data& dataIncarico, unsigned int indiceIncarico);
 
     void posponiIncarico(const Data& dataIncarico, int indiceIncarico, unsigned int quantoPosporre, unsigned int posizioneInquilinoRichiedente); //MESSAGGIO DA DARE IN CASO NEGATIVO
 
-    void riassegnaIncarico(const Data& dataIncarico, int indiceIncarico, string nomeInquilino); //solo l'admin
+    void riassegnaIncarico(const Data& dataIncarico, unsigned int indiceIncarico, const string &nomeInquilino); //solo l'admin
 
     void setIncaricoSvolto(const Data& dataIncarico, int indiceIncarico);
 

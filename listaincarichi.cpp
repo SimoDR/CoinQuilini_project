@@ -3,18 +3,22 @@
 void ListaIncarichi::buildButtons()
 {
     QHBoxLayout *buttons=new QHBoxLayout;
-    QPushButton *rimuovi= new QPushButton("Rimuovi");
-    buttons->addWidget(rimuovi);
-    QPushButton *riassegna= new QPushButton("Riassegna");
-    buttons->addWidget(riassegna);
+    _rimuovi= new QPushButton("Rimuovi");
+    _rimuovi->setDisabled(true);
+    buttons->addWidget(_rimuovi);
+    connect(_rimuovi,SIGNAL(clicked()), this, SLOT(raccogliDaEliminare()));
+    _riassegna= new QPushButton("Riassegna");
+    _riassegna->setDisabled(true);
+    connect(_riassegna,SIGNAL(clicked()), this, SLOT(raccogliDaRiassegnare()));
+    buttons->addWidget(_riassegna);
     _mainLayout->addLayout(buttons);
-
-
+    connect(_lista, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(enableButtons()));
 }
 
 void ListaIncarichi::buildLista(const vector<std::string> & incarichi, const vector<std::string> & incaricati)
 {
     int cont=0;
+    _lista->clear();
     for(auto ci=incarichi.cbegin();ci!=incarichi.cend();ci++)
     {
         _lista->addItem(QString::fromStdString(incarichi[cont])+ "        " + QString::fromStdString(incaricati[cont]));
@@ -39,4 +43,36 @@ void ListaIncarichi::raccogliDatiIncarico()
     QDate giorno=_data;
     unsigned int pos=_lista->currentRow();
     emit datiIncarico(giorno,pos);
+}
+
+void ListaIncarichi::raccogliDaRiassegnare()
+{
+    QDate giorno=_data;
+    unsigned int pos=_lista->currentRow();
+    emit riassegnaIncarico(giorno,pos, this);
+}
+
+void ListaIncarichi::raccogliDaEliminare()
+{
+    QMessageBox *conferma=new QMessageBox;
+    conferma->setWindowTitle("Rimozione inquilino");
+    conferma->setText("Sei sicuro di voler eliminare l'inquilino selezionato?");
+    conferma->setDetailedText("La rimozione comporta la perdita dei dati dell'inquilino e la riassegnazione automatica di tutti gli incarichi a lui assegnati in futuro");
+    conferma->setStandardButtons(QMessageBox::Yes | QMessageBox::No );
+    conferma->setDefaultButton(QMessageBox::Yes);
+    int scelta = conferma->exec();
+    if (scelta==QMessageBox::Yes)
+    {
+    Data giorno((_data.toString("d/M/yyyy")).toStdString());
+    unsigned int pos=_lista->currentRow();
+    emit eliminaIncarico(giorno,pos);
+    close();
+    }
+
+}
+
+void ListaIncarichi::enableButtons()
+{
+    _riassegna->setDisabled(false);
+    _rimuovi->setDisabled(false);
 }

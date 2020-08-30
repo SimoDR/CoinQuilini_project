@@ -20,6 +20,8 @@
 #include "selezionedialog.h"
 #include "formincarico.h"
 #include "listaincarichi.h"
+#include "riassegnadialog.h"
+#include "data.h"
 
 class Controller;
 
@@ -83,10 +85,12 @@ private slots:
     void buildForm(const QString &, bool);
     void buildIncarico(const vector<string> &);
     void buildListaIncarichi(const QDate &);
+    void buildListaIncarichi(const Data &);
     void logOut();
     void refreshlists(const QDate &giorno);
     void impostaStile();
     void mezzanotte();
+    void buildRiassegna(const QDate &, unsigned int, ListaIncarichi *);
 };
 
 #endif // MAINWINDOW_H

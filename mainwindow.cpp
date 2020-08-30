@@ -38,6 +38,17 @@ void Mainwindow::mezzanotte()
         _controller->incrementaGiorno();
     }
 }
+
+void Mainwindow::buildRiassegna(const QDate &data, unsigned int pos, ListaIncarichi * lista)
+{
+    Data giorno((data.toString("d/M/yyyy")).toStdString());
+    RiassegnaDialog* riassegna=new RiassegnaDialog(giorno, pos, _controller->getInquilini(), this);
+    riassegna->show();
+    connect(riassegna, SIGNAL(inviaInquilino(const Data &, unsigned int, const string &)), _controller, SLOT(riassegnaIncarico(const Data & , unsigned int, const string & )));
+    connect(riassegna, SIGNAL(inviaInquilino(const Data &, unsigned int, const string &)), lista, SLOT(close()));
+    connect(riassegna, SIGNAL(inviaInquilino(const Data &, unsigned int, const string &)), this, SLOT(buildListaIncarichi(const Data &)));
+}
+
 void Mainwindow::buildAdminPanel()
 {
     adminPanel* adminpanel= new adminPanel(_controller,this);
@@ -72,7 +83,18 @@ void Mainwindow::buildListaIncarichi(const QDate & giorno)
     ListaIncarichi *lista=new ListaIncarichi(giorno.toString("d/M/yyyy"),_controller->isAdmin(_inquilino.toStdString()), incarichi, incaricati, this);
     lista->show();
     connect(lista, SIGNAL(datiIncarico(const QDate &, unsigned int )), _controller, SLOT(buildNota(const QDate &, unsigned int)));
+    connect(lista, SIGNAL(riassegnaIncarico(const QDate &, unsigned int, ListaIncarichi *)), this, SLOT(buildRiassegna(const QDate &, unsigned int, ListaIncarichi *)));
+    connect(lista, SIGNAL(eliminaIncarico(const Data &, unsigned int)), _controller, SLOT(rimuoviIncarico(const Data&, unsigned int)));
+    connect(lista, SIGNAL(eliminaIncarico(const Data &, unsigned int)), this, SLOT(buildListaIncarichi(const Data &)));
 }
+
+void Mainwindow::buildListaIncarichi(const Data & giorno)
+{
+    QDate data=QDate::fromString(QString::fromStdString(giorno.dataToString()),"d/M/yyyy");
+    QMetaObject::invokeMethod(this, "buildListaIncarichi", Qt::DirectConnection, Q_ARG(QDate, data));
+    QMetaObject::invokeMethod(this, "refreshlists", Qt::DirectConnection, Q_ARG(QDate, data));
+}
+
 void Mainwindow::logOut()
 {
     this->close();
