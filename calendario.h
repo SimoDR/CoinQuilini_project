@@ -113,9 +113,9 @@ public:
 
     void insert(Incarico *, Data, int, int, int, bool);
 
-    void remove(Incarico * daRimuovere, const Data& dataIncarico);
+    void remove(const Data& dataIncarico,unsigned int indiceIncarico);
 
-    void posponiIncarico(Incarico * daPosporre, unsigned int quantoPosporre,const Data& dataIncarico);
+    void posponiIncarico(unsigned int indiceIncarico, unsigned int quantoPosporre,const Data& dataIncarico);
 
     void checkIncarichiSvolti() const;
 

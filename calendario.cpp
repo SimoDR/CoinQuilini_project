@@ -209,37 +209,49 @@ void Calendario::insert(Incarico * daInserire, Data  dataInCuiInserire, int nume
 
 
 
-void Calendario::remove(Incarico *daRimuovere, const Data &dataIncarico)
+void Calendario::remove(const Data &dataIncarico, unsigned int indiceIncarico)
 {
+    bool passato=false;
+    if(dataIncarico<_iteratoreCorrente->_dataDelGiorno) passato=true;
+    dList<Giorno>::iterator giornoIncarico;
+    if(passato) giornoIncarico=iteratoreFromData(_giorni.begin(),dataIncarico);
+    else giornoIncarico=iteratoreFromData(_iteratoreCorrente,dataIncarico);
+
     bool rimosso=false;
-    dList<Giorno>::iterator giornoIncarico=iteratoreFromData(_iteratoreCorrente,dataIncarico);
+    unsigned int pos=0;
+    bool isEmpty=false;
     for(vector<Incarico*>::iterator it=giornoIncarico->_incarichiDelGiorno.begin(); it!=giornoIncarico->_incarichiDelGiorno.end() && !rimosso; ++it)
     {
-        if(daRimuovere==*it)
+        if(pos==indiceIncarico)
         {
+            isEmpty=giornoIncarico->_incarichiDelGiorno.empty();
             giornoIncarico->_incarichiDelGiorno.erase(it);
             rimosso=true;
         }
+        pos++;
     }
 
-    if(giornoIncarico->_incarichiDelGiorno.empty()) //se ora non c'è più neanche un incarico, tolgo il giorno perchè non serve più
+    if(isEmpty) //se ora non c'è più neanche un incarico, tolgo il giorno perchè non serve più
         _giorni.remove(giornoIncarico);
 }
 
 
 
-void Calendario::posponiIncarico(Incarico * daPosporre, unsigned int quantoPosporre, const Data& dataIncarico)
+void Calendario::posponiIncarico(unsigned int indiceIncarico, unsigned int quantoPosporre, const Data& dataIncarico)
 {
     Data dataInCuiInserire=dataIncarico+quantoPosporre;
+    bool passato=false;
+    if(dataIncarico<getDataDiOggi()) passato=true;
+    Incarico * daPosporre=trovaIncarico(dataIncarico,indiceIncarico,passato);
     bool possibilePosporre=daPosporre->posponi(dataInCuiInserire);
 
     if (possibilePosporre)
     {
-       remove(daPosporre,dataIncarico); //rimuovo da dov'è
+       remove(dataIncarico,indiceIncarico); //rimuovo da dov'è
        dList<Giorno>::iterator iteratoreInCuiInserire=iteratoreFromData(_iteratoreCorrente, dataInCuiInserire);
        iteratoreInCuiInserire->_incarichiDelGiorno.push_back(daPosporre->clone());
-       int decurtazione=daPosporre->calcolaPunteggio()/2;
-       daPosporre->getIncaricato()->setPunteggio(decurtazione);
+       int decurtazione=daPosporre->calcolaPunteggio()/2+quantoPosporre;
+       daPosporre->getIncaricato()->setPunteggio(-decurtazione);
 
        showSuccess(QString::fromStdString("Incarico posposto con successo! Tuttavia ti sono stati decurtati "+std::to_string(decurtazione)+" punti"));
     }
