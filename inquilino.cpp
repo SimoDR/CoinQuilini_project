@@ -7,7 +7,7 @@ void Inquilino::modifica(const string& user, const string& pw)
     _user = user;
     _password = pw;
 }
-void Inquilino::setCD(double cd)
+void Inquilino::setCD(float cd)
 {
     _creditoDebito = _creditoDebito + cd;
 }
@@ -28,7 +28,7 @@ bool Inquilino::puoPosporre() const
     return _punteggio >= _sogliaPosponi;
 }
 
-double Inquilino::getCreditoDebito() const{
+float Inquilino::getCreditoDebito() const{
     return _creditoDebito;
 }
 std::string Inquilino::getNome() const
