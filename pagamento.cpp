@@ -21,7 +21,7 @@ string Pagamento::generaNota() const {
 	std::stringstream stream;
 	stream << std::fixed << std::setprecision(2) << aux;
     std::string money = stream.str();
-    return Incarico::generaNota()+"\n"+"Importo: "+ money+" €";
+    return "Importo: "+ money+" €";
 }
 
 unsigned short int Pagamento::calcolaPunteggio() const{

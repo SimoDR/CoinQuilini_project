@@ -8,7 +8,9 @@ Cucina::Cucina(const std::string & nome, int tempoStimato, unsigned short numero
 Cucina* Cucina::clone() const {return new Cucina(*this);}
 
 string Cucina::generaNota() const {
-    return "CUCINA\n\n"+Faccenda::generaNota()+"\nPunteggio: "+std::to_string(calcolaPunteggio())+" punti \n"+"Numero commensali: "+std::to_string(_numeroCommensali)+"\n\n"+"Forza chef: mettiti ai fornelli!";
+    return "CUCINA\n\n"+Incarico::generaNota()+"\n"+Faccenda::generaNota()+
+            "\nPunteggio: "+std::to_string(calcolaPunteggio())+" punti \n"+
+            "Numero commensali: "+std::to_string(_numeroCommensali)+"\n\n"+"Forza chef: mettiti ai fornelli!";
 }
 unsigned short int Cucina::calcolaPunteggio() const{
     return controlloSoglia(std::pow(_pesoCucina,_numeroCommensali));

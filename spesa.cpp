@@ -15,7 +15,7 @@ bool Spesa::posponi(const Data& d) const
 
 string Spesa::generaNota() const
 {
-    return "SPESA\n\n"+Faccenda::generaNota()+
+    return "SPESA\n\n"+Incarico::generaNota()+"\n"+Faccenda::generaNota()+"\n"+Pagamento::generaNota()+
             "\nPunteggio: "+std::to_string(calcolaPunteggio())+" punti \n"+"Numero articoli: "+
             std::to_string(_numeroArticoli)+"\n\n"+"Andiamo a fare compere!";
 }
