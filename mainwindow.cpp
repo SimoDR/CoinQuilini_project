@@ -32,14 +32,12 @@ void Mainwindow::impostaStile()
 
 void Mainwindow::mezzanotte()
 {
-    Data adesso=Data("31/8/2020");
-            //Data::unixDateToData(std::chrono::system_clock::now());
+    Data adesso=Data::unixDateToData(std::chrono::system_clock::now());
     if(adesso != _dataOdierna)
     {
         _controller->incrementaGiorno();
     }
-    _dataOdierna=Data("31/8/2020");
-            //Data::unixDateToData(std::chrono::system_clock::now());
+    _dataOdierna=Data::unixDateToData(std::chrono::system_clock::now());
 }
 void Mainwindow::buildAdminPanel()
 {

@@ -72,7 +72,6 @@ public slots:
 
     void buildNota(const QDate &data, unsigned int pos);
 
-
     vector<string> incarichiGiorno(string giorno, vector<string> & incaricati);
 
 };

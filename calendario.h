@@ -59,7 +59,7 @@ private:
 
     class BufferInquilini //DA METTERE PRIVATA
     {
-    public: //DA TOGLIERE
+
         friend class Calendario;
 
         //campi dati
@@ -99,13 +99,11 @@ public:
     void rimuoviInquilino(unsigned int pos);
     Inquilino * ottieniIncaricato(dList<Giorno>::iterator iteratoreIniziale);
     void incrementaData();
-    const Data& getDataDiOggi() const //debug
-    {
-        return _iteratoreCorrente->_dataDelGiorno;
-    }
+
+    const Data& getDataDiOggi() const;
 
 
-    Incarico * trovaIncarico(const Data& dataIncarico, unsigned int indiceIncarico,bool=false);
+    Incarico * trovaIncarico(const Data& dataIncarico, unsigned int indiceIncarico, bool=false);
     // il controller gli passa la data dell'incarico e la sua
     // posizione nella lista dell'interfaccia, questo metodo
     // ritorna il puntatore all'incarico stesso. Probabilmente
@@ -119,11 +117,11 @@ public:
 
     void posponiIncarico(Incarico * daPosporre, unsigned int quantoPosporre,const Data& dataIncarico);
 
-    void checkIncarichiSvolti();
+    void checkIncarichiSvolti() const;
 
-    void checkIncarichiSvoltiPassato();
+    void checkIncarichiSvoltiPassato() const;
 
-    void setCredito(Pagamento*, vector<Inquilino*> &);
+    void setCredito(Pagamento*, vector<Inquilino*> &) const;
 
     void exportXml() const;
 
@@ -134,11 +132,6 @@ public:
     void incarichiGiorno(const Data & giorno, vector<std::string> & tipiIncarichi, vector<string> & incaricati) const;
 
 
-    //    importacalendario(fileXML)
-    //    esportacalendario()
-    //    iterator *getCurrent()
-
-    //    vector<sring> getspecifiche(incarico *)
 };
 
 #endif // CALENDARIO_H
