@@ -12,7 +12,7 @@ bool Pulizia::posponi(const Data& d) const{
 }
 
 string Pulizia::generaNota() const {
-    return "PULIZIA\n\n" + Faccenda::generaNota() +
+    return "PULIZIA\n\n" + Incarico::generaNota()+"\n"+Faccenda::generaNota() +
             "\nPunteggio: "+ std::to_string(calcolaPunteggio())+" punti \n" +
             "Stanze da Pulire: "+std::to_string(_stanzeDaPulire)+"\n\n"+"Cenerentola tocca a te!";
 }

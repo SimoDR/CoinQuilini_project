@@ -37,6 +37,7 @@ void Mainwindow::mezzanotte()
     {
         _controller->incrementaGiorno();
     }
+    _dataOdierna=Data::unixDateToData(std::chrono::system_clock::now());
 }
 
 void Mainwindow::buildRiassegna(const QDate &data, unsigned int pos, ListaIncarichi * lista)
@@ -116,7 +117,7 @@ void Mainwindow::addbuttons()
     _punteggio= new QPushButton;
     _punteggio->setText("Il tuo punteggio");
     _creDeb= new QPushButton;
-    _creDeb->setText("il tuo credito / debito");
+    _creDeb->setText("Il tuo credito / debito");
     _calendarLayout->addWidget(_punteggio);
     _calendarLayout->addWidget(_creDeb);
 
@@ -236,7 +237,7 @@ void Mainwindow::inizializzaTimer()
 {
     _timer = new QTimer(this);
     connect(_timer, SIGNAL(timeout()), this, SLOT(mezzanotte()));
-    _timer->setInterval(10000);
+    _timer->setInterval(10000); //ogni 10 secondi controlla
     _timer->setSingleShot(false);
     _timer->start();
 }

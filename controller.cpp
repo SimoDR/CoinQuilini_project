@@ -23,9 +23,7 @@ bool Controller::login(const QString & user, const QString & pw)
     //altrimenti ritorna messaggio di errore
 
     else {
-        QMessageBox nomatch;
-        nomatch.setText("Utente o password errati");
-        nomatch.exec();
+        showMessage("Attenzione! Utente o password errati");
         return false;
     }
 
@@ -65,7 +63,7 @@ void Controller::rimuoviIncarico(const Data &dataIncarico, unsigned int indiceIn
     _calendario.remove(_calendario.trovaIncarico(dataIncarico,indiceIncarico),dataIncarico);
 }
 
-void Controller::posponiIncarico(const Data &dataIncarico, int indiceIncarico, unsigned int quantoPosporre, unsigned int posizioneInquilinoRichiedente) //DA GESTIRE PUNTEGGI??
+void Controller::posponiIncarico(const Data &dataIncarico, unsigned int indiceIncarico, unsigned int quantoPosporre, unsigned int posizioneInquilinoRichiedente) //DA GESTIRE PUNTEGGI??
 {
     Inquilino * richiedente=_listaInquilini.getInquilino(posizioneInquilinoRichiedente);
     if(richiedente->puoPosporre())
@@ -89,7 +87,7 @@ void Controller::riassegnaIncarico(const Data & dataIncarico, unsigned int indic
     daRiassegnare->setIncaricato(nuovoIncaricato);
 }
 
-void Controller::setIncaricoSvolto(const Data & dataIncarico, int indiceIncarico)
+void Controller::setIncaricoSvolto(const Data & dataIncarico, unsigned int indiceIncarico)
 {
     Incarico * svolto=_calendario.trovaIncarico(dataIncarico,indiceIncarico);
     svolto->setSvolto();

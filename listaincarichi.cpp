@@ -30,7 +30,7 @@ void ListaIncarichi::buildLista(const vector<std::string> & incarichi, const vec
 
 ListaIncarichi::ListaIncarichi(QString data, bool admin, vector<std::string> incarichi, vector<std::string> incaricati, QWidget *parent): QDialog(parent),_lista(new QListWidget), _mainLayout(new QVBoxLayout), _data(QDate::fromString(data,"d/M/yyyy"))
 {
-    setWindowTitle("lista di incarichi del "+ data);
+    setWindowTitle("Lista di incarichi del "+ data);
     setModal(true);
     buildLista(incarichi, incaricati);
     if(admin)

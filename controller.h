@@ -47,10 +47,10 @@ public:
     {
         _calendario.stampaGiorni();
     }
-    void stampaBuffer()
-    {
-        _calendario._buffer.stampaBuffer();
-    }
+//    void stampaBuffer() //debug
+//    {
+//        _calendario._buffer.stampaBuffer();
+//    }
 
 signals:
 
@@ -60,18 +60,17 @@ public slots:
 
     void rimuoviIncarico(const Data& dataIncarico, unsigned int indiceIncarico);
 
-    void posponiIncarico(const Data& dataIncarico, int indiceIncarico, unsigned int quantoPosporre, unsigned int posizioneInquilinoRichiedente); //MESSAGGIO DA DARE IN CASO NEGATIVO
+    void posponiIncarico(const Data& dataIncarico, unsigned int indiceIncarico, unsigned int quantoPosporre, unsigned int posizioneInquilinoRichiedente); //MESSAGGIO DA DARE IN CASO NEGATIVO
 
     void riassegnaIncarico(const Data& dataIncarico, unsigned int indiceIncarico, const string &nomeInquilino); //solo l'admin
 
-    void setIncaricoSvolto(const Data& dataIncarico, int indiceIncarico);
+    void setIncaricoSvolto(const Data& dataIncarico, unsigned int indiceIncarico);
 
     void incrementaGiorno(); //MESSAGGIO PER CHI NON HA SVOLTO
 
     void checkIncarichiSvoltiPassato();
 
     void buildNota(const QDate &data, unsigned int pos);
-
 
     vector<string> incarichiGiorno(string giorno, vector<string> & incaricati);
 

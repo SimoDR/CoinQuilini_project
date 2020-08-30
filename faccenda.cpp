@@ -7,7 +7,7 @@ Faccenda::Faccenda(int tempoStimato): _tempoStimato(tempoStimato) {}
 Faccenda::~Faccenda() {}
 
 string Faccenda::generaNota() const {
-    return Incarico::generaNota()+"\n" + "Tempo stimato: " + std::to_string(_tempoStimato) +
+    return  "Tempo stimato: " + std::to_string(_tempoStimato) +
             (_tempoStimato > 1 ? +" minuti" : " minuto");
 }
 
