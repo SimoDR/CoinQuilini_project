@@ -1,6 +1,6 @@
 * {
     background-color: rgb(0,23,39);
-    selection-background-color: rgb(21,83,109);
+    selection-background-color: rgb(36,98,124);
 
     color: white;
 }
@@ -14,13 +14,17 @@ QPushButton:hover {
     background-color: rgb(21,83,109);
 }
 
+QPushButton:disabled {
+    background-color: rgb(30,40,50);
+}
+
 QMenuBar {
     padding: 5px;
     background-color: rgb(25,48,64);
 }
 
 QMenuBar::item::selected, QMenu::item::selected{
-    background-color: rgb(21,83,109);
+    background-color: rgb(36,98,124);
 }
 
 QCheckBox::indicator {
@@ -64,7 +68,7 @@ QCalendarWidget QToolButton {
          font-size:18px;
          color: rgb(180, 180, 180);
          background-color: black;
-         selection-background-color: rgb(21,83,109);
+         selection-background-color: rgb(36,98,124);
          selection-color: white;
    }
 
@@ -87,3 +91,17 @@ QComboBox {
 }
 
 
+QListView::item:selected:active {
+    background: rgb(36,98,124);
+}
+
+
+QListView::item:selected:!active {
+    color : white;
+}
+
+
+
+QListView::item:hover {
+    background: rgb(1,63,89);
+}
