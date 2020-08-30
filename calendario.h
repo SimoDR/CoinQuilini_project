@@ -57,9 +57,6 @@ private:
 
     dList<Giorno>::iterator inizializzaCalendario(const Data&);
 
-
-
-public:
     class BufferInquilini //DA METTERE PRIVATA
     {
     public: //DA TOGLIERE
@@ -84,6 +81,10 @@ public:
 
     };
      BufferInquilini _buffer; //da mettere privato
+
+
+public:
+
 
     void stampaGiorni() //DEBUG
     {

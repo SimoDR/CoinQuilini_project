@@ -47,10 +47,10 @@ public:
     {
         _calendario.stampaGiorni();
     }
-    void stampaBuffer()
-    {
-        _calendario._buffer.stampaBuffer();
-    }
+//    void stampaBuffer() //debug
+//    {
+//        _calendario._buffer.stampaBuffer();
+//    }
 
 signals:
 

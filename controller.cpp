@@ -23,9 +23,7 @@ bool Controller::login(const QString & user, const QString & pw)
     //altrimenti ritorna messaggio di errore
 
     else {
-        QMessageBox nomatch;
-        nomatch.setText("Utente o password errati");
-        nomatch.exec();
+        showMessage("Attenzione! Utente o password errati");
         return false;
     }
 
