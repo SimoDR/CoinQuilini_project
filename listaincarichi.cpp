@@ -55,9 +55,9 @@ void ListaIncarichi::raccogliDaRiassegnare()
 void ListaIncarichi::raccogliDaEliminare()
 {
     QMessageBox *conferma=new QMessageBox;
-    conferma->setWindowTitle("Rimozione inquilino");
-    conferma->setText("Sei sicuro di voler eliminare l'inquilino selezionato?");
-    conferma->setDetailedText("La rimozione comporta la perdita dei dati dell'inquilino e la riassegnazione automatica di tutti gli incarichi a lui assegnati in futuro");
+    conferma->setWindowTitle("Rimozione incarico");
+    conferma->setText("Sei sicuro di voler eliminare l'incarico selezionato?");
+    conferma->setDetailedText("La rimozione comporta la perdita dei dati dell'incarico");
     conferma->setStandardButtons(QMessageBox::Yes | QMessageBox::No );
     conferma->setDefaultButton(QMessageBox::Yes);
     int scelta = conferma->exec();
