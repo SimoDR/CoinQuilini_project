@@ -60,7 +60,7 @@ void Controller::creaNuovoIncarico(vector<std::string> parametri)
 
 void Controller::rimuoviIncarico(const Data &dataIncarico, unsigned int indiceIncarico)
 {
-    _calendario.remove(_calendario.trovaIncarico(dataIncarico,indiceIncarico),dataIncarico);
+    _calendario.remove(dataIncarico,indiceIncarico);
 }
 
 void Controller::posponiIncarico(const Data &dataIncarico, unsigned int indiceIncarico, unsigned int quantoPosporre, unsigned int posizioneInquilinoRichiedente) //DA GESTIRE PUNTEGGI??
@@ -69,7 +69,7 @@ void Controller::posponiIncarico(const Data &dataIncarico, unsigned int indiceIn
     if(richiedente->puoPosporre())
     {
 
-        _calendario.posponiIncarico(_calendario.trovaIncarico(dataIncarico,indiceIncarico),quantoPosporre,dataIncarico);
+        _calendario.posponiIncarico(indiceIncarico,quantoPosporre,dataIncarico);
     }
     else
     {
@@ -82,7 +82,9 @@ void Controller::posponiIncarico(const Data &dataIncarico, unsigned int indiceIn
 
 void Controller::riassegnaIncarico(const Data & dataIncarico, unsigned int indiceIncarico, const string & nomeInquilino)
 {
-    Incarico * daRiassegnare=_calendario.trovaIncarico(dataIncarico,indiceIncarico);
+    bool passato=false;
+    if(dataIncarico<_calendario.getDataDiOggi()) passato=true;
+    Incarico * daRiassegnare=_calendario.trovaIncarico(dataIncarico,indiceIncarico,passato);
     Inquilino * nuovoIncaricato=_listaInquilini.getInquilino(nomeInquilino);
     daRiassegnare->setIncaricato(nuovoIncaricato);
 }
