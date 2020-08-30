@@ -91,7 +91,6 @@ private slots:
     void impostaStile();
     void mezzanotte();
     void buildRiassegna(const QDate &, unsigned int, ListaIncarichi *);
-    void buildInfo();
 };
 
 #endif // MAINWINDOW_H

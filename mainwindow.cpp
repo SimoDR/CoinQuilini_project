@@ -50,11 +50,6 @@ void Mainwindow::buildRiassegna(const QDate &data, unsigned int pos, ListaIncari
     connect(riassegna, SIGNAL(inviaInquilino(const Data &, unsigned int, const string &)), this, SLOT(buildListaIncarichi(const Data &)));
 }
 
-void Mainwindow::buildInfo()
-{
-    showSuccess("Programma creato con estrema fatica dai saccensi Antonio Badan, Simone De Renzis e Francesco Trolese \n ad astra per aspera!");
-}
-
 void Mainwindow::buildAdminPanel()
 {
     adminPanel* adminpanel= new adminPanel(_controller,this);
@@ -209,14 +204,12 @@ void Mainwindow::addmenubar()
     _menuBar=menuBar();
     _file=new QMenu("File");
     _esci=new QAction("Esci");
-    connect(_esci, SIGNAL(triggered()), this, SLOT(close()));
     _file->addAction(_esci);
     _menuBar->addMenu(_file);
     _opzioni= new QMenu("Opzioni");
     _logOut=new QAction("Log out");
     connect(_logOut, SIGNAL(triggered()), this, SLOT(logOut()));
     _info=new QAction("info");         //this action could open a messagebox with the instructions and informations about the program
-    connect(_info, SIGNAL(triggered()), this, SLOT(buildInfo()));
     _opzioni->addAction(_logOut);
     _opzioni->addAction(_info);
     _menuBar->addMenu(_opzioni);
