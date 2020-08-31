@@ -78,11 +78,14 @@ void Mainwindow::notaSucc()
 
 void Mainwindow::svoltoSelected()
 {
-    if(confirmationMessage("Confermi tu, vile marrano, di avere svolto l'incarico che hai selezionato?"))
+    int successo=confirmationMessage("Confermi tu, vile marrano, di avere svolto l'incarico che hai selezionato?");
+    if(successo==QMessageBox::Yes)
     {
         Data giorno(((_calendar->selectedDate()).toString("d/M/yyyy")).toStdString());
         unsigned int pos= _selectedList->currentRow();
         _controller->setIncaricoSvolto(giorno, pos);
+        _posponi->setDisabled(true);
+        _svolto->setDisabled(true);
     }
 }
 
@@ -92,14 +95,22 @@ void Mainwindow::buildPosponi()
     posponi->show();
     connect(posponi, SIGNAL(numero(unsigned int)), this, SLOT(posponiSelected(unsigned int)));
     connect(this, SIGNAL(datiPosponi(const Data& , unsigned int , unsigned int, const string &)), _controller, SLOT(posponiIncarico(const Data& , unsigned int , unsigned int, const string &)));
+    _posponi->setDisabled(true);
+    _svolto->setDisabled(true);
 }
 
 void Mainwindow::posponiSelected(unsigned int num)
 {
-    Data giorno((_selectedList->objectName().toStdString()));
+    Data giorno(((_calendar->selectedDate()).toString("d/M/yyyy")).toStdString());
     unsigned int pos=_selectedList->currentRow();
     string inquilino=_inquilino.toStdString();
     emit datiPosponi(giorno, pos, num, inquilino);
+}
+
+void Mainwindow::enableButtons()
+{
+    _posponi->setEnabled(true);
+    _posponi->setEnabled(true);
 }
 
 void Mainwindow::buildAdminPanel()
@@ -241,12 +252,15 @@ void Mainwindow::addlists()
     populateList(_selectedList, _inquilino, (_calendar->selectedDate()));
     connect(_selectedList,SIGNAL(itemActivated(QListWidgetItem *)),this, SLOT(notaSelected()));
     QHBoxLayout *buttonsLayout=new QHBoxLayout;
-    QPushButton * svolto=new QPushButton("Svolto");
-    connect(svolto, SIGNAL(clicked()), this, SLOT(svoltoSelected()));
-    buttonsLayout->addWidget(svolto);
-    QPushButton * posponi=new QPushButton("Posponi");
-    buttonsLayout->addWidget(posponi);
-    connect(posponi, SIGNAL(clicked()), this, SLOT(buildPosponi()));
+    _svolto=new QPushButton("Svolto");
+    connect(_svolto, SIGNAL(clicked()), this, SLOT(svoltoSelected()));
+    _svolto->setDisabled(true);
+    buttonsLayout->addWidget(_svolto);
+    _posponi=new QPushButton("Posponi");
+    _posponi->setDisabled(true);
+    buttonsLayout->addWidget(_posponi);
+    connect(_posponi, SIGNAL(clicked()), this, SLOT(buildPosponi()));
+    connect(_selectedList, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(enableButtons()));
 
     QGroupBox * selectedGroup= new QGroupBox;
     QVBoxLayout * selectedLayout=new QVBoxLayout;

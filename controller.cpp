@@ -65,48 +65,71 @@ void Controller::rimuoviIncarico(const Data &dataIncarico, unsigned int indiceIn
 
 void Controller::posponiIncarico(const Data &dataIncarico, unsigned int indiceIncarico, unsigned int quantoPosporre, const std::string &inquilinoRichiedente) //DA GESTIRE PUNTEGGI??
 {
-    Inquilino * richiedente=_listaInquilini.getInquilino(inquilinoRichiedente);
-    if(richiedente->puoPosporre())
-    {
+    if(dataIncarico<_calendario.getDataDiOggi())
+        showMessage("Attenzione! Non è possibile posporre un incarico passato");
+    else {
+        Inquilino * richiedente=_listaInquilini.getInquilino(inquilinoRichiedente);
+        if(richiedente->puoPosporre())
+        {
+            _calendario.posponiIncarico(indiceIncarico,quantoPosporre,dataIncarico);
+        }
+        else
+        {
+            //MESSAGGIO: NON PUOI POSPORRE!
+            showMessage(QString::fromStdString("Spiacente: non hai i requisiti sufficienti per posporre questo incarico!"));
 
-        _calendario.posponiIncarico(indiceIncarico,quantoPosporre,dataIncarico);
-    }
-    else
-    {
-        //MESSAGGIO: NON PUOI POSPORRE!
-        showMessage(QString::fromStdString("Spiacente: non hai i requisiti sufficienti per posporre questo incarico!"));
-
+        }
     }
 
 }
 
 void Controller::riassegnaIncarico(const Data & dataIncarico, unsigned int indiceIncarico, const string & nomeInquilino)
 {
-    bool passato=false;
-    if(dataIncarico<_calendario.getDataDiOggi()) passato=true;
-    Incarico * daRiassegnare=_calendario.trovaIncarico(dataIncarico,indiceIncarico,passato);
-    Inquilino * nuovoIncaricato=_listaInquilini.getInquilino(nomeInquilino);
-    daRiassegnare->setIncaricato(nuovoIncaricato);
+    if(dataIncarico<_calendario.getDataDiOggi())
+        showMessage("Attenzione! Non è possibile riassegnare un incarico passato");
+    else
+    {
+        Incarico * daRiassegnare=_calendario.trovaIncarico(dataIncarico,indiceIncarico);
+
+        if(daRiassegnare->getSvolto())
+            showMessage("Attenzione! Non è possibile riassegnare un incarico già svolto");
+        else
+        {
+            Inquilino * nuovoIncaricato=_listaInquilini.getInquilino(nomeInquilino);
+            daRiassegnare->setIncaricato(nuovoIncaricato);
+        }
+    }
 }
 
 void Controller::setIncaricoSvolto(const Data & dataIncarico, unsigned int indiceIncarico)
 {
-    Incarico * svolto=_calendario.trovaIncarico(dataIncarico,indiceIncarico);
+    if(dataIncarico<_calendario.getDataDiOggi())
+        showMessage("Attenzione! L'incarico è già stato svolto");
+    else {
+        Incarico * svolto=_calendario.trovaIncarico(dataIncarico,indiceIncarico);
 
-    // aggiornamento situazione contabile
-    Pagamento * pagamento=dynamic_cast<Pagamento*>(svolto);
-    if (pagamento){
-        // generazione di credito per l'incaricato
-        ( pagamento->getIncaricato() )-> setCD(pagamento->getImporto());
-        // generazione di debito per tutti gli inquilini
-        _listaInquilini.dividiSpese(pagamento->getImporto());
+        if(svolto->getSvolto())
+            showMessage("Attenzione! L'incarico è già stato svolto");
+        else {
+            showSuccess("Incarico impostato come svolto");
+            // aggiornamento situazione contabile
+            Pagamento * pagamento=dynamic_cast<Pagamento*>(svolto);
+            if (pagamento){
+                // generazione di credito per l'incaricato
+                ( pagamento->getIncaricato() )-> setCD(pagamento->getImporto());
+                // generazione di debito per tutti gli inquilini
+                _listaInquilini.dividiSpese(pagamento->getImporto());
+            }
+
+            // aggiornamento punteggi
+            svolto->getIncaricato()->setPunteggio( (*svolto).calcolaPunteggio() );
+
+            // incarico segnato come svolto
+            svolto->setSvolto();
+            //aggiustare soldi
+            //aggiustare punteggi
+        }
     }
-
-    // aggiornamento punteggi
-    svolto->getIncaricato()->setPunteggio( (*svolto).calcolaPunteggio() );
-
-    // incarico segnato come svolto
-    svolto->setSvolto();
 }
 
 void Controller::incrementaGiorno()
