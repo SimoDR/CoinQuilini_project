@@ -262,8 +262,8 @@ void Calendario::posponiIncarico(unsigned int indiceIncarico, unsigned int quant
     if(dataIncarico<getDataDiOggi()) passato=true;
     Incarico * daPosporre=trovaIncarico(dataIncarico,indiceIncarico,passato);
 
-    bool possibilePosporre=true; //DEBUG ONLY
-            //daPosporre->posponi(dataInCuiInserire); //SAREBBE QUESTA
+    bool possibilePosporre=daPosporre->posponi(dataInCuiInserire);
+    cout<<"E' possibile posporre? "<<possibilePosporre<<endl; //debug
     if(daPosporre->getSvolto())
         showMessage("Attenzione! Non è possibile posporre un incarico già svolto");
     else {
@@ -276,7 +276,7 @@ void Calendario::posponiIncarico(unsigned int indiceIncarico, unsigned int quant
         int decurtazione=cloned->calcolaPunteggio()/2+quantoPosporre;
         cloned->getIncaricato()->setPunteggio(-decurtazione);
 
-        showSuccess(QString::fromStdString("Incarico posposto con successo! Tuttavia ti sono stati decurtati "+std::to_string(decurtazione)+" punti"));
+        showSuccess(QString::fromStdString("Incarico posposto con successo! Tuttavia ti sono stati decurtati "+std::to_string(decurtazione)+(decurtazione>1 ? " punti" : "punto")));
     }
     else
         showMessage(QString::fromStdString("Impossibile posporre! L'incarico ha delle limitazioni che impediscono di posporlo al giorno "+dataInCuiInserire.dataToString()));
