@@ -92,6 +92,20 @@ void Controller::riassegnaIncarico(const Data & dataIncarico, unsigned int indic
 void Controller::setIncaricoSvolto(const Data & dataIncarico, unsigned int indiceIncarico)
 {
     Incarico * svolto=_calendario.trovaIncarico(dataIncarico,indiceIncarico);
+
+    // aggiornamento situazione contabile
+    Pagamento * pagamento=dynamic_cast<Pagamento*>(svolto);
+    if (pagamento){
+        // generazione di credito per l'incaricato
+        ( pagamento->getIncaricato() )-> setCD(pagamento->getImporto());
+        // generazione di debito per tutti gli inquilini
+        _listaInquilini.dividiSpese(pagamento->getImporto());
+    }
+
+    // aggiornamento punteggi
+    svolto->getIncaricato()->setPunteggio( (*svolto).calcolaPunteggio() );
+
+    // incarico segnato come svolto
     svolto->setSvolto();
 }
 

@@ -190,6 +190,15 @@ void ListaInquilini::resetCD()
     }
 }
 
+void ListaInquilini::dividiSpese(float x)
+{
+    // spesa cadauno
+    x = x / ( _listaInquilini.countElements() );
+    for(auto ci = _listaInquilini.cbegin(); ci != _listaInquilini.cend(); ++ci){
+        (*ci)->setCD(-x);
+    }
+}
+
 string ListaInquilini::getCdCasa() const
 {
     std::stringstream stream;
