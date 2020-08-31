@@ -27,7 +27,7 @@ class Controller : public QObject
     Q_OBJECT
 private:
     ListaInquilini _listaInquilini;
-    Calendario _calendario; //DA COSTRUIRE dando la _listaInquilini
+    Calendario _calendario;
 public:
 
 

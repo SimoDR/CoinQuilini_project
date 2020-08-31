@@ -93,6 +93,8 @@ void Controller::setIncaricoSvolto(const Data & dataIncarico, unsigned int indic
 {
     Incarico * svolto=_calendario.trovaIncarico(dataIncarico,indiceIncarico);
     svolto->setSvolto();
+    //aggiustare soldi
+    //aggiustare punteggi
 }
 
 void Controller::incrementaGiorno()

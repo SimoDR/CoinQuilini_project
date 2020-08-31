@@ -22,16 +22,23 @@ void ListaInquilini::rimuovi(unsigned int pos)
 {
     resetCD();
     unsigned int cont=0;
-    dList<Inquilino*>::iterator i;
-    for(i=_listaInquilini.begin();i!=_listaInquilini.end(); ++i) {
+    dList<Inquilino*>::iterator i=_listaInquilini.begin();
+    Inquilino * daRimuovere=nullptr;
+    while(i!=_listaInquilini.end()) {
         if (cont==pos)
         {
+            daRimuovere=*i;
             _listaInquilini.remove(i);
+            delete daRimuovere;
             return;
         }
-
-        cont++;
+        else
+        {
+            ++i;
+            cont++;
+        }
     }
+
 }
 
 vector<Inquilino*> ListaInquilini::getInquilini() const
@@ -53,6 +60,7 @@ Inquilino *ListaInquilini::getInquilino(unsigned int pos) const
             return *i;
         cont++;
     }
+    //return nullptr;
     return *i;   //se pos è out of bound ritorna iteratore past the end
 }
 

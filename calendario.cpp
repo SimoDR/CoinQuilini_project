@@ -58,7 +58,8 @@ void Calendario::rimuoviInquilino(unsigned int pos) //da Debuggare
     cout<<pos<<" pos"<<endl; //debug
 
     Inquilino * daRimuovere=nullptr;
-    for(vector<Inquilino*>::iterator i=_buffer._inquilini.begin();i!=_buffer._inquilini.end() && !trovato; ++i)
+    vector<Inquilino*>::iterator i=_buffer._inquilini.begin();
+    while(i!=_buffer._inquilini.end() && !trovato)
     {
         cout<<pos<<" pos"<<endl; //debug
         cout<<cont<<" cont"<<endl; //debug
@@ -70,8 +71,15 @@ void Calendario::rimuoviInquilino(unsigned int pos) //da Debuggare
             _buffer._inquilini.erase(i);
             trovato=true;
         }
-        cont++;
+        else
+        {
+            ++i;
+            cont++;
+        }
     }
+
+    removeIncarichiPassatiInquilino(daRimuovere);
+
     cout<<"+*+*+*+*"<<endl;  //debug
     _buffer.stampaBuffer(); //debug
     cout<<"+*+*+*+*"<<endl; //debug
@@ -101,6 +109,8 @@ void Calendario::rimuoviInquilino(unsigned int pos) //da Debuggare
             }
         }
     }
+    // delete daRimuovere; non serve, cancello in listaInquilini
+
 
 }
 
@@ -220,13 +230,15 @@ void Calendario::remove(const Data &dataIncarico, unsigned int indiceIncarico)
     bool rimosso=false;
     unsigned int pos=0;
     bool isEmpty=false;
+    Incarico * daRimuovere=nullptr;
     vector<Incarico*>::iterator it=giornoIncarico->_incarichiDelGiorno.begin();
     while(it!=giornoIncarico->_incarichiDelGiorno.end() && !rimosso)
     {
         if(pos==indiceIncarico)
         {
             isEmpty=giornoIncarico->_incarichiDelGiorno.empty();
-            it=giornoIncarico->_incarichiDelGiorno.erase(it);
+            daRimuovere=*it;
+            giornoIncarico->_incarichiDelGiorno.erase(it);
             rimosso=true;
         }
         else {
@@ -235,6 +247,7 @@ void Calendario::remove(const Data &dataIncarico, unsigned int indiceIncarico)
         }
 
     }
+    delete daRimuovere;
 
     if(isEmpty) //se ora non c'è più neanche un incarico, tolgo il giorno perchè non serve più
         _giorni.remove(giornoIncarico);
@@ -302,7 +315,7 @@ void Calendario::checkIncarichiSvolti() const
         }
         else
         {
-            (*it)->getIncaricato()->setPunteggio((*it)->calcolaPunteggio());
+            (*it)->getIncaricato()->setPunteggio((*it)->calcolaPunteggio()); //da togliere
         }
     }
     inadempienti.append("\nI sopracitati incarichi sono ora impostati come svolti. Sara' compito degli inquilini calendarizzarli nuovamente.");
@@ -349,6 +362,8 @@ Calendario::BufferInquilini::BufferInquilini(const vector<Inquilino *>& listaInq
 
 
 
+
+
 void Calendario::BufferInquilini::avanza()
 {
     _index++;
@@ -365,7 +380,7 @@ Inquilino * Calendario::BufferInquilini::getInquilino(std::string nome) const
         if((*cit)->getNome()==nome)
             return *cit;
     }
-    return *cit; //pte
+    return nullptr; //non trovato
 }
 
 
@@ -656,7 +671,9 @@ void Calendario::creaNuovoIncarico(const vector<string>& parametri,bool import)
         i=new Bolletta(nomeIncarico,importo);
 
     if(nomeIncaricato!="\0") //assegnazione manuale dell'incaricato
-        i->setIncaricato(_buffer.getInquilino(nomeIncaricato));
+    {
+        i->setIncaricato(_buffer.getInquilino(nomeIncaricato));        
+    }
 
     if(svolto) //per l'import
         i->setSvolto();
@@ -699,6 +716,38 @@ void Calendario::incarichiGiorno(const Data & giorno, vector<std::string> & tipi
         {
             incaricati.push_back((*cit)->getIncaricato()->getNome());
             tipiIncarichi.push_back((*cit)->getLabel());
+        }
+    }
+}
+
+void Calendario::removeIncarichiPassatiInquilino(Inquilino * daRimuovere)
+{
+    dList<Giorno>::iterator x=_giorni.begin();
+    Incarico * toDelete=nullptr;
+    while(x!=_iteratoreCorrente)
+    {
+        vector<Incarico*>::iterator y=(*x)._incarichiDelGiorno.begin();
+        while(y!=(*x)._incarichiDelGiorno.end())
+        {
+            if((*y)->getIncaricato()==daRimuovere)
+            {
+                toDelete=*y;
+                y=(*x)._incarichiDelGiorno.erase(y);
+                delete toDelete;
+            }
+            else
+            {
+                ++y;
+            }
+        }
+
+        if((*x)._incarichiDelGiorno.empty()) //se dopo aver eliminato gli incarichi della giornata il giorno è vuoto, lo elimino
+        {
+            x=_giorni.remove(x);
+        }
+        else
+        {
+            ++x;
         }
     }
 }
