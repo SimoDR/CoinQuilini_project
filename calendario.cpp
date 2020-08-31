@@ -58,8 +58,7 @@ void Calendario::rimuoviInquilino(unsigned int pos) //da Debuggare
     cout<<pos<<" pos"<<endl; //debug
 
     Inquilino * daRimuovere=nullptr;
-    vector<Inquilino*>::iterator i=_buffer._inquilini.begin();
-    while(i!=_buffer._inquilini.end() && !trovato)
+    for(vector<Inquilino*>::iterator i=_buffer._inquilini.begin();i!=_buffer._inquilini.end() && !trovato; ++i)
     {
         cout<<pos<<" pos"<<endl; //debug
         cout<<cont<<" cont"<<endl; //debug
@@ -71,13 +70,8 @@ void Calendario::rimuoviInquilino(unsigned int pos) //da Debuggare
             _buffer._inquilini.erase(i);
             trovato=true;
         }
-        else
-        {
-            ++i;
-            cont++;
-        }
+        cont++;
     }
-
     cout<<"+*+*+*+*"<<endl;  //debug
     _buffer.stampaBuffer(); //debug
     cout<<"+*+*+*+*"<<endl; //debug

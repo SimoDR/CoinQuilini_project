@@ -16,6 +16,7 @@ public:
     Spesa(const string& nome="spesa",float importo=0,int tempoStimato=60,
           unsigned short int numeroArticoli=0,Inquilino * incaricato=nullptr,bool svolto=false);
     virtual ~Spesa() {};
+    virtual void setDataLimite(const Data&) {}
 
     virtual Spesa* clone() const;
     virtual bool posponi (const Data& d=Data()) const;
