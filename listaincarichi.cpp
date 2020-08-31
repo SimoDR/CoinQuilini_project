@@ -33,7 +33,7 @@ ListaIncarichi::ListaIncarichi(QString data, bool admin, vector<std::string> inc
     setWindowTitle("Lista di incarichi del "+ data);
     setModal(true);
     buildLista(incarichi, incaricati);
-    if(admin)
+    if(admin && _data>=QDate::currentDate())
         buildButtons();
     setLayout(_mainLayout);
 }
