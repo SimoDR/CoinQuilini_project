@@ -55,6 +55,53 @@ void Mainwindow::buildInfo()
     showSuccess("Programma creato con estrema fatica dai saccensi Antonio Badan, Simone De Renzis e Francesco Trolese \n ad astra per aspera!");
 }
 
+void Mainwindow::notaPrec()
+{
+    QDate giorno=_calendar->selectedDate().addDays(-1);
+    unsigned int pos= _precList->currentRow();
+    QMetaObject::invokeMethod(_controller, "buildNota", Qt::DirectConnection, Q_ARG(QDate, giorno), Q_ARG(unsigned int, pos));
+}
+
+void Mainwindow::notaSelected()
+{
+    QDate giorno=_calendar->selectedDate();
+    unsigned int pos= _selectedList->currentRow();
+    QMetaObject::invokeMethod(_controller, "buildNota", Qt::DirectConnection, Q_ARG(QDate, giorno), Q_ARG(unsigned int, pos));
+}
+
+void Mainwindow::notaSucc()
+{
+    QDate giorno=_calendar->selectedDate().addDays(1);
+    unsigned int pos= _succList->currentRow();
+    QMetaObject::invokeMethod(_controller, "buildNota", Qt::DirectConnection, Q_ARG(QDate, giorno), Q_ARG(unsigned int, pos));
+}
+
+void Mainwindow::svoltoSelected()
+{
+    if(confirmationMessage("Confermi tu, vile marrano, di avere svolto l'incarico che hai selezionato?"))
+    {
+        Data giorno(((_calendar->selectedDate()).toString("d/M/yyyy")).toStdString());
+        unsigned int pos= _selectedList->currentRow();
+        _controller->setIncaricoSvolto(giorno, pos);
+    }
+}
+
+void Mainwindow::buildPosponi()
+{
+    PosponiDialog * posponi=new PosponiDialog(this);
+    posponi->show();
+    connect(posponi, SIGNAL(numero(unsigned int)), this, SLOT(posponiSelected(unsigned int)));
+    connect(this, SIGNAL(datiPosponi(const Data& , unsigned int , unsigned int, const string &)), _controller, SLOT(posponiIncarico(const Data& , unsigned int , unsigned int, const string &)));
+}
+
+void Mainwindow::posponiSelected(unsigned int num)
+{
+    Data giorno((_selectedList->objectName().toStdString()));
+    unsigned int pos=_selectedList->currentRow();
+    string inquilino=_inquilino.toStdString();
+    emit datiPosponi(giorno, pos, num, inquilino);
+}
+
 void Mainwindow::buildAdminPanel()
 {
     adminPanel* adminpanel= new adminPanel(_controller,this);
@@ -172,13 +219,29 @@ void Mainwindow::addlists()
 
     _precList= new QListWidget;
     populateList(_precList, _inquilino, (_calendar->selectedDate()).addDays(-1));
+    connect(_precList,SIGNAL(itemActivated(QListWidgetItem *)),this, SLOT(notaPrec()));
+    //selected day list, labe and buttons
 
-    //selected day list and label
     _selected = new QLabel;
     _selected->setText((_calendar->selectedDate()).toString(Qt::SystemLocaleLongDate));
 
     _selectedList= new QListWidget;
     populateList(_selectedList, _inquilino, (_calendar->selectedDate()));
+    connect(_selectedList,SIGNAL(itemActivated(QListWidgetItem *)),this, SLOT(notaSelected()));
+    QHBoxLayout *buttonsLayout=new QHBoxLayout;
+    QPushButton * svolto=new QPushButton("Svolto");
+    connect(svolto, SIGNAL(clicked()), this, SLOT(svoltoSelected()));
+    buttonsLayout->addWidget(svolto);
+    QPushButton * posponi=new QPushButton("Posponi");
+    buttonsLayout->addWidget(posponi);
+    connect(posponi, SIGNAL(clicked()), this, SLOT(buildPosponi()));
+
+    QGroupBox * selectedGroup= new QGroupBox;
+    QVBoxLayout * selectedLayout=new QVBoxLayout;
+    selectedLayout->addWidget(_selected);
+    selectedLayout->addWidget(_selectedList);
+    selectedLayout->addLayout(buttonsLayout);
+    selectedGroup->setLayout(selectedLayout);
 
     //next list and label
     _succ= new QLabel;
@@ -186,12 +249,13 @@ void Mainwindow::addlists()
 
     _succList= new QListWidget;
     populateList(_succList, _inquilino, (_calendar->selectedDate()).addDays(1));
+    connect(_succList,SIGNAL(itemActivated(QListWidgetItem *)),this, SLOT(notaSucc()));
+
     //layout add
     QVBoxLayout* listlayout = new QVBoxLayout;
     listlayout->addWidget(_prec);
     listlayout->addWidget(_precList);
-    listlayout->addWidget(_selected);
-    listlayout->addWidget(_selectedList);
+    listlayout->addWidget(selectedGroup);
     listlayout->addWidget(_succ);
     listlayout->addWidget(_succList);
 

@@ -63,9 +63,9 @@ void Controller::rimuoviIncarico(const Data &dataIncarico, unsigned int indiceIn
     _calendario.remove(dataIncarico,indiceIncarico);
 }
 
-void Controller::posponiIncarico(const Data &dataIncarico, unsigned int indiceIncarico, unsigned int quantoPosporre, unsigned int posizioneInquilinoRichiedente) //DA GESTIRE PUNTEGGI??
+void Controller::posponiIncarico(const Data &dataIncarico, unsigned int indiceIncarico, unsigned int quantoPosporre, const std::string &inquilinoRichiedente) //DA GESTIRE PUNTEGGI??
 {
-    Inquilino * richiedente=_listaInquilini.getInquilino(posizioneInquilinoRichiedente);
+    Inquilino * richiedente=_listaInquilini.getInquilino(inquilinoRichiedente);
     if(richiedente->puoPosporre())
     {
 

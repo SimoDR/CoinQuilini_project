@@ -41,3 +41,13 @@ void showSuccess(const QString & message)
 
     m->exec();
 }
+
+bool confirmationMessage(const QString & text)
+{
+    QMessageBox *conferma=new QMessageBox;
+    conferma->setWindowTitle("Conferma");
+    conferma->setText(text);
+    conferma->setStandardButtons(QMessageBox::Yes | QMessageBox::No );
+    conferma->setDefaultButton(QMessageBox::Yes);
+    return conferma->exec();
+}

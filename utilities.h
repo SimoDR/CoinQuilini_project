@@ -13,6 +13,7 @@
 void assignWithXml(QXmlStreamReader&, const std::string, std::string&);
 void showMessage(const QString &);
 void showSuccess (const QString &);
+bool confirmationMessage(const QString &);
 
 
 #endif // UTILITIES_H
