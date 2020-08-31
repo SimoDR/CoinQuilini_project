@@ -261,17 +261,20 @@ void Calendario::posponiIncarico(unsigned int indiceIncarico, unsigned int quant
     bool passato=false;
     if(dataIncarico<getDataDiOggi()) passato=true;
     Incarico * daPosporre=trovaIncarico(dataIncarico,indiceIncarico,passato);
-    bool possibilePosporre=daPosporre->posponi(dataInCuiInserire);
+
+    bool possibilePosporre=true; //DEBUG ONLY
+            //daPosporre->posponi(dataInCuiInserire); //SAREBBE QUESTA
     if(daPosporre->getSvolto())
         showMessage("Attenzione! Non è possibile posporre un incarico già svolto");
     else {
     if (possibilePosporre)
     {
+        Incarico * cloned=daPosporre->clone();
         remove(dataIncarico,indiceIncarico); //rimuovo da dov'è
         dList<Giorno>::iterator iteratoreInCuiInserire=iteratoreFromData(_iteratoreCorrente, dataInCuiInserire);
-        iteratoreInCuiInserire->_incarichiDelGiorno.push_back(daPosporre->clone());
-        int decurtazione=daPosporre->calcolaPunteggio()/2+quantoPosporre;
-        daPosporre->getIncaricato()->setPunteggio(-decurtazione);
+        iteratoreInCuiInserire->_incarichiDelGiorno.push_back(cloned);
+        int decurtazione=cloned->calcolaPunteggio()/2+quantoPosporre;
+        cloned->getIncaricato()->setPunteggio(-decurtazione);
 
         showSuccess(QString::fromStdString("Incarico posposto con successo! Tuttavia ti sono stati decurtati "+std::to_string(decurtazione)+" punti"));
     }

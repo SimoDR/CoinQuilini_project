@@ -39,7 +39,8 @@ void Incarico::setSvolto(){
 
 Incarico::~Incarico() {}
 
-bool Incarico::posponi (const Data& d) const{
+bool Incarico::posponi (const Data& d) const
+{
     return false; //un incarico non è posponibile di default
 }
 
