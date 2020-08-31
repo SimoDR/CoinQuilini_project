@@ -50,6 +50,8 @@ private:
     QListWidget* _selectedList;
     QLabel* _succ;
     QListWidget* _succList;
+    QPushButton * _posponi;
+    QPushButton * _svolto;
 
     //menu bar
     QMenuBar* _menuBar;
@@ -100,6 +102,7 @@ private slots:
     void svoltoSelected();
     void buildPosponi();
     void posponiSelected(unsigned int);
+    void enableButtons();
 };
 
 #endif // MAINWINDOW_H
