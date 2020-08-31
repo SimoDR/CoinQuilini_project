@@ -192,12 +192,13 @@ void ListaInquilini::resetCD()
 
 string ListaInquilini::getCdCasa() const
 {
-    string cdCasa="SITUAZIONE CONTABILE DELLA CASA\n\n";
-    for(auto ci = _listaInquilini.cbegin(); ci != _listaInquilini.cend(); ++ci){
-        cdCasa=cdCasa + ( (*ci)->getNome() ) +": " +
-                std::to_string((*ci)->getCreditoDebito())+" €\n";
+    std::stringstream stream;
+    stream << "SITUAZIONE CONTABILE DELLA CASA\n\n";
+        for(auto ci = _listaInquilini.cbegin(); ci != _listaInquilini.cend(); ++ci){
+        stream << (*ci)->getNome() << ": " <<
+                  std::fixed << std::setprecision(2) << ((*ci)->getCreditoDebito()) << " €\n";
     }
-    return cdCasa;
+    return stream.str();
 }
 
 std::string ListaInquilini::punteggioCd(const std::string & nome) const
