@@ -42,12 +42,20 @@ void showSuccess(const QString & message)
     m->exec();
 }
 
-bool confirmationMessage(const QString & text)
+int confirmationMessage(const QString & text,const QString & details)
 {
     QMessageBox *conferma=new QMessageBox;
     conferma->setWindowTitle("Conferma");
     conferma->setText(text);
+    if(details!='\0')
+            conferma->setDetailedText(details);
     conferma->setStandardButtons(QMessageBox::Yes | QMessageBox::No );
     conferma->setDefaultButton(QMessageBox::Yes);
+
+    QFile file(":/resources/style.css");
+    file.open(QFile::ReadOnly);
+    QString styleSheet = QLatin1String(file.readAll());
+
+    conferma->setStyleSheet(styleSheet);
     return conferma->exec();
 }

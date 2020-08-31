@@ -262,7 +262,9 @@ void Calendario::posponiIncarico(unsigned int indiceIncarico, unsigned int quant
     if(dataIncarico<getDataDiOggi()) passato=true;
     Incarico * daPosporre=trovaIncarico(dataIncarico,indiceIncarico,passato);
     bool possibilePosporre=daPosporre->posponi(dataInCuiInserire);
-
+    if(daPosporre->getSvolto())
+        showMessage("Attenzione! Non è possibile posporre un incarico già svolto");
+    else {
     if (possibilePosporre)
     {
         remove(dataIncarico,indiceIncarico); //rimuovo da dov'è
@@ -275,6 +277,8 @@ void Calendario::posponiIncarico(unsigned int indiceIncarico, unsigned int quant
     }
     else
         showMessage(QString::fromStdString("Impossibile posporre! L'incarico ha delle limitazioni che impediscono di posporlo al giorno "+dataInCuiInserire.dataToString()));
+
+    }
 }
 
 
