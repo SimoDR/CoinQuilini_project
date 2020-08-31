@@ -115,6 +115,16 @@ void Mainwindow::buildSelezione()
     select->show();
 }
 
+void Mainwindow::buildPunteggioPanel()
+{
+    showSuccess( QString::fromStdString(_controller->showPunteggio(_inquilino)) );
+}
+
+void Mainwindow::buildCreDeb()
+{
+    showSuccess( QString::fromStdString(_controller->showCreDeb(_inquilino)) );
+}
+
 void Mainwindow::buildForm(const QString & tipo, bool regolare)
 {
     FormIncarico *form=new FormIncarico(tipo, regolare, _controller->getInquilini(), this);
@@ -168,8 +178,10 @@ void Mainwindow::addbuttons()
 {
     _punteggio= new QPushButton;
     _punteggio->setText("Il tuo punteggio");
+    connect(_punteggio, SIGNAL(clicked()), this, SLOT(buildPunteggioPanel()));
     _creDeb= new QPushButton;
     _creDeb->setText("Il tuo credito / debito");
+    connect(_creDeb, SIGNAL(clicked()), this, SLOT(buildCreDeb()));
     _calendarLayout->addWidget(_punteggio);
     _calendarLayout->addWidget(_creDeb);
 

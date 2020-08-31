@@ -1,4 +1,4 @@
-#include "inquilino.h"
+﻿#include "inquilino.h"
 
 Inquilino::Inquilino(const string& user, const string& pw) : _user(user), _password(pw), _creditoDebito(0), _punteggio(0) {}
 
@@ -58,6 +58,36 @@ void Inquilino::exportXml(QXmlStreamWriter & xmlOutput) const
 
 unsigned short int Inquilino::getPunteggio() const{
     return _punteggio;
+}
+
+std::string Inquilino::showPunteggio() const
+{
+    string messaggio="PUNTEGGIO\n\nPunti: "+std::to_string(_punteggio)+"\n"
+            + "Facoltà di posporre: ";
+    if (_punteggio >= _sogliaPosponi) messaggio+="si";
+    else messaggio+="no";
+    return messaggio;
+}
+
+std::string Inquilino::showCreDeb() const
+{
+    string messaggio="BILANCIO\n\n";
+
+    if(_creditoDebito!=0){
+        messaggio+="Sei in ";
+
+        if (_creditoDebito < 0) messaggio+="debito";
+        else messaggio+="credito";
+
+        messaggio+=" verso la casa\n";
+    }
+
+    float aux = _creditoDebito;
+    std::stringstream stream;
+    stream << std::fixed << std::setprecision(2) << aux;
+    std::string money = stream.str();
+
+    return messaggio=messaggio+"Saldo: "+money+" €";
 }
 
 unsigned short int Inquilino::_puntiMin = 0;

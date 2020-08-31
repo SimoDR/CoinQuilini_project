@@ -187,6 +187,16 @@ std::string Controller::showCdCasa() const
     return _listaInquilini.getCdCasa();
 }
 
+string Controller::showPunteggio(const QString & nome) const
+{
+    return (_listaInquilini.getInquilino(nome.toStdString()) ) -> showPunteggio();
+}
+
+std::string Controller::showCreDeb(const QString & nome) const
+{
+    return (_listaInquilini.getInquilino(nome.toStdString()) ) -> showCreDeb();
+}
+
 void Controller::buildNota(const QDate & data, unsigned int pos)
 {
     Incarico* i= _calendario.trovaIncarico((data.toString("d/M/yyyy")).toStdString(),pos,true);
