@@ -87,14 +87,19 @@ void adminPanel::buildRimuovi()
         QMessageBox *conferma=new QMessageBox;
         conferma->setWindowTitle("Rimozione inquilino");
         conferma->setText("Sei sicuro di voler eliminare l'inquilino selezionato?");
-        conferma->setDetailedText("La rimozione comporta la perdita dei dati dell'inquilino e la riassegnazione automatica di tutti gli incarichi a lui assegnati in futuro");
+        conferma->setDetailedText("La rimozione comporta:\n"
+                                  "- l'appianamento della situazione contabile della casa\n"
+                                  "- la perdita dei dati dell'inquilino eliminato\n"
+                                  "- la riassegnazione automatica degli incarichi futuri dell'inquilino eliminato");
         conferma->setStandardButtons(QMessageBox::Yes | QMessageBox::No );
         conferma->setDefaultButton(QMessageBox::Yes);
         int scelta = conferma->exec();
-        if (scelta==QMessageBox::Yes)
+        if (scelta==QMessageBox::Yes){
+            showMessage(QString::fromStdString (_controller->showCdCasa()) );
             _controller->rimuoviInquilino(_elencoInquilini->currentRow());
-        showSuccess("Inquilino rimosso con successo");
-        aggiornaLista();
+            showSuccess("Inquilino rimosso con successo");
+            aggiornaLista();
+        }
     }
     catch (std::logic_error * e) {
         buildMessage("Attenzione", e->what());

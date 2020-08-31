@@ -168,6 +168,11 @@ void Controller::buildLogin()
     login->show();
 }
 
+std::string Controller::showCdCasa() const
+{
+    return _listaInquilini.getCdCasa();
+}
+
 void Controller::buildNota(const QDate & data, unsigned int pos)
 {
     Incarico* i= _calendario.trovaIncarico((data.toString("d/M/yyyy")).toStdString(),pos,true);

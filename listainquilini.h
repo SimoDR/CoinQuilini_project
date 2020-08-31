@@ -10,6 +10,8 @@
 #include <QFile>
 #include "utilities.h"
 #include <iostream>
+#include <iomanip>
+#include <sstream>
 using std::vector;
 
 class ListaInquilini
@@ -35,7 +37,8 @@ public:
     void exportXml() const;
     void importXml();
     void resetCD();
-    vector<std::pair<string, double> > getCdCasa() const;
+    string getCdCasa() const; //debug: utile per sistemare la contabilità
+    string punteggioCd(const string&) const;
 };
 
 #endif // LISTAINQUILINI_H

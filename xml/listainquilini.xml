@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<INQUILINI>
+    <ADMIN>
+        <nome>admin</nome>
+        <password>admin</password>
+    </ADMIN>
+    <INQUILINO>
+        <nome>Antonio</nome>
+        <password>pisellolungo</password>
+    </INQUILINO>
+    <INQUILINO>
+        <nome>Francesco</nome>
+        <password>Il montanaro</password>
+    </INQUILINO>
+	<INQUILINO>
+        <nome>Simone</nome>
+        <password>gay99</password>
+    </INQUILINO>
+</INQUILINI>

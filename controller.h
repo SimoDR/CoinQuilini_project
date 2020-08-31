@@ -43,6 +43,7 @@ public:
     unsigned short int isAdmin(const string &) const;
     void buildLogin();
     void setIncaricoSvolto(const Data& dataIncarico, unsigned int indiceIncarico);
+    string showCdCasa() const;
 
     void stampaCalendario() //DEBUG
     {

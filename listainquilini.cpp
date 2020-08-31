@@ -184,19 +184,32 @@ void ListaInquilini::importXml()
 
 void ListaInquilini::resetCD()
 {
-    vector<std::pair<string,double> > cdCasa;
+    vector<std::pair<string,float> > cdCasa;
     for(auto ci = _listaInquilini.cbegin(); ci != _listaInquilini.cend(); ++ci){
        (*ci)->setCD( -(*ci)->getCreditoDebito() );
     }
 }
 
-vector<std::pair<string,double>> ListaInquilini::getCdCasa() const
+string ListaInquilini::getCdCasa() const
 {
-    vector<std::pair<string,double> > cdCasa;
+    string cdCasa="SITUAZIONE CONTABILE DELLA CASA\n\n";
     for(auto ci = _listaInquilini.cbegin(); ci != _listaInquilini.cend(); ++ci){
-        cdCasa.push_back(std::make_pair ((*ci)->getNome(), (*ci)->getCreditoDebito()) );
+        cdCasa=cdCasa + ( (*ci)->getNome() ) +": " +
+                std::to_string((*ci)->getCreditoDebito())+" €\n";
     }
     return cdCasa;
+}
+
+std::string ListaInquilini::punteggioCd(const std::string & nome) const
+{
+    float aux = getInquilino(nome)->getCreditoDebito();
+    std::stringstream stream;
+    stream << std::fixed << std::setprecision(2) << aux;
+    std::string money = stream.str();
+
+    return +"Punteggio: "+std::to_string(getInquilino(nome)->getPunteggio())+
+            (getInquilino(nome)->getPunteggio()==1 ? " punto" : " punti") + "\n"+
+           +"Credito/Debito: "+ money + " €";
 }
 
 void ListaInquilini::exportXml() const
