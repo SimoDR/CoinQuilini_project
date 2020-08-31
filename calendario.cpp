@@ -233,13 +233,13 @@ void Calendario::remove(const Data &dataIncarico, unsigned int indiceIncarico)
     bool isEmpty=false;
     Incarico * daRimuovere=nullptr;
     vector<Incarico*>::iterator it=giornoIncarico->_incarichiDelGiorno.begin();
-    while(it!=giornoIncarico->_incarichiDelGiorno.end() && !rimosso)
+    while(!rimosso && it!=giornoIncarico->_incarichiDelGiorno.end()  )
     {
         if(pos==indiceIncarico)
         {
             isEmpty=giornoIncarico->_incarichiDelGiorno.empty();
             daRimuovere=*it;
-            giornoIncarico->_incarichiDelGiorno.erase(it);
+            it=giornoIncarico->_incarichiDelGiorno.erase(it);
             rimosso=true;
         }
         else {
