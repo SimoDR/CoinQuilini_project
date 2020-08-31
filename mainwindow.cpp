@@ -95,6 +95,8 @@ void Mainwindow::buildPosponi()
     posponi->show();
     connect(posponi, SIGNAL(numero(unsigned int)), this, SLOT(posponiSelected(unsigned int)));
     connect(this, SIGNAL(datiPosponi(const Data& , unsigned int , unsigned int, const string &)), _controller, SLOT(posponiIncarico(const Data& , unsigned int , unsigned int, const string &)));
+    QDate giorno=_calendar->selectedDate();
+    QMetaObject::invokeMethod(this, "refreshlists", Qt::DirectConnection, Q_ARG(QDate, giorno));
     _posponi->setDisabled(true);
     _svolto->setDisabled(true);
 }
@@ -131,7 +133,7 @@ void Mainwindow::buildSelezione()
 
 void Mainwindow::buildPunteggioPanel()
 {
-    showSuccess( QString::fromStdString(_controller->showPunteggio(_inquilino)) );
+    showSuccess(QString::fromStdString(_controller->showPunteggio(_inquilino)));
 }
 
 void Mainwindow::buildCreDeb()
