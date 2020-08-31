@@ -108,7 +108,7 @@ void Mainwindow::posponiSelected(unsigned int num)
 
 void Mainwindow::enableButtons()
 {
-    _posponi->setEnabled(true);
+    _svolto->setEnabled(true);
     _posponi->setEnabled(true);
 }
 

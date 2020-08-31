@@ -13,7 +13,6 @@ RiassegnaDialog::RiassegnaDialog(const Data & data, unsigned int pos,const vecto
     setLayout(_layout);
     connect(_ok, SIGNAL(clicked()), this, SLOT(raccogliInquilino()));
     connect(_ok, SIGNAL(clicked()), this, SLOT(close()));
-    connect(_ok, SIGNAL(clicked()), this, SLOT(sendData()));
     connect(_no, SIGNAL(clicked()), this, SLOT(close()));
 }
 

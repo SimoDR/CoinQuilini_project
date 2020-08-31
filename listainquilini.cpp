@@ -96,16 +96,16 @@ bool ListaInquilini::checkPresenza(const std::string &user) const
     return false;
 }
 
-void ListaInquilini::creaInserisci(const std::string & tipo,  const std::string &user, const std::string &pw)
+void ListaInquilini::creaInserisci(const std::string & tipo,  const std::string &user, const std::string &pw, float credeb, unsigned short punteggio)
 {
     if(checkPresenza(user))
         return;
     else {
         Inquilino *p=nullptr;
         if (tipo=="ADMIN")
-            p=new Admin(user, pw);
+            p=new Admin(user, pw, credeb, punteggio);
         else if (tipo=="INQUILINO")
-            p=new Inquilino(user, pw);
+            p=new Inquilino(user, pw, credeb, punteggio);
         aggiungi(p);
     }
 }
@@ -162,13 +162,17 @@ void ListaInquilini::importXml()
             {
                 if (xmlInput.name() == "INQUILINI")
                 {
-                    std::string user, pw;
+                    std::string user, pw, credeb, punteggio;
                     while(xmlInput.readNextStartElement())
                     {
                         std::string tipo=((xmlInput.name().toString()).toStdString());
                         assignWithXml(xmlInput, "nome", user);
                         assignWithXml(xmlInput, "password", pw);
-                        creaInserisci(tipo, user, pw);
+                        assignWithXml(xmlInput, "creditodebito", credeb);
+                        assignWithXml(xmlInput, "punteggio", punteggio);
+                        float cd=std::stof(credeb);
+                        unsigned short int punt=std::stoi(punteggio);
+                        creaInserisci(tipo, user, pw, cd, punt);
                         xmlInput.skipCurrentElement(); //per uscire dallo "scope"(?)
                     }
                 }

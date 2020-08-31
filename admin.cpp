@@ -1,6 +1,6 @@
 #include "admin.h"
 
-Admin::Admin(const string& user, const string& pw) : Inquilino(user, pw) {}
+Admin::Admin(const string& user, const string& pw, float credeb, unsigned short punteggio) : Inquilino(user, pw, credeb, punteggio) {}
 unsigned short int Admin::isAdmin() const
 {
     return 1;

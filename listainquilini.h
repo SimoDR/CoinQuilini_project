@@ -28,7 +28,7 @@ public:
     Inquilino *getInquilino(unsigned int) const;
     Inquilino *getInquilino(const string &) const;
     bool checkCredenziali(const string&,const string &) const;
-    void creaInserisci(const string &, const string &, const string &);   //crea l'inquilino e lo inserisce nel calendario
+    void creaInserisci(const string &, const string &, const string &, float=0, unsigned short int=0);   //crea l'inquilino e lo inserisce nel calendario
     vector<string>inquilini() const;
     vector<std::string> getCredenziali(unsigned int) const;
     void modifica(const string &, const string &, unsigned int);

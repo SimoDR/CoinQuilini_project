@@ -1,6 +1,6 @@
 #include "inquilino.h"
 
-Inquilino::Inquilino(const string& user, const string& pw) : _user(user), _password(pw), _creditoDebito(0), _punteggio(0) {}
+Inquilino::Inquilino(const string& user, const string& pw, float credeb, unsigned short int punteggio) : _user(user), _password(pw), _creditoDebito(credeb), _punteggio(punteggio) {}
 
 void Inquilino::modifica(const string& user, const string& pw)
 {
@@ -53,6 +53,8 @@ void Inquilino::exportXml(QXmlStreamWriter & xmlOutput) const
     xmlOutput.writeStartElement(QString::fromStdString(getLabel()));
     xmlOutput.writeTextElement("nome", QString::fromStdString(_user));
     xmlOutput.writeTextElement("password", QString::fromStdString(_password));
+    xmlOutput.writeTextElement("creditodebito", QString::fromStdString(std::to_string(_creditoDebito)));
+    xmlOutput.writeTextElement("punteggio", QString::fromStdString(std::to_string(_punteggio)));
     xmlOutput.writeEndElement();
 }
 
