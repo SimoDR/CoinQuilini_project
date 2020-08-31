@@ -31,7 +31,7 @@ public:
     Inquilino* getIncaricato() const;
 	bool getSvolto() const;
     void setSvolto();
-    virtual void setDataLimite(const Data&) =0;
+    virtual void setDataLimite(const Data&) {};
     virtual ~Incarico() = 0;
 	virtual Incarico* clone() const =0;
     virtual bool posponi (const Data & d=Data()) const;  //debug parametro d non sempre utilizzato
