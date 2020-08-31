@@ -213,6 +213,7 @@ void Calendario::insert(Incarico * daInserire, Data  dataInCuiInserire, int nume
         else iteratoreInizialeImport=iteratoreInCuiInserire;
         numeroOccorrenze--;
     }
+    delete daInserire;
 
 
 }
@@ -261,7 +262,7 @@ void Calendario::posponiIncarico(unsigned int indiceIncarico, unsigned int quant
     bool passato=false;
     if(dataIncarico<getDataDiOggi()) passato=true;
     Incarico * daPosporre=trovaIncarico(dataIncarico,indiceIncarico,passato);
-
+    cout<<"INDICE: "<<indiceIncarico<<endl;
     bool possibilePosporre=daPosporre->posponi(dataInCuiInserire);
     cout<<"E' possibile posporre? "<<possibilePosporre<<endl; //debug
     if(daPosporre->getSvolto())
@@ -500,10 +501,9 @@ Calendario::Calendario(const Data& odierna, const vector<Inquilino *> &listaInqu
 Calendario::~Calendario()
 {
     exportXml();
-
     for(dList<Giorno>::iterator x=_giorni.begin(); x!=_giorni.end(); ++x)
     {
-        for(vector<Incarico*>::iterator y=(*x)._incarichiDelGiorno.begin(); y!=(*x)._incarichiDelGiorno.begin(); ++y)
+        for(vector<Incarico*>::iterator y=(*x)._incarichiDelGiorno.begin(); y!=(*x)._incarichiDelGiorno.end(); ++y)
         {
             delete *y;
         }

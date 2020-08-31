@@ -10,7 +10,10 @@ ListaInquilini::~ListaInquilini()
 {
     exportXml();
     for (auto i=_listaInquilini.begin();i!=_listaInquilini.end();++i)
+    {
+        //cout<<"DELETION INQU"<<endl; //debug
         delete *i;
+    }
 }
 
 void ListaInquilini::aggiungi(Inquilino * nuovo)

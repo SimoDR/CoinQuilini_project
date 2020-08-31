@@ -80,7 +80,6 @@ void Controller::posponiIncarico(const Data &dataIncarico, unsigned int indiceIn
 
         }
     }
-
 }
 
 void Controller::riassegnaIncarico(const Data & dataIncarico, unsigned int indiceIncarico, const string & nomeInquilino)
