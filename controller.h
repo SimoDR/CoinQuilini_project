@@ -42,6 +42,7 @@ public:
     void checkAdmin(unsigned int);
     unsigned short int isAdmin(const string &) const;
     void buildLogin();
+    void setIncaricoSvolto(const Data& dataIncarico, unsigned int indiceIncarico);
 
     void stampaCalendario() //DEBUG
     {
@@ -60,11 +61,9 @@ public slots:
 
     void rimuoviIncarico(const Data& dataIncarico, unsigned int indiceIncarico);
 
-    void posponiIncarico(const Data& dataIncarico, unsigned int indiceIncarico, unsigned int quantoPosporre, unsigned int posizioneInquilinoRichiedente); //MESSAGGIO DA DARE IN CASO NEGATIVO
+    void posponiIncarico(const Data& dataIncarico, unsigned int indiceIncarico, unsigned int quantoPosporre, const string & inquilinoRichiedente); //MESSAGGIO DA DARE IN CASO NEGATIVO
 
     void riassegnaIncarico(const Data& dataIncarico, unsigned int indiceIncarico, const string &nomeInquilino); //solo l'admin
-
-    void setIncaricoSvolto(const Data& dataIncarico, unsigned int indiceIncarico);
 
     void incrementaGiorno(); //MESSAGGIO PER CHI NON HA SVOLTO
 
