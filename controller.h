@@ -42,6 +42,7 @@ public:
     void checkAdmin(unsigned int);
     unsigned short int isAdmin(const string &) const;
     void buildLogin();
+    string showCdCasa() const;
 
     void stampaCalendario() //DEBUG
     {

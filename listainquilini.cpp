@@ -190,11 +190,12 @@ void ListaInquilini::resetCD()
     }
 }
 
-vector<std::pair<std::string, float> > ListaInquilini::getCdCasa() const
+string ListaInquilini::getCdCasa() const
 {
-    vector<std::pair<string,float> > cdCasa;
+    string cdCasa="SITUAZIONE CONTABILE DELLA CASA\n\n";
     for(auto ci = _listaInquilini.cbegin(); ci != _listaInquilini.cend(); ++ci){
-        cdCasa.push_back(std::make_pair ((*ci)->getNome(), (*ci)->getCreditoDebito()) );
+        cdCasa=cdCasa + ( (*ci)->getNome() ) +": " +
+                std::to_string((*ci)->getCreditoDebito())+" €\n";
     }
     return cdCasa;
 }
