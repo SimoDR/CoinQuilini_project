@@ -11,17 +11,18 @@ class PosponiDialog : public QDialog
 {
     Q_OBJECT
 private:
+    unsigned int _pos;
     QLabel * _label;
     QSpinBox * _spin;
     QGridLayout * _layout;
     QPushButton * _ok;
     QPushButton * _no;
 public:
-    PosponiDialog(QWidget * parent=nullptr);
+    PosponiDialog(unsigned int,QWidget * parent=nullptr);
 private slots:
     void  raccogliNumero();
 signals:
-    void numero(unsigned int);
+    void numero(unsigned int, unsigned int);
 };
 
 #endif // POSPONIDIALOG_H

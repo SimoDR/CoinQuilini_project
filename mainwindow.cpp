@@ -91,9 +91,10 @@ void Mainwindow::svoltoSelected()
 
 void Mainwindow::buildPosponi()
 {
-    PosponiDialog * posponi=new PosponiDialog(this);
+    unsigned int pos=_selectedList->currentRow();
+    PosponiDialog * posponi=new PosponiDialog(pos,this);
     posponi->show();
-    connect(posponi, SIGNAL(numero(unsigned int)), this, SLOT(posponiSelected(unsigned int)));
+    connect(posponi, SIGNAL(numero(unsigned int, unsigned int)), this, SLOT(posponiSelected(unsigned int, unsigned int)));
     connect(this, SIGNAL(datiPosponi(const Data& , unsigned int , unsigned int, const string &)), _controller, SLOT(posponiIncarico(const Data& , unsigned int , unsigned int, const string &)));
     QDate giorno=_calendar->selectedDate();
     QMetaObject::invokeMethod(this, "refreshlists", Qt::DirectConnection, Q_ARG(QDate, giorno));
@@ -101,10 +102,9 @@ void Mainwindow::buildPosponi()
     _svolto->setDisabled(true);
 }
 
-void Mainwindow::posponiSelected(unsigned int num)
+void Mainwindow::posponiSelected(unsigned int pos, unsigned int num)
 {
     Data giorno(((_calendar->selectedDate()).toString("d/M/yyyy")).toStdString());
-    unsigned int pos=_selectedList->currentRow();
     string inquilino=_inquilino.toStdString();
     emit datiPosponi(giorno, pos, num, inquilino);
 }

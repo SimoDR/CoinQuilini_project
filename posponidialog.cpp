@@ -1,6 +1,6 @@
 #include "posponidialog.h"
 
-PosponiDialog::PosponiDialog(QWidget *parent): QDialog(parent), _label(new QLabel("Di quanti giorni vuoi posporre l'incarico?")),_spin(new QSpinBox),_layout(new QGridLayout), _ok(new QPushButton("Conferma")), _no(new QPushButton("Annulla"))
+PosponiDialog::PosponiDialog(unsigned int pos, QWidget *parent): _pos(pos), QDialog(parent), _label(new QLabel("Di quanti giorni vuoi posporre l'incarico?")),_spin(new QSpinBox),_layout(new QGridLayout), _ok(new QPushButton("Conferma")), _no(new QPushButton("Annulla"))
 {
     _layout->addWidget(_label, 1,1);
     _layout->addWidget(_spin,1,2);
@@ -17,5 +17,5 @@ PosponiDialog::PosponiDialog(QWidget *parent): QDialog(parent), _label(new QLabe
 void PosponiDialog::raccogliNumero()
 {
     unsigned int value= _spin->value();
-    emit numero(value);
+    emit numero(_pos,value);
 }

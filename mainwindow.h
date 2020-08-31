@@ -103,7 +103,7 @@ private slots:
     void notaSucc();
     void svoltoSelected();
     void buildPosponi();
-    void posponiSelected(unsigned int);
+    void posponiSelected(unsigned int, unsigned int);
     void enableButtons();
 };
 
