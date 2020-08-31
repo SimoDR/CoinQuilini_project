@@ -9,7 +9,7 @@ void Inquilino::modifica(const string& user, const string& pw)
 }
 void Inquilino::setCD(float cd)
 {
-    _creditoDebito = _creditoDebito + cd;
+    _creditoDebito += cd;
 }
 void Inquilino::setPunteggio(short int punti)
 {

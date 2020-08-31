@@ -198,13 +198,24 @@ void ListaInquilini::resetCD()
     }
 }
 
-vector<std::pair<std::string, float> > ListaInquilini::getCdCasa() const
+void ListaInquilini::dividiSpese(float x)
 {
-    vector<std::pair<string,float> > cdCasa;
+    // spesa cadauno
+    x = x / ( _listaInquilini.countElements() );
     for(auto ci = _listaInquilini.cbegin(); ci != _listaInquilini.cend(); ++ci){
-        cdCasa.push_back(std::make_pair ((*ci)->getNome(), (*ci)->getCreditoDebito()) );
+        (*ci)->setCD(-x);
     }
-    return cdCasa;
+}
+
+string ListaInquilini::getCdCasa() const
+{
+    std::stringstream stream;
+    stream << "SITUAZIONE CONTABILE DELLA CASA\n\n";
+        for(auto ci = _listaInquilini.cbegin(); ci != _listaInquilini.cend(); ++ci){
+        stream << (*ci)->getNome() << ": " <<
+                  std::fixed << std::setprecision(2) << ((*ci)->getCreditoDebito()) << " €\n";
+    }
+    return stream.str();
 }
 
 std::string ListaInquilini::punteggioCd(const std::string & nome) const

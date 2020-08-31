@@ -63,9 +63,9 @@ void Controller::rimuoviIncarico(const Data &dataIncarico, unsigned int indiceIn
     _calendario.remove(dataIncarico,indiceIncarico);
 }
 
-void Controller::posponiIncarico(const Data &dataIncarico, unsigned int indiceIncarico, unsigned int quantoPosporre, unsigned int posizioneInquilinoRichiedente) //DA GESTIRE PUNTEGGI??
+void Controller::posponiIncarico(const Data &dataIncarico, unsigned int indiceIncarico, unsigned int quantoPosporre, const std::string &inquilinoRichiedente) //DA GESTIRE PUNTEGGI??
 {
-    Inquilino * richiedente=_listaInquilini.getInquilino(posizioneInquilinoRichiedente);
+    Inquilino * richiedente=_listaInquilini.getInquilino(inquilinoRichiedente);
     if(richiedente->puoPosporre())
     {
 
@@ -92,6 +92,20 @@ void Controller::riassegnaIncarico(const Data & dataIncarico, unsigned int indic
 void Controller::setIncaricoSvolto(const Data & dataIncarico, unsigned int indiceIncarico)
 {
     Incarico * svolto=_calendario.trovaIncarico(dataIncarico,indiceIncarico);
+
+    // aggiornamento situazione contabile
+    Pagamento * pagamento=dynamic_cast<Pagamento*>(svolto);
+    if (pagamento){
+        // generazione di credito per l'incaricato
+        ( pagamento->getIncaricato() )-> setCD(pagamento->getImporto());
+        // generazione di debito per tutti gli inquilini
+        _listaInquilini.dividiSpese(pagamento->getImporto());
+    }
+
+    // aggiornamento punteggi
+    svolto->getIncaricato()->setPunteggio( (*svolto).calcolaPunteggio() );
+
+    // incarico segnato come svolto
     svolto->setSvolto();
     //aggiustare soldi
     //aggiustare punteggi
@@ -168,6 +182,11 @@ void Controller::buildLogin()
 {
     Login * login(new Login(this));
     login->show();
+}
+
+std::string Controller::showCdCasa() const
+{
+    return _listaInquilini.getCdCasa();
 }
 
 void Controller::buildNota(const QDate & data, unsigned int pos)

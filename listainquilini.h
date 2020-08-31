@@ -37,7 +37,8 @@ public:
     void exportXml() const;
     void importXml();
     void resetCD();
-    vector<std::pair<string, float> > getCdCasa() const; //debug: utile per sistemare la contabilità
+    void dividiSpese(float);
+    string getCdCasa() const;
     string punteggioCd(const string&) const;
 };
 
