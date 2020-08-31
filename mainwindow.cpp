@@ -109,8 +109,11 @@ void Mainwindow::posponiSelected(unsigned int num)
 
 void Mainwindow::enableButtons()
 {
-    _svolto->setEnabled(true);
-    _posponi->setEnabled(true);
+    if(_calendar->selectedDate()>= QDate::currentDate())
+    {
+        _svolto->setEnabled(true);
+        _posponi->setEnabled(true);
+    }
 }
 
 void Mainwindow::buildAdminPanel()
