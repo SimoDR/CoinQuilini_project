@@ -220,15 +220,20 @@ void Calendario::remove(const Data &dataIncarico, unsigned int indiceIncarico)
     bool rimosso=false;
     unsigned int pos=0;
     bool isEmpty=false;
-    for(vector<Incarico*>::iterator it=giornoIncarico->_incarichiDelGiorno.begin(); it!=giornoIncarico->_incarichiDelGiorno.end() && !rimosso; ++it)
+    vector<Incarico*>::iterator it=giornoIncarico->_incarichiDelGiorno.begin();
+    while(it!=giornoIncarico->_incarichiDelGiorno.end() && !rimosso)
     {
         if(pos==indiceIncarico)
         {
             isEmpty=giornoIncarico->_incarichiDelGiorno.empty();
-            giornoIncarico->_incarichiDelGiorno.erase(it);
+            it=giornoIncarico->_incarichiDelGiorno.erase(it);
             rimosso=true;
         }
-        pos++;
+        else {
+            ++it;
+            pos++;
+        }
+
     }
 
     if(isEmpty) //se ora non c'è più neanche un incarico, tolgo il giorno perchè non serve più
@@ -247,13 +252,13 @@ void Calendario::posponiIncarico(unsigned int indiceIncarico, unsigned int quant
 
     if (possibilePosporre)
     {
-       remove(dataIncarico,indiceIncarico); //rimuovo da dov'è
-       dList<Giorno>::iterator iteratoreInCuiInserire=iteratoreFromData(_iteratoreCorrente, dataInCuiInserire);
-       iteratoreInCuiInserire->_incarichiDelGiorno.push_back(daPosporre->clone());
-       int decurtazione=daPosporre->calcolaPunteggio()/2+quantoPosporre;
-       daPosporre->getIncaricato()->setPunteggio(-decurtazione);
+        remove(dataIncarico,indiceIncarico); //rimuovo da dov'è
+        dList<Giorno>::iterator iteratoreInCuiInserire=iteratoreFromData(_iteratoreCorrente, dataInCuiInserire);
+        iteratoreInCuiInserire->_incarichiDelGiorno.push_back(daPosporre->clone());
+        int decurtazione=daPosporre->calcolaPunteggio()/2+quantoPosporre;
+        daPosporre->getIncaricato()->setPunteggio(-decurtazione);
 
-       showSuccess(QString::fromStdString("Incarico posposto con successo! Tuttavia ti sono stati decurtati "+std::to_string(decurtazione)+" punti"));
+        showSuccess(QString::fromStdString("Incarico posposto con successo! Tuttavia ti sono stati decurtati "+std::to_string(decurtazione)+" punti"));
     }
     else
         showMessage(QString::fromStdString("Impossibile posporre! L'incarico ha delle limitazioni che impediscono di posporlo al giorno "+dataInCuiInserire.dataToString()));
@@ -455,7 +460,7 @@ Inquilino * Calendario::BufferInquilini::restituisciIlMinimo(dList<Calendario::G
                 trovato=true;
         }
         if(!trovato) avanza();
-     }
+    }
     cout<<(*_index)->getNome()<<" "; //debug
     return *_index;
 
@@ -603,12 +608,12 @@ void Calendario::creaNuovoIncarico(const vector<string>& parametri,bool import)
 
     if(!import) {
         try{
-        if(dataInizio<getDataDiOggi())
-            throw new std::invalid_argument("Attenzione! La data di inserimento dell'incarico dev'essere successiva alla data di oggi");
+            if(dataInizio<getDataDiOggi())
+                throw new std::invalid_argument("Attenzione! La data di inserimento dell'incarico dev'essere successiva alla data di oggi");
         }
         catch (std::invalid_argument *e)
         {
-           showMessage(QString::fromStdString(e->what()));
+            showMessage(QString::fromStdString(e->what()));
         }
     }
 
@@ -617,12 +622,12 @@ void Calendario::creaNuovoIncarico(const vector<string>& parametri,bool import)
 
 
     try{
-    if(numeroOccorrenze==0)
-        throw new std::invalid_argument("Attenzione! Le occorrenze devono essere almeno una (incarico semplice)");
+        if(numeroOccorrenze==0)
+            throw new std::invalid_argument("Attenzione! Le occorrenze devono essere almeno una (incarico semplice)");
     }
     catch (std::invalid_argument *e)
     {
-       showMessage(QString::fromStdString(e->what()));
+        showMessage(QString::fromStdString(e->what()));
     }
 
 
@@ -666,22 +671,22 @@ void Calendario::incarichiGiorno(const Data & giorno, vector<std::string> & tipi
     dList<Giorno>::iterator iteratoreIniziale=_giorni.begin();
     bool trovato=false;
     try{
-    while(!trovato)
-    {
-        if(iteratoreIniziale==_giorni.end() || iteratoreIniziale->_dataDelGiorno>giorno) //il giorno non c'è
+        while(!trovato)
         {
-            break;
-            throw new std::runtime_error("Attenzione! Giorno non presente.");
+            if(iteratoreIniziale==_giorni.end() || iteratoreIniziale->_dataDelGiorno>giorno) //il giorno non c'è
+            {
+                break;
+                throw new std::runtime_error("Attenzione! Giorno non presente.");
+            }
+            else if(iteratoreIniziale->_dataDelGiorno<giorno ) //non ho ancora raggiunto il giorno
+            {
+                ++iteratoreIniziale;
+            }
+            else if(iteratoreIniziale->_dataDelGiorno==giorno)//trovato, ritorna semplicemente
+            {
+                trovato=true;
+            }
         }
-        else if(iteratoreIniziale->_dataDelGiorno<giorno ) //non ho ancora raggiunto il giorno
-        {
-            ++iteratoreIniziale;
-        }
-        else if(iteratoreIniziale->_dataDelGiorno==giorno)//trovato, ritorna semplicemente
-        {
-            trovato=true;
-        }
-    }
     }
     catch(std::runtime_error * e)
     {
