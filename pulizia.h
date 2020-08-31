@@ -14,7 +14,6 @@ public:
     virtual Pulizia* clone() const;
     virtual bool posponi (const Data& d=Data()) const;
     virtual string generaNota() const;
-    virtual void setDataLimite(const Data&) {}
     virtual void exportXml(QXmlStreamWriter & xmlOutput,string data) const;
     virtual string getLabel() const;
     static void importXml(QXmlStreamReader & xmlInput, vector<string> & parametri);
