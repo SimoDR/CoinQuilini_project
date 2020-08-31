@@ -86,6 +86,8 @@ signals:
 private slots:
     void buildAdminPanel();
     void buildSelezione();
+    void buildPunteggioPanel();
+    void buildCreDeb();
     void buildForm(const QString &, bool);
     void buildIncarico(const vector<string> &);
     void buildListaIncarichi(const QDate &);

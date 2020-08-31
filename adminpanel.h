@@ -23,6 +23,7 @@ private:
     void buildLista();
     void buildBottoni();
     void aggiornaLista();
+    void impostaStile();
     void buildMessage(const QString &, const QString &);
 public:
     adminPanel(Controller *c, QWidget *parent = nullptr);

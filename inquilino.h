@@ -4,6 +4,8 @@
 #include <iostream>
 #include <string>
 #include <QXmlStreamWriter>
+#include <iomanip>
+#include <sstream>
 
 using std::string;
 
@@ -28,6 +30,8 @@ public:
     bool puoPosporre() const; //bool indica se l'inquilino può o no posporre
     float getCreditoDebito() const;
     unsigned short int getPunteggio() const;
+    string showPunteggio() const;
+    string showCreDeb() const;
     string getNome() const;
     bool isLogged(const string &, const string &) const;
     virtual std::string getLabel() const;

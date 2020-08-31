@@ -44,6 +44,9 @@ public:
     void buildLogin();
     void setIncaricoSvolto(const Data& dataIncarico, unsigned int indiceIncarico);
     string showCdCasa() const;
+    string showPunteggio(const QString &) const;
+    string showCreDeb(const QString &) const;
+
 
     void stampaCalendario() //DEBUG
     {

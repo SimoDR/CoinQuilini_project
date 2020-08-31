@@ -78,7 +78,8 @@ void Mainwindow::notaSucc()
 
 void Mainwindow::svoltoSelected()
 {
-    if(confirmationMessage("Confermi tu, vile marrano, di avere svolto l'incarico che hai selezionato?"))
+    int successo=confirmationMessage("Confermi tu, vile marrano, di avere svolto l'incarico che hai selezionato?");
+    if(successo==QMessageBox::Yes)
     {
         Data giorno(((_calendar->selectedDate()).toString("d/M/yyyy")).toStdString());
         unsigned int pos= _selectedList->currentRow();
@@ -123,6 +124,16 @@ void Mainwindow::buildSelezione()
     SelezioneDialog * select= new SelezioneDialog(this);
     connect(select, SIGNAL(datiSelezionati(const QString &, bool)),this, SLOT(buildForm(const QString &, bool)));
     select->show();
+}
+
+void Mainwindow::buildPunteggioPanel()
+{
+    showSuccess( QString::fromStdString(_controller->showPunteggio(_inquilino)) );
+}
+
+void Mainwindow::buildCreDeb()
+{
+    showSuccess( QString::fromStdString(_controller->showCreDeb(_inquilino)) );
 }
 
 void Mainwindow::buildForm(const QString & tipo, bool regolare)
@@ -178,8 +189,10 @@ void Mainwindow::addbuttons()
 {
     _punteggio= new QPushButton;
     _punteggio->setText("Il tuo punteggio");
+    connect(_punteggio, SIGNAL(clicked()), this, SLOT(buildPunteggioPanel()));
     _creDeb= new QPushButton;
     _creDeb->setText("Il tuo credito / debito");
+    connect(_creDeb, SIGNAL(clicked()), this, SLOT(buildCreDeb()));
     _calendarLayout->addWidget(_punteggio);
     _calendarLayout->addWidget(_creDeb);
 
