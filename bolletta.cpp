@@ -12,7 +12,7 @@ Bolletta* Bolletta::clone() const {return new Bolletta(*this);}
 
 bool Bolletta::posponi(const Data& d) const
 {
-    return d < _dataLimite ? true : false;
+    return d < _dataLimite && Incarico::posponi(d);
 }
 
 std::string Bolletta::getLabel() const {return "Bolletta";}

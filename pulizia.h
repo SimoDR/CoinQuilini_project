@@ -12,9 +12,8 @@ public:
     Pulizia(const string& nome="pulizia",int tempoStimato=60,unsigned short int stanzeDaPulire=2,Inquilino * incaricato=nullptr,bool svolto=false);
     virtual ~Pulizia() {}
     virtual Pulizia* clone() const;
-    virtual bool posponi (const Data& d=Data()) const;
+    virtual bool posponi (const Data &) const;
     virtual string generaNota() const;
-    virtual void setDataLimite(const Data&) {}
     virtual void exportXml(QXmlStreamWriter & xmlOutput,string data) const;
     virtual string getLabel() const;
     static void importXml(QXmlStreamReader & xmlInput, vector<string> & parametri);

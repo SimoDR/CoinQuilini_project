@@ -31,10 +31,9 @@ public:
     Inquilino* getIncaricato() const;
 	bool getSvolto() const;
     void setSvolto();
-    virtual void setDataLimite(const Data&) =0;
     virtual ~Incarico() = 0;
 	virtual Incarico* clone() const =0;
-    virtual bool posponi (const Data & d=Data()) const;  //debug parametro d non sempre utilizzato
+    virtual bool posponi (const Data &) const;  //debug parametro d non sempre utilizzato
     virtual string generaNota() const;
     virtual string getLabel() const =0;
     virtual void exportXml(QXmlStreamWriter&,string data) const;

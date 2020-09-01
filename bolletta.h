@@ -9,9 +9,9 @@ private:
 public:
     Bolletta(const string & nome="bolletta",float importo=0,const Data& dataLimite=Data(),Inquilino * incaricato=nullptr,bool svolto=false);
     virtual ~Bolletta() {}
-    virtual void setDataLimite(const Data&);
+    void setDataLimite(const Data&);
     virtual Bolletta* clone() const;
-    virtual bool posponi (const Data& d=Data()) const;
+    virtual bool posponi (const Data&) const;
     virtual string getLabel() const;
     virtual void exportXml(QXmlStreamWriter&,string data) const;
     virtual string generaNota() const;

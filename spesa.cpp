@@ -10,7 +10,7 @@ Spesa* Spesa::clone() const {return new Spesa(*this);}
 
 bool Spesa::posponi(const Data& d) const
 {
-    return true;
+    return Incarico::posponi(d) && _numeroArticoli <= 30;
 }
 
 string Spesa::generaNota() const
