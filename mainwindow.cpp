@@ -174,8 +174,9 @@ void Mainwindow::buildListaIncarichi(const Data & giorno)
 
 void Mainwindow::logOut()
 {
-    close();
     _controller->buildLogin();
+    close();
+
 }
 
 void Mainwindow::refreshlists(const QDate & giorno)

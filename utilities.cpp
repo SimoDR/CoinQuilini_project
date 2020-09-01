@@ -13,6 +13,7 @@ void assignWithXml(QXmlStreamReader & xmlInput, const std::string tag, std::stri
 void showMessage(const QString & message)
 {
     QMessageBox * m= new QMessageBox;
+    m->setModal(true);
     m->setAttribute(Qt::WA_DeleteOnClose);
     m->setWindowTitle("Alert");
     m->setIcon(QMessageBox::Warning);
@@ -23,12 +24,14 @@ void showMessage(const QString & message)
     QString styleSheet = QLatin1String(file.readAll());
     file.close();
     m->setStyleSheet(styleSheet);
-    m->exec();
+    m->show();
+    QObject::connect(m, SIGNAL(buttonClicked(QAbstractButton *)), m, SLOT(close()));
 }
 
 void showSuccess(const QString & message)
 {
     QMessageBox * m= new QMessageBox;
+    m->setModal(true);
     m->setAttribute(Qt::WA_DeleteOnClose);
     m->setWindowTitle("Info");
     m->setIcon(QMessageBox::Information);
@@ -39,7 +42,8 @@ void showSuccess(const QString & message)
     QString styleSheet = QLatin1String(file.readAll());
     file.close();
     m->setStyleSheet(styleSheet);
-    m->exec();
+    m->show();
+    QObject::connect(m, SIGNAL(buttonClicked(QAbstractButton *)), m, SLOT(close()));
 }
 
 int confirmationMessage(QWidget *parent, const QString & text,const QString & details)
