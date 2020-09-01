@@ -79,7 +79,7 @@ void Mainwindow::notaSucc()
 
 void Mainwindow::svoltoSelected()
 {
-    int successo=confirmationMessage("Confermi tu, vile marrano, di avere svolto l'incarico che hai selezionato?");
+    int successo=confirmationMessage(this, "Confermi tu, vile marrano, di avere svolto l'incarico che hai selezionato?");
     if(successo==QMessageBox::Yes)
     {
         Data giorno(((_calendar->selectedDate()).toString("d/M/yyyy")).toStdString());
