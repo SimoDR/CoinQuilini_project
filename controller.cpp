@@ -61,14 +61,14 @@ void Controller::rimuoviIncarico(const Data &dataIncarico, unsigned int indiceIn
     _calendario.remove(dataIncarico,indiceIncarico);
 }
 
+
+
 void Controller::posponiIncarico(const Data &dataIncarico, unsigned int indiceIncarico, unsigned int quantoPosporre, const std::string &inquilinoRichiedente) //DA GESTIRE PUNTEGGI??
 {
-    cout<<"CONTA VOLTE INVOCAZIONI"<<endl;
     if(dataIncarico<_calendario.getDataDiOggi())
         showMessage("Attenzione! Non è possibile posporre un incarico passato");
     else {
         Inquilino * richiedente=_listaInquilini.getInquilino(inquilinoRichiedente);
-        cout<<"Ci arrivi??"<<endl;
         if(richiedente->puoPosporre())
         {
             _calendario.posponiIncaricoCalendario(indiceIncarico,quantoPosporre,dataIncarico);
@@ -77,10 +77,11 @@ void Controller::posponiIncarico(const Data &dataIncarico, unsigned int indiceIn
         {
             //MESSAGGIO: NON PUOI POSPORRE!
             showMessage(QString::fromStdString("Spiacente: non hai i requisiti sufficienti per posporre questo incarico!"));
-
         }
     }
 }
+
+
 
 void Controller::riassegnaIncarico(const Data & dataIncarico, unsigned int indiceIncarico, const string & nomeInquilino)
 {
@@ -101,6 +102,8 @@ void Controller::riassegnaIncarico(const Data & dataIncarico, unsigned int indic
         }
     }
 }
+
+
 
 void Controller::setIncaricoSvolto(const Data & dataIncarico, unsigned int indiceIncarico)
 {
@@ -140,10 +143,13 @@ void Controller::incrementaGiorno()
 
 }
 
+
+
 void Controller::checkIncarichiSvoltiPassato()
 {
     _calendario.checkIncarichiSvoltiPassato();
 }
+
 
 
 vector<std::string> Controller::incarichiGiorno(string dataGiorno, vector<std::string> & incaricati)
@@ -156,13 +162,12 @@ vector<std::string> Controller::incarichiGiorno(string dataGiorno, vector<std::s
 
 
 
-
-
-
 vector<string> Controller::getInquilini()
 {
     return _listaInquilini.inquilini();
 }
+
+
 
 void Controller::rimuoviInquilino(unsigned int pos)
 {
@@ -172,10 +177,14 @@ void Controller::rimuoviInquilino(unsigned int pos)
 
 }
 
+
+
 vector<std::string> Controller::getInquilinoPos(unsigned int pos)
 {
     return _listaInquilini.getCredenziali(pos);
 }
+
+
 
 void Controller::aggiungiInquilino(const QString & user, const QString & pw)
 {
@@ -184,21 +193,29 @@ void Controller::aggiungiInquilino(const QString & user, const QString & pw)
 
 }
 
+
+
 void Controller::modificaInquilino(const QString &user, const QString & pw, unsigned int pos)
 {
     _listaInquilini.modifica(user.toStdString(), pw.toStdString(), pos);
     //da sistemare per _calendario? Forse non serve
 }
 
+
+
 void Controller::checkAdmin(unsigned int pos)
 {
     _listaInquilini.checkAdmin(pos);
 }
 
+
+
 unsigned short Controller::isAdmin(const std::string & user) const
 {
     return _listaInquilini.isAdmin(user);
 }
+
+
 
 void Controller::buildLogin()
 {
@@ -207,20 +224,28 @@ void Controller::buildLogin()
     login->show();
 }
 
+
+
 std::string Controller::showCdCasa() const
 {
     return _listaInquilini.getCdCasa();
 }
+
+
 
 string Controller::showPunteggio(const QString & nome) const
 {
     return (_listaInquilini.getInquilino(nome.toStdString()) ) -> showPunteggio();
 }
 
+
+
 std::string Controller::showCreDeb(const QString & nome) const
 {
     return (_listaInquilini.getInquilino(nome.toStdString()) ) -> showCreDeb();
 }
+
+
 
 void Controller::buildNota(const QDate & data, unsigned int pos)
 {

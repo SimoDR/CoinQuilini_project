@@ -55,19 +55,14 @@ void Calendario::rimuoviInquilino(unsigned int pos) //da Debuggare
 {
     bool trovato=false;
     unsigned int cont=0;
-    cout<<pos<<" pos"<<endl; //debug
 
     Inquilino * daRimuovere=nullptr;
     vector<Inquilino*>::iterator i=_buffer._inquilini.begin();
     while(i!=_buffer._inquilini.end() && !trovato)
     {
-        cout<<pos<<" pos"<<endl; //debug
-        cout<<cont<<" cont"<<endl; //debug
-
         if (cont==pos)
         {
             daRimuovere=*i;
-            cout<<daRimuovere->getNome()<<" da rimuovere"<<endl; //debug
             _buffer._inquilini.erase(i);
             trovato=true;
         }
@@ -79,11 +74,6 @@ void Calendario::rimuoviInquilino(unsigned int pos) //da Debuggare
     }
 
     removeIncarichiPassatiInquilino(daRimuovere);
-
-    cout<<"+*+*+*+*"<<endl;  //debug
-    _buffer.stampaBuffer(); //debug
-    cout<<"+*+*+*+*"<<endl; //debug
-
     _buffer._index=_buffer._inquilini.begin();
 
     Incarico * daRiassegnare=nullptr;
@@ -188,10 +178,6 @@ void Calendario::insert(Incarico * daInserire, Data  dataInCuiInserire, int nume
         else iteratoreInCuiInserire=iteratoreFromData(iteratoreIniziale, dataInCuiInserire);
 
         if(!assegnato) incaricato=ottieniIncaricato(iteratoreInCuiInserire);
-
-        //cout<<incaricato->getNome()<<": incaricato"<<endl; //debug
-
-        //cout<<daInserire->getNome()<<endl; //debug
         _buffer.avanza();
 
         if(!assegnato) daInserire->setIncaricato(incaricato);
@@ -265,9 +251,7 @@ void Calendario::posponiIncaricoCalendario(unsigned int indiceIncarico, unsigned
     Data dataInCuiInserire=dataIncarico+quantoPosporre;
 
     Incarico * daPosporre=trovaIncarico(dataIncarico,indiceIncarico);
-    //cout<<"INDICE: "<<indiceIncarico<<endl;
     bool possibilePosporre=daPosporre->posponi(dataInCuiInserire);
-    //cout<<"E' possibile posporre? "<<possibilePosporre<<endl; //debug
     if(daPosporre->getSvolto())
         showMessage("Attenzione! Non è possibile posporre un incarico già svolto");
     else {
@@ -309,8 +293,7 @@ void Calendario::setCredito(Pagamento * p, vector<Inquilino*> & lista) const
 
 void Calendario::checkIncarichiSvolti() const
 {
-    string inadempienti;
-    inadempienti="Attenzione: è scattata la mezzanotte e alcuni inquilini non hanno svolto gli incarichi assegnati per ieri. A costoro verranno decurtati dei punti: \n";
+    string inadempienti="Attenzione: è scattata la mezzanotte e alcuni inquilini non hanno svolto gli incarichi assegnati per ieri. A costoro verranno decurtati dei punti: \n";
 
     bool almenoUno=false;
 
@@ -404,22 +387,11 @@ vector<Inquilino *> Calendario::BufferInquilini::trovaMinimi(dList<Calendario::G
     map<Inquilino*,int> coppie;
     map<Inquilino*,int>::iterator mitt;
 
-    cout<<"-------"<<endl; //debug
     for(vector<Inquilino*>::iterator it=_inquilini.begin(); it!=_inquilini.end(); ++it) //aggiungo gli inquilini, tutti con frequenza 0
     {
         coppie[*it]=0;
-        cout<<(*it)->getNome()<<" stocazzo"<<endl; //debug
 
     }
-    cout<<"-------"<<endl; //debug
-
-    cout<<"*****"<<endl; //debug
-    for(map<Inquilino*,int>::iterator mit=coppie.begin(); mit!=coppie.end(); ++mit) //debug
-    {
-        cout<<(*mit).first->getNome()<<endl;
-    }
-    cout<<"*****"<<endl; //debug
-
 
     vector<Inquilino*> finaliZero;
     vector<Inquilino*> minimiFinali;
@@ -427,18 +399,12 @@ vector<Inquilino *> Calendario::BufferInquilini::trovaMinimi(dList<Calendario::G
 
     for(vector<Incarico*>::iterator it=iteratoreMinimo->_incarichiDelGiorno.begin(); it!=iteratoreMinimo->_incarichiDelGiorno.end(); ++it)
     {
-        cout<<(**it).getNome()<<" nome incarico"<<endl; //debug
 
         if((**it).getIncaricato()) //se non è nullptr, cioè se non è da riassegnare
         {
-            cout<<"stocazzo1"<<endl; //debug
             mitt=coppie.find((**it).getIncaricato());
-            cout<<(*mitt).first->getNome()<<": trovato"<<endl; //debug
-
             mitt->second++; //aumento la frequenza dell'inquilino trovato
         }
-        cout<<"stocazzo"<<endl; //debug
-
     }
 
     int minimo=INT_MAX;
@@ -448,21 +414,17 @@ vector<Inquilino *> Calendario::BufferInquilini::trovaMinimi(dList<Calendario::G
             minimo=mit->second;
     }
 
-    cout<<"Minimo="<<minimo<<endl; //debug
-
     for(map<Inquilino*,int>::iterator mit=coppie.begin(); mit!=coppie.end(); ++mit)
     {
 
         if(mit->second==0)
         {
             finaliZero.push_back(mit->first);
-            cout<<mit->first->getNome()<<" "<<mit->second<<" : minimi finali"<<endl; //debug
             zero=true;
         }
         else if(mit->second==minimo && !zero)
         {
             minimiFinali.push_back(mit->first);
-            cout<<mit->first->getNome()<<" "<<mit->second<<" : minimi finali"<<endl; //debug
         }
     }
 
@@ -474,11 +436,6 @@ vector<Inquilino *> Calendario::BufferInquilini::trovaMinimi(dList<Calendario::G
 Inquilino * Calendario::BufferInquilini::restituisciIlMinimo(dList<Calendario::Giorno>::iterator iteratoreMinimo)
 {
     vector<Inquilino*> minimi=trovaMinimi(iteratoreMinimo);
-    cout<<"--------"<<endl; //debug
-    for(vector<Inquilino*>::iterator it=minimi.begin(); it!=minimi.end(); ++it) //DEBUG
-        cout<<(*it)->getNome()<<": minimi trovati"<<endl; //debug
-    cout<<(*_index)->getNome()<<": indice"<<endl; //debug
-    cout<<"--------"<<endl; //debug
 
     bool trovato=false;
     while(!trovato)
@@ -490,7 +447,6 @@ Inquilino * Calendario::BufferInquilini::restituisciIlMinimo(dList<Calendario::G
         }
         if(!trovato) avanza();
     }
-    cout<<(*_index)->getNome()<<" "; //debug
     return *_index;
 
 }
@@ -564,7 +520,6 @@ void Calendario::importXml()
                             Cucina::importXml(xmlInput,parametri);
                         }
                         if (xmlInput.name() == "PULIZIA") {
-                            cout<<"PULIZIA"<<endl;
                             Pulizia::importXml(xmlInput,parametri);
                         }
                         if (xmlInput.name() == "SPAZZATURA") {
@@ -732,6 +687,8 @@ void Calendario::incarichiGiorno(const Data & giorno, vector<std::string> & tipi
         }
     }
 }
+
+
 
 void Calendario::removeIncarichiPassatiInquilino(Inquilino * daRimuovere)
 {

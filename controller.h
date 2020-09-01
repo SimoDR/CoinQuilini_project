@@ -45,34 +45,17 @@ public:
     string showPunteggio(const QString &) const;
     string showCreDeb(const QString &) const;
 
-
-    void stampaCalendario() //DEBUG
-    {
-        _calendario.stampaGiorni();
-    }
-//    void stampaBuffer() //debug
-//    {
-//        _calendario._buffer.stampaBuffer();
-//    }
-
 signals:
 
 public slots:
 
     void creaNuovoIncarico(vector<string> parametri); //slot per la creazione di un nuovo incarico
-
     void rimuoviIncarico(const Data& dataIncarico, unsigned int indiceIncarico);
-
-    void posponiIncarico(const Data& dataIncarico, unsigned int indiceIncarico, unsigned int quantoPosporre, const string & inquilinoRichiedente); //MESSAGGIO DA DARE IN CASO NEGATIVO
-
+    void posponiIncarico(const Data& dataIncarico, unsigned int indiceIncarico, unsigned int quantoPosporre, const string & inquilinoRichiedente);
     void riassegnaIncarico(const Data& dataIncarico, unsigned int indiceIncarico, const string &nomeInquilino); //solo l'admin
-
-    void incrementaGiorno(); //MESSAGGIO PER CHI NON HA SVOLTO
-
+    void incrementaGiorno();
     void checkIncarichiSvoltiPassato();
-
     void buildNota(const QDate &data, unsigned int pos);
-
     vector<string> incarichiGiorno(string giorno, vector<string> & incaricati);
 
 };
