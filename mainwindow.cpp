@@ -27,7 +27,7 @@ void Mainwindow::impostaStile()
     QFile file(":/resources/style.css");
     file.open(QFile::ReadOnly);
     QString styleSheet = QLatin1String(file.readAll());
-
+    file.close();
     setStyleSheet(styleSheet);
 }
 
@@ -85,8 +85,6 @@ void Mainwindow::svoltoSelected()
         Data giorno(((_calendar->selectedDate()).toString("d/M/yyyy")).toStdString());
         unsigned int pos= _selectedList->currentRow();
         _controller->setIncaricoSvolto(giorno, pos);
-        _posponi->setDisabled(true);
-        _svolto->setDisabled(true);
     }
 }
 
