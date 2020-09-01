@@ -63,13 +63,15 @@ void Controller::rimuoviIncarico(const Data &dataIncarico, unsigned int indiceIn
 
 void Controller::posponiIncarico(const Data &dataIncarico, unsigned int indiceIncarico, unsigned int quantoPosporre, const std::string &inquilinoRichiedente) //DA GESTIRE PUNTEGGI??
 {
+    cout<<"CONTA VOLTE INVOCAZIONI"<<endl;
     if(dataIncarico<_calendario.getDataDiOggi())
         showMessage("Attenzione! Non è possibile posporre un incarico passato");
     else {
         Inquilino * richiedente=_listaInquilini.getInquilino(inquilinoRichiedente);
+        cout<<"Ci arrivi??"<<endl;
         if(richiedente->puoPosporre())
         {
-            _calendario.posponiIncarico(indiceIncarico,quantoPosporre,dataIncarico);
+            _calendario.posponiIncaricoCalendario(indiceIncarico,quantoPosporre,dataIncarico);
         }
         else
         {

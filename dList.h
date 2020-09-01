@@ -64,8 +64,8 @@ public:
         bool operator==(const iterator &x) const;
         bool operator!=(const iterator &x) const;
     };
-    iterator begin() const;
-    iterator end() const;
+    iterator begin();
+    iterator end();
     iterator insert(iterator i, const T &t);
     iterator remove(iterator i);
 
@@ -88,6 +88,8 @@ public:
         bool operator==(const const_iterator &x) const;
         bool operator!=(const const_iterator &x) const;
     };
+    const_iterator begin() const;
+    const_iterator end() const;
     const_iterator cbegin() const;
     const_iterator cend() const;
 };
@@ -326,6 +328,20 @@ bool dList<T>::operator<(const dList<T> &d) const
 /**********************************CONST_ITERATOR**********************************/
 
 template <class T>
+typename dList<T>::const_iterator dList<T>::begin() const
+{
+    return first;
+}
+
+template <class T>
+typename dList<T>::const_iterator dList<T>::end() const
+{
+    if (last == nullptr) //dList vuota ritorna 0
+        return nullptr;
+    return const_iterator(last + 1, true); // dList ha almeno un nodo ritorna iterator pte
+}
+
+template <class T>
 typename dList<T>::const_iterator dList<T>::cbegin() const
 {
     return first;
@@ -412,13 +428,13 @@ bool dList<T>::const_iterator::operator!=(const dList<T>::const_iterator &x) con
 /**********************************ITERATOR**********************************/
 
 template <class T>
-typename dList<T>::iterator dList<T>::begin() const
+typename dList<T>::iterator dList<T>::begin()
 {
     return first;
 }
 
 template <class T>
-typename dList<T>::iterator dList<T>::end() const
+typename dList<T>::iterator dList<T>::end()
 {
     if (last == nullptr) //dList vuota ritorna 0
         return nullptr;

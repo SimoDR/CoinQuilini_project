@@ -57,7 +57,7 @@ vector<Inquilino*> ListaInquilini::getInquilini() const
 Inquilino *ListaInquilini::getInquilino(unsigned int pos) const
 {
     unsigned int cont=0;
-    dList<Inquilino*>::iterator i;
+    dList<Inquilino*>::const_iterator i;
     for(i=_listaInquilini.begin();i!=_listaInquilini.end(); ++i) {
         if (cont==pos)
             return *i;
@@ -71,7 +71,7 @@ Inquilino *ListaInquilini::getInquilino(unsigned int pos) const
 
 Inquilino *ListaInquilini::getInquilino(const std::string & user) const
 {
-    dList<Inquilino*>::iterator i;
+    dList<Inquilino*>::const_iterator i;
     for(i=_listaInquilini.begin();i!=_listaInquilini.end(); ++i) {
         if ((*i)->getNome()==user)
             return *i;
@@ -81,7 +81,7 @@ Inquilino *ListaInquilini::getInquilino(const std::string & user) const
 
 bool ListaInquilini::checkCredenziali(const std::string & user, const std::string & pw) const
 {
-    dList<Inquilino*>::iterator i;
+    dList<Inquilino*>::const_iterator i;
     for(i=_listaInquilini.begin();i!=_listaInquilini.end(); ++i) {
         if ((**i).isLogged(user, pw))
             return true;
