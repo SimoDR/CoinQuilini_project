@@ -53,7 +53,7 @@ private:
     // chiamata precedente nel caso di un incarico ricorrente
     dList<Giorno>::iterator iteratoreFromData(dList<Giorno>::iterator, const Data&);
 
-    bool checkIteratore(dList<Giorno>::iterator) const; //ritorna true sse è pte
+    bool checkIteratore(dList<Giorno>::const_iterator) const; //ritorna true sse è pte
 
     dList<Giorno>::iterator inizializzaCalendario(const Data&);
 
@@ -116,7 +116,7 @@ public:
 
     void remove(const Data& dataIncarico,unsigned int indiceIncarico);
 
-    void posponiIncarico(unsigned int indiceIncarico, unsigned int quantoPosporre,const Data& dataIncarico);
+    void posponiIncaricoCalendario(unsigned int indiceIncarico, unsigned int quantoPosporre,const Data& dataIncarico);
 
     void checkIncarichiSvolti() const;
 

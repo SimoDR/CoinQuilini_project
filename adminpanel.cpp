@@ -101,7 +101,7 @@ void adminPanel::buildRimuovi()
                         "- la perdita dei dati dell'inquilino eliminato\n"
                         "- la riassegnazione automatica degli incarichi futuri dell'inquilino eliminato";
 
-        int scelta = confirmationMessage("Sei sicuro di voler eliminare l'inquilino selezionato?",details);
+        int scelta = confirmationMessage(this, "Sei sicuro di voler eliminare l'inquilino selezionato?",details);
         if (scelta==QMessageBox::Yes){
             showMessage(QString::fromStdString (_controller->showCdCasa()) );
             _controller->rimuoviInquilino(_elencoInquilini->currentRow());

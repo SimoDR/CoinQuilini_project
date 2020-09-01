@@ -55,7 +55,7 @@ void ListaIncarichi::raccogliDaRiassegnare()
 
 void ListaIncarichi::raccogliDaEliminare()
 {
-    int scelta = confirmationMessage("Sei sicuro di voler eliminare l'incarico selezionato?", "La rimozione comporta la perdita dei dati dell'incarico");
+    int scelta = confirmationMessage(this, "Sei sicuro di voler eliminare l'incarico selezionato?", "La rimozione comporta la perdita dei dati dell'incarico");
     if (scelta==QMessageBox::Yes)
     {
     Data giorno((_data.toString("d/M/yyyy")).toStdString());
