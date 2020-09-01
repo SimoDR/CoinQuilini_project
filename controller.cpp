@@ -96,6 +96,8 @@ void Controller::riassegnaIncarico(const Data & dataIncarico, unsigned int indic
         {
             Inquilino * nuovoIncaricato=_listaInquilini.getInquilino(nomeInquilino);
             daRiassegnare->setIncaricato(nuovoIncaricato);
+            showSuccess("Incarico riassegnato con successo a "+QString::fromStdString(nuovoIncaricato->getNome()));
+
         }
     }
 }

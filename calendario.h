@@ -57,7 +57,7 @@ private:
 
     dList<Giorno>::iterator inizializzaCalendario(const Data&);
 
-    class BufferInquilini //DA METTERE PRIVATA
+    class BufferInquilini 
     {
 
         friend class Calendario;
