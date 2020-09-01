@@ -10,7 +10,10 @@ ListaInquilini::~ListaInquilini()
 {
     exportXml();
     for (auto i=_listaInquilini.begin();i!=_listaInquilini.end();++i)
+    {
+        //cout<<"DELETION INQU"<<endl; //debug
         delete *i;
+    }
 }
 
 void ListaInquilini::aggiungi(Inquilino * nuovo)
@@ -22,16 +25,23 @@ void ListaInquilini::rimuovi(unsigned int pos)
 {
     resetCD();
     unsigned int cont=0;
-    dList<Inquilino*>::iterator i;
-    for(i=_listaInquilini.begin();i!=_listaInquilini.end(); ++i) {
+    dList<Inquilino*>::iterator i=_listaInquilini.begin();
+    Inquilino * daRimuovere=nullptr;
+    while(i!=_listaInquilini.end()) {
         if (cont==pos)
         {
+            daRimuovere=*i;
             _listaInquilini.remove(i);
+            delete daRimuovere;
             return;
         }
-
-        cont++;
+        else
+        {
+            ++i;
+            cont++;
+        }
     }
+
 }
 
 vector<Inquilino*> ListaInquilini::getInquilini() const
@@ -53,6 +63,7 @@ Inquilino *ListaInquilini::getInquilino(unsigned int pos) const
             return *i;
         cont++;
     }
+    //return nullptr;
     return *i;   //se pos è out of bound ritorna iteratore past the end
 }
 
@@ -88,16 +99,16 @@ bool ListaInquilini::checkPresenza(const std::string &user) const
     return false;
 }
 
-void ListaInquilini::creaInserisci(const std::string & tipo,  const std::string &user, const std::string &pw)
+void ListaInquilini::creaInserisci(const std::string & tipo,  const std::string &user, const std::string &pw, float credeb, unsigned short punteggio)
 {
     if(checkPresenza(user))
         return;
     else {
         Inquilino *p=nullptr;
         if (tipo=="ADMIN")
-            p=new Admin(user, pw);
+            p=new Admin(user, pw, credeb, punteggio);
         else if (tipo=="INQUILINO")
-            p=new Inquilino(user, pw);
+            p=new Inquilino(user, pw, credeb, punteggio);
         aggiungi(p);
     }
 }
@@ -154,13 +165,17 @@ void ListaInquilini::importXml()
             {
                 if (xmlInput.name() == "INQUILINI")
                 {
-                    std::string user, pw;
+                    std::string user, pw, credeb, punteggio;
                     while(xmlInput.readNextStartElement())
                     {
                         std::string tipo=((xmlInput.name().toString()).toStdString());
                         assignWithXml(xmlInput, "nome", user);
                         assignWithXml(xmlInput, "password", pw);
-                        creaInserisci(tipo, user, pw);
+                        assignWithXml(xmlInput, "creditodebito", credeb);
+                        assignWithXml(xmlInput, "punteggio", punteggio);
+                        float cd=std::stof(credeb);
+                        unsigned short int punt=std::stoi(punteggio);
+                        creaInserisci(tipo, user, pw, cd, punt);
                         xmlInput.skipCurrentElement(); //per uscire dallo "scope"(?)
                     }
                 }
@@ -190,13 +205,24 @@ void ListaInquilini::resetCD()
     }
 }
 
-vector<std::pair<std::string, float> > ListaInquilini::getCdCasa() const
+void ListaInquilini::dividiSpese(float x)
 {
-    vector<std::pair<string,float> > cdCasa;
+    // spesa cadauno
+    x = x / ( _listaInquilini.countElements() );
     for(auto ci = _listaInquilini.cbegin(); ci != _listaInquilini.cend(); ++ci){
-        cdCasa.push_back(std::make_pair ((*ci)->getNome(), (*ci)->getCreditoDebito()) );
+        (*ci)->setCD(-x);
     }
-    return cdCasa;
+}
+
+string ListaInquilini::getCdCasa() const
+{
+    std::stringstream stream;
+    stream << "SITUAZIONE CONTABILE DELLA CASA\n\n";
+        for(auto ci = _listaInquilini.cbegin(); ci != _listaInquilini.cend(); ++ci){
+        stream << (*ci)->getNome() << ": " <<
+                  std::fixed << std::setprecision(2) << ((*ci)->getCreditoDebito()) << " €\n";
+    }
+    return stream.str();
 }
 
 std::string ListaInquilini::punteggioCd(const std::string & nome) const

@@ -27,12 +27,10 @@ class Controller : public QObject
     Q_OBJECT
 private:
     ListaInquilini _listaInquilini;
-    Calendario _calendario; //DA COSTRUIRE dando la _listaInquilini
+    Calendario _calendario;
+    Mainwindow * _mainwindow;
 public:
-
-
-
-    explicit Controller( QObject *parent = nullptr);
+    Controller( QObject *parent = nullptr);
     bool login(const QString &, const QString &);
     vector<string> getInquilini();
     void rimuoviInquilino(unsigned int); //da controllare
@@ -42,6 +40,11 @@ public:
     void checkAdmin(unsigned int);
     unsigned short int isAdmin(const string &) const;
     void buildLogin();
+    void setIncaricoSvolto(const Data& dataIncarico, unsigned int indiceIncarico);
+    string showCdCasa() const;
+    string showPunteggio(const QString &) const;
+    string showCreDeb(const QString &) const;
+
 
     void stampaCalendario() //DEBUG
     {
@@ -60,11 +63,9 @@ public slots:
 
     void rimuoviIncarico(const Data& dataIncarico, unsigned int indiceIncarico);
 
-    void posponiIncarico(const Data& dataIncarico, unsigned int indiceIncarico, unsigned int quantoPosporre, unsigned int posizioneInquilinoRichiedente); //MESSAGGIO DA DARE IN CASO NEGATIVO
+    void posponiIncarico(const Data& dataIncarico, unsigned int indiceIncarico, unsigned int quantoPosporre, const string & inquilinoRichiedente); //MESSAGGIO DA DARE IN CASO NEGATIVO
 
     void riassegnaIncarico(const Data& dataIncarico, unsigned int indiceIncarico, const string &nomeInquilino); //solo l'admin
-
-    void setIncaricoSvolto(const Data& dataIncarico, unsigned int indiceIncarico);
 
     void incrementaGiorno(); //MESSAGGIO PER CHI NON HA SVOLTO
 

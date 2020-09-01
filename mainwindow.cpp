@@ -4,6 +4,7 @@
 
 Mainwindow::Mainwindow(QWidget *parent, Controller* c, QString inquilino) : QMainWindow(parent),  _controller(c), _inquilino(inquilino), _dataOdierna(Data::unixDateToData(std::chrono::system_clock::now()))
 {
+    setAttribute(Qt::WA_DeleteOnClose);
     _mainLayout=new QHBoxLayout;
     setWindowTitle("CoinQuilini - Benvenuto " + _inquilino);
 
@@ -55,6 +56,68 @@ void Mainwindow::buildInfo()
     showSuccess("Programma creato con estrema fatica dai saccensi Antonio Badan, Simone De Renzis e Francesco Trolese \n ad astra per aspera!");
 }
 
+void Mainwindow::notaPrec()
+{
+    QDate giorno=_calendar->selectedDate().addDays(-1);
+    unsigned int pos= _precList->currentRow();
+    QMetaObject::invokeMethod(_controller, "buildNota", Qt::DirectConnection, Q_ARG(QDate, giorno), Q_ARG(unsigned int, pos));
+}
+
+void Mainwindow::notaSelected()
+{
+    QDate giorno=_calendar->selectedDate();
+    unsigned int pos= _selectedList->currentRow();
+    QMetaObject::invokeMethod(_controller, "buildNota", Qt::DirectConnection, Q_ARG(QDate, giorno), Q_ARG(unsigned int, pos));
+}
+
+void Mainwindow::notaSucc()
+{
+    QDate giorno=_calendar->selectedDate().addDays(1);
+    unsigned int pos= _succList->currentRow();
+    QMetaObject::invokeMethod(_controller, "buildNota", Qt::DirectConnection, Q_ARG(QDate, giorno), Q_ARG(unsigned int, pos));
+}
+
+void Mainwindow::svoltoSelected()
+{
+    int successo=confirmationMessage("Confermi tu, vile marrano, di avere svolto l'incarico che hai selezionato?");
+    if(successo==QMessageBox::Yes)
+    {
+        Data giorno(((_calendar->selectedDate()).toString("d/M/yyyy")).toStdString());
+        unsigned int pos= _selectedList->currentRow();
+        _controller->setIncaricoSvolto(giorno, pos);
+        _posponi->setDisabled(true);
+        _svolto->setDisabled(true);
+    }
+}
+
+void Mainwindow::buildPosponi()
+{
+    unsigned int pos=_selectedList->currentRow();
+    PosponiDialog * posponi=new PosponiDialog(pos,this);
+    posponi->show();
+    connect(posponi, SIGNAL(numero(unsigned int, unsigned int)), this, SLOT(posponiSelected(unsigned int, unsigned int)));
+    _posponi->setDisabled(true);
+    _svolto->setDisabled(true);
+}
+
+void Mainwindow::posponiSelected(unsigned int pos, unsigned int num)
+{
+    Data giorno(((_calendar->selectedDate()).toString("d/M/yyyy")).toStdString());
+    string inquilino=_inquilino.toStdString();
+    emit datiPosponi(giorno, pos, num, inquilino);
+    QDate _giorno=_calendar->selectedDate();
+    QMetaObject::invokeMethod(this, "refreshlists", Qt::DirectConnection, Q_ARG(QDate, _giorno));
+}
+
+void Mainwindow::enableButtons()
+{
+    if(_calendar->selectedDate()>= QDate::currentDate())
+    {
+        _svolto->setEnabled(true);
+        _posponi->setEnabled(true);
+    }
+}
+
 void Mainwindow::buildAdminPanel()
 {
     adminPanel* adminpanel= new adminPanel(_controller,this);
@@ -66,6 +129,16 @@ void Mainwindow::buildSelezione()
     SelezioneDialog * select= new SelezioneDialog(this);
     connect(select, SIGNAL(datiSelezionati(const QString &, bool)),this, SLOT(buildForm(const QString &, bool)));
     select->show();
+}
+
+void Mainwindow::buildPunteggioPanel()
+{
+    showSuccess(QString::fromStdString(_controller->showPunteggio(_inquilino)));
+}
+
+void Mainwindow::buildCreDeb()
+{
+    showSuccess( QString::fromStdString(_controller->showCreDeb(_inquilino)) );
 }
 
 void Mainwindow::buildForm(const QString & tipo, bool regolare)
@@ -103,7 +176,7 @@ void Mainwindow::buildListaIncarichi(const Data & giorno)
 
 void Mainwindow::logOut()
 {
-    this->close();
+    close();
     _controller->buildLogin();
 }
 
@@ -121,8 +194,10 @@ void Mainwindow::addbuttons()
 {
     _punteggio= new QPushButton;
     _punteggio->setText("Il tuo punteggio");
+    connect(_punteggio, SIGNAL(clicked()), this, SLOT(buildPunteggioPanel()));
     _creDeb= new QPushButton;
     _creDeb->setText("Il tuo credito / debito");
+    connect(_creDeb, SIGNAL(clicked()), this, SLOT(buildCreDeb()));
     _calendarLayout->addWidget(_punteggio);
     _calendarLayout->addWidget(_creDeb);
 
@@ -172,13 +247,33 @@ void Mainwindow::addlists()
 
     _precList= new QListWidget;
     populateList(_precList, _inquilino, (_calendar->selectedDate()).addDays(-1));
+    connect(_precList,SIGNAL(itemActivated(QListWidgetItem *)),this, SLOT(notaPrec()));
+    //selected day list, labe and buttons
 
-    //selected day list and label
     _selected = new QLabel;
     _selected->setText((_calendar->selectedDate()).toString(Qt::SystemLocaleLongDate));
 
     _selectedList= new QListWidget;
     populateList(_selectedList, _inquilino, (_calendar->selectedDate()));
+    connect(_selectedList,SIGNAL(itemActivated(QListWidgetItem *)),this, SLOT(notaSelected()));
+    QHBoxLayout *buttonsLayout=new QHBoxLayout;
+    _svolto=new QPushButton("Svolto");
+    connect(_svolto, SIGNAL(clicked()), this, SLOT(svoltoSelected()));
+    _svolto->setDisabled(true);
+    buttonsLayout->addWidget(_svolto);
+    _posponi=new QPushButton("Posponi");
+    _posponi->setDisabled(true);
+    buttonsLayout->addWidget(_posponi);
+    connect(_posponi, SIGNAL(clicked()), this, SLOT(buildPosponi()));
+    connect(_selectedList, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(enableButtons()));
+    connect(this, SIGNAL(datiPosponi(const Data& , unsigned int , unsigned int, const string &)), _controller, SLOT(posponiIncarico(const Data& , unsigned int , unsigned int, const string &)));
+
+    QGroupBox * selectedGroup= new QGroupBox;
+    QVBoxLayout * selectedLayout=new QVBoxLayout;
+    selectedLayout->addWidget(_selected);
+    selectedLayout->addWidget(_selectedList);
+    selectedLayout->addLayout(buttonsLayout);
+    selectedGroup->setLayout(selectedLayout);
 
     //next list and label
     _succ= new QLabel;
@@ -186,12 +281,13 @@ void Mainwindow::addlists()
 
     _succList= new QListWidget;
     populateList(_succList, _inquilino, (_calendar->selectedDate()).addDays(1));
+    connect(_succList,SIGNAL(itemActivated(QListWidgetItem *)),this, SLOT(notaSucc()));
+
     //layout add
     QVBoxLayout* listlayout = new QVBoxLayout;
     listlayout->addWidget(_prec);
     listlayout->addWidget(_precList);
-    listlayout->addWidget(_selected);
-    listlayout->addWidget(_selectedList);
+    listlayout->addWidget(selectedGroup);
     listlayout->addWidget(_succ);
     listlayout->addWidget(_succList);
 
@@ -215,7 +311,7 @@ void Mainwindow::addmenubar()
     _opzioni= new QMenu("Opzioni");
     _logOut=new QAction("Log out");
     connect(_logOut, SIGNAL(triggered()), this, SLOT(logOut()));
-    _info=new QAction("info");         //this action could open a messagebox with the instructions and informations about the program
+    _info=new QAction("info");
     connect(_info, SIGNAL(triggered()), this, SLOT(buildInfo()));
     _opzioni->addAction(_logOut);
     _opzioni->addAction(_info);

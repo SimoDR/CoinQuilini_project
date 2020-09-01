@@ -30,10 +30,11 @@ void ListaIncarichi::buildLista(const vector<std::string> & incarichi, const vec
 
 ListaIncarichi::ListaIncarichi(QString data, bool admin, vector<std::string> incarichi, vector<std::string> incaricati, QWidget *parent): QDialog(parent),_lista(new QListWidget), _mainLayout(new QVBoxLayout), _data(QDate::fromString(data,"d/M/yyyy"))
 {
+    setAttribute(Qt::WA_DeleteOnClose);
     setWindowTitle("Lista di incarichi del "+ data);
     setModal(true);
     buildLista(incarichi, incaricati);
-    if(admin)
+    if(admin && _data>=QDate::currentDate())
         buildButtons();
     setLayout(_mainLayout);
 }
@@ -54,13 +55,7 @@ void ListaIncarichi::raccogliDaRiassegnare()
 
 void ListaIncarichi::raccogliDaEliminare()
 {
-    QMessageBox *conferma=new QMessageBox;
-    conferma->setWindowTitle("Rimozione incarico");
-    conferma->setText("Sei sicuro di voler eliminare l'incarico selezionato?");
-    conferma->setDetailedText("La rimozione comporta la perdita dei dati dell'incarico");
-    conferma->setStandardButtons(QMessageBox::Yes | QMessageBox::No );
-    conferma->setDefaultButton(QMessageBox::Yes);
-    int scelta = conferma->exec();
+    int scelta = confirmationMessage("Sei sicuro di voler eliminare l'incarico selezionato?", "La rimozione comporta la perdita dei dati dell'incarico");
     if (scelta==QMessageBox::Yes)
     {
     Data giorno((_data.toString("d/M/yyyy")).toStdString());

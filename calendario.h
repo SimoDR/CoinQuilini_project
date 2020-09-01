@@ -74,6 +74,7 @@ private:
 
         //metodi
         BufferInquilini(const vector<Inquilino*>& listaInquilini);
+        //non serve distruttore perchè gli inquilini vengono eliminati con la delete dalla listaInquilini (essendo condivisi)
         void avanza();
         Inquilino * getInquilino(string nome) const;
         vector<Inquilino*> trovaMinimi(dList<Giorno>::iterator iteratoreMinim0);
@@ -131,7 +132,7 @@ public:
 
     void incarichiGiorno(const Data & giorno, vector<std::string> & tipiIncarichi, vector<string> & incaricati) const;
 
-
+    void removeIncarichiPassatiInquilino(Inquilino * );
 };
 
 #endif // CALENDARIO_H

@@ -25,7 +25,7 @@ FormIncarico::FormIncarico(const QString &tipo, bool regolare, vector<string> in
         QLabel *importo= new QLabel("Importo:");
         _layout->addWidget(importo,4,1);
         _importo=new QLineEdit;
-        _importo->setInputMask("d9.99");
+        _importo->setInputMask("dd9.99");
         _layout->addWidget(_importo,4,2);
         QLabel *dataLimite= new QLabel("Data limite:");
         _layout->addWidget(dataLimite,5,1);
@@ -39,7 +39,7 @@ FormIncarico::FormIncarico(const QString &tipo, bool regolare, vector<string> in
         QLabel *importo= new QLabel("Importo:");
         _layout->addWidget(importo,4,1);
         _importo=new QLineEdit;
-        _importo->setInputMask("d9.99");
+        _importo->setInputMask("dd9.99");
         _layout->addWidget(_importo,4,2);
         QLabel* tempo= new QLabel("Tempo stimato (in minuti):");
         _layout->addWidget(tempo,5,1);

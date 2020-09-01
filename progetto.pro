@@ -19,6 +19,7 @@ HEADERS += \
     mainwindow.h \
     outofboundexception.h \
     pagamento.h \
+    posponidialog.h \
     pulizia.h \
     riassegnadialog.h \
     selezionedialog.h \
@@ -47,6 +48,7 @@ SOURCES += \
     mainwindow.cpp \
     outofboundexception.cpp \
     pagamento.cpp \
+    posponidialog.cpp \
     pulizia.cpp \
     riassegnadialog.cpp \
     selezionedialog.cpp \

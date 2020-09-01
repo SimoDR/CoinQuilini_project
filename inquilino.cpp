@@ -1,6 +1,6 @@
-#include "inquilino.h"
+﻿#include "inquilino.h"
 
-Inquilino::Inquilino(const string& user, const string& pw) : _user(user), _password(pw), _creditoDebito(0), _punteggio(0) {}
+Inquilino::Inquilino(const string& user, const string& pw, float credeb, unsigned short int punteggio) : _user(user), _password(pw), _creditoDebito(credeb), _punteggio(punteggio) {}
 
 void Inquilino::modifica(const string& user, const string& pw)
 {
@@ -9,7 +9,7 @@ void Inquilino::modifica(const string& user, const string& pw)
 }
 void Inquilino::setCD(float cd)
 {
-    _creditoDebito = _creditoDebito + cd;
+    _creditoDebito += cd;
 }
 void Inquilino::setPunteggio(short int punti)
 {
@@ -53,11 +53,43 @@ void Inquilino::exportXml(QXmlStreamWriter & xmlOutput) const
     xmlOutput.writeStartElement(QString::fromStdString(getLabel()));
     xmlOutput.writeTextElement("nome", QString::fromStdString(_user));
     xmlOutput.writeTextElement("password", QString::fromStdString(_password));
+    xmlOutput.writeTextElement("creditodebito", QString::fromStdString(std::to_string(_creditoDebito)));
+    xmlOutput.writeTextElement("punteggio", QString::fromStdString(std::to_string(_punteggio)));
     xmlOutput.writeEndElement();
 }
 
 unsigned short int Inquilino::getPunteggio() const{
     return _punteggio;
+}
+
+std::string Inquilino::showPunteggio() const
+{
+    string messaggio="PUNTEGGIO\n\nPunti: "+std::to_string(_punteggio)+"\n"
+            + "Facoltà di posporre: ";
+    if (_punteggio >= _sogliaPosponi) messaggio+="si";
+    else messaggio+="no";
+    return messaggio;
+}
+
+std::string Inquilino::showCreDeb() const
+{
+    string messaggio="BILANCIO\n\n";
+
+    if(_creditoDebito!=0){
+        messaggio+="Sei in ";
+
+        if (_creditoDebito < 0) messaggio+="debito";
+        else messaggio+="credito";
+
+        messaggio+=" verso la casa\n";
+    }
+
+    float aux = _creditoDebito;
+    std::stringstream stream;
+    stream << std::fixed << std::setprecision(2) << aux;
+    std::string money = stream.str();
+
+    return messaggio=messaggio+"Saldo: "+money+" €";
 }
 
 unsigned short int Inquilino::_puntiMin = 0;

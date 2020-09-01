@@ -22,6 +22,7 @@
 #include "listaincarichi.h"
 #include "riassegnadialog.h"
 #include "data.h"
+#include "posponidialog.h"
 
 class Controller;
 
@@ -49,6 +50,8 @@ private:
     QListWidget* _selectedList;
     QLabel* _succ;
     QListWidget* _succList;
+    QPushButton * _posponi;
+    QPushButton * _svolto;
 
     //menu bar
     QMenuBar* _menuBar;
@@ -78,10 +81,13 @@ public:
     explicit Mainwindow(QWidget *parent, Controller*, QString);
 
 signals:
+    void datiPosponi(const Data&, unsigned int, unsigned int, const string &);
 
 private slots:
     void buildAdminPanel();
     void buildSelezione();
+    void buildPunteggioPanel();
+    void buildCreDeb();
     void buildForm(const QString &, bool);
     void buildIncarico(const vector<string> &);
     void buildListaIncarichi(const QDate &);
@@ -92,6 +98,13 @@ private slots:
     void mezzanotte();
     void buildRiassegna(const QDate &, unsigned int, ListaIncarichi *);
     void buildInfo();
+    void notaPrec();
+    void notaSelected();
+    void notaSucc();
+    void svoltoSelected();
+    void buildPosponi();
+    void posponiSelected(unsigned int, unsigned int);
+    void enableButtons();
 };
 
 #endif // MAINWINDOW_H
