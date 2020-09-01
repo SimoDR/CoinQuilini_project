@@ -41,7 +41,7 @@ Incarico::~Incarico() {}
 
 bool Incarico::posponi (const Data& d) const
 {
-    return false; //un incarico non è posponibile di default
+    return d > Data::unixDateToData(std::chrono::system_clock::now());
 }
 
 std::string Incarico::generaNota() const

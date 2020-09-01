@@ -7,6 +7,11 @@ Cucina::Cucina(const std::string & nome, int tempoStimato, unsigned short numero
 
 Cucina* Cucina::clone() const {return new Cucina(*this);}
 
+bool Cucina::posponi(const Data & d) const
+{
+    return Incarico::posponi(d) && _numeroCommensali>6;
+}
+
 string Cucina::generaNota() const {
     return "CUCINA\n\n"+Incarico::generaNota()+"\n"+Faccenda::generaNota()+
             "\nPunteggio: "+std::to_string(calcolaPunteggio())+" punti \n"+

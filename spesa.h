@@ -16,10 +16,8 @@ public:
     Spesa(const string& nome="spesa",float importo=0,int tempoStimato=60,
           unsigned short int numeroArticoli=0,Inquilino * incaricato=nullptr,bool svolto=false);
     virtual ~Spesa() {};
-    virtual void setDataLimite(const Data&) {}
-
+    virtual bool posponi (const Data &) const;
     virtual Spesa* clone() const;
-    virtual bool posponi (const Data& d=Data()) const;
     virtual string generaNota() const;
     void exportXml(QXmlStreamWriter & xmlOutput,string data) const;
     static void importXml(QXmlStreamReader & xmlInput, vector<string> & parametri);

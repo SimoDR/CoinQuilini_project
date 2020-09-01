@@ -7,8 +7,9 @@ Pulizia::Pulizia(const std::string& nome, int tempoStimato, unsigned short stanz
 
 Pulizia* Pulizia::clone() const {return new Pulizia(*this);}
 
-bool Pulizia::posponi(const Data& d) const{
-    return true;
+bool Pulizia::posponi(const Data & d) const
+{
+    return Incarico::posponi(d) && _stanzeDaPulire <=3;
 }
 
 string Pulizia::generaNota() const {

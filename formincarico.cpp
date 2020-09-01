@@ -27,7 +27,7 @@ FormIncarico::FormIncarico(const QString &tipo, bool regolare, vector<string> in
         _importo=new QLineEdit;
         _importo->setInputMask("dd9.99");
         _layout->addWidget(_importo,4,2);
-        QLabel *dataLimite= new QLabel("Data limite:");
+        QLabel *dataLimite= new QLabel("Posticipabile di (numero giorni):");
         _layout->addWidget(dataLimite,5,1);
         _dataLimite=new QSpinBox;
         _dataLimite->setRange(1,30);

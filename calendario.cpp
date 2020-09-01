@@ -191,11 +191,15 @@ void Calendario::insert(Incarico * daInserire, Data  dataInCuiInserire, int nume
 
         //cout<<incaricato->getNome()<<": incaricato"<<endl; //debug
 
-        cout<<daInserire->getNome()<<endl; //debug
+        //cout<<daInserire->getNome()<<endl; //debug
         _buffer.avanza();
 
         if(!assegnato) daInserire->setIncaricato(incaricato);
-        daInserire->setDataLimite(dataInCuiInserire+scostamentoDataLimite);
+
+        // se bolletta setto _dataLimite
+        Bolletta * bolletta=dynamic_cast<Bolletta*> (daInserire);
+        if (bolletta)
+            bolletta->setDataLimite(dataInCuiInserire+scostamentoDataLimite);
 
         if(import && daInserire->getSvolto()==false && iteratoreInCuiInserire->_dataDelGiorno<_iteratoreCorrente->_dataDelGiorno) //se non è stato svolto, è import ed è nel passato
         {
@@ -267,13 +271,16 @@ void Calendario::posponiIncaricoCalendario(unsigned int indiceIncarico, unsigned
     if(daPosporre->getSvolto())
         showMessage("Attenzione! Non è possibile posporre un incarico già svolto");
     else {
+
         if (possibilePosporre)
         {
             Incarico * cloned=daPosporre->clone();
             remove(dataIncarico,indiceIncarico); //rimuovo da dov'è
             dList<Giorno>::iterator iteratoreInCuiInserire=iteratoreFromData(_iteratoreCorrente, dataInCuiInserire);
             iteratoreInCuiInserire->_incarichiDelGiorno.push_back(cloned);
-            int decurtazione=cloned->calcolaPunteggio()/2+quantoPosporre;
+            int decurtazione=
+            	cloned->calcolaPunteggio()/2+quantoPosporre > cloned->calcolaPunteggio() ?
+                    cloned->calcolaPunteggio() : cloned->calcolaPunteggio()/2+quantoPosporre;
             cloned->getIncaricato()->setPunteggio(-decurtazione);
 
             showSuccess(QString::fromStdString("Incarico posposto con successo! Tuttavia ti sono stati decurtati "+std::to_string(decurtazione)+(decurtazione>1 ? " punti" : "punto")));

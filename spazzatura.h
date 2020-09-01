@@ -14,8 +14,7 @@ public:
     virtual ~Spazzatura() {}
     virtual Spazzatura* clone() const;
     virtual string generaNota() const;
-    virtual void setDataLimite(const Data&) {}
-
+    virtual bool posponi (const Data &) const;
     virtual void exportXml(QXmlStreamWriter & xmlOutput,string data) const;
     static void importXml(QXmlStreamReader & xmlInput, vector<string> & parametri);
     virtual string getLabel() const;
