@@ -28,11 +28,9 @@ class Controller : public QObject
 private:
     ListaInquilini _listaInquilini;
     Calendario _calendario;
+    Mainwindow * _mainwindow;
 public:
-
-
-
-    explicit Controller( QObject *parent = nullptr);
+    Controller( QObject *parent = nullptr);
     bool login(const QString &, const QString &);
     vector<string> getInquilini();
     void rimuoviInquilino(unsigned int); //da controllare

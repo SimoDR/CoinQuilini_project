@@ -4,6 +4,7 @@
 
 Mainwindow::Mainwindow(QWidget *parent, Controller* c, QString inquilino) : QMainWindow(parent),  _controller(c), _inquilino(inquilino), _dataOdierna(Data::unixDateToData(std::chrono::system_clock::now()))
 {
+    setAttribute(Qt::WA_DeleteOnClose);
     _mainLayout=new QHBoxLayout;
     setWindowTitle("CoinQuilini - Benvenuto " + _inquilino);
 
@@ -95,9 +96,6 @@ void Mainwindow::buildPosponi()
     PosponiDialog * posponi=new PosponiDialog(pos,this);
     posponi->show();
     connect(posponi, SIGNAL(numero(unsigned int, unsigned int)), this, SLOT(posponiSelected(unsigned int, unsigned int)));
-    connect(this, SIGNAL(datiPosponi(const Data& , unsigned int , unsigned int, const string &)), _controller, SLOT(posponiIncarico(const Data& , unsigned int , unsigned int, const string &)));
-    QDate giorno=_calendar->selectedDate();
-    QMetaObject::invokeMethod(this, "refreshlists", Qt::DirectConnection, Q_ARG(QDate, giorno));
     _posponi->setDisabled(true);
     _svolto->setDisabled(true);
 }
@@ -107,6 +105,8 @@ void Mainwindow::posponiSelected(unsigned int pos, unsigned int num)
     Data giorno(((_calendar->selectedDate()).toString("d/M/yyyy")).toStdString());
     string inquilino=_inquilino.toStdString();
     emit datiPosponi(giorno, pos, num, inquilino);
+    QDate _giorno=_calendar->selectedDate();
+    QMetaObject::invokeMethod(this, "refreshlists", Qt::DirectConnection, Q_ARG(QDate, _giorno));
 }
 
 void Mainwindow::enableButtons()
@@ -176,7 +176,7 @@ void Mainwindow::buildListaIncarichi(const Data & giorno)
 
 void Mainwindow::logOut()
 {
-    this->close();
+    close();
     _controller->buildLogin();
 }
 
@@ -266,6 +266,7 @@ void Mainwindow::addlists()
     buttonsLayout->addWidget(_posponi);
     connect(_posponi, SIGNAL(clicked()), this, SLOT(buildPosponi()));
     connect(_selectedList, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(enableButtons()));
+    connect(this, SIGNAL(datiPosponi(const Data& , unsigned int , unsigned int, const string &)), _controller, SLOT(posponiIncarico(const Data& , unsigned int , unsigned int, const string &)));
 
     QGroupBox * selectedGroup= new QGroupBox;
     QVBoxLayout * selectedLayout=new QVBoxLayout;
@@ -310,7 +311,7 @@ void Mainwindow::addmenubar()
     _opzioni= new QMenu("Opzioni");
     _logOut=new QAction("Log out");
     connect(_logOut, SIGNAL(triggered()), this, SLOT(logOut()));
-    _info=new QAction("info");         //this action could open a messagebox with the instructions and informations about the program
+    _info=new QAction("info");
     connect(_info, SIGNAL(triggered()), this, SLOT(buildInfo()));
     _opzioni->addAction(_logOut);
     _opzioni->addAction(_info);

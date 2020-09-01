@@ -13,6 +13,7 @@ void assignWithXml(QXmlStreamReader & xmlInput, const std::string tag, std::stri
 void showMessage(const QString & message)
 {
     QMessageBox * m= new QMessageBox;
+    m->setAttribute(Qt::WA_DeleteOnClose);
     m->setWindowTitle("Alert");
     m->setIcon(QMessageBox::Warning);
     m->setText(message);
@@ -20,15 +21,15 @@ void showMessage(const QString & message)
     QFile file(":/resources/style.css");
     file.open(QFile::ReadOnly);
     QString styleSheet = QLatin1String(file.readAll());
-
+    file.close();
     m->setStyleSheet(styleSheet);
-
     m->exec();
 }
 
 void showSuccess(const QString & message)
 {
     QMessageBox * m= new QMessageBox;
+    m->setAttribute(Qt::WA_DeleteOnClose);
     m->setWindowTitle("Info");
     m->setIcon(QMessageBox::Information);
     m->setText(message);
@@ -36,15 +37,15 @@ void showSuccess(const QString & message)
     QFile file(":/resources/style.css");
     file.open(QFile::ReadOnly);
     QString styleSheet = QLatin1String(file.readAll());
-
+    file.close();
     m->setStyleSheet(styleSheet);
-
     m->exec();
 }
 
 int confirmationMessage(const QString & text,const QString & details)
 {
     QMessageBox *conferma=new QMessageBox;
+    conferma->setAttribute(Qt::WA_DeleteOnClose);
     conferma->setWindowTitle("Conferma");
     conferma->setText(text);
     if(details!='\0')
@@ -55,7 +56,7 @@ int confirmationMessage(const QString & text,const QString & details)
     QFile file(":/resources/style.css");
     file.open(QFile::ReadOnly);
     QString styleSheet = QLatin1String(file.readAll());
-
+    file.close();
     conferma->setStyleSheet(styleSheet);
     return conferma->exec();
 }

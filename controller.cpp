@@ -9,14 +9,12 @@ Controller::Controller(QObject *parent) : QObject(parent), _listaInquilini(Lista
     buildLogin();
 }
 
-
-
 bool Controller::login(const QString & user, const QString & pw)
 {
     if (_listaInquilini.checkCredenziali(user.toStdString(), pw.toStdString()))
     {
-        Mainwindow * mainwindow= new Mainwindow(nullptr, this, user);
-        mainwindow->show();
+        _mainwindow= new Mainwindow(nullptr, this, user);
+        _mainwindow->show();
         checkIncarichiSvoltiPassato();
         return true;
     }
@@ -201,6 +199,7 @@ unsigned short Controller::isAdmin(const std::string & user) const
 void Controller::buildLogin()
 {
     Login * login(new Login(this));
+    login->setAttribute(Qt::WA_DeleteOnClose);
     login->show();
 }
 
