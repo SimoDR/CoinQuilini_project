@@ -165,9 +165,9 @@ int main(int argc, char *argv[])
 //    controller.creaNuovoIncarico(parametri5);
 
 
-    controller.stampaCalendario();
+ //   controller.stampaCalendario();
 
-    controller.checkIncarichiSvoltiIeri();
+
 
 
 
@@ -201,13 +201,24 @@ int main(int argc, char *argv[])
 //    controller.rimuoviInquilino(1);
 //    controller.stampaCalendario();
 
+//    dList<int> prova;
+//    prova.insertBack(3);
+//    prova.insertBack(4);
+//    prova.insertBack(5);
+//    prova.insertBack(6);
+//    prova.insertBack(7);
+
+//    for(dList<int>::iterator cit=prova.begin(); cit!=prova.end(); ++cit)
+//    {
+//        (*cit)=10;
+//    }
 
 
 }
 
 
-
 */
+
 
 
 

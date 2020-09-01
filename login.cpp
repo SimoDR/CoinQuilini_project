@@ -6,7 +6,7 @@ void Login::impostaStile()
     QFile file(":/resources/style.css");
     file.open(QFile::ReadOnly);
     QString styleSheet = QLatin1String(file.readAll());
-
+    file.close();
     setStyleSheet(styleSheet);
 }
 

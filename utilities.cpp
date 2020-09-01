@@ -42,17 +42,15 @@ void showSuccess(const QString & message)
     m->exec();
 }
 
-int confirmationMessage(const QString & text,const QString & details)
+int confirmationMessage(QWidget *parent, const QString & text,const QString & details)
 {
-    QMessageBox *conferma=new QMessageBox;
-    conferma->setAttribute(Qt::WA_DeleteOnClose);
+    QMessageBox *conferma=new QMessageBox(parent);
     conferma->setWindowTitle("Conferma");
     conferma->setText(text);
     if(details!='\0')
             conferma->setDetailedText(details);
     conferma->setStandardButtons(QMessageBox::Yes | QMessageBox::No );
     conferma->setDefaultButton(QMessageBox::Yes);
-
     QFile file(":/resources/style.css");
     file.open(QFile::ReadOnly);
     QString styleSheet = QLatin1String(file.readAll());

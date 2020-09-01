@@ -26,7 +26,7 @@ dList<Calendario::Giorno>::iterator Calendario::iteratoreFromData(dList<Giorno>:
 
 
 
-bool Calendario::checkIteratore(dList<Calendario::Giorno>::iterator iteratoreDaControllare) const
+bool Calendario::checkIteratore(dList<Calendario::Giorno>::const_iterator iteratoreDaControllare) const
 {
     if(iteratoreDaControllare==_giorni.end())
         return true;
@@ -260,33 +260,33 @@ void Calendario::remove(const Data &dataIncarico, unsigned int indiceIncarico)
 
 
 
-void Calendario::posponiIncarico(unsigned int indiceIncarico, unsigned int quantoPosporre, const Data& dataIncarico)
+void Calendario::posponiIncaricoCalendario(unsigned int indiceIncarico, unsigned int quantoPosporre, const Data& dataIncarico)
 {
     Data dataInCuiInserire=dataIncarico+quantoPosporre;
-    bool passato=false;
-    if(dataIncarico<getDataDiOggi()) passato=true;
-    Incarico * daPosporre=trovaIncarico(dataIncarico,indiceIncarico,passato);
-    cout<<"INDICE: "<<indiceIncarico<<endl;
+
+    Incarico * daPosporre=trovaIncarico(dataIncarico,indiceIncarico);
+    //cout<<"INDICE: "<<indiceIncarico<<endl;
     bool possibilePosporre=daPosporre->posponi(dataInCuiInserire);
-    cout<<"E' possibile posporre? "<<possibilePosporre<<endl; //debug
+    //cout<<"E' possibile posporre? "<<possibilePosporre<<endl; //debug
     if(daPosporre->getSvolto())
         showMessage("Attenzione! Non è possibile posporre un incarico già svolto");
     else {
-    if (possibilePosporre)
-    {
-        Incarico * cloned=daPosporre->clone();
-        remove(dataIncarico,indiceIncarico); //rimuovo da dov'è
-        dList<Giorno>::iterator iteratoreInCuiInserire=iteratoreFromData(_iteratoreCorrente, dataInCuiInserire);
-        iteratoreInCuiInserire->_incarichiDelGiorno.push_back(cloned);
-        int decurtazione=
-                cloned->calcolaPunteggio()/2+quantoPosporre > cloned->calcolaPunteggio() ?
-                    cloned->calcolaPunteggio() : cloned->calcolaPunteggio()/2+quantoPosporre;
-        cloned->getIncaricato()->setPunteggio(-decurtazione);
 
-        showSuccess(QString::fromStdString("Incarico posposto con successo! Tuttavia ti sono stati decurtati "+std::to_string(decurtazione)+(decurtazione>1 ? " punti" : "punto")));
-    }
-    else
-        showMessage(QString::fromStdString("Impossibile posporre! L'incarico ha delle limitazioni che impediscono di posporlo al giorno "+dataInCuiInserire.dataToString()));
+        if (possibilePosporre)
+        {
+            Incarico * cloned=daPosporre->clone();
+            remove(dataIncarico,indiceIncarico); //rimuovo da dov'è
+            dList<Giorno>::iterator iteratoreInCuiInserire=iteratoreFromData(_iteratoreCorrente, dataInCuiInserire);
+            iteratoreInCuiInserire->_incarichiDelGiorno.push_back(cloned);
+            int decurtazione=
+            	cloned->calcolaPunteggio()/2+quantoPosporre > cloned->calcolaPunteggio() ?
+                    cloned->calcolaPunteggio() : cloned->calcolaPunteggio()/2+quantoPosporre;
+            cloned->getIncaricato()->setPunteggio(-decurtazione);
+
+            showSuccess(QString::fromStdString("Incarico posposto con successo! Tuttavia ti sono stati decurtati "+std::to_string(decurtazione)+(decurtazione>1 ? " punti" : "punto")));
+        }
+        else
+            showMessage(QString::fromStdString("Impossibile posporre! L'incarico ha delle limitazioni che impediscono di posporlo al giorno "+dataInCuiInserire.dataToString()));
 
     }
 }
@@ -698,7 +698,7 @@ void Calendario::creaNuovoIncarico(const vector<string>& parametri,bool import)
 
 void Calendario::incarichiGiorno(const Data & giorno, vector<std::string> & tipiIncarichi, vector<string> & incaricati) const
 {
-    dList<Giorno>::iterator iteratoreIniziale=_giorni.begin();
+    dList<Giorno>::const_iterator iteratoreIniziale=_giorni.begin();
     bool trovato=false;
     try{
         while(!trovato)
