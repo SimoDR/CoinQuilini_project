@@ -2,7 +2,7 @@
 
 unsigned short int Faccenda::_pesoFaccenda=60; // => 1 punto ogni 60 minuti
 
-Faccenda::Faccenda(int tempoStimato): _tempoStimato(tempoStimato) {}
+Faccenda::Faccenda(const string &nome, Inquilino *incaricato, bool svolto, int tempoStimato):Incarico(nome, incaricato, svolto), _tempoStimato(tempoStimato) {}
 
 Faccenda::~Faccenda() {}
 

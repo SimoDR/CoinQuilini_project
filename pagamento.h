@@ -12,7 +12,7 @@ private:
     static unsigned short int _pesoPagamento;
 
 public:
-    Pagamento(float importo);
+    Pagamento(const string& nome, Inquilino * incaricato,bool svolto, float importo);
     void setImporto(double);
     double getImporto() const;
     virtual ~Pagamento()=0;

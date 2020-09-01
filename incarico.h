@@ -23,7 +23,7 @@ private:
 protected:
     static unsigned short int controlloSoglia(int);
 public:
-    Incarico(const string& nome,Inquilino * incaricato,bool svolto);
+    Incarico(const string& nome="\0",Inquilino * incaricato=nullptr,bool svolto=false);
 	void setNome(const string&);
 
     string getNome() const {return _nome;} //debug
