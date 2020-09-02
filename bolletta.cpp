@@ -1,7 +1,7 @@
 #include "bolletta.h"
 
 Bolletta::Bolletta(const std::string & nome, float importo, const Data &dataLimite, Inquilino *incaricato, bool svolto):
-    Incarico(nome,incaricato,svolto), Pagamento(importo), _dataLimite(dataLimite) {}
+    Incarico(nome,incaricato,svolto), Pagamento(nome,incaricato,svolto,importo), _dataLimite(dataLimite) {}
 
 void Bolletta::setDataLimite(const Data& dataLimite)
 {
