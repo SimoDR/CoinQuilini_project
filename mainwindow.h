@@ -100,6 +100,7 @@ private slots:
     void buildPosponi();
     void posponiSelected(unsigned int, unsigned int);
     void enableButtons();
+    void disableButtons();
 };
 
 #endif // MAINWINDOW_H

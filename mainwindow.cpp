@@ -78,6 +78,8 @@ void Mainwindow::notaSucc()
 
 void Mainwindow::svoltoSelected()
 {
+    _posponi->setDisabled(true);
+    _svolto->setDisabled(true);
     int successo=confirmationMessage(this, "Confermi di avere svolto l'incarico selezionato?");
     if(successo==QMessageBox::Yes)
     {
@@ -113,6 +115,12 @@ void Mainwindow::enableButtons()
         _svolto->setEnabled(true);
         _posponi->setEnabled(true);
     }
+}
+
+void Mainwindow::disableButtons()
+{
+    _posponi->setDisabled(true);
+    _svolto->setDisabled(true);
 }
 
 void Mainwindow::buildAdminPanel()
@@ -251,6 +259,7 @@ void Mainwindow::addlists()
     buttonsLayout->addWidget(_posponi);
     connect(_posponi, SIGNAL(clicked()), this, SLOT(buildPosponi()));
     connect(_selectedList, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(enableButtons()));
+    connect(_calendar, SIGNAL(selectionChanged()), this, SLOT(disableButtons()));
     connect(this, SIGNAL(datiPosponi(const Data& , unsigned int , unsigned int, const string &)), _controller, SLOT(posponiIncarico(const Data& , unsigned int , unsigned int, const string &)));
     QGroupBox * selectedGroup= new QGroupBox;
     QVBoxLayout * selectedLayout=new QVBoxLayout;
