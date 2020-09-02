@@ -7,9 +7,11 @@ class Admin : public Inquilino
     friend class ListaInquilini;
     public:
         Admin(const string&, const string&, float=0, unsigned short=0);
-        virtual unsigned short int isAdmin() const;
-        virtual bool puoposporre() const;
+
+        //get
         virtual std::string getLabel() const;
+
+        virtual unsigned short int isAdmin() const;
 };
 
 #endif
