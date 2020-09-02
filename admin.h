@@ -12,6 +12,8 @@ class Admin : public Inquilino
         virtual std::string getLabel() const;
 
         virtual unsigned short int isAdmin() const;
+
+        virtual void exportXml(QXmlStreamWriter&) const;
 };
 
 #endif

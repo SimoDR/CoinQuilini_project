@@ -7,6 +7,11 @@ unsigned short int Admin::isAdmin() const
     return 1;
 }
 
+void Admin::exportXml(QXmlStreamWriter &xmlOutput) const
+{
+    Inquilino::exportXml(xmlOutput);
+}
+
 std::string Admin::getLabel() const
 {
     return "ADMIN";
