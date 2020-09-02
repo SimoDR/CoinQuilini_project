@@ -261,8 +261,8 @@ void Calendario::posponiIncaricoCalendario(unsigned int indiceIncarico, unsigned
             dList<Giorno>::iterator iteratoreInCuiInserire=iteratoreFromData(_iteratoreCorrente, dataInCuiInserire);
             iteratoreInCuiInserire->_incarichiDelGiorno.push_back(cloned);
             int decurtazione=
-            	cloned->calcolaPunteggio()/2+quantoPosporre > cloned->calcolaPunteggio() ?
-                    cloned->calcolaPunteggio() : cloned->calcolaPunteggio()/2+quantoPosporre;
+                cloned->calcolaPunteggio()/2+quantoPosporre > (cloned->calcolaPunteggio())/2 ?
+                    (cloned->calcolaPunteggio())/2 : cloned->calcolaPunteggio()/2+quantoPosporre;
             cloned->getIncaricato()->setPunteggio(-decurtazione);
 
             showSuccess(QString::fromStdString("Incarico posposto con successo! Tuttavia ti sono stati decurtati "+std::to_string(decurtazione)+(decurtazione>1 ? " punti" : "punto")));
