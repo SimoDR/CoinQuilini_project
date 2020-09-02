@@ -2,7 +2,8 @@
 
 float Cucina::_pesoCucina=1.45; // => 1.45^(numeroCommensali) punti ogni pasto
 
-Cucina::Cucina(const std::string & nome, int tempoStimato, unsigned short numeroCommensali, Inquilino *incaricato, bool svolto): Faccenda(nome,incaricato,svolto, tempoStimato), _numeroCommensali(numeroCommensali) {}
+Cucina::Cucina(const std::string & nome, int tempoStimato, unsigned short numeroCommensali, Inquilino *incaricato, bool svolto):
+    Incarico(nome,incaricato,svolto), Faccenda(tempoStimato), _numeroCommensali(numeroCommensali) {}
 
 Cucina* Cucina::clone() const {return new Cucina(*this);}
 

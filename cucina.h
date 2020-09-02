@@ -11,7 +11,8 @@ private:
     static float _pesoCucina;
 
 public:
-    Cucina(const string & nome="cucina",int tempoStimato=60,unsigned short int numeroCommensali=4,Inquilino * incaricato=nullptr,bool svolto=false);
+    Cucina(const string & nome="cucina",int tempoStimato=60,unsigned short int numeroCommensali=4,
+           Inquilino * incaricato=nullptr,bool svolto=false);
     virtual ~Cucina() {}
     virtual Cucina* clone() const;
 

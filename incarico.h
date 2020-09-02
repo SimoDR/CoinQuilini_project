@@ -22,7 +22,8 @@ protected:
     static unsigned short int controlloSoglia(int); // verifica: 2 <= punteggio incarico <= 10
 
 public:
-    Incarico(const string& nome="\0",Inquilino * incaricato=nullptr,bool svolto=false);
+    Incarico(const string& nome, Inquilino * incaricato, bool svolto);
+    Incarico() {}
     virtual ~Incarico() = 0;
     virtual Incarico* clone() const =0;
 
