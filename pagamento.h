@@ -12,7 +12,8 @@ private:
     static unsigned short int _pesoPagamento;
 
 public:
-    Pagamento(const string& nome, Inquilino * incaricato,bool svolto, float importo);
+    Pagamento(float importo);
+    Pagamento() {}
     virtual ~Pagamento()=0;
 
     // get

@@ -2,7 +2,7 @@
 
 unsigned short int Pagamento::_pesoPagamento=30; // => l'incarico vale 1 punto ogni 30 euro di importo
 
-Pagamento::Pagamento(const string &nome, Inquilino *incaricato, bool svolto, float importo): Incarico(nome, incaricato, svolto), _importo(importo) {}
+Pagamento::Pagamento(float importo): _importo(importo) {}
 
 float Pagamento::getImporto() const
 {

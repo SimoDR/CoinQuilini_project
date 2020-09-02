@@ -10,7 +10,8 @@ private:
     string _cosaButtare;
 
 public:
-    Spazzatura(const string& nome="spazzatura", const string & cosaButtare="rifiuto",int tempoStimato=10, Inquilino * incaricato=nullptr,bool svolto=false);
+    Spazzatura(const string& nome="spazzatura", const string & cosaButtare="rifiuto",int tempoStimato=10,
+               Inquilino * incaricato=nullptr,bool svolto=false);
     virtual ~Spazzatura() {}
     virtual Spazzatura* clone() const;
 

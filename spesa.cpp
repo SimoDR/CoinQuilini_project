@@ -3,7 +3,7 @@
 unsigned short int Spesa::_pesoSpesa=10; // => 1 punto ogni 10 articoli comprati
 
 Spesa::Spesa(const std::string& nome, float importo, int tempoStimato, unsigned short numeroArticoli, Inquilino *incaricato, bool svolto):
-    Incarico(nome,incaricato,svolto), Pagamento(nome,incaricato,svolto,importo), Faccenda(nome,incaricato,svolto,tempoStimato), _numeroArticoli(numeroArticoli) {}
+    Incarico(nome,incaricato,svolto), Pagamento(importo), Faccenda(tempoStimato), _numeroArticoli(numeroArticoli) {}
 
 Spesa* Spesa::clone() const {return new Spesa(*this);}
 
