@@ -12,7 +12,13 @@ private:
     static unsigned short int _pesoPagamento;
 
 public:
+<<<<<<< HEAD
     Pagamento(const string& nome, Inquilino * incaricato,bool svolto, float importo);
+=======
+    Pagamento(float importo);
+    void setImporto(double);
+    double getImporto() const;
+>>>>>>> parent of 08e7a01... refactor sui costruttori della gerarchia di incarichi
     virtual ~Pagamento()=0;
 
     // get

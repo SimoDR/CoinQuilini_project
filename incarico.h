@@ -22,9 +22,14 @@ protected:
     static unsigned short int controlloSoglia(int); // verifica: 2 <= punteggio incarico <= 10
 
 public:
+<<<<<<< HEAD
     Incarico(const string& nome="\0",Inquilino * incaricato=nullptr,bool svolto=false);
     virtual ~Incarico() = 0;
     virtual Incarico* clone() const =0;
+=======
+    Incarico(const string& nome,Inquilino * incaricato,bool svolto);
+	void setNome(const string&);
+>>>>>>> parent of 08e7a01... refactor sui costruttori della gerarchia di incarichi
 
     // set
     void setIncaricato(Inquilino *);

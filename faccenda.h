@@ -10,7 +10,7 @@ private:
     static unsigned short int _pesoFaccenda;
 
 public:
-    Faccenda(const string& nome,Inquilino * incaricato,bool svolto, int tempoStimato);
+    Faccenda(int tempoStimato);
     virtual ~Faccenda()=0;
 
     //get
