@@ -1,8 +1,8 @@
 #include "faccenda.h"
 
-unsigned short int Faccenda::_pesoFaccenda=60; // => 1 punto ogni 60 minuti
+unsigned short int Faccenda::_pesoFaccenda=60; // => 1 punto ogni 60 minuti di tempo stimato per svolgere l'incarico
 
-Faccenda::Faccenda(const string &nome, Inquilino *incaricato, bool svolto, int tempoStimato):Incarico(nome, incaricato, svolto), _tempoStimato(tempoStimato) {}
+Faccenda::Faccenda(int tempoStimato): _tempoStimato(tempoStimato) {}
 
 Faccenda::~Faccenda() {}
 

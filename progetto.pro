@@ -8,7 +8,6 @@ HEADERS += \
     cucina.h \
     dList.h \
     data.h \
-    euro.h \
     faccenda.h \
     formincarico.h \
     incarico.h \
@@ -36,7 +35,6 @@ SOURCES += \
     creamodificainquilino.cpp \
     cucina.cpp \
     data.cpp \
-    euro.cpp \
     faccenda.cpp \
     formincarico.cpp \
     incarico.cpp \
