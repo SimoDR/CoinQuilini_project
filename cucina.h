@@ -8,17 +8,23 @@ class Cucina: public Faccenda
 {
 private:
     unsigned short int _numeroCommensali;
-    static double _pesoCucina;
+    static float _pesoCucina;
+
 public:
     Cucina(const string & nome="cucina",int tempoStimato=60,unsigned short int numeroCommensali=4,Inquilino * incaricato=nullptr,bool svolto=false);
     virtual ~Cucina() {}
     virtual Cucina* clone() const;
-    virtual bool posponi (const Data &) const;
-    virtual string generaNota() const;
-    virtual unsigned short int calcolaPunteggio() const;
-    virtual void exportXml(QXmlStreamWriter&,string data) const;
+
+    // get
     virtual string getLabel() const;
+    virtual string generaNota() const;
+
+    virtual bool posponi (const Data &) const;
+    virtual unsigned short int calcolaPunteggio() const;
+
+    // input/output
     static void importXml(QXmlStreamReader & xmlInput, vector<string> & parametri);
+    virtual void exportXml(QXmlStreamWriter&,string data) const;
 };
 
 #endif // CUCINA_H

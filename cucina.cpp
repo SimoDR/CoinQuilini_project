@@ -1,6 +1,6 @@
 #include "cucina.h"
 
-double Cucina::_pesoCucina=1.5; // => 1.5^(numeroCommensali) punti ogni pasto
+float Cucina::_pesoCucina=1.45; // => 1.45^(numeroCommensali) punti ogni pasto
 
 Cucina::Cucina(const std::string & nome, int tempoStimato, unsigned short numeroCommensali, Inquilino *incaricato, bool svolto): Faccenda(nome,incaricato,svolto, tempoStimato), _numeroCommensali(numeroCommensali) {}
 
@@ -11,12 +11,14 @@ bool Cucina::posponi(const Data & d) const
     return Incarico::posponi(d) && _numeroCommensali>6;
 }
 
-string Cucina::generaNota() const {
+string Cucina::generaNota() const
+{
     return "CUCINA\n\n"+Incarico::generaNota()+"\n"+Faccenda::generaNota()+
             "\nPunteggio: "+std::to_string(calcolaPunteggio())+" punti \n"+
             "Numero commensali: "+std::to_string(_numeroCommensali)+"\n\n"+"Forza chef: mettiti ai fornelli!";
 }
-unsigned short int Cucina::calcolaPunteggio() const{
+unsigned short int Cucina::calcolaPunteggio() const
+{
     return controlloSoglia(std::pow(_pesoCucina,_numeroCommensali));
 }
 

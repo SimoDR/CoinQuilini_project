@@ -4,11 +4,7 @@ unsigned short int Pagamento::_pesoPagamento=30; // => l'incarico vale 1 punto o
 
 Pagamento::Pagamento(const string &nome, Inquilino *incaricato, bool svolto, float importo): Incarico(nome, incaricato, svolto), _importo(importo) {}
 
-void Pagamento::setImporto(double x){
-    _importo=x;
-}
-
-double Pagamento::getImporto() const
+float Pagamento::getImporto() const
 {
     return _importo;
 }
@@ -24,7 +20,8 @@ string Pagamento::generaNota() const {
     return "Importo: "+ money+" €";
 }
 
-unsigned short int Pagamento::calcolaPunteggio() const{
+unsigned short int Pagamento::calcolaPunteggio() const
+{
     return controlloSoglia(_importo/_pesoPagamento);
 }
 

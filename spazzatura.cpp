@@ -1,6 +1,6 @@
 #include "spazzatura.h"
 
-unsigned short int Spazzatura::_pesoSpazzatura=2; // => 2 punti ogni incarico spazzatura assolto
+unsigned short int Spazzatura::_pesoSpazzatura=2; // => 2 punti ogni incarico spazzatura completato
 
 Spazzatura::Spazzatura(const std::string& nome, const std::string & cosaButtare, int tempoStimato, Inquilino *incaricato, bool svolto):
     Faccenda(nome,incaricato,svolto, tempoStimato), _cosaButtare(cosaButtare) {}

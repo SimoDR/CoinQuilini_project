@@ -182,10 +182,7 @@ void Calendario::insert(Incarico * daInserire, Data  dataInCuiInserire, int nume
 
         if(!assegnato) daInserire->setIncaricato(incaricato);
 
-        // se bolletta setto _dataLimite
-        Bolletta * bolletta=dynamic_cast<Bolletta*> (daInserire);
-        if (bolletta)
-            bolletta->setDataLimite(dataInCuiInserire+scostamentoDataLimite);
+        daInserire->setDataLimite(dataInCuiInserire+scostamentoDataLimite);
 
         if(import && daInserire->getSvolto()==false && iteratoreInCuiInserire->_dataDelGiorno<_iteratoreCorrente->_dataDelGiorno) //se non è stato svolto, è import ed è nel passato
         {
@@ -281,7 +278,7 @@ void Calendario::setCredito(Pagamento * p, vector<Inquilino*> & lista) const
 {
     if (p->getSvolto()){
         p->getIncaricato()->setCD(p->getImporto());
-        double quota = p->getImporto() / lista.size();
+        float quota = p->getImporto() / lista.size();
         for(vector<Inquilino*>::iterator it=lista.begin(); it!=lista.end(); ++it)
         {
             (*it)->setCD(-quota);

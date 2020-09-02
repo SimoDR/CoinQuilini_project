@@ -1,6 +1,3 @@
-// file incarico.h
-// interfaccia di incarico
-
 #ifndef INCARICO_H
 #define INCARICO_H
 
@@ -20,25 +17,32 @@ private:
     bool _svolto;
     static unsigned short int _sogliaMax;
     static unsigned short int _sogliaMin;
+
 protected:
-    static unsigned short int controlloSoglia(int);
+    static unsigned short int controlloSoglia(int); // verifica: 2 <= punteggio incarico <= 10
+
 public:
     Incarico(const string& nome="\0",Inquilino * incaricato=nullptr,bool svolto=false);
-	void setNome(const string&);
+    virtual ~Incarico() = 0;
+    virtual Incarico* clone() const =0;
 
-    string getNome() const {return _nome;} //debug
+    // set
     void setIncaricato(Inquilino *);
+    void setSvolto();
+    virtual void setDataLimite(const Data&);
+
+    // get
     Inquilino* getIncaricato() const;
 	bool getSvolto() const;
-    void setSvolto();
-    virtual ~Incarico() = 0;
-	virtual Incarico* clone() const =0;
-    virtual bool posponi (const Data &) const;  //debug parametro d non sempre utilizzato
-    virtual string generaNota() const;
     virtual string getLabel() const =0;
-    virtual void exportXml(QXmlStreamWriter&,string data) const;
-    static void importXml(QXmlStreamReader & xmlInput, vector<string>& parametri); //parametri è il vettore che si passa: vector<string> parametri(12,"\0");
+    virtual string generaNota() const;
+
+    virtual bool posponi (const Data &) const;
     virtual unsigned short int calcolaPunteggio() const=0;
+
+    // input/output
+    static void importXml(QXmlStreamReader & xmlInput, vector<string>& parametri);    //parametri è il vettore che si passa: vector<string> parametri(12,"\0");
+    virtual void exportXml(QXmlStreamWriter&, string) const;
 };
 
 #endif
