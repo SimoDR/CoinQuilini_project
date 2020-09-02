@@ -62,7 +62,6 @@ Inquilino *ListaInquilini::getInquilino(unsigned int pos) const
             return *i;
         cont++;
     }
-    //return nullptr;
     return *i;   //se pos è out of bound ritorna iteratore past the end
 }
 
@@ -75,7 +74,7 @@ Inquilino *ListaInquilini::getInquilino(const std::string & user) const
         if ((*i)->getNome()==user)
             return *i;
     }
-    return *i;   //se pos è out of bound ritorna iteratore past the end
+    return *i;   //se user non esiste ritorna iteratore past the end
 }
 
 bool ListaInquilini::checkCredenziali(const std::string & user, const std::string & pw) const
@@ -175,7 +174,7 @@ void ListaInquilini::importXml()
                         float cd=std::stof(credeb);
                         unsigned short int punt=std::stoi(punteggio);
                         creaInserisci(tipo, user, pw, cd, punt);
-                        xmlInput.skipCurrentElement(); //per uscire dallo "scope"(?)
+                        xmlInput.skipCurrentElement();
                     }
                 }
                 else
@@ -198,9 +197,8 @@ void ListaInquilini::importXml()
 
 void ListaInquilini::resetCD()
 {
-    vector<std::pair<string,float> > cdCasa;
     for(auto ci = _listaInquilini.cbegin(); ci != _listaInquilini.cend(); ++ci){
-       (*ci)->setCD( -(*ci)->getCreditoDebito() );
+       (*ci)->setCD( -(*ci)->getCreditoDebito());
     }
 }
 

@@ -2,7 +2,6 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QWidget>
 #include <QCalendarWidget>
 #include <QPushButton>
 #include <QListWidget>
@@ -14,14 +13,13 @@
 #include <QMenuBar>
 #include <QMenu>
 #include <QAction>
-#include <QGroupBox> //layout with a title
+#include <QGroupBox>
 #include <QTimer>
 #include "data.h"
 #include "selezionedialog.h"
 #include "formincarico.h"
 #include "listaincarichi.h"
 #include "riassegnadialog.h"
-#include "data.h"
 #include "posponidialog.h"
 
 class Controller;
@@ -30,7 +28,7 @@ class Mainwindow : public QMainWindow
 {
     Q_OBJECT
 private:
-    Controller *_controller; //controller figlio di mainwindow: alla distruzione della vista si distrugge in automatico anche il controller
+    Controller *_controller;
     QHBoxLayout* _mainLayout;
     QWidget*_mainWidget;
     //layout calendario e buttons
@@ -52,7 +50,6 @@ private:
     QListWidget* _succList;
     QPushButton * _posponi;
     QPushButton * _svolto;
-
     //menu bar
     QMenuBar* _menuBar;
     QMenu *_file;
@@ -60,12 +57,10 @@ private:
     QMenu *_opzioni;
     QAction* _logOut;
     QAction* _info;
-
     //inquilino loggato
     QString _inquilino;
 
     QTimer * _timer;
-
     Data _dataOdierna;
 
     void addbuttons();
@@ -78,7 +73,7 @@ private:
 
 
 public:
-    explicit Mainwindow(QWidget *parent, Controller*, QString);
+    Mainwindow(QWidget *parent, Controller*, QString);
 
 signals:
     void datiPosponi(const Data&, unsigned int, unsigned int, const string &);

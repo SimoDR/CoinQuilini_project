@@ -7,7 +7,6 @@ Mainwindow::Mainwindow(QWidget *parent, Controller* c, QString inquilino) : QMai
     setAttribute(Qt::WA_DeleteOnClose);
     _mainLayout=new QHBoxLayout;
     setWindowTitle("CoinQuilini - Benvenuto " + _inquilino);
-
     //create menu bar
     addmenubar();
     //create calendar and buttons
@@ -53,7 +52,7 @@ void Mainwindow::buildRiassegna(const QDate &data, unsigned int pos, ListaIncari
 
 void Mainwindow::buildInfo()
 {
-    showSuccess("Programma creato con estrema fatica dai saccensi Antonio Badan, Simone De Renzis e Francesco Trolese \n ad astra per aspera!");
+    showSuccess("Programma creato come progetto didattico di Programmazione ad Oggetti da: \n       Antonio Badan, Simone De Renzis e Francesco Trolese \n\nPer aspera ad astra!");
 }
 
 void Mainwindow::notaPrec()
@@ -79,7 +78,7 @@ void Mainwindow::notaSucc()
 
 void Mainwindow::svoltoSelected()
 {
-    int successo=confirmationMessage(this, "Confermi tu, vile marrano, di avere svolto l'incarico che hai selezionato?");
+    int successo=confirmationMessage(this, "Confermi di avere svolto l'incarico selezionato?");
     if(successo==QMessageBox::Yes)
     {
         Data giorno(((_calendar->selectedDate()).toString("d/M/yyyy")).toStdString());
@@ -204,54 +203,41 @@ void Mainwindow::addbuttons()
         _incarico= new QPushButton;
         _incarico->setText("Aggiungi un incarico");
         _calendarLayout->addWidget(_incarico);
-
         connect(_incarico, SIGNAL(clicked()), this, SLOT(buildSelezione()));
         _admin= new QPushButton;
         _admin->setText("Apri pannello admin");
         connect(_admin, SIGNAL(clicked()), this, SLOT(buildAdminPanel()));
         _calendarLayout->addWidget(_admin);
     }
-
-    //add buttons to the layout
 }
 
 void Mainwindow::addcalendar()
 {
-
     _calendar=new QCalendarWidget;
     connect(_calendar, SIGNAL(activated(const QDate &)), this, SLOT(buildListaIncarichi(const QDate &)));
     connect(_calendar, SIGNAL(clicked(const QDate &)), this, SLOT(refreshlists(const QDate &)));
     _calendarLayout= new QVBoxLayout;
-
     //add calendar to the layout
     _calendarLayout->addWidget(_calendar);
-
     //buttons
     addbuttons();
-
     _calendarGroup=new QGroupBox("Calendario");
     _calendarGroup->setLayout(_calendarLayout);
-
     //add to the main layout
     _mainLayout->addWidget(_calendarGroup);
 }
 
 void Mainwindow::addlists()
 {
-
-
     //prev list and label
     _prec= new QLabel;
     _prec->setText(((_calendar->selectedDate()).addDays(-1)).toString(Qt::SystemLocaleLongDate));
-
     _precList= new QListWidget;
     populateList(_precList, _inquilino, (_calendar->selectedDate()).addDays(-1));
     connect(_precList,SIGNAL(itemActivated(QListWidgetItem *)),this, SLOT(notaPrec()));
-    //selected day list, labe and buttons
-
-    _selected = new QLabel;
+    //selected day list, label and buttons
+   _selected = new QLabel;
     _selected->setText((_calendar->selectedDate()).toString(Qt::SystemLocaleLongDate));
-
     _selectedList= new QListWidget;
     populateList(_selectedList, _inquilino, (_calendar->selectedDate()));
     connect(_selectedList,SIGNAL(itemActivated(QListWidgetItem *)),this, SLOT(notaSelected()));
@@ -266,22 +252,18 @@ void Mainwindow::addlists()
     connect(_posponi, SIGNAL(clicked()), this, SLOT(buildPosponi()));
     connect(_selectedList, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(enableButtons()));
     connect(this, SIGNAL(datiPosponi(const Data& , unsigned int , unsigned int, const string &)), _controller, SLOT(posponiIncarico(const Data& , unsigned int , unsigned int, const string &)));
-
     QGroupBox * selectedGroup= new QGroupBox;
     QVBoxLayout * selectedLayout=new QVBoxLayout;
     selectedLayout->addWidget(_selected);
     selectedLayout->addWidget(_selectedList);
     selectedLayout->addLayout(buttonsLayout);
     selectedGroup->setLayout(selectedLayout);
-
     //next list and label
     _succ= new QLabel;
     _succ->setText(((_calendar->selectedDate()).addDays(1)).toString(Qt::SystemLocaleLongDate));
-
     _succList= new QListWidget;
     populateList(_succList, _inquilino, (_calendar->selectedDate()).addDays(1));
     connect(_succList,SIGNAL(itemActivated(QListWidgetItem *)),this, SLOT(notaSucc()));
-
     //layout add
     QVBoxLayout* listlayout = new QVBoxLayout;
     listlayout->addWidget(_prec);
@@ -289,14 +271,10 @@ void Mainwindow::addlists()
     listlayout->addWidget(selectedGroup);
     listlayout->addWidget(_succ);
     listlayout->addWidget(_succList);
-
-
     _listGroup=new QGroupBox("I tuoi incarichi");
     _listGroup->setLayout(listlayout);
-
     //add to the main layout
     _mainLayout->addWidget(_listGroup);
-
 }
 
 void Mainwindow::addmenubar()
@@ -315,7 +293,6 @@ void Mainwindow::addmenubar()
     _opzioni->addAction(_logOut);
     _opzioni->addAction(_info);
     _menuBar->addMenu(_opzioni);
-
 }
 
 void Mainwindow::populateList(QListWidget *lista, const QString & utente, const QDate & giorno)

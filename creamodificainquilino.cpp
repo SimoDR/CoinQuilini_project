@@ -6,7 +6,6 @@ CreaModificaInquilino::CreaModificaInquilino(QWidget *parent, const QString & us
     buildFields(user, pw);
     buildButtons();
     setLayout(_layout);
-
 }
 
 void CreaModificaInquilino::buildFields(const QString& user, const QString& pw)
@@ -43,11 +42,7 @@ void CreaModificaInquilino::checkDati()
         showSuccess("Inquilino aggiunto con successo");
     }
     else
-    {
-        disconnect(_yes, SIGNAL(clicked()), this, SLOT(checkDati()));
-        connect(_yes, SIGNAL(clicked()), this, SLOT(checkDati()));
         showMessage("Attenzione! I campi user e password non possono essere vuoti");
-    }
 }
 
 void CreaModificaInquilino::raccogliDati()

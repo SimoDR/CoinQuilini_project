@@ -7,7 +7,6 @@ void adminPanel::buildLista()
     _mainLayout->addWidget(_elencoInquilini);
     impostaStile();
     connect(_elencoInquilini,SIGNAL(itemSelectionChanged()),this, SLOT(enableButtons()));
-
 }
 
 void adminPanel::buildBottoni()
@@ -37,22 +36,10 @@ void adminPanel::aggiornaLista()
 
 void adminPanel::impostaStile()
 {
-
     QFile file(":/resources/style.css");
     file.open(QFile::ReadOnly);
     QString styleSheet = QLatin1String(file.readAll());
-
     setStyleSheet(styleSheet);
-
-}
-
-void adminPanel::buildMessage(const QString & title, const QString & message)
-{
-    QMessageBox *error= new QMessageBox;
-    setWindowModality(Qt::WindowModal);
-    error->setWindowTitle(title);
-    error->setText(message);
-    error->exec();
 }
 
 adminPanel::adminPanel(Controller *c, QWidget *parent) : QDialog(parent), _controller(c), _mainLayout(new QHBoxLayout), _buttonLayout(new QVBoxLayout)
@@ -63,8 +50,8 @@ adminPanel::adminPanel(Controller *c, QWidget *parent) : QDialog(parent), _contr
     //costruzione lista
     buildLista();
     setLayout(_mainLayout);
-
-
+    //fixed size
+    setFixedSize(sizeHint());
 }
 
 void adminPanel::buildAggiungi()
@@ -73,7 +60,6 @@ void adminPanel::buildAggiungi()
     form->setWindowTitle("Aggiungi un nuovo inquilino");
     form->show();
     connect(form, SIGNAL(invia(const QString &, const QString &)), this, SLOT(aggiungi(const QString &, const QString &)));
-
 }
 //TODO: modifica dell'utente
 void adminPanel::buildModifica()
@@ -87,8 +73,7 @@ void adminPanel::buildModifica()
         connect(form, SIGNAL(invia(const QString &, const QString &)), this, SLOT(modifica(const QString &, const QString &)));
     }
     catch (std::logic_error * e) {
-        buildMessage("Attenzione", e->what());
-
+        showMessage(QString::fromStdString(e->what()));
     }
 }
 
@@ -100,7 +85,6 @@ void adminPanel::buildRimuovi()
                         "- l'appianamento della situazione contabile della casa\n"
                         "- la perdita dei dati dell'inquilino eliminato\n"
                         "- la riassegnazione automatica degli incarichi futuri dell'inquilino eliminato";
-
         int scelta = confirmationMessage(this, "Sei sicuro di voler eliminare l'inquilino selezionato?",details);
         if (scelta==QMessageBox::Yes){
             showMessage(QString::fromStdString (_controller->showCdCasa()) );
@@ -110,7 +94,7 @@ void adminPanel::buildRimuovi()
         }
     }
     catch (std::logic_error * e) {
-        buildMessage("Attenzione", e->what());
+        showMessage(QString::fromStdString(e->what()));
     }
 }
 
@@ -131,4 +115,3 @@ void adminPanel::enableButtons()
     _modifica->setDisabled(false);
     _rimuovi->setDisabled(false);
 }
-

@@ -13,7 +13,7 @@ FormIncarico::FormIncarico(const QString &tipo, bool regolare, vector<string> in
     _layout->addWidget(_data,2,1);
     _dataEdit->setMinimumDate(QDate::currentDate());
     _layout->addWidget(_dataEdit,2,2);
-        _layout->addWidget(_inquilini,3,1);
+    _layout->addWidget(_inquilini,3,1);
     buildCombo(inquilini);
     _layout->addWidget(_combo,3,2);
     _buttons->addWidget(_ok);
@@ -24,8 +24,9 @@ FormIncarico::FormIncarico(const QString &tipo, bool regolare, vector<string> in
     {
         QLabel *importo= new QLabel("Importo:");
         _layout->addWidget(importo,4,1);
-        _importo=new QLineEdit;
-        _importo->setInputMask("dd9.99");
+        _importo=new QDoubleSpinBox;
+        _importo->setDecimals(2);
+        _importo->setRange(0.1,1000);
         _layout->addWidget(_importo,4,2);
         QLabel *dataLimite= new QLabel("Posticipabile di (numero giorni):");
         _layout->addWidget(dataLimite,5,1);
@@ -38,8 +39,9 @@ FormIncarico::FormIncarico(const QString &tipo, bool regolare, vector<string> in
     {
         QLabel *importo= new QLabel("Importo:");
         _layout->addWidget(importo,4,1);
-        _importo=new QLineEdit;
-        _importo->setInputMask("dd9.99");
+        _importo=new QDoubleSpinBox;
+        _importo->setDecimals(2);
+        _importo->setRange(0.1,1000);
         _layout->addWidget(_importo,4,2);
         QLabel* tempo= new QLabel("Tempo stimato (in minuti):");
         _layout->addWidget(tempo,5,1);
@@ -112,14 +114,10 @@ FormIncarico::FormIncarico(const QString &tipo, bool regolare, vector<string> in
         regolare->addWidget(_nOccorrenze,2,2);
         _mainLayout->addLayout(regolare);
     }
-
     _mainLayout->addLayout(_buttons);
     setLayout(_mainLayout);
-
     connect(_ok, SIGNAL(clicked()), this, SLOT(controllaCampi()));
     connect(_no, SIGNAL(clicked()), this, SLOT(close()));
-
-
 }
 
 void FormIncarico::raccogliDati()
@@ -140,7 +138,7 @@ void FormIncarico::raccogliDati()
     if(_tipo=="Spesa")
         parametri[7]=std::to_string(_articoli->value());
     if(_tipo=="Spesa" || _tipo=="Bolletta")
-        parametri[8]=(_importo->text()).toStdString();
+        parametri[8]=(_importo->textFromValue(_importo->value())).toStdString();
     if(_tipo=="Bolletta")
         parametri[9]=std::to_string(_dataLimite->value());
     parametri[10]=((_dataEdit->date()).toString("d/M/yyyy")).toStdString();
@@ -190,11 +188,7 @@ void FormIncarico::controllaCampi()
     else
     {
         showMessage("Attenzione! Tutti i campi devono essere valorizzati");
-        disconnect(_ok, SIGNAL(clicked()), this, SLOT(controllaCampi()));
-        connect(_ok, SIGNAL(clicked()), this, SLOT(controllaCampi()));
-        connect(_no, SIGNAL(clicked()), this, SLOT(close()));
     }
-
 }
 void FormIncarico::buildCombo(const vector<std::string> & inquilini)
 {

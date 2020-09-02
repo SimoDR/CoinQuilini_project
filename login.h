@@ -25,7 +25,6 @@ private:
 public:
     Login(Controller*, QWidget *parent=nullptr);
 
-signals:
 private slots:
     void trylogin();
 

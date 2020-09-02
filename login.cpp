@@ -36,9 +36,7 @@ Login::Login(Controller* c, QWidget *parent) : QWidget(parent), _controller(c)
     _layoutLogin->addWidget(_loginBut, 3, 0, 1, 2);
     //size
     _layoutLogin->setSizeConstraint(QLayout::SetFixedSize);
-
     setLayout(_layoutLogin);
-
     impostaStile();
     connect(_editUser,SIGNAL(returnPressed()), this, SLOT(trylogin()));
     connect(_editPw,SIGNAL(returnPressed()), this, SLOT(trylogin()));
@@ -58,7 +56,3 @@ void Login::trylogin()
         _editPw->clear();
     }
 }
-
-
-
-

@@ -8,8 +8,6 @@
 #include <stdexcept>
 #include "QFile"
 
-//class error message
-
 void assignWithXml(QXmlStreamReader&, const std::string, std::string&);
 void showMessage(const QString &);
 void showSuccess (const QString &);

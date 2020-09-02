@@ -63,7 +63,6 @@ void ListaIncarichi::raccogliDaEliminare()
     emit eliminaIncarico(giorno,pos);
     close();
     }
-
 }
 
 void ListaIncarichi::enableButtons()

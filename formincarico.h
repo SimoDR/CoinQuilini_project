@@ -7,6 +7,7 @@
 #include <QDateEdit>
 #include <QRadioButton>
 #include <QSpinBox>
+#include <QDoubleSpinBox>
 #include <QComboBox>
 #include <QGridLayout>
 #include <QPushButton>
@@ -32,7 +33,7 @@ private:
     QPushButton *_no;
     QGridLayout * _layout;
     QSpinBox * _tempoStimato;
-    QLineEdit * _importo;
+    QDoubleSpinBox * _importo;
     QSpinBox * _dataLimite;
     QSpinBox * _commensali;
     QSpinBox * _nStanze;
