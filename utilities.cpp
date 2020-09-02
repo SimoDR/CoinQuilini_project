@@ -9,7 +9,7 @@ void assignWithXml(QXmlStreamReader & xmlInput, const std::string tag, std::stri
     string = (xmlInput.readElementText()).toStdString();
 }
 
-void showMessage(const QString & message)
+void showMessage(const QString & message, const QString & details)
 {
     QMessageBox * m= new QMessageBox;
     m->setModal(true);
@@ -17,7 +17,8 @@ void showMessage(const QString & message)
     m->setWindowTitle("Alert");
     m->setIcon(QMessageBox::Warning);
     m->setText(message);
-
+    if(details!='\0')
+            m->setDetailedText(details);
     QFile file(":/resources/style.css");
     file.open(QFile::ReadOnly);
     QString styleSheet = QLatin1String(file.readAll());
@@ -27,7 +28,7 @@ void showMessage(const QString & message)
     QObject::connect(m, SIGNAL(buttonClicked(QAbstractButton *)), m, SLOT(close()));
 }
 
-void showSuccess(const QString & message)
+void showSuccess(const QString & message, const QString & details)
 {
     QMessageBox * m= new QMessageBox;
     m->setModal(true);
@@ -35,7 +36,8 @@ void showSuccess(const QString & message)
     m->setWindowTitle("Info");
     m->setIcon(QMessageBox::Information);
     m->setText(message);
-
+    if(details!='\0')
+            m->setDetailedText(details);
     QFile file(":/resources/style.css");
     file.open(QFile::ReadOnly);
     QString styleSheet = QLatin1String(file.readAll());

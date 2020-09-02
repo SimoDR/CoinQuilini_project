@@ -11,8 +11,8 @@
 //class error message
 
 void assignWithXml(QXmlStreamReader&, const std::string, std::string&);
-void showMessage(const QString &);
-void showSuccess (const QString &);
+void showMessage(const QString &, const QString& = "\0");
+void showSuccess (const QString &, const QString& = "\0");
 int confirmationMessage(QWidget *, const QString &,const QString& = "\0");
 
 
