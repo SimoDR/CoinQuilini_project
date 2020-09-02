@@ -68,7 +68,7 @@ public:
     void remove(const Data& dataIncarico,unsigned int indiceIncarico);
     void posponiIncaricoCalendario(unsigned int indiceIncarico, unsigned int quantoPosporre,const Data& dataIncarico);
     void checkIncarichiSvolti() const;
-    void checkIncarichiSvoltiPassato() const;
+    void checkIncarichiSvoltiPassato();
     void setCredito(Pagamento*, vector<Inquilino*> &) const;
     void exportXml() const;
     void importXml();

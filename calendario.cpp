@@ -322,7 +322,7 @@ void Calendario::checkIncarichiSvolti() const
 
 
 
-void Calendario::checkIncarichiSvoltiPassato() const
+void Calendario::checkIncarichiSvoltiPassato()
 {
     string inadempienti;
     inadempienti="Attenzione: alcuni inquilini non hanno svolto gli incarichi assegnati nei giorni scorsi. A costoro verranno decurtati dei punti: \n\n";
@@ -348,6 +348,7 @@ void Calendario::checkIncarichiSvoltiPassato() const
     {
         showMessage(QString::fromStdString(inadempienti),QString::fromStdString(details));
     }
+    _nonSvoltiImport.clear();
 }
 
 
