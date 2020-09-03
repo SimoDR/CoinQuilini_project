@@ -43,7 +43,7 @@ public:
     bool isLogged(const string &, const string &) const;
 
     //OUTPUT
-    void exportXml(QXmlStreamWriter&) const;
+    virtual void exportXml(QXmlStreamWriter&) const;
 };
 
 #endif
