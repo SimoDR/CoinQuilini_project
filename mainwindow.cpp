@@ -295,15 +295,15 @@ void Mainwindow::addlists()
 void Mainwindow::addmenubar()
 {
     _menuBar=menuBar();
-    _file=new QMenu("File");
-    _esci=new QAction("Esci");
+    _file=new QMenu("File", this);
+    _esci=new QAction("Esci",this);
     connect(_esci, SIGNAL(triggered()), this, SLOT(close()));
     _file->addAction(_esci);
     _menuBar->addMenu(_file);
-    _opzioni= new QMenu("Opzioni");
-    _logOut=new QAction("Log out");
+    _opzioni= new QMenu("Opzioni", this);
+    _logOut=new QAction("Log out", this);
     connect(_logOut, SIGNAL(triggered()), this, SLOT(logOut()));
-    _info=new QAction("info");
+    _info=new QAction("info", this);
     connect(_info, SIGNAL(triggered()), this, SLOT(buildInfo()));
     _opzioni->addAction(_logOut);
     _opzioni->addAction(_info);
