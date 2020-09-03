@@ -5,6 +5,7 @@
 Mainwindow::Mainwindow(QWidget *parent, Controller* c, QString inquilino) : QMainWindow(parent),  _controller(c), _inquilino(inquilino), _dataOdierna(Data::unixDateToData(std::chrono::system_clock::now()))
 {
     setAttribute(Qt::WA_DeleteOnClose);
+    setWindowIcon(QIcon(":/resources/icon.png"));
     _mainLayout=new QHBoxLayout;
     setWindowTitle("CoinQuilini - Benvenuto " + _inquilino);
     //create menu bar
