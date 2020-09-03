@@ -13,9 +13,8 @@ Pagamento::~Pagamento() {}
 
 string Pagamento::generaNota() const {
 
-	float aux = _importo;
 	std::stringstream stream;
-	stream << std::fixed << std::setprecision(2) << aux;
+    stream << std::fixed << std::setprecision(2) << _importo;
     std::string money = stream.str();
     return "Importo: "+ money+" €";
 }
