@@ -224,9 +224,8 @@ string ListaInquilini::getCdCasa() const
 
 std::string ListaInquilini::punteggioCd(const std::string & nome) const
 {
-    float aux = getInquilino(nome)->getCreditoDebito();
     std::stringstream stream;
-    stream << std::fixed << std::setprecision(2) << aux;
+    stream << std::fixed << std::setprecision(2) << getInquilino(nome)->getCreditoDebito();
     std::string money = stream.str();
 
     return +"Punteggio: "+std::to_string(getInquilino(nome)->getPunteggio())+

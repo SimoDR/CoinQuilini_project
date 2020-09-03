@@ -86,9 +86,8 @@ std::string Inquilino::showCreDeb() const
         messaggio+=" verso la casa\n";
     }
 
-    float aux = _creditoDebito;
     std::stringstream stream;
-    stream << std::fixed << std::setprecision(2) << aux;
+    stream << std::fixed << std::setprecision(2) << _creditoDebito;
     std::string money = stream.str();
 
     return messaggio=messaggio+"Saldo: "+money+" €";
