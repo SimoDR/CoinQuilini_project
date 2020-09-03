@@ -23,6 +23,7 @@ void Spesa::exportXml(QXmlStreamWriter & xmlOutput,string data) const
 {
     xmlOutput.writeStartElement(QString::fromStdString("SPESA"));
     Faccenda::exportXml(xmlOutput,data);
+    xmlOutput.writeTextElement("importo", QString::fromStdString(std::to_string(getImporto())));
     xmlOutput.writeTextElement("numeroArticoli", QString::fromStdString(std::to_string(_numeroArticoli)));
     xmlOutput.writeEndElement();
 }
@@ -31,9 +32,12 @@ void Spesa::importXml(QXmlStreamReader & xmlInput, vector<string> & parametri)
 {
     Faccenda::importXml(xmlInput,parametri);
 
-    string numeroArticoli;
+    string numeroArticoli,importo;
+    assignWithXml(xmlInput, "importo", importo);
     assignWithXml(xmlInput, "numeroArticoli", numeroArticoli);
 
+
+    parametri[8]=importo;
     parametri[7]=numeroArticoli;
     parametri[1]="Spesa";
 
