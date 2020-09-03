@@ -62,6 +62,7 @@ void ListaIncarichi::raccogliDaEliminare()
     unsigned int pos=_lista->currentRow();
     emit eliminaIncarico(giorno,pos);
     close();
+    showSuccess("Incarico rimosso con successo");
     }
 }
 
