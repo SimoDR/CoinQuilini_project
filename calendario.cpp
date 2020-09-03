@@ -265,7 +265,7 @@ void Calendario::posponiIncaricoCalendario(unsigned int indiceIncarico, unsigned
                     (cloned->calcolaPunteggio())/2 : cloned->calcolaPunteggio()/2+quantoPosporre;
             cloned->getIncaricato()->setPunteggio(-decurtazione);
 
-            showSuccess(QString::fromStdString("Incarico posposto con successo! Tuttavia ti sono stati decurtati "+std::to_string(decurtazione)+(decurtazione>1 ? " punti" : "punto")));
+            showSuccess(QString::fromStdString("Incarico posposto con successo! Tuttavia ti sono stati decurtati "+std::to_string(decurtazione)+(decurtazione>1 ? " punti" : " punto")));
         }
         else
             showMessage(QString::fromStdString("Impossibile posporre! L'incarico ha delle limitazioni che impediscono di posporlo al giorno "+dataInCuiInserire.dataToString()));
