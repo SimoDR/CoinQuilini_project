@@ -198,7 +198,6 @@ void Controller::aggiungiInquilino(const QString & user, const QString & pw)
 void Controller::modificaInquilino(const QString &user, const QString & pw, unsigned int pos)
 {
     _listaInquilini.modifica(user.toStdString(), pw.toStdString(), pos);
-    //da sistemare per _calendario? Forse non serve
 }
 
 

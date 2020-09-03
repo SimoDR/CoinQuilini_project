@@ -51,7 +51,7 @@ void Calendario::aggiungiAlBuffer(Inquilino *nuovoInquilino)
 
 
 
-void Calendario::rimuoviInquilino(unsigned int pos) //da Debuggare
+void Calendario::rimuoviInquilino(unsigned int pos)
 {
     bool trovato=false;
     unsigned int cont=0;
@@ -307,10 +307,6 @@ void Calendario::checkIncarichiSvolti() const
             inadempienti.append(".\n");
             (*it)->getIncaricato()->setPunteggio(-(*it)->calcolaPunteggio());
             (*it)->setSvolto();
-        }
-        else
-        {
-            (*it)->getIncaricato()->setPunteggio((*it)->calcolaPunteggio()); //da togliere
         }
     }
     string details="I sopracitati incarichi sono ora impostati come svolti. Sara' compito degli inquilini calendarizzarli nuovamente.";

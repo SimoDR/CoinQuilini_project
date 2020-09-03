@@ -33,7 +33,7 @@ public:
     Controller( QObject *parent = nullptr);
     bool login(const QString &, const QString &);
     vector<string> getInquilini();
-    void rimuoviInquilino(unsigned int); //da controllare
+    void rimuoviInquilino(unsigned int);
     vector<string> getInquilinoPos(unsigned int);
     void aggiungiInquilino(const QString &, const QString &);
     void modificaInquilino(const QString &, const QString &, unsigned int);
