@@ -13,7 +13,7 @@ void showMessage(const QString & message, const QString & details)
 {
     QMessageBox * m= new QMessageBox;
     m->setModal(true);
-    m->setWindowIcon(QIcon(":/resources/error.png"));
+    m->setWindowIcon(QIcon(":/resources/error.svg"));
     m->setAttribute(Qt::WA_DeleteOnClose);
     m->setWindowTitle("Alert");
     m->setIcon(QMessageBox::Warning);
