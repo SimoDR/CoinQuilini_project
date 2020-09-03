@@ -1,6 +1,8 @@
 ﻿#include "inquilino.h"
 
-Inquilino::Inquilino(const string& user, const string& pw, float credeb, unsigned short int punteggio) : _user(user), _password(pw), _creditoDebito(credeb), _punteggio(punteggio) {}
+Inquilino::Inquilino(const string& user, const string& pw, float credeb, unsigned short int punteggio) :
+    _user(user), _password(pw), _creditoDebito(credeb),
+    _punteggio(punteggio > _puntiMax ? _puntiMax : punteggio) {}
 
 void Inquilino::modifica(const string& user, const string& pw)
 {
