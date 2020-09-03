@@ -4,7 +4,6 @@ RiassegnaDialog::RiassegnaDialog(const Data & data, unsigned int pos,const vecto
 {
     setWindowTitle("Riassegnazione dell'incarico");
     setModal(true);
-    setFixedSize(sizeHint());
     _layout->addWidget(_label,1,1);
     for(auto ci= inquilini.cbegin(); ci!=inquilini.cend(); ci++)
         _combo->addItem(QString::fromStdString(*ci));

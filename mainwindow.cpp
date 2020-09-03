@@ -45,6 +45,7 @@ void Mainwindow::buildRiassegna(const QDate &data, unsigned int pos, ListaIncari
 {
     Data giorno((data.toString("d/M/yyyy")).toStdString());
     RiassegnaDialog* riassegna=new RiassegnaDialog(giorno, pos, _controller->getInquilini(), this);
+    riassegna->setFixedSize(riassegna->sizeHint());
     riassegna->show();
     connect(riassegna, SIGNAL(inviaInquilino(const Data &, unsigned int, const string &)), _controller, SLOT(riassegnaIncarico(const Data & , unsigned int, const string & )));
     connect(riassegna, SIGNAL(inviaInquilino(const Data &, unsigned int, const string &)), lista, SLOT(close()));
@@ -94,6 +95,7 @@ void Mainwindow::buildPosponi()
 {
     unsigned int pos=_selectedList->currentRow();
     PosponiDialog * posponi=new PosponiDialog(pos,this);
+    posponi->setFixedSize(posponi->sizeHint());
     posponi->show();
     connect(posponi, SIGNAL(numero(unsigned int, unsigned int)), this, SLOT(posponiSelected(unsigned int, unsigned int)));
     _posponi->setDisabled(true);
@@ -128,11 +130,13 @@ void Mainwindow::buildAdminPanel()
 {
     adminPanel* adminpanel= new adminPanel(_controller,this);
     adminpanel->show();
+    adminpanel->setFixedSize(adminpanel->sizeHint());
 }
 
 void Mainwindow::buildSelezione()
 {
     SelezioneDialog * select= new SelezioneDialog(this);
+    select->setFixedSize(select->sizeHint());
     connect(select, SIGNAL(datiSelezionati(const QString &, bool)),this, SLOT(buildForm(const QString &, bool)));
     select->show();
 }
@@ -150,6 +154,7 @@ void Mainwindow::buildCreDeb()
 void Mainwindow::buildForm(const QString & tipo, bool regolare)
 {
     FormIncarico *form=new FormIncarico(tipo, regolare, _controller->getInquilini(), this);
+    form->setFixedSize(form->sizeHint());
     form->show();
     connect(form, SIGNAL(inviaDati(const vector<string> &)), this, SLOT(buildIncarico(const vector<string> &)));
 }
@@ -166,6 +171,7 @@ void Mainwindow::buildListaIncarichi(const QDate & giorno)
     vector<string> incaricati;
     vector<string> incarichi=_controller->incarichiGiorno(data, incaricati);
     ListaIncarichi *lista=new ListaIncarichi(giorno.toString("d/M/yyyy"),_controller->isAdmin(_inquilino.toStdString()), incarichi, incaricati, this);
+    lista->setFixedSize(lista->sizeHint());
     lista->show();
     connect(lista, SIGNAL(datiIncarico(const QDate &, unsigned int )), _controller, SLOT(buildNota(const QDate &, unsigned int)));
     connect(lista, SIGNAL(riassegnaIncarico(const QDate &, unsigned int, ListaIncarichi *)), this, SLOT(buildRiassegna(const QDate &, unsigned int, ListaIncarichi *)));

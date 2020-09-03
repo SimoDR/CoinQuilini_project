@@ -3,7 +3,6 @@
 CreaModificaInquilino::CreaModificaInquilino(QWidget *parent, const QString & user, const QString & pw) : QDialog(parent), _layout(new QGridLayout), _userlabel(new QLabel), _pwlabel(new QLabel), _useredit(new QLineEdit), _pwedit(new QLineEdit), _yes(new QPushButton), _no(new QPushButton)
 {
     setWindowModality(Qt::WindowModal);
-    setFixedSize(sizeHint());
     buildFields(user, pw);
     buildButtons();
     setLayout(_layout);
@@ -40,7 +39,7 @@ void CreaModificaInquilino::checkDati()
     {
         raccogliDati();
         close();
-        showSuccess("Inquilino aggiunto con successo");
+        showSuccess("Operazione effettuata con successo");
     }
     else
         showMessage("Attenzione! I campi user e password non possono essere vuoti");

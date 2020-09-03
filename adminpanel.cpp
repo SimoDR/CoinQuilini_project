@@ -51,14 +51,13 @@ adminPanel::adminPanel(Controller *c, QWidget *parent) : QDialog(parent), _contr
     //costruzione lista
     buildLista();
     setLayout(_mainLayout);
-    //fixed size
-    setFixedSize(sizeHint());
 }
 
 void adminPanel::buildAggiungi()
 {
     CreaModificaInquilino *form= new CreaModificaInquilino(this);
     form->setWindowTitle("Aggiungi un nuovo inquilino");
+    form->setFixedSize(form->sizeHint());
     form->show();
     connect(form, SIGNAL(invia(const QString &, const QString &)), this, SLOT(aggiungi(const QString &, const QString &)));
 }
@@ -70,6 +69,7 @@ void adminPanel::buildModifica()
         vector<string> utente= _controller->getInquilinoPos(_elencoInquilini->currentRow());
         CreaModificaInquilino *form= new CreaModificaInquilino(this, QString::fromStdString(utente[0]), QString::fromStdString(utente[1]));
         form->setWindowTitle("Modifica i dati dell'inquilino");
+        form->setFixedSize(form->sizeHint());
         form->show();
         connect(form, SIGNAL(invia(const QString &, const QString &)), this, SLOT(modifica(const QString &, const QString &)));
     }

@@ -221,6 +221,7 @@ void Controller::buildLogin()
 {
     Login * login(new Login(this));
     login->setAttribute(Qt::WA_DeleteOnClose);
+    login->setFixedSize(login->sizeHint());
     login->show();
 }
 

@@ -3,7 +3,6 @@
 PosponiDialog::PosponiDialog(unsigned int pos, QWidget *parent): QDialog(parent), _pos(pos),  _label(new QLabel("Di quanti giorni vuoi posporre l'incarico?")),_spin(new QSpinBox),_layout(new QGridLayout), _ok(new QPushButton("Conferma")), _no(new QPushButton("Annulla"))
 {
     setWindowTitle("Posponi");
-    setFixedSize(sizeHint());
     _layout->addWidget(_label, 1,1);
     _layout->addWidget(_spin,1,2);
     _spin->setRange(1,50);
