@@ -573,13 +573,13 @@ void Calendario::creaNuovoIncarico(const vector<string>& parametri,bool import)
     int tempoStimato=0;
     if(parametri[4]!="\0") tempoStimato=std::stoi(parametri[4]);
 
-    unsigned short int stanzeDaPulire;
+    unsigned short int stanzeDaPulire=0;
     if(parametri[5]!="\0") stanzeDaPulire=std::stoi(parametri[5]);
 
-    unsigned short int numeroCommensali;
+    unsigned short int numeroCommensali=0;
     if(parametri[6]!="\0") numeroCommensali=std::stoi(parametri[6]);
 
-    unsigned short int numeroArticoli;
+    unsigned short int numeroArticoli=0;
     if(parametri[7]!="\0") numeroArticoli=std::stoi(parametri[7]);
 
     float importo=0;
