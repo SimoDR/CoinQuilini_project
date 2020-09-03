@@ -16,7 +16,7 @@ private:
     string _user;
     string _password;
     float _creditoDebito;
-    unsigned short int _punteggio;
+    short int _punteggio;
     static unsigned short int _puntiMin;
     static unsigned short int _puntiMax;
     static unsigned short int _sogliaPosponi;
