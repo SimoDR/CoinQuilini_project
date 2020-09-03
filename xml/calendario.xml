@@ -44,7 +44,7 @@
         <data>3/9/2020</data>
         <nome>Portare fuori plastica</nome>
         <nomeIncaricato>Ospite</nomeIncaricato>
-        <svolto>no</svolto>
+        <svolto>si</svolto>
         <tempoStimato>5</tempoStimato>
         <cosaButtare>Plastica</cosaButtare>
     </SPAZZATURA>
@@ -52,7 +52,7 @@
         <data>3/9/2020</data>
         <nome>Mettere su il caffè per colazione</nome>
         <nomeIncaricato>Jessica</nomeIncaricato>
-        <svolto>no</svolto>
+        <svolto>si</svolto>
         <tempoStimato>3</tempoStimato>
         <numeroCommensali>5</numeroCommensali>
     </CUCINA>
@@ -60,23 +60,15 @@
         <data>3/9/2020</data>
         <nome>Fare la lavastoviglie</nome>
         <nomeIncaricato>admin</nomeIncaricato>
-        <svolto>no</svolto>
+        <svolto>si</svolto>
         <tempoStimato>5</tempoStimato>
         <stanzeDaPulire>1</stanzeDaPulire>
     </PULIZIA>
-    <BOLLETTA>
-        <data>3/9/2020</data>
-        <nome>Abbonamento Netflix</nome>
-        <nomeIncaricato>Simone</nomeIncaricato>
-        <svolto>no</svolto>
-        <importo>10.000000</importo>
-        <dataLimite>4/9/2020</dataLimite>
-    </BOLLETTA>
     <CUCINA>
         <data>3/9/2020</data>
         <nome>Cucinare pranzo</nome>
         <nomeIncaricato>Antonio</nomeIncaricato>
-        <svolto>no</svolto>
+        <svolto>si</svolto>
         <tempoStimato>20</tempoStimato>
         <numeroCommensali>3</numeroCommensali>
     </CUCINA>
@@ -84,7 +76,7 @@
         <data>4/9/2020</data>
         <nome>Pulizia dei bagni</nome>
         <nomeIncaricato>Antonio</nomeIncaricato>
-        <svolto>no</svolto>
+        <svolto>si</svolto>
         <tempoStimato>15</tempoStimato>
         <stanzeDaPulire>2</stanzeDaPulire>
     </PULIZIA>
@@ -92,7 +84,7 @@
         <data>4/9/2020</data>
         <nome>Preparare la cena</nome>
         <nomeIncaricato>Ospite</nomeIncaricato>
-        <svolto>no</svolto>
+        <svolto>si</svolto>
         <tempoStimato>30</tempoStimato>
         <numeroCommensali>5</numeroCommensali>
     </CUCINA>
@@ -117,7 +109,7 @@
         <data>4/9/2020</data>
         <nome>Fare la lavastoviglie</nome>
         <nomeIncaricato>Francesco</nomeIncaricato>
-        <svolto>no</svolto>
+        <svolto>si</svolto>
         <tempoStimato>5</tempoStimato>
         <stanzeDaPulire>1</stanzeDaPulire>
     </PULIZIA>
@@ -125,7 +117,7 @@
         <data>5/9/2020</data>
         <nome>Preparare la cena</nome>
         <nomeIncaricato>admin</nomeIncaricato>
-        <svolto>no</svolto>
+        <svolto>si</svolto>
         <tempoStimato>30</tempoStimato>
         <numeroCommensali>5</numeroCommensali>
     </CUCINA>
@@ -133,7 +125,7 @@
         <data>5/9/2020</data>
         <nome>Spesa della settimana</nome>
         <nomeIncaricato>Francesco</nomeIncaricato>
-        <svolto>no</svolto>
+        <svolto>si</svolto>
         <tempoStimato>120</tempoStimato>
         <importo>250.000000</importo>
         <numeroArticoli>50</numeroArticoli>
@@ -150,7 +142,7 @@
         <data>5/9/2020</data>
         <nome>Mettere su il caffè per colazione</nome>
         <nomeIncaricato>Simone</nomeIncaricato>
-        <svolto>no</svolto>
+        <svolto>si</svolto>
         <tempoStimato>3</tempoStimato>
         <numeroCommensali>5</numeroCommensali>
     </CUCINA>
@@ -158,7 +150,7 @@
         <data>5/9/2020</data>
         <nome>Fare la lavastoviglie</nome>
         <nomeIncaricato>Ospite</nomeIncaricato>
-        <svolto>no</svolto>
+        <svolto>si</svolto>
         <tempoStimato>5</tempoStimato>
         <stanzeDaPulire>1</stanzeDaPulire>
     </PULIZIA>
@@ -166,7 +158,7 @@
         <data>5/9/2020</data>
         <nome>Cucinare pranzo</nome>
         <nomeIncaricato>Antonio</nomeIncaricato>
-        <svolto>no</svolto>
+        <svolto>si</svolto>
         <tempoStimato>20</tempoStimato>
         <numeroCommensali>3</numeroCommensali>
     </CUCINA>
@@ -174,7 +166,7 @@
         <data>6/9/2020</data>
         <nome>Portare fuori il secco</nome>
         <nomeIncaricato>Simone</nomeIncaricato>
-        <svolto>no</svolto>
+        <svolto>si</svolto>
         <tempoStimato>3</tempoStimato>
         <cosaButtare>Secco</cosaButtare>
     </SPAZZATURA>
@@ -190,7 +182,7 @@
         <data>6/9/2020</data>
         <nome>Preparare la cena</nome>
         <nomeIncaricato>Antonio</nomeIncaricato>
-        <svolto>no</svolto>
+        <svolto>si</svolto>
         <tempoStimato>30</tempoStimato>
         <numeroCommensali>5</numeroCommensali>
     </CUCINA>
@@ -207,7 +199,7 @@
         <data>6/9/2020</data>
         <nome>Mettere su il caffè per colazione</nome>
         <nomeIncaricato>Ospite</nomeIncaricato>
-        <svolto>no</svolto>
+        <svolto>si</svolto>
         <tempoStimato>3</tempoStimato>
         <numeroCommensali>5</numeroCommensali>
     </CUCINA>
@@ -215,7 +207,7 @@
         <data>6/9/2020</data>
         <nome>Fare la lavastoviglie</nome>
         <nomeIncaricato>admin</nomeIncaricato>
-        <svolto>no</svolto>
+        <svolto>si</svolto>
         <tempoStimato>5</tempoStimato>
         <stanzeDaPulire>1</stanzeDaPulire>
     </PULIZIA>
@@ -375,6 +367,14 @@
         <tempoStimato>20</tempoStimato>
         <numeroCommensali>3</numeroCommensali>
     </CUCINA>
+    <BOLLETTA>
+        <data>9/9/2020</data>
+        <nome>Abbonamento Netflix</nome>
+        <nomeIncaricato>admin</nomeIncaricato>
+        <svolto>no</svolto>
+        <importo>10.000000</importo>
+        <dataLimite>10/9/2020</dataLimite>
+    </BOLLETTA>
     <SPAZZATURA>
         <data>10/9/2020</data>
         <nome>Portare fuori il secco</nome>

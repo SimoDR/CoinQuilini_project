@@ -3,37 +3,37 @@
     <ADMIN>
         <nome>admin</nome>
         <password>admin</password>
-        <creditodebito>0.000000</creditodebito>
-        <punteggio>100</punteggio>
+        <creditodebito>-57.166664</creditodebito>
+        <punteggio>50</punteggio>
     </ADMIN>
     <INQUILINO>
         <nome>Simone</nome>
         <password>Simone</password>
-        <creditodebito>0.000000</creditodebito>
-        <punteggio>0</punteggio>
+        <creditodebito>-47.166664</creditodebito>
+        <punteggio>15</punteggio>
     </INQUILINO>
     <INQUILINO>
         <nome>Antonio</nome>
         <password>Antonio</password>
-        <creditodebito>0.000000</creditodebito>
-        <punteggio>0</punteggio>
+        <creditodebito>27.833328</creditodebito>
+        <punteggio>37</punteggio>
     </INQUILINO>
     <INQUILINO>
         <nome>Francesco</nome>
         <password>Francesco</password>
-        <creditodebito>0.000000</creditodebito>
-        <punteggio>0</punteggio>
+        <creditodebito>-6.166668</creditodebito>
+        <punteggio>55</punteggio>
     </INQUILINO>
     <INQUILINO>
         <nome>Jessica</nome>
         <password>Jessica</password>
-        <creditodebito>0.000000</creditodebito>
+        <creditodebito>-25.166668</creditodebito>
         <punteggio>0</punteggio>
     </INQUILINO>
     <INQUILINO>
         <nome>Ospite</nome>
         <password>Ospite</password>
-        <creditodebito>0.000000</creditodebito>
-        <punteggio>0</punteggio>
+        <creditodebito>107.833328</creditodebito>
+        <punteggio>90</punteggio>
     </INQUILINO>
 </INQUILINI>
