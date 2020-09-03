@@ -33,6 +33,7 @@ ListaIncarichi::ListaIncarichi(QString data, bool admin, vector<std::string> inc
     setAttribute(Qt::WA_DeleteOnClose);
     setWindowTitle("Lista di incarichi del "+ data);
     setModal(true);
+    setFixedSize(sizeHint());
     buildLista(incarichi, incaricati);
     if(admin && _data>=QDate::currentDate())
         buildButtons();

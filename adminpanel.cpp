@@ -45,6 +45,7 @@ void adminPanel::impostaStile()
 adminPanel::adminPanel(Controller *c, QWidget *parent) : QDialog(parent), _controller(c), _mainLayout(new QHBoxLayout), _buttonLayout(new QVBoxLayout)
 {
     setWindowTitle("Pannello admin");
+    setModal(true);
     //costruzione bottoni
     buildBottoni();
     //costruzione lista

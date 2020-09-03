@@ -4,6 +4,7 @@ SelezioneDialog::SelezioneDialog(QWidget *parent): QDialog(parent), _combo(new Q
 {
     setWindowTitle("Tipo di incarico");
     setModal(true);
+    setFixedSize(sizeHint());
     _explanation->setText("Seleziona la tipologia di incarico che vuoi creare");
     _layout->addWidget(_explanation);
     _combo->addItem("Bolletta");

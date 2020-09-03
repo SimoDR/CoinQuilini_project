@@ -8,6 +8,7 @@ FormIncarico::FormIncarico(const QString &tipo, bool regolare, vector<string> in
     _tipo=tipo;
     setWindowTitle("Creazione incarico "+ tipo);
     setModal(true);
+    setFixedSize(sizeHint());
     _layout->addWidget(_nome,1,1);
     _layout->addWidget(_nomeEdit,1,2);
     _layout->addWidget(_data,2,1);
