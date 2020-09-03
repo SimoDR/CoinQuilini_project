@@ -171,7 +171,6 @@ void Mainwindow::buildListaIncarichi(const QDate & giorno)
     vector<string> incaricati;
     vector<string> incarichi=_controller->incarichiGiorno(data, incaricati);
     ListaIncarichi *lista=new ListaIncarichi(giorno.toString("d/M/yyyy"),_controller->isAdmin(_inquilino.toStdString()), incarichi, incaricati, this);
-    lista->setFixedSize(lista->sizeHint());
     lista->show();
     connect(lista, SIGNAL(datiIncarico(const QDate &, unsigned int )), _controller, SLOT(buildNota(const QDate &, unsigned int)));
     connect(lista, SIGNAL(riassegnaIncarico(const QDate &, unsigned int, ListaIncarichi *)), this, SLOT(buildRiassegna(const QDate &, unsigned int, ListaIncarichi *)));
