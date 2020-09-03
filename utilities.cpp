@@ -13,6 +13,7 @@ void showMessage(const QString & message, const QString & details)
 {
     QMessageBox * m= new QMessageBox;
     m->setModal(true);
+    m->setWindowIcon(QIcon(":/resources/error.png"));
     m->setAttribute(Qt::WA_DeleteOnClose);
     m->setWindowTitle("Alert");
     m->setIcon(QMessageBox::Warning);
@@ -34,6 +35,7 @@ void showSuccess(const QString & message, const QString & details)
     m->setModal(true);
     m->setAttribute(Qt::WA_DeleteOnClose);
     m->setWindowTitle("Info");
+    m->setWindowIcon(QIcon(":/resources/info.svg"));
     m->setIcon(QMessageBox::Information);
     m->setText(message);
     if(details!='\0')
@@ -52,6 +54,7 @@ int confirmationMessage(QWidget *parent, const QString & text,const QString & de
     QMessageBox *conferma=new QMessageBox(parent);
     conferma->setWindowTitle("Conferma");
     conferma->setText(text);
+    conferma->setWindowIcon(QIcon(":/resources/warning.svg"));
     if(details!='\0')
             conferma->setDetailedText(details);
     conferma->setStandardButtons(QMessageBox::Yes | QMessageBox::No );

@@ -2,5 +2,8 @@
     <qresource prefix="/">
         <file>resources/style.css</file>
         <file>resources/icon.png</file>
+        <file>resources/error.svg</file>
+        <file>resources/info.svg</file>
+        <file>resources/warning.svg</file>
     </qresource>
 </RCC>

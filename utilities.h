@@ -6,7 +6,8 @@
 #include <iostream>
 #include <QMessageBox>
 #include <stdexcept>
-#include "QFile"
+#include <QFile>
+#include <QIcon>
 
 void assignWithXml(QXmlStreamReader&, const std::string, std::string&);
 void showMessage(const QString &, const QString& = "\0");

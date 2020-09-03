@@ -39,7 +39,7 @@ void CreaModificaInquilino::checkDati()
     {
         raccogliDati();
         close();
-        showSuccess("Operazione effettuata con successo");
+        showSuccess("Operazione eseguita con successo");
     }
     else
         showMessage("Attenzione! I campi user e password non possono essere vuoti");
