@@ -13,6 +13,7 @@ void Login::impostaStile()
 Login::Login(Controller* c, QWidget *parent) : QWidget(parent), _controller(c)
 {
     setWindowTitle("Login");
+    setFixedSize(sizeHint());
     //user label
     _labelUser = new QLabel();
     _labelUser->setText("User:");
